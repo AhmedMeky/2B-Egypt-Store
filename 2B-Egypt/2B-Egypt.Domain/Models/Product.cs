@@ -27,6 +27,9 @@ public class Product : BaseEntity
     [Range(0, int.MaxValue, ErrorMessage = "Stock quantity must be a non-negative number.")]
     public int UnitInStock { get; set; }
 
+    [Range(0, 99, ErrorMessage = "Discount must be a non negative number less than 100")]
+    public int Discount { get; set; }
+
     public Guid categoryId { get; set; }
 
     public Guid brandId { get; set; }
@@ -36,5 +39,6 @@ public class Product : BaseEntity
     public virtual Brand Brand { get; set; }
     public virtual ICollection<OrderItem>? OrderItems { get; set; }
     public virtual ICollection<ProductImage> Images { get; set; }
+    public virtual ICollection<Facility> Facilities { get; set; }
     public virtual ICollection<Review>? Reviews { get; set; }
 }

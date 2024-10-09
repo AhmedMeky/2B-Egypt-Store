@@ -1,5 +1,5 @@
 ﻿namespace _2B_Egypt.Domain.Models;
-public class User : BaseEntity
+public class User : IdentityUser<Guid>
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
