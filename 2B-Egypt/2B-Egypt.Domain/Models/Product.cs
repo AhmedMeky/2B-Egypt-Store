@@ -1,4 +1,5 @@
-﻿namespace _2B_Egypt.Domain.Models;
+﻿
+namespace _2B_Egypt.Domain.Models;
 public class Product : BaseEntity
 {
 
@@ -30,9 +31,9 @@ public class Product : BaseEntity
     [Range(0, 99, ErrorMessage = "Discount must be a non negative number less than 100")]
     public int Discount { get; set; }
 
-    public Guid categoryId { get; set; }
+    public Guid CategoryId { get; set; }
 
-    public Guid brandId { get; set; }
+    public Guid BrandId { get; set; }
 
     // Navigation properties
     public virtual Category Category { get; set; }
