@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using _2B_Egypt.Domain.Models
+@using _2B_Egypt.Application.DTOs.BrandDTOs
+@model IEnumerable<CreateOrUpdateBrandDTO>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -75,8 +79,8 @@
                       
                        
                          <h6 class="collapse-header">Brands:</h6>
-                         <a class="collapse-item" asp-action="CreateBrand"> Create Brand </a>
-                         <a class="collapse-item" asp-action="UpdateBrand"> Update  Brand</a> 
+                         <a class="collapse-item" asp-action="Create"> Create Brand </a>
+                        <a class="collapse-item" asp-action="Edit"  method="post"> Update  Brand</a>
 
                         <h6 class="collapse-header">Order:</h6>
                         <a class="collapse-item" asp-controller="Order" asp-action="Index"> View Orders </a>

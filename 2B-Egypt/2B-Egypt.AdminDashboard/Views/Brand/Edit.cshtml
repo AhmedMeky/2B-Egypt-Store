@@ -1,0 +1,57 @@
+﻿@using _2B_Egypt.Application.DTOs.BrandDTOs
+
+@model CreateOrUpdateBrandDTO;
+
+@{
+    ViewData["Title"] = "Edit Brand";
+}
+<link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Edit Brand</h1>
+    <a asp-action="BrandList" class="d-none d-sm-inline-block btn btn-sm bg-success shadow text-white">
+        Back to Brand List
+    </a>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="CreatedAt" class="control-label"></label>
+                <input asp-for="CreatedAt" class="form-control" readonly />
+                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameAr" class="control-label"></label>
+                <input asp-for="NameAr" class="form-control" />
+                <span asp-validation-for="NameAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEn" class="control-label"></label>
+                <input asp-for="NameEn" class="form-control" />
+                <span asp-validation-for="NameEn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
