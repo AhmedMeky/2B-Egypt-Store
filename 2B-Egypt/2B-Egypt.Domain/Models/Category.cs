@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection.Metadata;
-
-namespace _2B_Egypt.Domain.Models;
+﻿namespace _2B_Egypt.Domain.Models;
 
 public class Category : BaseEntity
 {
