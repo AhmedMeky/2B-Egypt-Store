@@ -1,5 +1,3 @@
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,7 +10,8 @@ builder.Services.AddSession(options =>
 );
 
 builder.Services.AddDbContext<AppDbContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        b => b.MigrationsAssembly("2B-Egypt.AdminDashboard"));
 });
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
@@ -22,6 +21,9 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 //builder.Services.AddScoped<AppDbContext>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 // ========================================================================
 

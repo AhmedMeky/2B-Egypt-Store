@@ -1,0 +1,57 @@
+﻿@model IEnumerable<CreateOrUpdateBrandDTO>
+
+
+@{
+    ViewData["Title"] = "Brand List";
+}
+<link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Brand List</h1>
+    <a asp-action="Create" class="btn btn-success shadow-sm">
+        <i class="fas fa-plus"></i> Add New Brand
+    </a>
+</div>
+
+<hr />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            @* <th>@Html.DisplayNameFor(model => model.First().Id)</th> *@
+            <th>@Html.DisplayNameFor(model => model.First().NameAr)</th>
+            <th>@Html.DisplayNameFor(model => model.First().NameEn)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+            <th>@Html.DisplayNameFor(model => model.First().CreatedAt)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var brand in Model)
+        {
+            <tr>
+                @* <td>@brand.Id</td> *@
+                <td>@brand.NameAr</td>
+                <td>@brand.NameEn</td>
+                <td>@brand.Email</td>
+                <td>@brand.CreatedAt.ToString("g")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@brand.Id" class="btn btn-warning">Edit</a>
+                    @* <a asp-action="Delete" asp-route-id="@brand.Id" class="btn btn-danger">Delete</a> *@
+                    <form asp-action="Delete" asp-route-id="@brand.Id" method="post" style="display:inline;">
+                        <input type="hidden" name="isSoftDelete" value="true" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this brand?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
