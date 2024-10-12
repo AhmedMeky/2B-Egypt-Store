@@ -18,7 +18,10 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 // inject your dependencies here ===================================
 
-//builder.Services.AddScoped<AppDbContext>();
+//builder.Services.AddScoped<AppDbContext>(); 
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 

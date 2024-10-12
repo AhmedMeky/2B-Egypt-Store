@@ -1,0 +1,51 @@
+﻿@using _2B_Egypt.Application.DTOs.CategoryDTOs
+@model CreateCategoryDTO
+@{
+    ViewData["Title"] = "Create Category";
+}
+<link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add New Brands </h1>
+    <a asp-action="" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">
+        Back List Categories
+    </a>
+</div>
+
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SaveAddCategory" method="post" asp-route-model="@Model">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="@Model.NameEn" class="control-label"></label>
+                <input asp-for="@Model.NameEn" class="form-control" />
+                <span asp-validation-for="@Model.NameEn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameAr" class="control-label"></label>
+                <input asp-for="NameAr" class="form-control" />
+                <span asp-validation-for="NameAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Email" class="control-label"></label>
+                <input asp-for="@Model.Email" class="form-control" />
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+                 @* <a asp-action="SaveAddCategory" asp-route-model="@Model">Create Category</a> *@
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,16 @@
+﻿@using _2B_Egypt.Application.DTOs.CategoryDTOs
+@model List<CreateCategoryDTO> ;
+ 
+    @foreach(var category in Model){
+    
+    
+    <div class="card">
+        <h5 class="card-header">@category.NameEn</h5>
+  <div class="card-body">
+    <h5 class="card-title">@category.NameAr</h5>
+   
+    <a href="#" class="btn btn-primary">Back To Home</a>
+  </div>
+</div>
+    }
+ 
