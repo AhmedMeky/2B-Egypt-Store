@@ -4,3 +4,6 @@ global using _2B_Egypt.Application.IRepositories;
 global using _2B_Egypt.Application.IServices;
 global using _2B_Egypt.Application.DTOs;
 global using _2B_Egypt.Application.DTOs.BrandDTOs;
+global using _2B_Egypt.Application.DTOs.ProductDTO;
+global using _2B_Egypt.Application.DTOs.ProductImageDTO;
+global using _2B_Egypt.Application.DTOs.Shared;

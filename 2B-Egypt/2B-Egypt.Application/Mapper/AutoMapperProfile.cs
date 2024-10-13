@@ -4,6 +4,14 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     {
-        CreateMap<Brand, CreateBrandDTO>().ReverseMap();
+        // Brand
+        CreateMap<Brand, CreateOrUpdateBrandDTO>().ReverseMap();
+
+        // Product
+        CreateMap<Product, CreateProductDTO>().ReverseMap();
+
+        //Product Image
+        CreateMap<ProductImage, CreateImageWithPraductDTO>().ReverseMap();
+
     }
 }

@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using _2B_Egypt.Domain.Models
+@using _2B_Egypt.Application.DTOs.BrandDTOs
+@* @model IEnumerable<CreateOrUpdateBrandDTO> *@
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -65,18 +69,18 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Products:</h6>
-                        <a class="collapse-item" asp-controller="Product" asp-action="Add">Create Product</a>
+                        <a class="collapse-item" asp-controller="Product" asp-action="Create">Create Product</a>
                         <a class="collapse-item" asp-controller="Product" asp-action="ProductList">Products List</a>
                        
                         <h6 class="collapse-header">Category:</h6>
                         <a class="collapse-item" asp-controller="Category" asp-action="CategoryList"> View Category List</a>
 
-                        <a class="collapse-item" asp-controller="Category" asp-action="create"> Create Category</a>
+                        <a class="collapse-item" asp-controller="Category" asp-action="Create"> Create Category</a>
                       
                        
                          <h6 class="collapse-header">Brands:</h6>
-                         <a class="collapse-item" asp-action="CreateBrand"> Create Brand </a>
-                         <a class="collapse-item" asp-action="UpdateBrand"> Update  Brand</a> 
+                         <a class="collapse-item" asp-controller="Brand" asp-action="index"> Brand </a>
+                         @* <a class="collapse-item" asp-action="UpdateBrand"> Update  Brand</a>  *@
 
                         <h6 class="collapse-header">Order:</h6>
                         <a class="collapse-item" asp-controller="Order" asp-action="Index"> View Orders </a>
@@ -204,7 +208,7 @@
                         </div>
                         <footer class="border-top footer text-muted">
                             <div class="container">
-                                &copy; 2024 - E_Commerce.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                &copy; 2024 - 2B_Egypt Admin Dashboard - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </div>
                         </footer>
 

@@ -55,6 +55,7 @@ public class GenericRepository<TEntity, TId> : IGenericRepository<TEntity, TId> 
         }
 
         en.IsDeleted = true;
+        en.DeletedAt = DateTime.Now;
         return en;
     }
 
