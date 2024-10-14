@@ -10,11 +10,17 @@ public class AutoMapperProfile : Profile
         CreateMap<Category, CreateCategoryDTO>().ReverseMap();
         CreateMap<Category, CategoryWithRelatedProducts>().ReverseMap();
         CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
+        CreateMap<Category, CategoryForGetAllProductDTO>().ReverseMap();
+
         // Brand
         CreateMap<Brand, CreateOrUpdateBrandDTO>().ReverseMap();
+        CreateMap<Brand, BrandForGetAllProductDTO>().ReverseMap();
 
         // Product
         CreateMap<Product, CreateProductDTO>().ReverseMap();
+        CreateMap<Product, GetProductDTO>().ReverseMap();
+        CreateMap<Product, GetAllProductDTO>().ReverseMap();
+
 
         //Product Image
         CreateMap<ProductImage, CreateImageWithPraductDTO>().ReverseMap();

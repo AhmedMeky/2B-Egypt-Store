@@ -37,6 +37,8 @@ namespace _2B_Egypt.Application.Services
                 }
 
                 var newBrand = _mapper.Map<Brand>(brand);
+                brand.Id = Guid.NewGuid();
+                brand.CreatedAt = DateTime.Now;
                 await _brandRepository.CreateAsync(newBrand);
                 await _brandRepository.SaveChangesAsync();
 
@@ -132,7 +134,7 @@ namespace _2B_Egypt.Application.Services
                     return result;
                 }
                 _mapper.Map(brand, oldBrand);
-
+                oldBrand.UpdatedAt = DateTime.Now;
                 var updatedBrand = await _brandRepository.UpdateAsync(oldBrand);
                 await _brandRepository.SaveChangesAsync();
 
@@ -181,6 +183,7 @@ namespace _2B_Egypt.Application.Services
             if (brand != null)
             {
                 brand.IsDeleted = true;
+                brand.DeletedAt = DateTime.Now;
                 await _brandRepository.UpdateAsync(brand);
                 await _brandRepository.SaveChangesAsync();
             }
