@@ -1,8 +1,225 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+}
+@model  List<int> ;
+<style>
+    .container {
+        position: relative;
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+      #myChart {
+            width: 100%;
+            background-color:white;
+             height: 40vh;
+        }
+        #myChart:hover {
+            box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+            transition: box-shadow 0.3s ease-in-out;
+                   z-index: 2px;
+        }
+
+    .imgs {
+        width: 100%;
+        padding-left: 50px;
+        height: 15vh;
+        position: sticky;
+        top: 0;
+        padding-top: 30px;
+        display: block;
+        background-color: white;
+        margin: 0 auto;
+    }
+    .card {
+        margin-bottom: 10px;
+        border-radius: 10px;
+        /*    background-color: #f8f9fa;  *//* Set card background color */
+        border-radius: 10px; /* Add rounded corners to the card */
+        box-shadow: 0 0 20px 2px rgb(175, 174, 174);
+        transition: 1s;
+    }
+
+        .card :hover {
+           /*  z-index: 2px; */
+            transform: scale(1.1);
+        }
+
+    .card-counter.info {
+        background-color: #26c6da;
+        color: #FFF;
+    }
+
+    .card-counter i {
+        font-size: 5em;
+        opacity: 0.2;
+    }
+
+    .card-counter .count-numbers {
+        position: absolute;
+        right: 35px;
+        top: 20px;
+        font-size: 32px;
+        display: block;
+    }
+
+    .card-counter .count-name {
+        position: absolute;
+        right: 35px;
+        top: 65px;
+        font-style: italic;
+        text-transform: capitalize;
+        opacity: 0.5;
+        display: block;
+        font-size: 18px;
+    }
+</style>
+<link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/home.css")" rel="stylesheet" />
+<div class="container">
+@*     <div class="row ">
+
+        <section >
+            <div class="container py-4 ml-5">
+				<article class="postcard ">					
+					<div class="postcard__text">
+                      				
+                        <h1 class="h1 text-center" id="pageHeaderTitle" style="color: black;">Website Users</h1>
+						<ul class="postcard__tagbox ml-2">
+            
+                            <li class="tag__item"> <i class="fa fa-users"></i>  55  Users </li>						
+							</li>
+						</ul>                       
+					</div>
+                    <a class="postcard__img_link" href="#">
+                        <img class="postcard__img" src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template-free/assets/img/illustrations/man-with-laptop-light.png" alt="Image Title" />
+                    </a>
+				</article>	
+			</div>
+		</section>
+        <div class="col-md-12 ml-5">
+    <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
 </div>
+    </div> *@
+    <div class="container">
+        <div class="row">
+            <section class="col-md-8">
+                <div class="container py-4">
+                    <article class="postcard">
+                        <div class="postcard__text">
+                            <h1 class="h1 text-center" id="pageHeaderTitle" style="color: black;">Website Users</h1>
+                            <ul class="postcard__tagbox ml-2">
+                                <li class="tag__item"><i class="fa fa-users"></i> @ViewBag.Users  Users</li>
+                            </ul>
+                        </div>
+                        <a class="postcard__img_link" href="#">
+                            <img class="postcard__img" src="https://demos.themeselection.com/sneat-bootstrap-html-admin-template-free/assets/img/illustrations/man-with-laptop-light.png" alt="Image Title" />
+                        </a>
+                    </article>
+                </div>
+            </section>
+            <div class="col-lg-4 col-sm-6 card">
+                <div class="card">
+                    <img src="@Url.Content("~/img/Account Setting.png" )">
+                    <br />
+                    <a href="@Url.Action("UpdateAdminData", "Admin")" class="btn" style="background-color:#F37021; color:black"> Account  Settings </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="row">
+        <div class="col-md-8 padding: 20px;">
+            <canvas id="myChart" style="width:100%; " class="postcard"></canvas>
+        </div>
+                <div class="col-lg-4 col-sm-6 ">
+                    <div class="card">
+                        <img src="@Url.Content("~/img/Order.png" )">
+
+                        <a href="@Url.Action("Index", "Order")" class="btn" style="background-color:#F37021; color:black"> Orders </a>
+
+                    </div>
+                </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+    </div>
+
+<div class="card1 container-fluid ">
+    <br><br>
+    <div class="row ">
+      
+        <div class="col-lg-4 col-sm-6 card">
+            <div class="card">
+        <img src="@Url.Content("~/img/Categories.jpg")" >
+                    <a href="@Url.Action("Index", "Category")" class="btn" style="background-color:#F37021; color:black"> Categories </a>
+            
+            </div>
+        </div>
+            <div class="col-lg-3 col-sm-0">
+
+
+        </div>
+        <div class="col-lg-4 col-sm-6 card">
+            <div class="card">
+               
+                <img src="@Url.Content("~/img/Products.png" )">     
+                    <a href="@Url.Action("Index", "Product")" class="btn " style="background-color:#F37021; color:black"> Products </a>
+                 
+            </div>
+        </div>
+       
+    <br><br>
+
+   
+</div>
+<br />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+<script>
+            const xValues = ["Pending", "Confirmed", "Canceled", "Received", "Attempted_deliverys"];
+     var yValues = @Html.Raw(Json.Serialize(Model));
+    //var yValues=[10,50,20,80,98];
+      console.log(yValues);
+  const barColors = [
+  "rgba(255, 99, 132, 1.0)",
+  "rgba(54, 162, 235, 1.0)",
+  "rgba(51, 53, 56, 1.0)",
+ "rgba(75, 192, 192, 1.0)",
+  "rgba(243, 201, 139, 1.0)",
+];
+    new Chart("myChart", {
+        type: "pie",
+        data: {
+            labels: xValues,
+            datasets: [{
+                backgroundColor: barColors,
+                data: yValues
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: "Orders States"
+            }
+        }
+    });
+     var canvas = document.getElementById('myChart');
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'rgba(255, 0, 0, 0.5)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+</script>
+
+
+

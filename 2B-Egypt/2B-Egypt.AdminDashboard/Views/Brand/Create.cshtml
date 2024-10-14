@@ -9,8 +9,8 @@
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Add New Brands </h1>
-    <a asp-action="BrandList" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">
-        Back List Brands
+    <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">
+        Back to Brands
     </a>
 </div>
 
@@ -26,11 +26,11 @@
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div> *@
 
-             <div class="form-group">
+             @* <div class="form-group">
                  <label asp-for="CreatedAt" class="control-label"></label>
                 <input asp-for="CreatedAt" class="form-control" readonly />
                  <span asp-validation-for="CreatedAt" class="text-danger"></span>
-             </div>
+             </div> *@
 
             <div class="form-group">
                 <label asp-for="NameAr" class="control-label">Arabic Name</label>

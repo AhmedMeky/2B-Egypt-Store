@@ -96,9 +96,8 @@ namespace _2B_Egypt.Application.Services
 
         public async Task<List<CreateOrUpdateBrandDTO>> SearchByNameAsync(string brandName)
         {
-            var brands = await _brandRepository.GetAllAsync();
-            var filter = brands.Where(b => b.NameEn.Contains(brandName) || b.NameAr.Contains(brandName)).ToList();
-            return _mapper.Map<List<CreateOrUpdateBrandDTO>>(filter);
+            var brands = await _brandRepository.SearchByNameAsync(brandName);
+            return _mapper.Map<List<CreateOrUpdateBrandDTO>>(brands);
         }
 
         public async Task<ResponseDTO<CreateOrUpdateBrandDTO>> UpdateAsync(CreateOrUpdateBrandDTO brand)

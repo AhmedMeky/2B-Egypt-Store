@@ -1,4 +1,5 @@
-﻿namespace _2B_Egypt.Application.Services;
+﻿
+namespace _2B_Egypt.Application.Services;
 
 public class ProductService : IProductService
 {
@@ -35,4 +36,18 @@ public class ProductService : IProductService
         return new ResponseDTO<CreateProductDTO>() { Entity = productDTO, IsSuccessfull = true, Message = "The Product Created" };
     }
 
+    public async Task<IEnumerable<ResponseDTO<CreateProductDTO>>> SearchByBrandNameAsync(string brandName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IQueryable<ResponseDTO<CreateProductDTO>>> SearchByCategoryNameAsync(string categoryName)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IQueryable<ResponseDTO<CreateProductDTO>>> SearchByNameAsync(string name)
+    {
+        throw new NotImplementedException();
+    }
 }

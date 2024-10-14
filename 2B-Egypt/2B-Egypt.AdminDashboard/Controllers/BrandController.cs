@@ -31,7 +31,6 @@ namespace _2B_Egypt.AdminDashboard.Controllers
             //    return Content(brandResponse.Message);
             if (ModelState.IsValid)
             {
-                brand.Id = Guid.NewGuid();
                 var response = await _brandService.CreateAsync(brand);
                 if (response.IsSuccessfull)
                 {
@@ -73,7 +72,7 @@ namespace _2B_Egypt.AdminDashboard.Controllers
             var response = await _brandService.GetByIdAsync(id); 
             if (!response.IsSuccessfull)
             {
-                return View("Forbidden");
+                return View("Error", response.Message);
             }
             return View(response.Entity); 
         }
@@ -93,6 +92,7 @@ namespace _2B_Egypt.AdminDashboard.Controllers
             ModelState.AddModelError(string.Empty, result.Message); 
             return View(brand); 
         }
+
         [HttpPost]
        
         public async Task<IActionResult> Delete(Guid id, bool isSoftDelete = true)

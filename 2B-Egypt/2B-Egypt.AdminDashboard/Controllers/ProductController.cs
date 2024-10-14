@@ -1,43 +1,58 @@
-﻿using _2B_Egypt.Application.DTOs.ProductImageDTO;
-using _2B_Egypt.Domain.Models;
-using Microsoft.AspNetCore.Hosting;
-
-namespace _2B_Egypt.AdminDashboard.Controllers;
-
+﻿namespace _2B_Egypt.AdminDashboard.Controllers;
 public class ProductController : Controller
 {
     private readonly IProductService _productService;
+    private readonly IBrandService _brandService;
+    private readonly ICategoryService _categoryService;
     private readonly IWebHostEnvironment _webHostEnvironment;
-    public ProductController(IProductService productService, IWebHostEnvironment webHostEnvironment)
+    public ProductController(
+        IProductService productService,
+        IBrandService brandService,
+        ICategoryService categoryService,
+        IWebHostEnvironment webHostEnvironment)
     {
         _productService = productService;
+        _brandService = brandService;
+        _categoryService = categoryService;
         _webHostEnvironment = webHostEnvironment;
     }
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var products = await _productService.GetAllAsync();
+        return View(products);
     }
 
-    public async Task<IActionResult> Create() => View();
+    [HttpGet]
+    public async Task<IActionResult> Create()
+    {
+        var categories = (await _categoryService.GetAllAsync()).Entity;
+        ViewBag.categories = new SelectList(categories, "Id", "NameEn");
+        var brands = await _brandService.GetAllAsync();
+        ViewBag.brands = new SelectList(brands, "Id", "NameEn");
+        return View();
+    }
 
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductDTO product, List<IFormFile> images)
     {
-        foreach (IFormFile image in images)
+        if(images is not null)
         {
-            if(image.Length > 0)
+            foreach (IFormFile image in images)
             {
-                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                if (image.Length > 0)
                 {
-                    await image.CopyToAsync(fileStream);
+                    var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await image.CopyToAsync(fileStream);
+                    }
+                    CreateImageWithPraductDTO createImage = new();
+                    createImage.ImageUrl = "/img/" + uniqueFileName;
+                    product.Images.Add(createImage);
                 }
-                CreateImageWithPraductDTO createImage = new();
-                createImage.ImageUrl = "/img/" + uniqueFileName;
-                product.Images.Add(createImage);
             }
         }
         if (ModelState.IsValid)
@@ -46,8 +61,23 @@ public class ProductController : Controller
             if (productResponse.IsSuccessfull)
                 return View("Index", productResponse.Entity);
             else
-                return View("Forbidden");
+                return View("Error", productResponse.Message);
         }
         return View("Forbidden");
+    }
+
+    public async Task<IActionResult> Delete(Guid id, bool isSoftDelete = true)
+    {
+
+        if (isSoftDelete)
+        {
+            await _productService.SoftDeleteAsync(id);
+        }
+        else
+        {
+            await _productService.HardDeleteAsync(id);
+        }
+
+        return RedirectToAction(nameof(Index));
     }
 }

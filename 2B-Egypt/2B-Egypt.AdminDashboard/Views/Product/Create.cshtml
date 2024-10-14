@@ -6,13 +6,13 @@
 <link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Create";
 }
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Add New Product</h1>
-    <a asp-action="ProductList" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">
-        Back List Products
+    <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">
+        Back To Products
     </a>
 </div>
 <hr />
@@ -66,16 +66,16 @@
                 <input asp-for="Discount" class="form-control" min="1" />
                 <span asp-validation-for="Discount" class="text-danger"></span>
             </div>
-            @* <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, "Select Parent Category", new { @class = "form-control" })
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Category</label>
+                @Html.DropDownList("CategoryId", ViewBag.categories as SelectList, "select category", new { @class = "form-control" })
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div> *@
-           @*  <div class="form-group">
-                <label asp-for="brandId" class="control-label"></label>
-                @Html.DropDownList("brandId", ViewBag.brands as SelectList, "Select brand", new { @class = "form-control" })
-                <span asp-validation-for="brandId" class="text-danger"></span>
-            </div> *@
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label">Brand</label>
+                @Html.DropDownList("BrandId", ViewBag.brands as SelectList, "select brand", new { @class = "form-control" })
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label for ="Images">Images:</label>
