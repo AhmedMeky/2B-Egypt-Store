@@ -12,7 +12,7 @@ public interface IBrandService
     Task<EntitypaginatedDTO<CreateOrUpdateBrandDTO>> GetAllPaginatedAsync(int pageNumber, int pageSize);
     Task<List<CreateOrUpdateBrandDTO>> SearchByNameAsync(string brandName);
     Task<ResponseDTO<CreateOrUpdateBrandDTO>> UpdateAsync(CreateOrUpdateBrandDTO brand);
-    Task<CreateOrUpdateBrandDTO> GetByIdAsync(Guid id);
+    Task<ResponseDTO<CreateOrUpdateBrandDTO>> GetByIdAsync(Guid id);
     Task SoftDeleteAsync(Guid id); 
     Task HardDeleteAsync(Guid id);
 

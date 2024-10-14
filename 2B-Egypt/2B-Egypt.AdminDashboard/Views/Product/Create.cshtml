@@ -1,0 +1,130 @@
+﻿@model CreateProductDTO;
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add New Product</h1>
+    <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">
+        Back To Products
+    </a>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NameAr" class="control-label"></label>
+                <input asp-for="NameAr" class="form-control" />
+                <span asp-validation-for="NameAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEn" class="control-label"></label>
+                <input asp-for="NameEn" class="form-control" />
+                <span asp-validation-for="NameEn" class="text-danger"></span>
+            </div>
+          
+            <div class="form-group">
+                <label asp-for="ColorAr" class="control-label"></label>
+                <input asp-for="ColorAr" class="form-control" />
+                <span asp-validation-for="ColorAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ColorEn" class="control-label"></label>
+                <input asp-for="ColorEn" class="form-control" />
+                <span asp-validation-for="ColorEn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionAr" class="control-label"></label>
+                <textarea asp-for="DescriptionAr" class="form-control" rows="5" placeholder="Please Enter $ between each property"></textarea>
+                <span asp-validation-for="DescriptionAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionEn" class="control-label"></label>
+                <textarea asp-for="DescriptionEn" class="form-control" rows="5" placeholder="Please Enter $ between each property"></textarea>
+                <span asp-validation-for="DescriptionEn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" min="1" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitInStock" class="control-label"></label>
+                <input asp-for="UnitInStock" class="form-control" min="1" />
+                <span asp-validation-for="UnitInStock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discount" class="control-label"></label>
+                <input asp-for="Discount" class="form-control" min="1" />
+                <span asp-validation-for="Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Category</label>
+                @Html.DropDownList("CategoryId", ViewBag.categories as SelectList, "select category", new { @class = "form-control" })
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label">Brand</label>
+                @Html.DropDownList("BrandId", ViewBag.brands as SelectList, "select brand", new { @class = "form-control" })
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for ="Images">Images:</label>
+                <input type="file" class="form-control-file" name="Images" multiple>
+            </div>
+
+            @* <div class="form-group">
+                <label asp-for="FormFiles">Images:</label>
+                <input type="file" class="form-control-file" asp-for="FormFiles" multiple>
+            </div> *@
+
+            <div class="form-group">
+                <a asp-action="Add">
+                    <input type="submit" value="Create" class="btn btn-success" />
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Product Added Successfully</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Your Product has been added successfully!
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+@* @if (ViewBag.ProductAdded != null && ViewBag.ProductAdded)
+{
+    <script>
+        $(document).ready(function () {
+            $('#successModal').modal('show');
+        });
+    </script>
+} *@
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

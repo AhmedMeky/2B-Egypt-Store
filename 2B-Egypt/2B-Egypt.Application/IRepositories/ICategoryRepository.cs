@@ -2,5 +2,11 @@
 {
     public interface ICategoryRepository : IGenericRepository<Category, Guid>
     {
+        public Task<bool> CategoryNameExists(string Categoryname);
+        public Task<IEnumerable<Category>> GetAllSubCategories(Guid CatId);
+
     }
+
+
+
 }

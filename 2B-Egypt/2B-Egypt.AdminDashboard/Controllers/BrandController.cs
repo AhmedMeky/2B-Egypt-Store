@@ -1,7 +1,4 @@
-﻿using _2B_Egypt.Application.DTOs.BrandDTOs;
-using _2B_Egypt.Application.IServices;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace _2B_Egypt.AdminDashboard.Controllers
 {
     public class BrandController : Controller
@@ -23,6 +20,7 @@ namespace _2B_Egypt.AdminDashboard.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateOrUpdateBrandDTO brand)
         {
@@ -71,14 +69,14 @@ namespace _2B_Egypt.AdminDashboard.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var brands = await _brandService.GetAllAsync(); 
-            var brand = brands.FirstOrDefault(b => b.Id == id); 
-            if (brand == null)
+            var response = await _brandService.GetByIdAsync(id); 
+            if (!response.IsSuccessfull)
             {
-                return NotFound();
+                return View("Error", response.Message);
             }
-            return View(brand); 
+            return View(response.Entity); 
         }
+
         [HttpPost]
         public async Task<IActionResult> Edit(CreateOrUpdateBrandDTO brand)
         {
@@ -94,6 +92,7 @@ namespace _2B_Egypt.AdminDashboard.Controllers
             ModelState.AddModelError(string.Empty, result.Message); 
             return View(brand); 
         }
+
         [HttpPost]
        
         public async Task<IActionResult> Delete(Guid id, bool isSoftDelete = true)
@@ -110,9 +109,14 @@ namespace _2B_Egypt.AdminDashboard.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        // public async Task<IActionResult> SearchByName(string name)
+        // {
+        //     var brands = await _brandService.GetAllAsync();
+        //     return View(brands);
+        // }
+
     }
-
-
 
 }
 

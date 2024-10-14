@@ -1,13 +1,4 @@
-﻿using _2B_Egypt.Application.DTOs;
-using _2B_Egypt.Application.DTOs.BrandDTOs;
-using _2B_Egypt.Application.DTOs.Shared;
-using _2B_Egypt.Application.IServices;
-using _2B_Egypt.Domain.Models;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 
 namespace _2B_Egypt.Application.Services
 {
@@ -46,6 +37,8 @@ namespace _2B_Egypt.Application.Services
                 }
 
                 var newBrand = _mapper.Map<Brand>(brand);
+                brand.Id = Guid.NewGuid();
+                brand.CreatedAt = DateTime.Now;
                 await _brandRepository.CreateAsync(newBrand);
                 await _brandRepository.SaveChangesAsync();
 
@@ -105,9 +98,8 @@ namespace _2B_Egypt.Application.Services
 
         public async Task<List<CreateOrUpdateBrandDTO>> SearchByNameAsync(string brandName)
         {
-            var brands = await _brandRepository.GetAllAsync();
-            var filter = brands.Where(b => b.NameEn.Contains(brandName) || b.NameAr.Contains(brandName)).ToList();
-            return _mapper.Map<List<CreateOrUpdateBrandDTO>>(filter);
+            var brands = await _brandRepository.SearchByNameAsync(brandName);
+            return _mapper.Map<List<CreateOrUpdateBrandDTO>>(brands);
         }
 
         public async Task<ResponseDTO<CreateOrUpdateBrandDTO>> UpdateAsync(CreateOrUpdateBrandDTO brand)
@@ -142,7 +134,7 @@ namespace _2B_Egypt.Application.Services
                     return result;
                 }
                 _mapper.Map(brand, oldBrand);
-
+                oldBrand.UpdatedAt = DateTime.Now;
                 var updatedBrand = await _brandRepository.UpdateAsync(oldBrand);
                 await _brandRepository.SaveChangesAsync();
 
@@ -167,17 +159,31 @@ namespace _2B_Egypt.Application.Services
                 return result;
             }
         }
-        public async Task<CreateOrUpdateBrandDTO> GetByIdAsync(Guid id)
+        public async Task<ResponseDTO<CreateOrUpdateBrandDTO>> GetByIdAsync(Guid id)
         {
             var brand = await _brandRepository.GetByIdAsync(id);
-            return _mapper.Map<CreateOrUpdateBrandDTO>(brand);
+            if (brand is null)
+            {
+                return new ResponseDTO<CreateOrUpdateBrandDTO>
+                {
+                    IsSuccessfull = false,
+                    Message = "There is no Brand with this Id"
+                };
+            }
+            var response = new ResponseDTO<CreateOrUpdateBrandDTO>
+            {
+                Entity = _mapper.Map<CreateOrUpdateBrandDTO>(brand),
+                IsSuccessfull = true,
+            };
+            return response;
         }
         public async Task SoftDeleteAsync(Guid id)
         {
             var brand = await _brandRepository.GetByIdAsync(id);
             if (brand != null)
             {
-                brand.IsDeleted = true; 
+                brand.IsDeleted = true;
+                brand.DeletedAt = DateTime.Now;
                 await _brandRepository.UpdateAsync(brand);
                 await _brandRepository.SaveChangesAsync();
             }

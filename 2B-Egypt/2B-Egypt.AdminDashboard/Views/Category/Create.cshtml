@@ -1,0 +1,93 @@
+﻿@model CreateCategoryDTO
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Create Category</h1>
+    <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">Back to List</a>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+         
+            <div class="form-group">
+                <label asp-for="NameAr" class="control-label"></label>
+                <input asp-for="NameAr" class="form-control" />
+                <span asp-validation-for="NameAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEn" class="control-label"></label>
+                <input asp-for="NameEn" class="form-control" />
+                <span asp-validation-for="NameEn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentCategoryId" class="control-label"></label>
+                @Html.DropDownList("ParentCategoryId", ViewBag.Categories as SelectList, "Select Parent Category", new { @class = "form-control" })
+                <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
+            </div>
+           @*  <div>
+                <label asp-for="ParentCategoryId"></label>
+                <select asp-for="ParentCategoryId" asp-items="ViewBag.Categories as SelectList">
+                    <option value="">Select a category</option>
+                </select>
+                <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
+            </div> *@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            
+            
+
+        </form>
+    </div>
+</div>
+@if (ViewBag.ErrorMessage != null )
+{
+    <div class="alert alert-danger"  role="alert">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Category Added Successfully</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Your Category has been added successfully!
+            </div>
+        </div>
+    </div>
+</div>
+@* <div>
+    <a asp-action="CategoryList" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">Back to List</a>
+</div> *@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript to show the modal -->
+@if (ViewBag.CategoryAdded != null && ViewBag.CategoryAdded)
+{
+    <script>
+        $(document).ready(function () {
+            $('#successModal').modal('show');
+        });
+    </script>
+}
+
+
