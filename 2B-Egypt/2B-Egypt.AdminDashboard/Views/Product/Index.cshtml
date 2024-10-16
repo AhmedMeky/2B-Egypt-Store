@@ -1,5 +1,82 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<GetProductDTO>
+
 @{
+    ViewData["Title"] = "Products";
 }
+
+<!-- Include Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Products</h1>
+    <a asp-action="Create" class="btn btn-success shadow-sm">
+        <i class="fas fa-plus"></i> Add New Product
+    </a>
+</div>
+
+<hr />
+
+<div class="container ">
+    <br />
+    @for (var i = 0; i < Model?.Count(); i += 3)
+    {
+        <div class="row">
+            @foreach (var item in Model?.Skip(i)?.Take(3))
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card" style="width: 18rem; height: 400px;">
+                        @if (item.Images?.FirstOrDefault() != null && !string.IsNullOrEmpty(item.Images?.FirstOrDefault()?.ImageUrl))
+                        {
+                            <div class="card-body" style="background-image: url(@item.Images?.FirstOrDefault()?.ImageUrl); background-size: cover; background-position: center; height: 200px;"></div>
+                        }
+                        else
+                        {
+                            <div class="card-body" style="background-color: #ccc; height: 200px;">No Image</div>
+                        }
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><h5>@item.NameEn  (@item.NameAr)</h5></li>
+                            <li class="list-group-item"><h5 class="text-success">@item.Price EGP</h5></li>
+                        </ul>
+
+                        <div class="card-body">
+                            <a class="card-link" asp-action="Update" asp-route-id="@item.Id">
+                                <i class="bi bi-pencil-square">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-pencil-square text-success" viewBox="0 0 20 20">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                    </svg>
+                                </i>
+                            </a> |
+
+                            <a class="card-link" onclick="confirmDelete('@item.Id')">
+                                <i class="bi bi-trash">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-trash text-danger" viewBox="0 0 20 20">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                    </svg>
+                                </i>
+                            </a> |
+
+                            <a class="card-link" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">
+                                <i class="bi bi-info-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-info-lg" viewBox="0 0 16 16">
+                                        <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0" />
+                                    </svg>
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    }
+</div>
+
+<script>
+    function confirmDelete(productId) {
+        if (confirm('هل أنت متأكد أنك تريد حذف هذا المنتج؟')) {
+            window.location.href = '/Product/Delete?id=' + productId;
+        }
+    }
+</script>

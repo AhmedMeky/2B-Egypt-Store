@@ -1,0 +1,122 @@
+﻿@model GetAllProductDTO
+
+@{
+    ViewData["Title"] = "Details";
+}
+<!-- Include Bootstrap CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"> Details</h1>
+    <a class="btn btn-success btn-lg" asp-controller="Product" asp-action="Index">Back to Products</a>
+</div>
+<hr />
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div id="imageCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach (var productimage in Model?.Images){
+                        <div class="carousel-item @if (Model?.Images?.FirstOrDefault()?.ImageUrl == productimage?.ImageUrl) {
+                    <text>active</text>
+ }">
+                                    <img src="@productimage?.ImageUrl" class="d-block w-100" alt="Product Image">
+                                </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#imageCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#imageCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="row mt-3">
+                 @foreach (var productImage in Model?.Images){
+                    <div class="col-md-2">
+                        <img src="@(productImage?.ImageUrl)" class="img-thumbnail" alt="productImage" onclick="selectImage('@(productImage?.ImageUrl)')">
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card-body p-0">
+                <h1 class=" fw-bolder">@Model?.NameEn (@Model?.NameAr)</h1>
+                <div class="pt-5">
+                    <h4 class=""> Description :</h4>
+                    <p class="fs-5">@Model?.DescriptionEn</p>
+                    <p class="fs-5">@Model?.DescriptionAr</p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="pt-5">
+                            <h4 > Color :</h4>
+                            <p class="fs-5">@Model.ColorEn (@Model.ColorAr)</p>
+                        </div>
+                        <div class="pt-5">
+                            <h4 > Price :</h4>
+                            <p class="fs-5">@Model.Price EPG</p>
+                        </div>
+                        <div class="pt-5">
+                            <h4> Discount :</h4>
+                            <p class="fs-5">(@Model.Discount)%</p>
+                        </div>
+                        <div class="pt-5">
+                            <h4 > Stock Quantity :</h4>
+                            <p class="fs-5">@Model.UnitInStock</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pt-5">
+                            <h4 > Rate :</h4>
+                            @if (Model?.Reviews is not null && Model?.Reviews?.Count > 0)
+                            {
+                                <p class="fs-5">@Model?.Reviews?.Select(rv => rv.QualityRating)?.Average()??0</p>
+                            }
+                            else
+                            {
+                                <p class="fs-5">0</p>
+                            }
+                        </div>
+                        <div class="pt-5">
+                            <h4 > Reviews :</h4>
+                            @if (Model?.Reviews is not null && Model?.Reviews?.Count > 0)
+                            {
+                                @foreach (var item in Model?.Reviews)
+                                {
+                                    <p class="fs-5">Price Rating : @item.PriceRating</p>
+                                    <p class="fs-5"> Value Rating : @item.ValueRating</p>
+                                    <p class="fs-5"> Quality Rating :@item.QualityRating</p>
+                                    <p class="fs-5">Summary : @item.Summary</p>
+                                    <p class="fs-5">Nickname : @item.NickName</p>
+                                    <p class="fs-5">Review : @item.ReviewText</p>
+                                    <hr />
+                                }
+                            }
+                            else
+                            {
+                                <p class="fs-5">There is no Reviews yet.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    function selectImage(imageUrl) {
+        $('#imageCarousel .carousel-item').removeClass('active');
+        $('#imageCarousel .carousel-item img[src="' + imageUrl + '"]').closest('.carousel-item').addClass('active');
+    }
+</script>
+

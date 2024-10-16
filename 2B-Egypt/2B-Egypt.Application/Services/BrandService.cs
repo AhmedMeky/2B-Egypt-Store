@@ -14,12 +14,6 @@ namespace _2B_Egypt.Application.Services
 
         public async Task<ResponseDTO<CreateOrUpdateBrandDTO>> CreateAsync(CreateOrUpdateBrandDTO brand)
         {
-            //brand.Id = Guid.NewGuid();
-            //            var brMapper = mapper.Map<Brand>(brand);
-            //            var newBrand = await brandRepository.CreateAsync(brMapper);
-            //            await brandRepository.SaveChangesAsync();
-            //            var brandDto = mapper.Map<CreateBrandDTO>(newBrand);
-            //            return new ResponseDTO<CreateBrandDTO> { Entity = brandDto, IsSuccessfull = true, Message = "Created Successfully" };
             ResponseDTO<CreateOrUpdateBrandDTO> result = new ResponseDTO<CreateOrUpdateBrandDTO>();
 
             try
@@ -37,8 +31,8 @@ namespace _2B_Egypt.Application.Services
                 }
 
                 var newBrand = _mapper.Map<Brand>(brand);
-                brand.Id = Guid.NewGuid();
-                brand.CreatedAt = DateTime.Now;
+                newBrand.Id = Guid.NewGuid();
+                newBrand.CreatedAt = DateTime.Now;
                 await _brandRepository.CreateAsync(newBrand);
                 await _brandRepository.SaveChangesAsync();
 

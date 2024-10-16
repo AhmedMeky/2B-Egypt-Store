@@ -35,35 +35,44 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductDTO product, List<IFormFile> images)
     {
-        if(images is not null)
+        foreach (IFormFile image in images)
         {
-            foreach (IFormFile image in images)
+            if (image.Length > 0)
             {
-                if (image.Length > 0)
-                {
-                    var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
-                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await image.CopyToAsync(fileStream);
-                    }
-                    CreateImageWithPraductDTO createImage = new();
-                    createImage.ImageUrl = "/img/" + uniqueFileName;
-                    product.Images.Add(createImage);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
                 }
+                CreateImageWithPraductDTO createImage = new();
+                createImage.ImageUrl = "/img/" + uniqueFileName;
+                product.Images.Add(createImage);
             }
         }
-        if (ModelState.IsValid)
+        if (ModelState.IsValid && product.Images.Count() != 0)
         {
             var productResponse = await _productService.CreateAsync(product);
             if (productResponse.IsSuccessfull)
-                return View("Index", productResponse.Entity);
+                return RedirectToAction("Index");
             else
-                return View("Error", productResponse.Message);
+                return View("Error404", productResponse.Message);
         }
-        return View("Forbidden");
+
+        return RedirectToAction("Create",product);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(Guid id)
+    {
+        var productRespone = await _productService.GetByIdAsync(id);
+        if(!productRespone.IsSuccessfull)
+        {
+            return View("Error404");
+        }
+        return View(productRespone.Entity);
     }
 
     public async Task<IActionResult> Delete(Guid id, bool isSoftDelete = true)

@@ -9,5 +9,5 @@ public class GetProductDTO
     public int UnitInStock { get; set; }
     public decimal Price { get; set; }
     public int Discount { get; set; }
+    public List<CreateImageWithPraductDTO> Images { get; set; }
 }
-
