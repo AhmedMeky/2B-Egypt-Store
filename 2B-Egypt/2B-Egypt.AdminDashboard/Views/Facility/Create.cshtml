@@ -1,0 +1,62 @@
+﻿@model CreateFacilityDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+<link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+<link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Add New Specification </h1>
+    <a asp-controller="Facility" asp-action="GetAllFacilities" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">
+        Back List Specifications
+    </a>
+</div>
+
+<hr />
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Facility" asp-action="CreateFacility">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+          
+            <div class="form-group">
+                <label asp-for="NameAr" class="control-label"></label>
+                <input asp-for="NameAr" class="form-control" />
+                <span asp-validation-for="NameAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameEn" class="control-label"></label>
+                <input asp-for="NameEn" class="form-control" />
+                <span asp-validation-for="NameEn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValueAr" class="control-label"></label>
+                <input asp-for="ValueAr" class="form-control" />
+                <span asp-validation-for="ValueAr" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValueEn" class="control-label"></label>
+                <input asp-for="ValueEn" class="form-control" />
+                <span asp-validation-for="ValueEn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

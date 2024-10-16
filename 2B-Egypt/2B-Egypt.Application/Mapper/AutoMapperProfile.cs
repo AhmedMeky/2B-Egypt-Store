@@ -5,5 +5,7 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<Brand, CreateBrandDTO>().ReverseMap();
+        CreateMap<Facility, CreateFacilityDTO>().ReverseMap();
+
     }
 }

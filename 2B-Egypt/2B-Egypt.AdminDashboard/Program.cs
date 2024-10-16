@@ -23,7 +23,8 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 //builder.Services.AddScoped<AppDbContext>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
-
+builder.Services.AddScoped<IFacilityService, FacilityService>();
+builder.Services.AddScoped<IFacilityRepository, FacilityRepository>();
 // ========================================================================
 
 
