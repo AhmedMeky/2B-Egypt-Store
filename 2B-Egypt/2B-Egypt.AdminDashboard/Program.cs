@@ -44,6 +44,8 @@ builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IFacilityService, FacilityService>();
+builder.Services.AddScoped<IFacilityRepository, FacilityRepository>();
 
 // ========================================================================
 

@@ -27,5 +27,6 @@ public class AutoMapperProfile : Profile
         // Reviw
         CreateMap<Review,ReviewForGetAllProductDTO> ().ReverseMap();
 
+        CreateMap<Facility, CreateFacilityDTO>().ReverseMap();
     }
 }
