@@ -1,4 +1,6 @@
 ﻿using _2B_Egypt.Application.IRepositories;
+using _2B_Egypt.Application.IServices;
+using _2B_Egypt.Application.Services;
 using _2B_Egypt.Domain.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,19 +12,19 @@ namespace _2B_Egypt.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
+        private readonly IProductService _productService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductsController(IProductRepository productRepository, IWebHostEnvironment webHostEnvironment)
+        public ProductsController(IProductService productService, IWebHostEnvironment webHostEnvironment)
         {
-            _productRepository = productRepository;
+            _productService = productService;
             _webHostEnvironment = webHostEnvironment;
 
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
-            var products = await _productRepository.GetAllAsync();
+            var products = await _productService.GetAllAsync();
             return Ok(products);
         }
         
