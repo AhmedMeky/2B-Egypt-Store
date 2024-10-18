@@ -1,0 +1,107 @@
+a{
+    text-decoration: none;
+    color:white;
+}
+a:hover{
+    color: #F37021 !important;    
+}
+button{
+    background-color:#ff662b !important;   ;
+}
+
+.footer-middle a {
+    text-decoration: none;
+    color: var(--white) !important;
+    transition: all ease-in-out 0.1s;
+    font-size: 14px !important;
+    -webkit-transition: all ease-in-out 0.1s;
+    -moz-transition: all ease-in-out 0.1s;
+    -ms-transition: all ease-in-out 0.1s;
+    -o-transition: all ease-in-out 0.1s;
+}
+.footer-middle a:hover{
+   color: var(--main-color) !important;
+   text-decoration: none; 
+}
+.footer-middle ul.contact-info li {
+    padding: 5px 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .features {
+        margin-bottom: revert;
+    }
+    ul.contact-info.whitening{
+        margin: revert;
+    }
+}
+
+.social-icons {
+    float: left !important;
+}
+
+.thirteen {
+    font-size: 13px;
+}
+
+.twelve {
+    font-size: 12px;
+    color: #FFFFFF !important;
+}
+
+.footer-middle .block .block-title strong {
+    font-size: 16px !important;
+    color: #F37021 !important;
+}
+
+.footer-middle a {
+    color: #FFFFFF !important;
+}
+
+.whitening {
+    color: #FFFFFF !important;
+    font-size: 14px !important;
+}
+
+.footer-middle {
+    padding: 0px 0px;
+}
+
+.social-icons2 a {
+    background-image: none;
+    background-color: #33332f;
+    text-indent: 0;
+    color: #fff;
+    border-radius: 6px;
+    font-size: 15px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    margin-right: 4px;
+    float: right;
+    line-height: 40px;
+}
+
+.socials.facebook:hover{
+    background: rgba(66, 103, 178, 1);
+}
+.socials.twitter:hover{
+    background: rgba(29, 161, 242, 1);
+}
+.socials.linkedin:hover{
+    background: rgba(40,103,178,1);
+}
+.socials.instagram:hover{
+    background:radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+      }
+      .block-title{
+        font-size: 16px !important;
+        color: #F37021 !important;   
+    }
+    
+    ul{
+    padding-inline-start: 0
+    }
+    li{
+        padding-bottom: 10px;
+    }

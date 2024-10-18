@@ -4,16 +4,19 @@ public class ProductController : Controller
     private readonly IProductService _productService;
     private readonly IBrandService _brandService;
     private readonly ICategoryService _categoryService;
+    private readonly IFacilityService _facilityService;
     private readonly IWebHostEnvironment _webHostEnvironment;
     public ProductController(
         IProductService productService,
         IBrandService brandService,
         ICategoryService categoryService,
-        IWebHostEnvironment webHostEnvironment)
+        IFacilityService facilityService,
+    IWebHostEnvironment webHostEnvironment)
     {
         _productService = productService;
         _brandService = brandService;
         _categoryService = categoryService;
+        _facilityService = facilityService;
         _webHostEnvironment = webHostEnvironment;
     }
     public async Task<IActionResult> Index()
@@ -29,41 +32,57 @@ public class ProductController : Controller
         ViewBag.categories = new SelectList(categories, "Id", "NameEn");
         var brands = await _brandService.GetAllAsync();
         ViewBag.brands = new SelectList(brands, "Id", "NameEn");
+        var facilities = await _facilityService.GetAllAsync();
+        ViewBag.facilities = facilities.Entity;
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateProductDTO product, List<IFormFile> images)
+    public async Task<IActionResult> Create(CreateProductDTO product, List<IFormFile> images, Guid[] facilities)
     {
-        if(images is not null)
+        foreach (IFormFile image in images)
         {
-            foreach (IFormFile image in images)
+            if (image.Length > 0)
             {
-                if (image.Length > 0)
-                {
-                    var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
-                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
-                    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await image.CopyToAsync(fileStream);
-                    }
-                    CreateImageWithPraductDTO createImage = new();
-                    createImage.ImageUrl = "/img/" + uniqueFileName;
-                    product.Images.Add(createImage);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
                 }
+                CreateImageWithPraductDTO createImage = new();
+                createImage.ImageUrl = "/img/" + uniqueFileName;
+                product.Images.Add(createImage);
             }
         }
-        if (ModelState.IsValid)
+        foreach (var id in facilities)
+        {
+            var fac = await _facilityService.GetByIdAsync(id);
+            product.Facilities.Add(fac.Entity);
+        }
+        if (ModelState.IsValid && product.Images.Count() != 0)
         {
             var productResponse = await _productService.CreateAsync(product);
             if (productResponse.IsSuccessfull)
-                return View("Index", productResponse.Entity);
+                return RedirectToAction("Index");
             else
-                return View("Error", productResponse.Message);
+                return View("Error404", productResponse.Message);
         }
-        return View("Forbidden");
+
+        return RedirectToAction("Create", product);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Details(Guid id)
+    {
+        var productRespone = await _productService.GetByIdAsync(id);
+        if (!productRespone.IsSuccessfull)
+        {
+            return View("Error404");
+        }
+        return View(productRespone.Entity);
     }
 
     public async Task<IActionResult> Delete(Guid id, bool isSoftDelete = true)

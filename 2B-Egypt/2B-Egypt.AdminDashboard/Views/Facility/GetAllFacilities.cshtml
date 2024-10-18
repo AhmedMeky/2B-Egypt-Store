@@ -1,0 +1,39 @@
+﻿@model List<CreateFacilityDTO>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name (Arabic)</th>
+                <th>Name (English)</th>
+                <th>Value (Arabic)</th>
+                <th>Value (English)</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody id="facilitiesList">
+            @foreach (var facility in Model)
+            {
+                <tr>
+                    <td>@facility.NameAr</td>
+                    <td>@facility.NameEn</td>
+                    <td>@facility.ValueAr</td>
+                    <td>@facility.ValueEn</td>
+                    <td>
+                         <a asp-action="Edit" asp-route-id="@facility.Id" class="btn btn-warning">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@facility.Id" method="post" style="display:inline;">
+                        <input type="hidden" name="isSoftDelete" value="true" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Facility?');">Delete</button>
+                    </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

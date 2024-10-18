@@ -1,0 +1,453 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\ITI 2024\\Final Project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Services\\FacilityService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\Services\\FacilityService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\BrandRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\BrandRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\FacilityRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\FacilityRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IFacilityRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\IRepositories\\IFacilityRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IGenericRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\IRepositories\\IGenericRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\GenericRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\GenericRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\AppDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Context\\AppDbContext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Services\\BrandService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\Services\\BrandService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IServices\\IFacilityService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\IServices\\IFacilityService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Domain\\Models\\Facility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Domain\\Models\\Facility.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IServices\\IBrandService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\IServices\\IBrandService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\FacilityDTOs\\CreateFacilityDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\DTOs\\FacilityDTOs\\CreateFacilityDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\BrandDTOs\\CreateBrandDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\DTOs\\BrandDTOs\\CreateBrandDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IBrandRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\IRepositories\\IBrandRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\FacilityController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\FacilityController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\BrandController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\BrandController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\ResponseDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\DTOs\\ResponseDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Domain\\Models\\Brand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Domain\\Models\\Brand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\OrderEntityTypeConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\OrderEntityTypeConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\FacilityEntityTypeConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\FacilityEntityTypeConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\ProductImageEntityTypeConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\ProductImageEntityTypeConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\BrandEntityTypeConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\BrandEntityTypeConfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Mapper\\AutoMapperProfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Application\\Mapper\\AutoMapperProfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CategoryRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CategoryRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CartRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CartRepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FacilityService.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Services\\FacilityService.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\Services\\FacilityService.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Services\\FacilityService.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\Services\\FacilityService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T13:13:13.777Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FacilityRepository.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\FacilityRepository.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\FacilityRepository.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\FacilityRepository.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\FacilityRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:16:16.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BrandRepository.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\BrandRepository.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\BrandRepository.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\BrandRepository.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\BrandRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:10:13.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IFacilityRepository.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IFacilityRepository.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\IRepositories\\IFacilityRepository.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IFacilityRepository.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\IRepositories\\IFacilityRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T10:05:02.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\IRepositories\\IGenericRepository.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IGenericRepository.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\IRepositories\\IGenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T13:26:35.869Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\GenericRepository.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\GenericRepository.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\GenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T13:26:23.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\AppDbContext.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\AppDbContext.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T13:42:43.093Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BrandService.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Services\\BrandService.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\Services\\BrandService.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Services\\BrandService.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\Services\\BrandService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T10:03:06.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IFacilityService.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IServices\\IFacilityService.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\IServices\\IFacilityService.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IServices\\IFacilityService.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\IServices\\IFacilityService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T13:04:25.929Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Facility.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Domain\\Models\\Facility.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Domain\\Models\\Facility.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Domain\\Models\\Facility.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Domain\\Models\\Facility.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T10:02:44.247Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IBrandService.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IServices\\IBrandService.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\IServices\\IBrandService.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IServices\\IBrandService.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\IServices\\IBrandService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T10:03:56.436Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreateFacilityDTO.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\FacilityDTOs\\CreateFacilityDTO.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\DTOs\\FacilityDTOs\\CreateFacilityDTO.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\FacilityDTOs\\CreateFacilityDTO.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\DTOs\\FacilityDTOs\\CreateFacilityDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:35:01.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CreateBrandDTO.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\BrandDTOs\\CreateBrandDTO.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\DTOs\\BrandDTOs\\CreateBrandDTO.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\BrandDTOs\\CreateBrandDTO.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\DTOs\\BrandDTOs\\CreateBrandDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:17:30.997Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IBrandRepository.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IBrandRepository.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\IRepositories\\IBrandRepository.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\IRepositories\\IBrandRepository.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\IRepositories\\IBrandRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T13:27:33.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "FacilityController.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\FacilityController.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\FacilityController.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\FacilityController.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\FacilityController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:24:56.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "BrandController.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\BrandController.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\BrandController.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\BrandController.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.AdminDashboard\\Controllers\\BrandController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:20:04.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ResponseDTO.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\ResponseDTO.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\DTOs\\ResponseDTO.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\DTOs\\ResponseDTO.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\DTOs\\ResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T13:05:07.964Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Brand.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Domain\\Models\\Brand.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Domain\\Models\\Brand.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Domain\\Models\\Brand.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Domain\\Models\\Brand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T13:07:54.97Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "OrderEntityTypeConfiguration.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\OrderEntityTypeConfiguration.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\OrderEntityTypeConfiguration.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\OrderEntityTypeConfiguration.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\OrderEntityTypeConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:17:47.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ProductImageEntityTypeConfiguration.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\ProductImageEntityTypeConfiguration.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\ProductImageEntityTypeConfiguration.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\ProductImageEntityTypeConfiguration.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\ProductImageEntityTypeConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:15:54.477Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "BrandEntityTypeConfiguration.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\BrandEntityTypeConfiguration.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\BrandEntityTypeConfiguration.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\BrandEntityTypeConfiguration.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\BrandEntityTypeConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:15:44.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "FacilityEntityTypeConfiguration.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\FacilityEntityTypeConfiguration.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\FacilityEntityTypeConfiguration.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\FacilityEntityTypeConfiguration.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Context\\Configurations\\FacilityEntityTypeConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:15:39.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AutoMapperProfile.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Mapper\\AutoMapperProfile.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Application\\Mapper\\AutoMapperProfile.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Application\\Mapper\\AutoMapperProfile.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Application\\Mapper\\AutoMapperProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:13:54.787Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "CategoryRepository.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CategoryRepository.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CategoryRepository.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CategoryRepository.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CategoryRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:10:33.807Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "CartRepository.cs",
+              "DocumentMoniker": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CartRepository.cs",
+              "RelativeDocumentMoniker": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CartRepository.cs",
+              "ToolTip": "D:\\ITI 2024\\Final Project\\2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CartRepository.cs",
+              "RelativeToolTip": "2B-Egypt\\2B-Egypt.Infrastructure\\Reposetories\\CartRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-12T12:10:32.632Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

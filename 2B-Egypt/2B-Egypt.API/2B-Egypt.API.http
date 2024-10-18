@@ -1,0 +1,6 @@
+@_2B_Egypt.API_HostAddress = http://localhost:5204
+
+GET {{_2B_Egypt.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
