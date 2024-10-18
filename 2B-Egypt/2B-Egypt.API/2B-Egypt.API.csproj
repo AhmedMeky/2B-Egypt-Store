@@ -18,4 +18,9 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.1.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\2B-Egypt.Application\2B-Egypt.Application.csproj" />
+    <ProjectReference Include="..\2B-Egypt.Infrastructure\2B-Egypt.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

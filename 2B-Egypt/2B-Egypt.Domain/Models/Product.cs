@@ -34,6 +34,7 @@ public class Product : BaseEntity
     public Guid CategoryId { get; set; }
 
     public Guid BrandId { get; set; }
+  
 
     // Navigation properties
     public virtual Category Category { get; set; }
