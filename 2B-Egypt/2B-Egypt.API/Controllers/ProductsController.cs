@@ -27,46 +27,9 @@ namespace _2B_Egypt.API.Controllers
             var products = await _productService.GetAllAsync();
             return Ok(products);
         }
+
+
         
-
-        //// POST: api/products
-        //[HttpPost]
-        //public async Task<ActionResult<Product>> CreateProduct(Product product)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    await _productRepository.CreateAsync(product);
-        //    return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
-        //}
-
-        //// PUT: api/products/{id}
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> UpdateProduct(Guid id, Product product)
-        //{
-        //    if (id != product.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    await _productRepository.UpdateAsync(product);
-        //    return NoContent();
-        //}
-
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteProduct(Guid id)
-        //{
-        //    var product = await _productRepository.GetByIdAsync(id); 
-        //    if (product == null)
-        //    {
-        //        return NotFound(); 
-        //    }
-
-        //    await _productRepository.HardDeleteAsync(product); 
-        //    return NoContent();
-        //}
 
     }
 }
