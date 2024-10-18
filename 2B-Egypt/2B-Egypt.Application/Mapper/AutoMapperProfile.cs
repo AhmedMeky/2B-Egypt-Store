@@ -1,4 +1,4 @@
-﻿using _2B_Egypt.Application.DTOs.CategoryDTOs;
+﻿using _2B_Egypt.Application.DTOs.AdminDTOs;
 
 namespace _2B_Egypt.Application.Mapper;
 
@@ -6,7 +6,7 @@ public class AutoMapperProfile : Profile
 {
     public AutoMapperProfile()
     { 
-	//category 
+	    //category 
         CreateMap<Category, CreateCategoryDTO>().ReverseMap();
         CreateMap<Category, CategoryWithRelatedProducts>().ReverseMap();
         CreateMap<Category, UpdateCategoryDTO>().ReverseMap();
@@ -27,6 +27,12 @@ public class AutoMapperProfile : Profile
         // Reviw
         CreateMap<Review,ReviewForGetAllProductDTO> ().ReverseMap();
 
+        // Facilities
+
         CreateMap<Facility, CreateFacilityDTO>().ReverseMap();
+
+        // Admin
+        CreateMap<CreateAdminDTO, User>().ReverseMap();
+
     }
 }

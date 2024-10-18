@@ -26,13 +26,11 @@
                     <td>@facility.ValueAr</td>
                     <td>@facility.ValueEn</td>
                     <td>
-                        <form asp-controller="Facility" asp-action="DeleteFacility" method="post">
-                            <input type="hidden" asp-for="@facility.NameAr" />
-                            <input type="hidden" asp-for="@facility.NameEn" />
-                            <input type="hidden" asp-for="@facility.ValueAr" />
-                            <input type="hidden" asp-for="@facility.ValueEn" />
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
+                         <a asp-action="Edit" asp-route-id="@facility.Id" class="btn btn-warning">Edit</a>
+                    <form asp-action="Delete" asp-route-id="@facility.Id" method="post" style="display:inline;">
+                        <input type="hidden" name="isSoftDelete" value="true" />
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this Facility?');">Delete</button>
+                    </form>
                     </td>
                 </tr>
             }

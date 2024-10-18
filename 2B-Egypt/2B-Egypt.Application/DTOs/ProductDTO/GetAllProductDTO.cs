@@ -26,6 +26,6 @@ public class GetAllProductDTO
     public BrandForGetAllProductDTO Brand { get; set; }
     public List<CreateImageWithPraductDTO> Images { get; set; } = [];
     public List<ReviewForGetAllProductDTO> Reviews { get; set; } = [];
-    //public virtual List<Guid> Facilities { get; set; } = [];
+    public List<FacilityForGetAllProductDTO> Facilities { get; set; } = [];
 }
 

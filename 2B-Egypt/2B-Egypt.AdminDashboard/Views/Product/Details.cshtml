@@ -45,6 +45,16 @@
             <div class="card-body p-0">
                 <h1 class=" fw-bolder">@Model?.NameEn (@Model?.NameAr)</h1>
                 <div class="pt-5">
+                    <h4 class=""> Specifications :</h4>
+                    @if(Model?.Facilities is not null && Model?.Facilities?.Count > 0)
+                    {
+                        @foreach(var facility in Model.Facilities)
+                        {
+                                    <strong> <p class="fs-5">@facility?.NameEn</p> </strong> <p class="fs-5">@facility?.ValueEn</p> <br />
+                        }
+                    }
+                </div>
+                <div class="pt-5">
                     <h4 class=""> Description :</h4>
                     <p class="fs-5">@Model?.DescriptionEn</p>
                     <p class="fs-5">@Model?.DescriptionAr</p>
@@ -77,7 +87,7 @@
                             }
                             else
                             {
-                                <p class="fs-5">0</p>
+                                <p class="fs-5">3</p>
                             }
                         </div>
                         <div class="pt-5">

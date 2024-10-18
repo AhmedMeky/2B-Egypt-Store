@@ -28,16 +28,13 @@ public class FacilityController : Controller
     public async Task<IActionResult> GetAllFacilities()
     {
         var faclilties = await _facilityService.GetAllAsync();
-        if (faclilties.IsSuccessfull)
-            return View("GetAllFacilities", faclilties.Entity);
-        else
-            return Content(faclilties.Message);
+        return View("GetAllFacilities", faclilties.Entity);
     }
 
     [HttpPost]
-    public async Task<IActionResult> DeleteFacility(Facility facility)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        await _facilityService.SoftDeleteAsync(facility);
+        await _facilityService.SoftDeleteAsync(id);
         return RedirectToAction("GetAllFacilities");
     }
 }

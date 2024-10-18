@@ -35,5 +35,5 @@ public class CreateProductDTO
     public Guid BrandId { get; set; }
     //[Required,MinLength(1)]
     public virtual List<CreateImageWithPraductDTO> Images { get; set; } = [];
-    //public virtual List<Guid> Facilities { get; set; } = [];
+    public virtual List<CreateFacilityDTO> Facilities { get; set; } = [];
 }

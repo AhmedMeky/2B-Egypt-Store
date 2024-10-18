@@ -4,16 +4,19 @@ public class ProductController : Controller
     private readonly IProductService _productService;
     private readonly IBrandService _brandService;
     private readonly ICategoryService _categoryService;
+    private readonly IFacilityService _facilityService;
     private readonly IWebHostEnvironment _webHostEnvironment;
     public ProductController(
         IProductService productService,
         IBrandService brandService,
         ICategoryService categoryService,
-        IWebHostEnvironment webHostEnvironment)
+        IFacilityService facilityService,
+    IWebHostEnvironment webHostEnvironment)
     {
         _productService = productService;
         _brandService = brandService;
         _categoryService = categoryService;
+        _facilityService = facilityService;
         _webHostEnvironment = webHostEnvironment;
     }
     public async Task<IActionResult> Index()
@@ -29,11 +32,13 @@ public class ProductController : Controller
         ViewBag.categories = new SelectList(categories, "Id", "NameEn");
         var brands = await _brandService.GetAllAsync();
         ViewBag.brands = new SelectList(brands, "Id", "NameEn");
+        var facilities = await _facilityService.GetAllAsync();
+        ViewBag.facilities = facilities.Entity;
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateProductDTO product, List<IFormFile> images)
+    public async Task<IActionResult> Create(CreateProductDTO product, List<IFormFile> images, Guid[] facilities)
     {
         foreach (IFormFile image in images)
         {
@@ -52,6 +57,11 @@ public class ProductController : Controller
                 product.Images.Add(createImage);
             }
         }
+        foreach (var id in facilities)
+        {
+            var fac = await _facilityService.GetByIdAsync(id);
+            product.Facilities.Add(fac.Entity);
+        }
         if (ModelState.IsValid && product.Images.Count() != 0)
         {
             var productResponse = await _productService.CreateAsync(product);
@@ -61,14 +71,14 @@ public class ProductController : Controller
                 return View("Error404", productResponse.Message);
         }
 
-        return RedirectToAction("Create",product);
+        return RedirectToAction("Create", product);
     }
 
     [HttpGet]
     public async Task<IActionResult> Details(Guid id)
     {
         var productRespone = await _productService.GetByIdAsync(id);
-        if(!productRespone.IsSuccessfull)
+        if (!productRespone.IsSuccessfull)
         {
             return View("Error404");
         }
