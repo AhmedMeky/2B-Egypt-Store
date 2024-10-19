@@ -1,6 +1,7 @@
 ﻿
 namespace _2B_Egypt.AdminDashboard.Controllers
 {
+    [Authorize]
     public class BrandController : Controller
     {
         private readonly IBrandService _brandService;

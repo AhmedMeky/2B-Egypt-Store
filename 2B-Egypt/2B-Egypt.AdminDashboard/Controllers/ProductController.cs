@@ -1,4 +1,5 @@
 ﻿namespace _2B_Egypt.AdminDashboard.Controllers;
+[Authorize]
 public class ProductController : Controller
 {
     private readonly IProductService _productService;

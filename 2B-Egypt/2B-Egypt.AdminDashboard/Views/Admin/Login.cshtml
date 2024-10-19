@@ -1,6 +1,7 @@
 ﻿
 @{
     Layout = null;
+    ViewData["Title"] = "Login";
 }
 
 @{
@@ -33,8 +34,8 @@
                         <i class="ri-user-3-line login__icon"></i>
 
                         <div class="login__box-input">
-                            <input type="email" required name="UserName" class="login__input" id="login-email" placeholder=" ">
-                            <label for="login-email"  class="login__label">Email or Phone</label>
+                            <input type="email" required name="Email" class="login__input" id="login-email" placeholder=" ">
+                            <label for="login-email"  class="login__label">Email</label>
                         </div>
                     </div>
 
@@ -47,12 +48,21 @@
                             <i class="ri-eye-off-line login__eye" id="login-eye"></i>
                         </div>
                     </div>
+
+                    <div class="login__box">
+                        <i class="ri-lock-2-line login__icon"></i>
+
+                        <div class="login__box-input">
+                            <input type="checkbox" name="RememberMe" class="login__input" id="RememberMe" placeholder=" ">
+                            <label for="RememberMe" class="login__label">Remember Me</label>
+                            <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="login__check">
-                 
-
-                    <a href="@Url.Action("ResetPassword", "Admin")" class="login__forgot">Forgot Password?</a>
+                    <a href="@Url.Action("Register", "Admin")" class="login__forgot">Register</a>
                 </div>
 
                 <button type="submit" class="login__button">Login</button>
