@@ -33,12 +33,18 @@ public class ProductService : IProductService
         return new ResponseDTO<CreateProductDTO>() { Entity = mapper.Map<CreateProductDTO>(product), IsSuccessfull = true, Message = "The Product Created" };
     }
 
-
     public async Task<List<GetProductDTO>> GetAllAsync()
     {
-        var products = (await productRepository.GetAllAsync()).Include(prd => prd.Images).ToList();
+
+        var products = (await productRepository.GetAllAsync())
+                    .Include(prd => prd.Images)
+                    .Include(prd => prd.Category)
+                    .Include(prd => prd.Brand)
+                    .Where(prd => !prd.IsDeleted)
+                    .ToList();
         return mapper.Map<List<GetProductDTO>>(products);
     }
+
 
     public async Task<ResponseDTO<GetAllProductDTO>> GetByIdAsync(Guid id)
     {
