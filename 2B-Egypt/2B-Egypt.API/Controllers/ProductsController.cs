@@ -34,7 +34,7 @@ namespace _2B_Egypt.API.Controllers
             var product = await _productService.GetByIdAsync(id);
             if (product != null)
             {
-                return Ok(product);
+                return Ok(product.Entity);
             }
             return NotFound();
         }
