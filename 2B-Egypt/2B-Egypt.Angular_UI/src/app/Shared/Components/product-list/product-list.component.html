@@ -1,47 +1,45 @@
-<!-- <div class="row product-details" *ngIf="products.length > 0; else noProducts">
-    <div class="col-sm-6">
-        
-        <h2>Product List</h2>
-        <ul>
-            <li *ngFor="let product of products">
-                <img class="product-img" src="{{ products.imageUrl }}" alt="" />
-                <h3>{{ product.nameEn }} - {{ product.price | currency }}</h3>
-                <p>{{ product.descriptionEn }}</p>
-                <div>
-                    Color :
-                    <h3 [style.backgroundColor]="products.colorEn" class="product-color"></h3>
-                </div>
-                <h6>Description : {{ product.descriptionEn }}</h6>
-                <button *ngIf="removeCart" class="form-button" (click)="removeToCart(products.id)">
-                    Remove to Cart
-                </button>
-                <button *ngIf="!removeCart" class="form-button" (click)="addToCart()">
-                    Add to Cart
-                </button>
-                <div class="quantity-group">
-                    <button (click)="handleQuantity('min')">-</button>
-                    <input type="text" value="{{ productQuantity }}" />
-                    <button (click)="handleQuantity('plus')">+</button>
-                </div>
-            </li>
-        </ul>
+<div class="product-list product-details">
+    <div *ngFor="let product of products" class="product-card" [routerLink]="['/details', product.id]" style="cursor: pointer;">
+      <div class="product-img-wrapper">
+        <img [src]="
+            product.images.length > 0
+              ? product.images[0].imageUrl
+              : 'default-product.jpg'
+          " alt="{{ product.nameEn }}" class="product-img" />
+        <span *ngIf="product.discount > 0" class="discount-badge">-{{ product.discount }}%</span>
+      </div>
+      <h3 class="product-name">{{ product.nameEn }}</h3>
+      <p class="product-description">{{ product.descriptionEn }}</p>
+      <div class="price-section">
+        <span class="old-price" *ngIf="product.discount > 0">
+          {{ product.price | currency }}
+        </span>
+        <span class="current-price">
+          {{
+            product.price - (product.price * product.discount) / 100 | currency
+          }}
+        </span>
+        <span *ngIf="product.discount > 0" class="discount-percentage">
+          Save {{ product.discount }}%
+        </span>
+      </div>
+      <div class="quantity-section">
+        <button class="quantity-btn" (click)="handleQuantity('plus', product)">+</button>
+        <input type="text" [(ngModel)]="product.quantity" readonly class="quantity-input" />
+        <button class="quantity-btn" (click)="handleQuantity('min', product)">-</button>
+      </div>
+  
+      <div class="cart-buttons">
+        <button (click)="addToCart(product)" class="add-cart-btn">
+          <i class="fas fa-shopping-cart"></i> Add to Cart
+        </button>
+        <button *ngIf="product.inCart" (click)="removeFromCart(+product.id)" class="remove-cart-btn">
+          Remove from Cart
+        </button>
+      </div>
     </div>
-</div>
-
-<ng-template #noProducts>
+  </div>
+  <ng-template #noProducts>
     <p>No products available.</p>
-</ng-template> -->
-
-<div *ngIf="products.length > 0; else noProducts">
-  <h2>Product List</h2>
-  <ul>
-    <li *ngFor="let product of products">
-      <h3>{{ product.nameEn }} - {{ product.price | currency }}</h3>
-      <p>{{ product.descriptionEn }}</p>
-    </li>
-  </ul>
-</div>
-
-<ng-template #noProducts>
-  <p>No products available.</p>
-</ng-template>
+  </ng-template>
+  
