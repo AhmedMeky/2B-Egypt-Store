@@ -1,7 +1,10 @@
 import { Routes } from '@angular/router';
 import { ProductListComponent } from './Shared/Components/product-list/product-list.component';
+import { ProductDetailsComponent } from './Shared/product-details/product-details.component';
 
 export const routes: Routes = [
-    { path: 'products', component: ProductListComponent }, 
-    { path: '', redirectTo: '/products', pathMatch: 'full' }
+    { path: '', component: ProductListComponent },
+    { path: 'products', component: ProductListComponent },
+    { path: 'productDetails/:id', component: ProductDetailsComponent }
+    
 ];

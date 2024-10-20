@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IProduct } from '../../models/IProduct';
 
@@ -9,17 +7,20 @@ import { IProduct } from '../../models/IProduct';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl: 'https://localhost:61044/api/products' | undefined; //Link Api :Not fixed, variable depending on port
+  private apiUrl = 'http://localhost:5204/api/products'; 
+
   constructor(private httpclient: HttpClient) {}
+
   getAllProducts(): Observable<IProduct[]> {
-    return this.httpclient.get<IProduct[]>(`${this.apiUrl}`);
+    return this.httpclient.get<IProduct[]>(this.apiUrl);
   }
+
   getProductById(id: string): Observable<IProduct> {
     return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`);
   }
 
   addProduct(product: IProduct): Observable<IProduct> {
-    return this.httpclient.post<IProduct>(`${this.apiUrl}`, product);
+    return this.httpclient.post<IProduct>(this.apiUrl, product);
   }
 
   updateProduct(id: string, product: IProduct): Observable<IProduct> {

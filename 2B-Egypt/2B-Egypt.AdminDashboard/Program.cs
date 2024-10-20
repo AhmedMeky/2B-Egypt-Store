@@ -1,4 +1,5 @@
 
+using _2B_Egypt.AdminDashboard.Controllers;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,24 +8,40 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 
-builder.Services.AddSession();
+//builder.Services.AddSession();
+builder.Services.AddSession(
+    options => options.IdleTimeout = TimeSpan.FromDays(1)
+    );
 
 
-//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//          .AddCookie(options =>
-//          {
-//              options.LoginPath = "/Admin/Login";
-//              options.AccessDeniedPath = "/Admin/AccessDenied";
-//          });
+builder.Services.AddIdentity<User, IdentityRole<Guid>>(option =>
+{
+    option.Password.RequiredLength = 8;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireDigit = false;
+    option.User.RequireUniqueEmail = true;
+    option.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz0123456789.@";
+}).AddEntityFrameworkStores<AppDbContext>();
 
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.DefaultPolicy = new AuthorizationPolicyBuilder()
-//        .RequireAuthenticatedUser()
-//        .Build();
-//});
 
-//builder.Services.AddTransient<AdminController>();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+          .AddCookie(options =>
+          {
+              options.LoginPath = "/Admin/Login";
+              options.AccessDeniedPath = "/Admin/AccessDenied";
+          });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+        .RequireAuthenticatedUser()
+        .Build();
+});
+
+builder.Services.AddTransient<AdminController>();
 
 
 
@@ -51,8 +68,6 @@ builder.Services.AddScoped<IFacilityService, FacilityService>();
 builder.Services.AddScoped<IFacilityRepository, FacilityRepository>();
 
 // ========================================================================
-
-
 
 
 var app = builder.Build();

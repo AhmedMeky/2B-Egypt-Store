@@ -26,24 +26,22 @@
             </li>
         </ul>
     </div>
-</div>
+</div> -->
 
 <ng-template #noProducts>
     <p>No products available.</p>
-</ng-template> -->
-
+</ng-template>
 
 <div *ngIf="products.length > 0; else noProducts">
-    <h2>Product List</h2>
-    <ul>
-      <li *ngFor="let product of products">
-        <h3>{{ product.nameEn }} - {{ product.price | currency }}</h3>
-        <p>{{ product.descriptionEn }}</p>
-      </li>
-    </ul>
-  </div>
-  
-  <ng-template #noProducts>
-    <p>No products available.</p>
-  </ng-template>
-  
+  <h2>Product List</h2>
+  <ul>
+    <li *ngFor="let product of products">
+      <h3>{{ product.nameEn }} - {{ product.price | currency }}</h3>
+      <p>{{ product.descriptionEn }}</p>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noProducts>
+  <p>No products available.</p>
+</ng-template>
