@@ -24,6 +24,7 @@ public class AutoMapperProfile : Profile
         //Product Image
         CreateMap<ProductImage, CreateImageWithPraductDTO>().ReverseMap();
 
+
         // Reviw
         CreateMap<Review,ReviewForGetAllProductDTO> ().ReverseMap();
         CreateMap<Review, CreateOrUpdateReviewDTO>().ReverseMap();

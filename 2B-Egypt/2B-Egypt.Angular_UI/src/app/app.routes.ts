@@ -4,5 +4,6 @@ import { ProductListComponent } from './Shared/Components/product-list/product-l
 export const routes: Routes = [
     { path: '', component: ProductListComponent },
     { path: 'products', component: ProductListComponent }
+    // { path: 'product/:id', component: ProductDetailsComponent },
     
 ];
