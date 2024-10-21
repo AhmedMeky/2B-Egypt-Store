@@ -31,6 +31,8 @@ builder.Services.AddScoped<IFacilityRepository, FacilityRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,6 +42,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 
 app.UseCors(builder =>
     builder.AllowAnyOrigin()
