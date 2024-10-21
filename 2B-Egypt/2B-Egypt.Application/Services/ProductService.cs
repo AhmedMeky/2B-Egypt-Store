@@ -13,7 +13,7 @@ public class ProductService : IProductService
         this.mapper = mapper;
     }
 
-
+    // Create a new Product
     public async Task<ResponseDTO<CreateProductDTO>> CreateAsync(CreateProductDTO productDTO)
     {
         if(productDTO is null)
@@ -33,6 +33,7 @@ public class ProductService : IProductService
         return new ResponseDTO<CreateProductDTO>() { Entity = mapper.Map<CreateProductDTO>(product), IsSuccessfull = true, Message = "The Product Created" };
     }
 
+    // get all products 
     public async Task<List<GetProductDTO>> GetAllAsync()
     {
 
@@ -45,7 +46,7 @@ public class ProductService : IProductService
         return mapper.Map<List<GetProductDTO>>(products);
     }
 
-
+    // get the details of a specific product by its Id
     public async Task<ResponseDTO<GetAllProductDTO>> GetByIdAsync(Guid id)
     {
         var product = (await productRepository.GetByIdAsync(id,["Images","Category","Brand", "Reviews", "Facilities"]));
@@ -63,6 +64,53 @@ public class ProductService : IProductService
             Entity = mapper.Map<GetAllProductDTO>(product),
             IsSuccessfull = true
         };
+    }
+
+    // get all products in a specific Category
+    public async Task<List<GetProductDTO>> GetByCategoryIdAsync(Guid categoryId)
+    {
+        var products = (await productRepository.GetAllAsync())
+                    .Include(prd => prd.Images)
+                    .Include(prd => prd.Category)
+                    .Include(prd => prd.Brand)
+                    .Where(prd => !prd.IsDeleted && prd.CategoryId.Equals(categoryId))
+                    .ToList();
+        return mapper.Map<List<GetProductDTO>>(products);
+    }
+    // get all products in a specific Brand
+    public async Task<List<GetProductDTO>> GetByBrandIdAsync(Guid brandId)
+    {
+        var products = (await productRepository.GetAllAsync())
+                    .Include(prd => prd.Images)
+                    .Include(prd => prd.Category)
+                    .Include(prd => prd.Brand)
+                    .Where(prd => !prd.IsDeleted && prd.BrandId.Equals(brandId))
+                    .ToList();
+        return mapper.Map<List<GetProductDTO>>(products);
+    }
+
+    // get products in a specific Price range
+    public async Task<List<GetProductDTO>> GetByPriceRangeAsync(decimal min, decimal max)
+    {
+        var products = (await productRepository.GetAllAsync())
+                    .Include(prd => prd.Images)
+                    .Include(prd => prd.Category)
+                    .Include(prd => prd.Brand)
+                    .Where(prd => !prd.IsDeleted && prd.Price >= min && prd.Price <= max)
+                    .ToList();
+        return mapper.Map<List<GetProductDTO>>(products);
+    }
+
+    // get product which has a descount more than or equal a specific value
+    public async Task<List<GetProductDTO>> GetByDiscountRangeAsync(int discount)
+    {
+        var products = (await productRepository.GetAllAsync())
+                    .Include(prd => prd.Images)
+                    .Include(prd => prd.Category)
+                    .Include(prd => prd.Brand)
+                    .Where(prd => !prd.IsDeleted && prd.Discount >= discount)
+                    .ToList();
+        return mapper.Map<List<GetProductDTO>>(products);
     }
 
     public Task<ResponseDTO<CreateProductDTO>> UpdateAsync(CreateProductDTO product)
