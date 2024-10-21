@@ -5,6 +5,10 @@ public interface IProductService
     Task<ResponseDTO<CreateProductDTO>> CreateAsync(CreateProductDTO product);
     Task<List<GetProductDTO>> GetAllAsync();
     Task<ResponseDTO<GetAllProductDTO>> GetByIdAsync(Guid id);
+    Task<List<GetProductDTO>> GetByCategoryIdAsync(Guid categoryId);
+    Task<List<GetProductDTO>> GetByBrandIdAsync(Guid brandId);
+    Task<List<GetProductDTO>> GetByPriceRangeAsync(decimal min,decimal max);
+    Task<List<GetProductDTO>> GetByDiscountRangeAsync(int discount);
     Task<ResponseDTO<CreateProductDTO>> UpdateAsync(CreateProductDTO product);
     Task SoftDeleteAsync(Guid id);
     Task HardDeleteAsync(Guid id);

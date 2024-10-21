@@ -30,6 +30,9 @@ builder.Services.AddScoped<IFacilityService, FacilityService>();
 builder.Services.AddScoped<IFacilityRepository, FacilityRepository>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
+builder.Services.AddScoped<IReviewRepository,ReviewRepository>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+
 
 var app = builder.Build();
 
@@ -40,6 +43,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+
 app.UseCors(builder =>
     builder.AllowAnyOrigin()
            .AllowAnyMethod()

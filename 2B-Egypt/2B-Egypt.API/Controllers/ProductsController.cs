@@ -5,6 +5,9 @@ using _2B_Egypt.Domain.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using _2B_Egypt.Application.DTOs;
+using _2B_Egypt.Application.DTOs.ProductDTO;
+
 
 namespace _2B_Egypt.API.Controllers
 {
@@ -22,9 +25,10 @@ namespace _2B_Egypt.API.Controllers
 
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<GetAllProductDTO>> GetProducts()
         {
             var products = await _productService.GetAllAsync();
+
             return Ok(products);
         }
         [HttpGet("{id}")]
@@ -38,6 +42,26 @@ namespace _2B_Egypt.API.Controllers
             }
             return NotFound();
         }
+
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<GetAllProductDTO>>> GetProducts()
+        //{
+        //    var products = await _productService.GetAllAsync();
+
+        //    foreach (var product in products)
+        //    {
+        //        if (product.Images != null && product.Images.Count > 0)
+        //        {
+        //            foreach (var image in product.Images)
+        //            {
+        //                image.ImageUrl = $"{Request.Scheme}://{Request.Host}/img/{image.ImageUrl}"; 
+        //            }
+        //        }
+        //    }
+
+        //    return Ok(products);
+        //}
 
 
 

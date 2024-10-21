@@ -11,7 +11,9 @@ export interface IProduct {
     discount: number;      
     categoryId: string;    
     brandId: string;    
-    imageUrl: string   
+    images: { imageUrl: string }[];
+    inCart?: boolean;     
+    quantity?: number; 
     // category?: ICategory;    
     // brand?: IBrand;          
     // images?: IProductImage[];   
