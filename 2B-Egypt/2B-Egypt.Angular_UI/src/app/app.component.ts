@@ -6,13 +6,21 @@ import { ProductsByCategoryComponent } from './Shared/products-by-category/produ
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './Shared/product-details/product-details.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
+<<<<<<< Updated upstream
 import { NavBarComponent } from './Shared/Components/nav-bar/nav-bar.component';
+=======
+import { TranslateModule } from '@ngx-translate/core';
+>>>>>>> Stashed changes
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
+<<<<<<< Updated upstream
   imports: [RouterOutlet, NavBarComponent,ProductListComponent,HttpClientModule,ProductDetailsComponent,ProductsByCategoryComponent,FooterComponent],
+=======
+  imports: [RouterOutlet,ProductListComponent,HttpClientModule,ProductDetailsComponent,ProductsByCategoryComponent,FooterComponent,TranslateModule],
+>>>>>>> Stashed changes
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

@@ -9,7 +9,7 @@ describe('ProductDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductDetailsComponent]
+      imports: [ProductDetailsComponent,CommonModule]
     })
     .compileComponents();
 
