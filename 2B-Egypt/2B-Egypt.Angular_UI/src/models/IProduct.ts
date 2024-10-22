@@ -9,7 +9,11 @@ export interface IProduct {
     price: number;        
     unitInStock: number;   
     discount: number;      
-    categoryId: string;    
+    categoryId: string;  
+    category: {
+      nameEn: string;
+      nameAr: string;
+  }  
     brandId: string;    
     images: { imageUrl: string }[];
     inCart?: boolean;     

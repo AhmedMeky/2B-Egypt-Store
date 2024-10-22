@@ -1,11 +1,11 @@
 <div class="product-list product-details">
-    <div *ngFor="let product of products" class="product-card" [routerLink]="['/details', product.id]" style="cursor: pointer;">
+    <div *ngFor="let product of products" class="product-card" (click)="SelectedProductId(product.id)" style="cursor: pointer;">
       <div class="product-img-wrapper">
-        <img [src]="
+        <!-- <img   [src]="
             product.images.length > 0
               ? product.images[0].imageUrl
               : 'default-product.jpg'
-          " alt="{{ product.nameEn }}" class="product-img" />
+          " alt="{{ product.nameEn }}" class="product-img" /> -->
         <span *ngIf="product.discount > 0" class="discount-badge">-{{ product.discount }}%</span>
       </div>
       <h3 class="product-name">{{ product.nameEn }}</h3>
@@ -42,5 +42,5 @@
   <ng-template #noProducts>
     <p>No products available.</p>
   </ng-template>
-    </ng-template>
+    
   

@@ -17,6 +17,7 @@ import Cookies from 'js-cookie';
 export class ProductListComponent implements OnInit {
   products: IProduct[] = [] as IProduct[];
   cartData: IProduct | undefined;
+  SelectedProduct:IProduct | null = null;
   constructor(
     private productService: ProductService,
     private activeRoute: ActivatedRoute,
@@ -123,6 +124,11 @@ updateCartQuantity(product: IProduct) {
             Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 }); 
         }
     }
+}
+SelectedProductId(id:string)
+{
+  this.router.navigateByUrl(`/product-details/${id}`);
+
 }
 
 }
