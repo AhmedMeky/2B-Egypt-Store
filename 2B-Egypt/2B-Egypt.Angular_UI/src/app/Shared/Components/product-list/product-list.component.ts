@@ -86,10 +86,13 @@ export class ProductListComponent implements OnInit {
 
   handleQuantity(action: string, product: IProduct) {
     product.quantity = product.quantity || 1;
+    product.quantity = product.quantity || 0;
 
     if (action === 'plus' && product.quantity < 20) {
+    if (action === 'plus' && product.quantity < product.unitInStock) {
       product.quantity += 1;
     } else if (action === 'min' && product.quantity > 1) {
+    } else if (action === 'min' && product.quantity > 0) {
       product.quantity -= 1;
     }
     this.updateCartQuantity(product);
