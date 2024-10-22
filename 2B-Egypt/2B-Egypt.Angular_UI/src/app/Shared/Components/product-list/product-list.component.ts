@@ -17,8 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProductListComponent implements OnInit {
   products: IProduct[] = [] as IProduct[];
-  imgmvcurl = 'http://localhost:5269/img/'; 
-
+  imgmvcurl = 'http://localhost:5269/img/';
+  cartData: IProduct | undefined;
+  SelectedProduct:IProduct | null = null;
   constructor(
     private productService: ProductService,
     private router: Router,
@@ -26,7 +27,7 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    
+
     this.productService.getAllProducts().subscribe({
       next: (res) => {
         this.products = res;
@@ -105,4 +106,12 @@ export class ProductListComponent implements OnInit {
       }
     }
   }
+  SelectedProductId(id:string)
+  {
+    this.router.navigateByUrl(`/product-details/${id}`);
+
+  }
 }
+
+
+

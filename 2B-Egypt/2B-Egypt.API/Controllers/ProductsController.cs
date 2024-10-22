@@ -24,6 +24,7 @@ namespace _2B_Egypt.API.Controllers
             _webHostEnvironment = webHostEnvironment;
 
         }
+        
         [HttpGet]
         public async Task<ActionResult<List<GetProductDTO>>> GetProducts()
         {

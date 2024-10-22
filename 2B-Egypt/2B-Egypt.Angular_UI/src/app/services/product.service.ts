@@ -8,8 +8,7 @@ import { IProduct } from '../../models/IProduct';
 })
 export class ProductService {
   private apiUrl = 'http://localhost:5204/api/products';
-  private imgmvcurl = 'http://localhost:5269/'; 
-
+  private imgmvcurl = 'http://localhost:5269/';
   constructor(private httpclient: HttpClient) {}
 
   getAllProducts(): Observable<IProduct[]> {
@@ -23,9 +22,9 @@ export class ProductService {
       ...product,
       images: product.images.map(image => ({
         ...image,
-        imageUrl: image.imageUrl.startsWith('http') 
-          ? image.imageUrl 
-          : `${this.imgmvcurl}${image.imageUrl}`, 
+        imageUrl: image.imageUrl.startsWith('http')
+          ? image.imageUrl
+          : `${this.imgmvcurl}${image.imageUrl}`,
       })),
     };
   }

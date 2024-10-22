@@ -1,6 +1,5 @@
 <div class="product-list product-details">
-  <!-- <div *ngFor="let product of products" class="product-card" [routerLink]="['/details', product.id]" style="cursor: pointer;"> -->
-
+<div *ngFor="let product of products" class="product-card" (click)="SelectedProductId(product.id)" style="cursor: pointer;">
   <div
     *ngFor="let product of products"
     class="product-card"
@@ -68,3 +67,4 @@
 <ng-template #noProducts>
   <p>No products available.</p>
 </ng-template>
+
