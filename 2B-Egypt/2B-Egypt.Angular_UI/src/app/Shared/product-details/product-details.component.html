@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="product-image">
+            <img src="path/to/product-image.jpg" alt="Product Name">
+        </div>
+        
+        <div class="product-info">
+            <h1 class="product-title">{{product?.nameEn}}</h1>
+            <p class="product-price">$99.99</p>
+            <p class="product-description">
+                {{product?.descriptionEn}} 
+            </p>
+            <button class="add-to-cart">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="related-products">
+        <h2>Related Products</h2>
+        <div class="related-product">
+            <img src="path/to/related-product1.jpg" alt="Related Product 1">
+            <p class="related-product-title">Related Product 1</p>
+            <p class="related-product-price">$49.99</p>
+        </div>
+        <div class="related-product">
+            <img src="path/to/related-product2.jpg" alt="Related Product 2">
+            <p class="related-product-title">Related Product 2</p>
+            <p class="related-product-price">$59.99</p>
+        </div>
+        <!-- أضف المزيد من المنتجات حسب الحاجة -->
+    </div>
+
+</body>
+</html>
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.product-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.product-info {
+    flex: 2;
+}
+
+.product-title {
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+
+.product-price {
+    font-size: 20px;
+    color: #e74c3c;
+    margin: 10px 0;
+}
+
+.product-description {
+    margin: 15px 0;
+    line-height: 1.5;
+}
+
+.add-to-cart {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-to-cart:hover {
+    background-color: #218838;
+}
+
+.related-products {
+    margin-top: 40px;
+}
+
+.related-products h2 {
+    margin-bottom: 20px;
+}
+
+.related-product {
+    display: inline-block;
+    width: calc(33.33% - 20px);
+    margin-right: 20px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.related-product img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.related-product-title {
+    font-size: 16px;
+    margin: 10px 0 5px;
+}
+
+.related-product-price {
+    color: #e74c3c;
+    font-size: 14px;
+}
+
+</style>
+

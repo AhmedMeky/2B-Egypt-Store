@@ -40,8 +40,18 @@ namespace _2B_Egypt.API.Controllers
             {
                 return NotFound($"No products found for category ID {categoryId}");
             }
-
             return Ok(products);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GetAllProductDTO>> GetProductById(Guid id)
+        {
+            var product = await _productService.GetByIdAsync(id);
+            if (product != null)
+            {
+                return Ok(product.Entity);
+            }
+            return NotFound();
         }
 
     }
