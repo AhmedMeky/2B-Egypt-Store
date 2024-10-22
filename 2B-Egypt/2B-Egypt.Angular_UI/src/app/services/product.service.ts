@@ -7,24 +7,28 @@ import { IProduct } from '../../models/IProduct';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:61044/api/products';
+  private apiUrl = 'http://localhost:5204/api/products';
+  private imgmvcurl = 'http://localhost:5269/'; 
 
   constructor(private httpclient: HttpClient) {}
+
   getAllProducts(): Observable<IProduct[]> {
     return this.httpclient.get<IProduct[]>(this.apiUrl).pipe(
-      map((products) =>
-        products.map((product) => ({
-          ...product,
-          images: product.images.map((image) => ({
-            ...image,
-            imageUrl: `${image.imageUrl}`,
-          })),
-        }))
-      )
+      map(products => products.map(product => this.processProductImages(product)))
     );
   }
 
-
+  private processProductImages(product: IProduct): IProduct {
+    return {
+      ...product,
+      images: product.images.map(image => ({
+        ...image,
+        imageUrl: image.imageUrl.startsWith('http') 
+          ? image.imageUrl 
+          : `${this.imgmvcurl}${image.imageUrl}`, 
+      })),
+    };
+  }
 
   getProductById(id: string): Observable<IProduct> {
     return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`);
@@ -40,5 +44,12 @@ export class ProductService {
 
   deleteProduct(id: string): Observable<void> {
     return this.httpclient.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+
+
+  getProductsByCategoryId(categoryId: string): Observable<IProduct[]> {
+    return this.httpclient.get<IProduct[]>(`${this.apiUrl}/category/${categoryId}`).pipe(
+      map(products => products.map(product => this.processProductImages(product))));
   }
 }

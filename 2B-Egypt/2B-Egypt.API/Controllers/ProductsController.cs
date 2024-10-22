@@ -25,35 +25,32 @@ namespace _2B_Egypt.API.Controllers
 
         }
         [HttpGet]
-        public async Task<ActionResult<GetAllProductDTO>> GetProducts()
+        public async Task<ActionResult<List<GetProductDTO>>> GetProducts()
         {
             var products = await _productService.GetAllAsync();
 
             return Ok(products);
         }
+        
+        [HttpGet("category/{categoryId}")]
+        public async Task<ActionResult<List<GetProductDTO>>> GetProductsByCategoryID(Guid categoryId)
+        {
+            var products = await _productService.GetProductsByCategoryID(categoryId);
+            if (products == null || products.Count == 0)
+            {
+                return NotFound($"No products found for category ID {categoryId}");
+            }
 
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<GetAllProductDTO>>> GetProducts()
-        //{
-        //    var products = await _productService.GetAllAsync();
-
-        //    foreach (var product in products)
-        //    {
-        //        if (product.Images != null && product.Images.Count > 0)
-        //        {
-        //            foreach (var image in product.Images)
-        //            {
-        //                image.ImageUrl = $"{Request.Scheme}://{Request.Host}/img/{image.ImageUrl}"; 
-        //            }
-        //        }
-        //    }
-
-        //    return Ok(products);
-        //}
-
-
-
+            return Ok(products);
+        }
 
     }
+
+
+
+
+
+
 }
+
 

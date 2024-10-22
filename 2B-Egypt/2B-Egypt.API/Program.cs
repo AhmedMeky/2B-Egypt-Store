@@ -34,6 +34,8 @@ builder.Services.AddScoped<IReviewRepository,ReviewRepository>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,6 +45,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+
 
 app.UseCors(builder =>
     builder.AllowAnyOrigin()

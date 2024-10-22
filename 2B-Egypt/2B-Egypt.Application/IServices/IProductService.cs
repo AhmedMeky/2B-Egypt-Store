@@ -15,5 +15,6 @@ public interface IProductService
     Task<IQueryable<ResponseDTO<CreateProductDTO>>> SearchByNameAsync(string name);
     Task<IQueryable<ResponseDTO<CreateProductDTO>>> SearchByCategoryNameAsync(string categoryName);
     Task<IQueryable<ResponseDTO<CreateProductDTO>>> SearchByBrandNameAsync(string brandName);
+    Task<List<GetProductDTO>> GetProductsByCategoryID(Guid categoryId);
 
 }

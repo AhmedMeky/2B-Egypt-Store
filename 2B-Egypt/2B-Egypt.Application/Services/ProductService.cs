@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using _2B_Egypt.Application.IRepositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace _2B_Egypt.Application.Services;
 
@@ -65,6 +66,12 @@ public class ProductService : IProductService
             IsSuccessfull = true
         };
     }
+    public async Task<List<GetProductDTO>> GetProductsByCategoryID(Guid categoryId)
+    {
+        var products = await productRepository.GetProductsByCategoryID(categoryId);
+        return mapper.Map<List<GetProductDTO>>(products);
+    }
+
 
     // get all products in a specific Category
     public async Task<List<GetProductDTO>> GetByCategoryIdAsync(Guid categoryId)

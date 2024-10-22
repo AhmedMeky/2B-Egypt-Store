@@ -31,4 +31,11 @@ public class ProductRepository : GenericRepository<Product, Guid>, IProductRepos
                 || product.NameEn.ToLower().Contains(name.ToLower()))
             );
     }
+
+    public async Task<List<Product>> GetProductsByCategoryID(Guid categoryId)
+    {
+        return await _context.Products
+            .Where(p => p.CategoryId == categoryId && !p.IsDeleted)
+            .ToListAsync();
+    }
 }
