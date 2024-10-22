@@ -1,24 +1,3 @@
-<div class="product-list product-details">
-<div *ngFor="let product of products" class="product-card" (click)="SelectedProductId(product.id)" style="cursor: pointer;">
-  <div
-    *ngFor="let product of products"
-    class="product-card"
-    style="cursor: pointer"
-  >
-    <div class="product-img-wrapper">
-      <img
-        [src]="
-          product.images.length > 0
-            ? product.images[0].imageUrl
-            : 'default-product.jpg'
-        "
-        alt="{{ product.nameEn }}"
-        class="product-img"
-      />
-      <span *ngIf="product.discount > 0" class="discount-badge"
-        >-{{ product.discount }}%</span
-      >
-    </div>
 <div class="product-list product-details" >
   <div *ngFor="let product of products" class="product-card" style="cursor: pointer">
     <div class="product-card" style="cursor: pointer">
