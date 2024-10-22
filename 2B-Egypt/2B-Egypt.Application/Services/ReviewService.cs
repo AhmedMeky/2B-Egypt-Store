@@ -90,7 +90,7 @@ public class ReviewService : IReviewService
     public async Task<ResponseDTO<GetReviewDTO>> UpdateAsync(CreateOrUpdateReviewDTO reviewDTO, Guid reviewId)
     {
         var review = await _reviewRepository.GetByIdAsync(reviewId);
-        if (review != null)
+        if (review is null)
         {
             return new()
             {

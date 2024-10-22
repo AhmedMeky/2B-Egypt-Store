@@ -11,9 +11,13 @@ public class ReviewController : ControllerBase
     }
 
     [HttpGet("{productId:guid}")]
-    public async Task<ActionResult<IEnumerable<GetReviewDTO>>> Reviews(Guid productId)
+    public async Task<ActionResult<IEnumerable<GetReviewDTO>>> Get(Guid productId)
     {
-        return Ok(await _reviewService.GetAllAsync(productId));
+        var reviewResponse = await _reviewService.GetAllAsync(productId);
+        if(reviewResponse.IsSuccessfull) 
+            return Ok(reviewResponse.Entity);
+        else 
+            return BadRequest();
     }
 
     [HttpPost]
@@ -39,8 +43,8 @@ public class ReviewController : ControllerBase
         {
             if (ModelState.IsValid)
             {
-                var resultreview = await _reviewService.UpdateAsync(reviewDto, reviewId);
-                return Created("Review", resultreview);
+                var resultReview = await _reviewService.UpdateAsync(reviewDto, reviewId);
+                return Created("Review", resultReview);
             }
         }
         return BadRequest(ModelState);

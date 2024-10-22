@@ -2,7 +2,7 @@
 
 public class CreateOrUpdateReviewDTO
 {
-    public Guid Id { get; set; }
+    public Guid? Id { get; set; }
     [Required(ErrorMessage = "Nickname is required.")]
     [MaxLength(50, ErrorMessage = "Nickname cannot exceed 50 characters.")]
     public string NickName { get; set; }
