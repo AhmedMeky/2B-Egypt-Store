@@ -1,0 +1,85 @@
+﻿@model CreateAdminDTO
+@{
+    Layout = null;
+    ViewData["Title"] = "Register";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== REMIXICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="@Url.Content("~/css/Login.css")" rel="stylesheet" />
+    <title>Register</title>
+    <link rel="icon" type="image/x-icon" href="https://smhttp-ssl-73217.nexcesscdn.net/pub/media/favicon/default/icon-01.png">
+   
+    <link href="@Url.Content("~/css/sb-admin-2.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/css/site.min.css")" rel="stylesheet" />
+</head>
+<body>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Join Us For Free </h1>
+</div>
+
+<hr />
+    <div class="row login">
+    <div class="col-md-4">
+            <img src="@Url.Content("~/img/111.png")" alt="Register image" class="login__img" style="">
+
+            <form asp-action="Register" class="login__form ">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-success" />
+            </div>
+
+                <div class="login__check">
+                    <a href="@Url.Action("Login", "Admin")" class="login__forgot">Already have an account?</a>
+                </div>
+
+        </form>
+            
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+</body>
+</html>

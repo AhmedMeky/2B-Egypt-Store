@@ -1,5 +1,4 @@
-﻿
-
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace _2B_Egypt.Application.Services;
 
@@ -29,25 +28,40 @@ public class ProductService : IProductService
             image.Id = Guid.NewGuid();
             image.CreatedAt = DateTime.Now;
         }
-        product.CreatedAt = DateTime.Now;
         product = await productRepository.CreateAsync(product);
         await productRepository.SaveChangesAsync();
-        return new ResponseDTO<CreateProductDTO>() { Entity = productDTO, IsSuccessfull = true, Message = "The Product Created" };
+        return new ResponseDTO<CreateProductDTO>() { Entity = mapper.Map<CreateProductDTO>(product), IsSuccessfull = true, Message = "The Product Created" };
     }
-
 
     public async Task<List<GetProductDTO>> GetAllAsync()
     {
-        var products = await productRepository.GetAllAsync();
-        return mapper.Map<List<GetProductDTO>>(products.ToList());
+
+        var products = (await productRepository.GetAllAsync())
+                    .Include(prd => prd.Images)
+                    .Include(prd => prd.Category)
+                    .Include(prd => prd.Brand)
+                    .Where(prd => !prd.IsDeleted)
+                    .ToList();
+        return mapper.Map<List<GetProductDTO>>(products);
     }
+
 
     public async Task<ResponseDTO<GetAllProductDTO>> GetByIdAsync(Guid id)
     {
-        var product = await productRepository.GetByIdAsync(id, ["Product.Category","Product.Brand", "Product.Reviews"]);
+        var product = (await productRepository.GetByIdAsync(id,["Images","Category","Brand", "Reviews", "Facilities"]));
+        if(product is null)
+        {
+            return new ResponseDTO<GetAllProductDTO>()
+            {
+                Entity = null!,
+                IsSuccessfull = false,
+                Message = "There is no product with this Id"
+            };
+        }
         return new ResponseDTO<GetAllProductDTO>()
         {
-            Entity = mapper.Map<GetAllProductDTO>(product)
+            Entity = mapper.Map<GetAllProductDTO>(product),
+            IsSuccessfull = true
         };
     }
 

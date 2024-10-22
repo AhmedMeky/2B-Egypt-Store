@@ -19,7 +19,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" method="post" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="NameAr" class="control-label"></label>
                 <input asp-for="NameAr" class="form-control" />
@@ -76,7 +76,12 @@
                 @Html.DropDownList("BrandId", ViewBag.brands as SelectList, "select brand", new { @class = "form-control" })
                 <span asp-validation-for="BrandId" class="text-danger"></span>
             </div>
-
+           @*  <select name="Facilities[]" multiple>
+               @foreach(var facility in ViewBag.facilities)
+                {
+                    <option value="@facility.Id"> @facility.NameEn : @facility.ValueEn </option>
+                }
+            </select> *@
             <div class="form-group">
                 <label for ="Images">Images:</label>
                 <input type="file" class="form-control-file" name="Images" multiple>

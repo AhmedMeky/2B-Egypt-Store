@@ -80,12 +80,21 @@
                       
                        
                          <h6 class="collapse-header">Brands:</h6>
+<<<<<<< Updated upstream
                          <a class="collapse-item" asp-controller="Brand" asp-action="index"> Brands </a>
                          <a class="collapse-item" asp-controller="Brand" asp-action="Create"> Create Brand</a> 
+
+                         <a class="collapse-item" asp-action="Create"> Create Brand </a>
+                        <a class="collapse-item" asp-action="Edit" method="post"> Update  Brand</a>
+
 
                         <h6 class="collapse-header">Order:</h6>
                         <a class="collapse-item" asp-controller="Order" asp-action="Index"> Orders </a>
                     
+                        <a class="collapse-item" asp-controller="Order" asp-action="Index"> View Orders </a>
+
+                        <h6 class="collapse-header">Specifications:</h6>
+                        <a class="collapse-item" asp-controller="Facility" asp-action="Create"> Create Specifications </a>
 
                     </div>
                 </div>
@@ -172,7 +181,7 @@
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     profile
                                 </a> 
-                               
+                      
                                 <a class="dropdown-item" href="@Url.Action("UpdateAdminData", "Admin")">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
@@ -183,7 +192,7 @@
                                 </a>
                                
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="@Url.Action("Logout", "Admin") @* data-toggle="modal" data-target="#logoutModal" *@>
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>

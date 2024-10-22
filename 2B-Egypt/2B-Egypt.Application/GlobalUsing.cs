@@ -9,3 +9,5 @@ global using _2B_Egypt.Application.DTOs.ProductDTO;
 global using _2B_Egypt.Application.DTOs.ProductImageDTO;
 global using _2B_Egypt.Application.DTOs.CategoryDTOs;
 global using _2B_Egypt.Application.DTOs.Shared;
+global using _2B_Egypt.Application.DTOs.AdminDTOs;
+

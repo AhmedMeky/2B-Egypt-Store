@@ -1,0 +1,47 @@
+<!-- <div class="row product-details" *ngIf="products.length > 0; else noProducts">
+    <div class="col-sm-6">
+        
+        <h2>Product List</h2>
+        <ul>
+            <li *ngFor="let product of products">
+                <img class="product-img" src="{{ products.imageUrl }}" alt="" />
+                <h3>{{ product.nameEn }} - {{ product.price | currency }}</h3>
+                <p>{{ product.descriptionEn }}</p>
+                <div>
+                    Color :
+                    <h3 [style.backgroundColor]="products.colorEn" class="product-color"></h3>
+                </div>
+                <h6>Description : {{ product.descriptionEn }}</h6>
+                <button *ngIf="removeCart" class="form-button" (click)="removeToCart(products.id)">
+                    Remove to Cart
+                </button>
+                <button *ngIf="!removeCart" class="form-button" (click)="addToCart()">
+                    Add to Cart
+                </button>
+                <div class="quantity-group">
+                    <button (click)="handleQuantity('min')">-</button>
+                    <input type="text" value="{{ productQuantity }}" />
+                    <button (click)="handleQuantity('plus')">+</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<ng-template #noProducts>
+    <p>No products available.</p>
+</ng-template> -->
+
+<div *ngIf="products.length > 0; else noProducts">
+  <h2>Product List</h2>
+  <ul>
+    <li *ngFor="let product of products">
+      <h3>{{ product.nameEn }} - {{ product.price | currency }}</h3>
+      <p>{{ product.descriptionEn }}</p>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noProducts>
+  <p>No products available.</p>
+</ng-template>

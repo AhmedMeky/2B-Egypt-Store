@@ -2,6 +2,7 @@
 
 namespace _2B_Egypt.AdminDashboard.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;

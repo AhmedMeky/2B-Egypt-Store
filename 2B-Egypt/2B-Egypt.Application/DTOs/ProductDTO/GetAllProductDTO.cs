@@ -22,11 +22,10 @@ public class GetAllProductDTO
 
     public int Discount { get; set; }
 
-    public CategoryForGetAllProductDTO Category { get; set; }
-
+    public CategoryForGetAllProductDTO? Category { get; set; }
     public BrandForGetAllProductDTO Brand { get; set; }
-
-    public virtual List<CreateImageWithPraductDTO> Images { get; set; } = [];
-    //public virtual List<Guid> Facilities { get; set; } = [];
+    public List<CreateImageWithPraductDTO> Images { get; set; } = [];
+    public List<ReviewForGetAllProductDTO> Reviews { get; set; } = [];
+    public List<FacilityForGetAllProductDTO> Facilities { get; set; } = [];
 }
 
