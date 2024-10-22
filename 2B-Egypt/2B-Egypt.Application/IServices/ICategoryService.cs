@@ -8,6 +8,8 @@ public interface ICategoryService
     Task<ResponseDTO<CreateCategoryDTO>>UpdateAsync(CreateCategoryDTO category);
     Task SoftDeleteAsync(Guid id);
     Task HardDeleteAsync(Guid id);
+    Task<ResponseDTO<List<CreateCategoryDTO>>> GetAllParent();
+    Task<ResponseDTO<List<CreateCategoryDTO>>> GetAllSubCategories(Guid id);
 
     //Task<ResponseDTO<UpdateCategoryDTO>>UpdateAsync(UpdateCategoryDTO category);
     //Task<ResponseDTO<CreateCategoryDTO>> DeleteAsync(CreateCategoryDTO category);
@@ -16,5 +18,19 @@ public interface ICategoryService
     //Task<ResponseDTO<SubCategoryDTO>> GetAllSubCategories(string ParentCatID);
     //Task<ResponseDTO<IEnumerable<CreateProductDTO>>> GetAllRelatedProducts(string ParentCatID);
     //Task<ResponseDTO<CreateCategoryDTO>> SearchByName(string categoryName);
-    //Task<bool> IsExists(string categoryName);
+    //Task<bool> IsExists(string categoryName); 
+
+//----------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
 }

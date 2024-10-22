@@ -8,7 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule], // Ensure HttpClientModule is included here
+  imports: [CommonModule, RouterModule, HttpClientModule],
+   // Ensure HttpClientModule is included here
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
