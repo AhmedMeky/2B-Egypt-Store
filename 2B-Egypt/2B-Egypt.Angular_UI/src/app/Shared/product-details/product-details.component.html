@@ -1,123 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Details</title>
+
     <style>
+.more-info-reviews {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  width: 100%;
+  position: relative;
+}
+
+.more-info-reviews a {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  position: relative;
+}
+
+.more-info-reviews a::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: lightgray;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: background-color 0.3s;
+}
+
+.more-info-reviews a.active::after {
+  background-color: orange;
+}
 
 
-        .container {
-            display: flex;
-            margin: 0 auto;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 800px;
-        }
+      .carousel-indicators img {
+        border: 1px solid #e57b34;
+        border-radius: 5px;
+        width: 100px;
+        height: 70px;
+        cursor: pointer;
+        margin-left: 2%;
+        margin-bottom: -10%;
+      }
+      .container {
+        display: flex;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 800px;
+      }
 
-        .product-image-container {
-            flex: 2;
-            margin-right: 10px;
-            border: 1px solid #e0e0e0; /* border light */
-            border-radius: 8px; /* rounded corners */
-            padding: 50px; /* padding around the image */
-            background-color: #fff; /* background color for the image container */
-        }
+      .product-image-container {
+        flex: 2;
+        margin-right: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 50px;
+        background-color: #fff;
+      }
 
-        .product-image img {
-            max-width: 100%;
-            border-radius: 8px;
-        }
+      .product-image img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
 
-        .product-info {
-            flex: 2;
-        }
+      /* .product-info {
+            /* flex: 2; */
+      */ .product-title {
+        font-size: 20px;
+        margin: 0 0 10px;
+      }
 
-        .product-title {
-            font-size: 20px;
-            margin: 0 0 10px;
-        }
+      .review {
+        font-size: 14px;
+        color: #888;
+        margin: 5px 0;
+      }
+      .carousel-control-prev-icon,
+      .carousel-control-next-icon {
+        filter: invert(58%) sepia(93%) saturate(2537%) hue-rotate(359deg)
+          brightness(103%) contrast(102%);
+      }
 
-        .review {
-            font-size: 14px;
-            color: #888;
-            margin: 5px 0;
-        }
+      .price {
+        font-size: 24px;
+        color: #e57b34;
+        margin: 15px 0;
+      }
 
-        .price {
-            font-size: 24px;
-            color: #e57b34;
-            margin: 15px 0;
-        }
+      .special-price {
+        font-size: 16px;
+        color: #555;
+        text-decoration: line-through;
+        margin-left: 10px;
+      }
 
-        .special-price {
-            font-size: 16px;
-            color: #555;
-            text-decoration: line-through;
-            margin-left: 10px;
-        }
+      .stock-status,
+      .sku,
+      .pickup-info {
+        font-size: 14px;
+        margin: 5px 0;
+        color: #333;
+      }
 
-        .stock-status, .sku, .pickup-info {
-            font-size: 14px;
-            margin: 5px 0;
-            color: #333;
-        }
-
-        .product-details {
-            margin-top: 20px;
-        }
+      .product-details {
+        margin-top: 20px;
+      }
     </style>
-</head>
-<body>
-
-    <div class="container">
-        <div class="product-image-container">
-            <div class="product-image">
-                <img src="./Images/default-product.jpg" alt="Lenovo ThinkPad E16 Laptop">
-            </div>
+  </head>
+  <body>
+    <div style="display: flex; align-items: center; justify-content: center">
+      <div
+        style="width: 30%"
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-bs-ride="false"
+      >
+        <div class="carousel-indicators">
+          <img
+            src="./Images/default-product.jpg"
+            class="img-thumbnail"
+            class="d-block"
+            alt="Slide 1 Thumbnail"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          />
+          <img
+            src="./Images/default-product.jpg"
+            class="img-thumbnail"
+            class="d-block"
+            alt="Slide 2 Thumbnail"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          />
+          <img
+            src="./Images/default-product.jpg"
+            class="img-thumbnail"
+            class="d-block"
+            alt="Slide 3 Thumbnail"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          />
         </div>
 
-        <div class="product-info">
-            <h1 class="product-title">{{product?.nameEn}}</h1>
-            <p><strong>Processor:</strong> 13th Gen Intel® Core™ i7-1355U Processor 12M Cache, up to 5.00 GHz</p>
-            <p><strong>Ram:</strong> 8GB</p>
-            <p><strong>Hard Disk:</strong> 512GB SSD</p>
-            <p><strong>Graphics Card:</strong> NVIDIA® GeForce MX550 2GB</p>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="./Images/default-product.jpg"
+              class="d-block w-100"
+              alt="First Slide"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Images/default-product.jpg"
+              class="d-block w-100"
+              alt="Second Slide"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./Images/default-product.jpg"
+              class="d-block w-100"
+              alt="Third Slide"
+            />
+          </div>
+        </div>
 
-            <p class="price"><strong>{{product?.price}}</strong> <span class="special-price">Special Price EGP 45,999.00</span></p>
-            <p class="stock-status">{{product?.unitInStock}}</p>
-            <div class="cart-buttons">
-                <button (click)="addToCart(product)" class="add-cart-btn">
-                  <i class="fas fa-shopping-cart"></i> Add to Cart
-                </button>
-                <button *ngIf="product.inCart" (click)="removeFromCart(+product.id)" class="remove-cart-btn">
-                  Remove from Cart
-                </button>
-              </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="product-info">
+        <h1 class="product-title">{{ product?.nameEn }}</h1>
+        <p><strong>Description:</strong> {{ product?.descriptionEn }}</p>
+<hr>
+        <p class="price">
+          <span class="special-price">EGP{{ product?.price }}</span>
+          <strong>EGP{{ PriceAfterSale }}</strong>
+          &nbsp;
+          <span  class="stock-status">
+          {{ product && product.unitInStock > 0 ? "In Stock" : "Out of Stock" }}
+        </span>
+        </p>
+
+        <div class="cart-buttons">
+          <button (click)="addToCart(product)" class="add-cart-btn">
+            <i class="fas fa-shopping-cart"></i> Add to Cart
+          </button>
+          <!-- <button *ngIf="product.inCart" (click)="removeFromCart(+product.id)" class="remove-cart-btn">
+                      Remove from Cart
+                    </button> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="more-info-reviews">
+        <a id="more-info" [class.active]="IsMoreInfo" (click)="activateTab(true)">More Information</a>
+        <a id="reviews" [class.active]="!IsMoreInfo" (click)="activateTab(false)">Reviews</a>
+    </div>
+    
+    <div *ngIf="IsMoreInfo">
+        <div class="product-details">
+          <h2>Product Specifications</h2>
+          <ul>
+            <li>
+              <strong>Category:</strong> {{ product?.category?.nameEn }}
+            </li>
+            <li>
+              <strong>Brand:</strong> {{ product?.brand?.nameAr }}
+            </li>
+          </ul>
         </div>
     </div>
-
-    <div class="product-details">
-        <h2>Product Specifications</h2>
-        <ul>
-            <li><strong>Select From Category:</strong> {{ product?.category?.nameEn }}</li>
-            <li><strong>Brand:</strong> Lenovo</li>
-            <li><strong>Color:</strong> Black</li>
-            <li><strong>Model:</strong> Lenovo ThinkPad E16</li>
-            <li><strong>Processor:</strong> Intel Core i7</li>
-            <li><strong>Processor Generation:</strong> 13th Generation</li>
-            <li><strong>Processor Information:</strong> 13th Gen Intel® Core™ i7-1355U Processor 12M Cache, up to 5.00 GHz</li>
-            <li><strong>RAM:</strong> 8 GB</li>
-            <li><strong>Hard Disk Capacity:</strong> 512 GB</li>
-            <li><strong>Hard Disk Type:</strong> 512GB SSD</li>
-            <li><strong>Graphics Card Details:</strong> NVIDIA® GeForce MX550 2GB</li>
-            <li><strong>Display Type:</strong> 16" FHD 1920 x 1080</li>
-            <li><strong>Display Size:</strong> 16 inches</li>
-            <li><strong>Speaker:</strong> Stereo Speakers</li>
-            <li><strong>Operating System:</strong> Free Dos</li>
-            <li><strong>Product Warranty:</strong> 1 Year</li>
-        </ul>
+    
+    <div *ngIf="!IsMoreInfo">
+        <h2>Reviews</h2>
     </div>
-
-</body>
+    
+  </body>
 </html>

@@ -1,12 +1,12 @@
 <div class="product-list product-details">
-<div *ngFor="let product of products" class="product-card" (click)="SelectedProductId(product.id)" style="cursor: pointer;">
+<div *ngFor="let product of products" class="product-card"  style="cursor: pointer;">
   <div
-    *ngFor="let product of products"
     class="product-card"
     style="cursor: pointer"
   >
     <div class="product-img-wrapper">
       <img
+      (click)="SelectedProductId(product.id)"
         [src]="
           product.images.length > 0
             ? product.images[0].imageUrl
