@@ -115,6 +115,11 @@
       .product-details {
         margin-top: 20px;
       }
+.star-rating , .form-group{
+    margin-top: 15px;
+}
+
+      
     </style>
   </head>
   <body>
@@ -244,10 +249,89 @@
           </ul>
         </div>
     </div>
-    
     <div *ngIf="!IsMoreInfo">
-        <h2>Reviews</h2>
-    </div>
     
-  </body>
-</html>
+
+
+        <form style="margin: 25px;" (ngSubmit)="addreview()" #reviewForm="ngForm">
+
+                <!-- stars parts -->
+        <div class="star-rating">
+            <h2 style="margin: 0;">Price</h2>
+            <span  *ngFor="let star of starsPrice; let i = index" (click)="ratePrice(i + 1)">
+              <i  [class]="ratingPrice > i ? 'fas fa-star' :'far fa-star'" style="font-size: 24px; margin-right: 10px;"></i>
+            
+            </span>
+          </div>
+        
+          <div  class="star-rating">
+            <h2 style="margin: 0;" >Quality</h2>
+            <span *ngFor="let star of starsQuilty; let i = index" (click)="rateQuilty(i + 1)">
+                <i  [class]="ratingQuilty > i ? 'fas fa-star' :'far fa-star'" style="font-size: 24px; margin-right: 10px;"></i>
+            </span>
+          </div>
+        
+          <div class="star-rating">
+            <h2 style="margin: 0;">Value</h2>
+            <span *ngFor="let star of starsValue; let i = index" (click)="rateValue(i + 1)">
+                <i  [class]="ratingValue > i ? 'fas fa-star' :'far fa-star'" style="font-size: 24px; margin-right: 10px;"></i>
+            </span>
+          </div>
+
+        <!-- stars parts -->
+            <div  class="form-group">
+              <label for="NickName">NickName</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                [(ngModel)]="Review.nickName" 
+                id="NickName" 
+                name="nickName" 
+                required 
+                maxlength="50" 
+                #nickName="ngModel">
+              <div *ngIf="nickName.invalid && nickName.touched" class="text-danger">
+                <div *ngIf="nickName.errors?.['required']">Nickname is required.</div>
+                <div *ngIf="nickName.errors?.['maxlength']">Nickname cannot exceed 50 characters.</div>
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <label for="Summary">Summary</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                [(ngModel)]="Review.summary" 
+                name="summary" 
+                id="Summary" 
+                required 
+                maxlength="100" 
+                #summary="ngModel">
+              <div *ngIf="summary.invalid && summary.touched" class="text-danger">
+                <div *ngIf="summary.errors?.['required']">Summary is required.</div>
+                <div *ngIf="summary.errors?.['maxlength']">Summary cannot exceed 100 characters.</div>
+              </div>
+            </div>
+          
+            <div class="form-group">
+              <label for="reviewText">Review</label>
+              <textarea 
+                type="text" 
+                class="form-control" 
+                [(ngModel)]="Review.reviewText" 
+                name="reviewText" 
+                id="reviewText" 
+                required 
+                maxlength="1000" 
+                #reviewText="ngModel">
+            </textarea>
+              <div *ngIf="reviewText.invalid && reviewText.touched" class="text-danger">
+                <div *ngIf="reviewText.errors?.['required']">Review text is required.</div>
+                <div *ngIf="reviewText.errors?.['maxlength']">Review text cannot exceed 1000 characters.</div>
+              </div>
+            </div>
+          
+            <button type="submit" class="btn btn-warning" style="margin: 20px  0px" [disabled]="reviewForm.invalid">Submit</button>
+          </form>
+          
+    
