@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+#smallnav {
+  background-color: grey;
+  height: 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  padding-right: 50px;
+}
+nav {
+  background-color: black;
+  margin-left: 50px;
+  margin-right: 50px;
+  /* width: 100%; */
+
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+nav ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+nav li {
+  height: 50px;
+}
+nav a {
+  font-weight: bold;
+  height: 100%;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+nav a:hover {
+  transition: 1s;
+  color: orangered;
+}
+#img2b {
+  margin-left: 30px;
+}
+#search {
+  width: 250px;
+  height: 45px;
+  border-radius: 7px;
+  box-shadow: none;
+}
+#btnandsearch {
+  margin: 15px;
+}
+#bigDivForNavbar {
+  /* background-color: rebeccapurple; */
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  /* margin-left: 40px; */
+  margin-right: 0px;
+  width: 100%;
+  /* background-color: red; */
+}
+#bigDivForNavbar > div {
+  flex: 1; /* Allow child divs to grow */
+  color: white; /* Example text color */
+  padding: 10px; /* Example padding */
+}
+#btnsearch {
+  background-color: rgb(255, 102, 0);
+  border: none;
+  border-radius: 2px;
+}
+#sidelist {
+  display: none;
+  background-color: rgb(156, 156, 214);
+  display: none;
+  flex-direction: row;
+}
+
+#showsubcategories {
+  background-color: grey;
+  border-radius: 10px;
+  height: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+/* nav >ul >li> a:hover #showsubcategories{
+  display: block;
+}
+/* nav a:left #showsubcategories{
+  display: none;
+} */
+a {
+  font-weight: bold;
+  height: 100%;
+  padding: 0 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+@media (max-width: 600px) {
+  #nav {
+    display: none;
+  }
+  #sidelist {
+    display: block;
+  }
+}
+@media (min-width: 480) {
+  #nav {
+    display: block;
+  }
+  #sidelist {
+    display: none;
+  }
+}

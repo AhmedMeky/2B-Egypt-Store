@@ -15,11 +15,37 @@ namespace _2B_Egypt.Infrastructure.Reposetories
         { 
            
          return (await GetAllAsync().Result.AnyAsync(category => category.NameEn == Categoryname || category.NameAr == Categoryname));
-        }  
-        public async Task<IEnumerable<Category>>GetAllSubCategories(Guid CatId)
+        }
+        //public async Task<IEnumerable<Category>> GetAllSubCategories(Guid CatId)
+        //{
+        //    return _context.Categories.Where(c => c.ParentCategoryId == CatId).Include(c => c.SubCategories).Select(c => c).ToList();
+
+        //}
+        public async Task<IEnumerable<Category>> GetAllSubCategories(Guid CatId)
         {
-            return _context.Categories.Where(c => c.ParentCategoryId == CatId).Select(c => c).ToList();
-        } 
+            var categories = new List<Category>();
+            await GetSubCategoriesRecursive(CatId, categories);
+            return categories;
+        }
+
+        private async Task GetSubCategoriesRecursive(Guid CatId, List<Category> categories)
+        {
+            
+            var subCategories = await _context.Categories
+                .Where(c => c.ParentCategoryId == CatId)
+                .Include(c => c.SubCategories) 
+                .ToListAsync();
+
+           
+            categories.AddRange(subCategories);
+
+            
+            foreach (var subCategory in subCategories)
+            {
+                await GetSubCategoriesRecursive(subCategory.Id, categories);
+            }
+        }
+
         public   Task<IEnumerable<CreateProductDTO>> GetAllRelatedProduct(Guid CategoryId)
         {
            var ProductDTOs =   _context.Products.Where(p => p.CategoryId == CategoryId).Select(p => new CreateProductDTO()
@@ -37,7 +63,22 @@ namespace _2B_Egypt.Infrastructure.Reposetories
             return null;
             
         }
-        
+         public async Task<List<Category>> GetAllParentAsync()
+        {
+            var response =   _context.Categories
+                .Where(c => c.ParentCategoryId == null)
+                .Select(c => c)
+                .ToList();
+            if(response.Count() == 0)
+            {
+                return null;
+            } 
+            else
+            {
+                return response;
+            }
+        }
+
 
     }
 }

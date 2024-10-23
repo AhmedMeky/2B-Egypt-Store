@@ -37,7 +37,6 @@ public class CategoryService : ICategoryService
         }
     }
 
-
     public async Task<ResponseDTO<CreateCategoryDTO>> GetByIdAsync(Guid id)
     {
         var category = await categoryRepository.GetByIdAsync(id);
@@ -59,7 +58,6 @@ public class CategoryService : ICategoryService
         };
     }
 
-
     public async Task<ResponseDTO<List<CreateCategoryDTO>>> GetAllAsync()
     {
         var categories = await categoryRepository.GetAllAsync();
@@ -69,6 +67,56 @@ public class CategoryService : ICategoryService
             IsSuccessfull = true,
             Message = "OK"
         };
+    }
+
+    public async Task<ResponseDTO<List<CreateCategoryDTO>>> GetAllParent()
+    {
+        var categories = await categoryRepository.GetAllParentAsync();
+        if (categories.Count != 0)
+        {
+            return new ResponseDTO<List<CreateCategoryDTO>>()
+            {
+                Entity = mapper.Map<List<CreateCategoryDTO>>(categories),
+                IsSuccessfull = true,
+                Message = "parent Categories Retrieved"
+            };
+        }
+        else
+        {
+            return new ResponseDTO<List<CreateCategoryDTO>>()
+            {
+                Entity = null,
+                IsSuccessfull = true,
+                Message = "There are no Parent Categories"
+            };
+        }
+
+    }
+
+    public async Task<ResponseDTO<List<CreateCategoryDTO>>> GetAllSubCategories(Guid id)
+    {
+        var subcategories = await categoryRepository.GetAllSubCategories(id);
+        if (subcategories.Count() != 0)
+        {
+            var response = mapper.Map<List<CreateCategoryDTO>>(subcategories);
+            return new ResponseDTO<List<CreateCategoryDTO>>()
+            {
+                Entity = response,
+                IsSuccessfull = true,
+                Message = "Retrieved successfully"
+
+            };
+        }
+        else
+        {
+            return new ResponseDTO<List<CreateCategoryDTO>>()
+            {
+                Entity = null,
+                IsSuccessfull = true,
+                Message = "THer are no subCategories for this Category"
+            };
+        }
+
     }
 
     public async Task<ResponseDTO<CreateCategoryDTO>> UpdateAsync(CreateCategoryDTO categoryDTO)
