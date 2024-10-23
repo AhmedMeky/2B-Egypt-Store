@@ -1,11 +1,11 @@
 ﻿namespace _2B_Egypt.AdminDashboard.Controllers;
-public class AdminController : Controller
+public class AccountController : Controller
 {
     private readonly UserManager<User> userManager;
     private readonly SignInManager<User> signInManager;
     private readonly IMapper mapper;
 
-    public AdminController(UserManager<User> userManager, SignInManager<User> _signInManager, IMapper mapper)
+    public AccountController(UserManager<User> userManager, SignInManager<User> _signInManager, IMapper mapper)
     {
         this.userManager = userManager;
         this.signInManager = _signInManager;
@@ -50,7 +50,6 @@ public class AdminController : Controller
         return View(userDTO);
     }
 
-    [Route("Account/Login")]
     public async Task<IActionResult> Login()
     {
         return View();
