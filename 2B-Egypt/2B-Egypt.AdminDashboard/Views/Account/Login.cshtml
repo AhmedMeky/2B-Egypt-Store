@@ -23,8 +23,8 @@
         <div class="login">
 
             <img src="@Url.Content("~/img/111.png")" alt="login image" class="login__img">
-            
-            <form action="@Url.Action("Login", "Admin")" method="post" class="login__form ">
+
+            <form action="@Url.Action("Login", "Account")" method="post" class="login__form ">
                 <h1 class="login__title">Login</h1>
 
                 <div class="login__content">
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="login__check">
-                    <a href="@Url.Action("Register", "Admin")" class="login__forgot">Register</a>
+                    <a href="@Url.Action("Register", "Account")" class="login__forgot">Register</a>
                 </div>
 
                 <button type="submit" class="login__button">Login</button>
@@ -72,7 +72,6 @@
                     <div class="alert alert-danger" style="color:#680082" role="alert">
                         @ViewBag.ErrorMessage
                     </div>
-
 
                 }
             </form>

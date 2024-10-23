@@ -30,8 +30,8 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(option =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
           .AddCookie(options =>
           {
-              options.LoginPath = "/Admin/Login";
-              options.AccessDeniedPath = "/Admin/AccessDenied";
+              options.LoginPath = "/Account/Login";
+              options.AccessDeniedPath = "/Account/AccessDenied";
           });
 
 builder.Services.AddAuthorization(options =>
@@ -41,7 +41,7 @@ builder.Services.AddAuthorization(options =>
         .Build();
 });
 
-builder.Services.AddTransient<AdminController>();
+builder.Services.AddTransient<AccountController>();
 
 
 
