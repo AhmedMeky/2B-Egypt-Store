@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { CategoryService } from '../../../services/category.service';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ICategory } from '../../../../models/icategory';
 import { HttpClientModule } from '@angular/common/http';
 import { CategorywithSubcategories } from '../../../../models/categorywith-subcategories';
+import { LanguageServiceService } from '../../../services/language-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,8 +20,16 @@ export class NavBarComponent implements OnInit {
   filteredSubcategories: ICategory[] = [] as ICategory[];
 
   categorywithSubCategories: CategorywithSubcategories[] = [] ;
-  constructor(private categoryService: CategoryService) {}
+  
+  lang: string = 'English'; // Default language
+  constructor(private categoryService: CategoryService,  private router: Router, private _LanguageService: LanguageServiceService) {}
+
   ngOnInit(): void {
+    this._LanguageService.getlanguage().subscribe({
+      next: (lang) => {
+        this.lang = lang;
+      },
+    });
     this.categoryService.getAllCategories().subscribe({
       next: (res) => {
         this.Categories = res; 
@@ -99,4 +108,17 @@ export class NavBarComponent implements OnInit {
   reset(){
     this.filteredSubcategories=[] as ICategory[] ;
   }
+  SelectedProductId(id:string)
+  {
+    this.router.navigateByUrl(`/products-by-category/${id}`);
+
+  }
+  changelang(event: Event) {
+    const selectElement = event.target as HTMLSelectElement | null; 
+    if (selectElement) { 
+        const value = selectElement.value; 
+        this._LanguageService.cahngelanguage(value);
+    }
+
+}
 }

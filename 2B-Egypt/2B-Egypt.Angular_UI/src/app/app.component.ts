@@ -6,21 +6,27 @@ import { ProductsByCategoryComponent } from './Shared/products-by-category/produ
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './Shared/product-details/product-details.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
-<<<<<<< Updated upstream
-import { NavBarComponent } from './Shared/Components/nav-bar/nav-bar.component';
-=======
-import { TranslateModule } from '@ngx-translate/core';
->>>>>>> Stashed changes
 
+import { NavBarComponent } from './Shared/Components/nav-bar/nav-bar.component';
+
+import { TranslateModule } from '@ngx-translate/core';
+import { SidebarComponent } from './Shared/Components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-<<<<<<< Updated upstream
-  imports: [RouterOutlet, NavBarComponent,ProductListComponent,HttpClientModule,ProductDetailsComponent,ProductsByCategoryComponent,FooterComponent],
-=======
-  imports: [RouterOutlet,ProductListComponent,HttpClientModule,ProductDetailsComponent,ProductsByCategoryComponent,FooterComponent,TranslateModule],
->>>>>>> Stashed changes
+
+  imports: [
+    RouterOutlet,
+    NavBarComponent,
+    ProductListComponent,
+    HttpClientModule,
+    ProductDetailsComponent,
+    ProductsByCategoryComponent,
+    FooterComponent,
+    SidebarComponent,
+  ],
+
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
@@ -39,5 +45,4 @@ export class AppComponent {
   changelang() {
     this._LanguageService.cahngelanguage(this.lang == 'en' ? 'ar' : 'en');
   }
-
 }

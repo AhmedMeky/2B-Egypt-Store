@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IProduct } from '../../../models/IProduct';
@@ -11,41 +11,73 @@ import Cookies from 'js-cookie';
 @Component({
   selector: 'app-products-by-category',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule,],
   templateUrl: './products-by-category.component.html',
   styleUrl: './products-by-category.component.css',
 })
 export class ProductsByCategoryComponent implements OnInit {
-  @Input() categoryId!: string;
-  products: IProduct[] = [] as IProduct[];
- 
+  imgmvcurl = 'http://localhost:5269/img/';
 
+  products: IProduct[] = [] as IProduct[];
+  filteredProducts: IProduct[] = [] as IProduct[];
+ 
+  categoryId!: string;
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    
   ) {}
 
+  
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
         this.categoryId = params.get('id')!;
-        this.getProductsByCategoryId(this.categoryId);
+        this.getProductsByCategoryIdt(this.categoryId);
     });
+    
+      this.checkCartItems()
+    
+ 
+    
+};
+getProductsByCategoryIdt(categoryId: string): void {
+  this.productService.getProductsByCategoryId(categoryId).subscribe({
+    next: (res) => {
+      this.products = res;
+      console.log('Fetched products:', this.products);  
+      this.products.forEach(product => {
+        console.log('Product Images Array:', product.images);
+        if (product.images.length > 0) {
+          console.log('Product Image URL:', product.images[0]?.imageUrl); 
+        } else {
+          console.log('No images for this product');
+        }
+      });
+    },
+    error: (error) => {
+      console.error('Error fetching products by category:', error);
+    },
+  });
 }
 
-   
-  
 
-  getProductsByCategoryId(categoryId: string): void {
-    this.productService.getProductsByCategoryId(categoryId).subscribe({
-      next: (res) => {
-        this.products = res;
-      },
-      error: (error) => {
-        console.error('Error fetching products by category:', error);
-      },
-    });
-  }
+// getProductsByCategoryIdt(categoryId: string): void {
+//   this.productService.getProductsByCategoryId(categoryId).subscribe({
+//     next: (res) => {
+//       this.products = res;
+//       console.log('Fetched products:', this.products);  // طباعة المنتجات
+//       this.products.forEach(product => {
+//         console.log('Product Image URL:', product.images[0]?.imageUrl);  // طباعة رابط الصورة
+//       });
+//     },
+//     error: (error) => {
+//       console.error('Error fetching products by category:', error);
+//     },
+//   });
+// }
+
 
 
   checkCartItems() {
@@ -124,5 +156,10 @@ export class ProductsByCategoryComponent implements OnInit {
         Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
       }
     }
+  }
+  SelectedProductId(id:string)
+  {
+    this.router.navigateByUrl(`/product-details/${id}`);
+
   }
 }

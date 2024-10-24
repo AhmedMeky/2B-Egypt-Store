@@ -36,7 +36,8 @@ namespace _2B_Egypt.API.Controllers
         [HttpGet("category/{categoryId}")]
         public async Task<ActionResult<List<GetProductDTO>>> GetProductsByCategoryID(Guid categoryId)
         {
-            var products = await _productService.GetProductsByCategoryID(categoryId);
+            
+            var products = await _productService.GetByCategoryIdAsync(categoryId);
             if (products == null || products.Count == 0)
             {
                 return NotFound($"No products found for category ID {categoryId}");
