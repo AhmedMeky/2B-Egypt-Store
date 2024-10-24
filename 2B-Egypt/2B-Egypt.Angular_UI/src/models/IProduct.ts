@@ -1,3 +1,5 @@
+import { IBrand } from "./ibrand";
+
 export interface IProduct {
     id: string;            
     nameAr: string;        
@@ -19,7 +21,7 @@ export interface IProduct {
     inCart?: boolean;     
     quantity?: number; 
     // category?: ICategory;    
-    // brand?: IBrand;          
+    brand?: IBrand;          
     // images?: IProductImage[];   
     // facilities?: IFacility[];   
     // reviews?: IReview[];        

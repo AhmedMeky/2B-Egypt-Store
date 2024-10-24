@@ -1,4 +1,5 @@
 <div class="product-list product-details">
+
   <app-sidebar (filterChange)="applyFilters($event)"></app-sidebar>
   <div *ngFor="let product of filteredProducts" class="product-card" style="cursor: pointer">
   <div class="product-card" *ngIf="filteredProducts.length > 0; else noProducts">
@@ -8,6 +9,7 @@
              alt="{{ product.nameEn }}" class="product-img" />
         <span *ngIf="product.discount > 0" class="discount-badge">-{{ product.discount }}%</span>
       </div>
+
 
       <h3 class="product-name">{{ product.nameEn }}</h3>
       <p class="product-description">{{ product.descriptionEn }}</p>
