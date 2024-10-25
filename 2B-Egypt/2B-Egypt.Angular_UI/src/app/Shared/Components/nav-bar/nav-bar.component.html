@@ -1,89 +1,106 @@
-<!-- Example split danger button -->
-<div
-  style="
-    background-image: url('/img/bank.jpg');
-    background-size: cover;
-    height: 70px;
-    background-position: center;
-  "
-></div>
-<div style="height: 3px; background-color: orangered"></div>
-<div id="smallnav">
-  <div style="display: flex; flex-direction: row; align-items: center">
-    <div><a href="#">Compare()</a></div>
-    <div><a href="#">Sign In</a></div>
-    <div><a href="#">Create Account</a></div>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Font Awesome 6 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
 
-  <div>
-    <!-- <i class="fa-solid fa-language fa-2x" style="color: orange;"></i>  -->
-    <select name="" id="" style="background-color: grey">
-      <option><a href="#">English</a></option>
-      <option><a href="#">العربية</a></option>
-    </select>
-  </div>
-</div>
-<div>
-  <div id="bigDivForNavbar">
-    <img src="/img/2b.png" width="200px" id="img2b" />
+    <!-- Font Awesome 5 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
 
+    <!-- Font Awesome 4 -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+    <!-- Example split danger button -->   
+    <div style="background-image: url('/img/bank.jpg'); background-size: cover; height: 70px; background-position: center; "></div>
+     <div style="height: 3px;background-color: orangered;"></div>
+     <div id="smallnav">
+
+            <div style="display: flex;flex-direction: row;align-items: center;">
+              <div> <a href="#">Compare()</a></div>
+              <div> <a href="#">Sign In</a></div>
+              <div> <a href="#">Create Account</a></div>
+            </div>
+ 
+            <select (change)="changelang($event)" name="languageSelect" aria-label="Select language" style="background-color: grey;">
+              <option value="English">English</option>
+              <option value="العربية">العربية</option>
+            </select>
+
+     </div>
     <div>
-      <div
-        style="
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          margin: 10px;
-          justify-content: space-between;
-        "
-      >
-        <div style="display: flex; flex-direction: row; margin-right: 20px">
-          <input type="search" id="search" class="form-control" />
-          <button id="btnsearch" style="margin-right: 15px">Search</button>
-          <!-- <label class="form-label" for="form1">Search</label> -->
-        </div>
-        <div
-          style="
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-          "
-        >
+      <div id="bigDivForNavbar">
+        <img src="/img/2b.png" width="150px" id="img2b" />
+
+        <div>
           <div
             style="
               display: flex;
               flex-direction: row;
-              justify-content: space-around;
-              width: 250px;
+              align-items: center;
+              margin: 10px;
+              justify-content: space-between;
             "
           >
-            <div style="display: block; align-items: center">
-              <i
-                class="fa-solid fa-headset fa-2x"
-                style="margin-right: 5px; color: black"
-              ></i>
-              <h5 style="margin: 0; color: orangered">16512</h5>
+            <div style="display: flex; flex-direction: row; margin-right: 20px">
+              <input
+                type="search"
+                id="search"
+                class="form-control"
+                style="margin-right: 5px"
+              />
+              <button id="btnsearch" style="margin-right: 5px">Search</button>
+              <!-- <label class="form-label" for="form1">Search</label> -->
             </div>
-            <div>
-              <i
-                class="fa-solid fa-location-dot fa-2x"
-                style="color: black; text-align: center"
-              ></i>
-              <h5 style="margin: 0; color: orangered">Stores</h5>
+            <div style="display: flex;flex-direction: row;justify-content: space-between;">
+              <div style="display: flex;flex-direction: row;justify-content: space-around;width: 250px;">
+                <div style="display: block; align-items: center">
+                  <i
+                    class="fa-solid fa-headset fa-2x"
+                    style="margin-right: 5px; color: black"
+                  ></i>
+                  <h5 style="margin: 0; color: orangered">16512</h5>
+                </div>
+                <div>
+                  <i
+                    class="fa-solid fa-location-dot fa-2x"
+                    style="color: black"
+                  ></i>
+                  <h5 style="margin: 0; color: orangered">Stores</h5>
+                </div>
+              </div> 
+              <div style="margin-right:45px;">
+                <i class="fa-solid fa-cart-shopping fa-2x" style="color: orangered;"></i> 
+                <h5 style="color: orangered;">0</h5>
+              </div>
             </div>
-          </div>
-          <div style="margin-right: 45px">
-            <i
-              class="fa-solid fa-cart-shopping fa-2x"
-              style="color: orangered"
-            ></i>
-            <h5 style="color: orangered">0</h5>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <!-- <nav id="nav">
+      <!-- <nav id="nav">
         <ul style="display: flex; padding: 0; margin: 0; list-style-type: none">
           <li *ngFor="let cat of Categories" style="margin-right: 15px">
             <a href="#">{{ cat.nameEn }}</a>
@@ -91,31 +108,33 @@
         </ul>
       </nav> -->
 
-  <nav id="nav">
-    <ul style="display: flex; padding: 0; margin: 0; list-style-type: none">
-      <li
-        *ngFor="let cat of ParentCategories"
-        style="margin-right: 15px; position: relative"
-      >
-        <a (mouseover)="ShowSubCategories(cat.id)">
-          {{ cat.nameEn }}
-        </a>
-      </li>
-    </ul>
-  </nav>
-  <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
-    <a
-      href="#"
-      *ngFor="let cat of filteredSubcategories"
-      style="margin-right: 15px; position: relative"
-      >{{ cat.nameEn }}</a
-    >
-  </div>
-  <div id="sidelist">
-    <ul *ngFor="let cat of ParentCategories">
-      <li>
-        <a href="#">{{ cat.nameEn }}</a>
-      </li>
-    </ul>
-  </div>
-</div>
+      <nav id="nav">
+        <ul style="display: flex; padding: 0; margin: 0; list-style-type: none">
+          <li
+            *ngFor="let cat of ParentCategories"
+            style="margin-right: 15px; position: relative"
+          >
+            <a (mouseover)="ShowSubCategories(cat.id)"  >
+              {{ cat.nameEn }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
+        <a routerLink="/products-by-category" routerLinkActive="active"
+        (click)="SelectedProductId(cat.id)"
+          *ngFor="let cat of filteredSubcategories" 
+          style="margin-right: 15px; position: relative;" 
+          >{{ cat.nameEn }}</a
+        >
+      </div>
+      <div id="sidelist">
+        <ul *ngFor="let cat of ParentCategories">
+          <li>
+            <a href="#">{{ cat.nameEn }}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+</html>

@@ -1,0 +1,63 @@
+<div class="main-container">
+  <div class="sidebar">
+    <div class="filters">
+      <h3>Filters</h3>
+
+      <!-- Filter by Product Name -->
+      <div>
+        <label for="productName">Product Name:</label>
+        <input
+          type="text"
+          id="productName"
+          [(ngModel)]="selectedProductName"
+          (input)="filterProducts()"
+        />
+      </div>
+
+      <!-- Filter by Category -->
+      <!-- Filter by Category -->
+      <div>
+        <label for="category">Category:</label>
+        <select
+          id="category"
+          [(ngModel)]="selectedCategory"
+          (change)="filterProducts()"
+        >
+          <option value="all">All</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.nameEn }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Filter by Price -->
+      <div>
+        <label for="price">Price:</label>
+        <input
+          type="range"
+          id="price"
+          min="1"
+          max="9000"
+          [(ngModel)]="selectedPrice"
+          (input)="filterProducts()"
+        />
+        <p>Max Price: {{ selectedPrice }}</p>
+      </div>
+      <div class="filter-container">
+        <label for="discount" class="filter-label">Filter by Discount:</label>
+        <div class="input-group">
+          <input
+            type="number"
+            id="discount"
+            [(ngModel)]="minDiscount"
+            class="filter-input"
+            placeholder="Enter minimum discount"
+          />
+          <button (click)="filterProducts()" class="filter-button">Apply Filter</button>
+        </div>
+      </div>
+      
+      
+    </div>
+  </div>
+</div>

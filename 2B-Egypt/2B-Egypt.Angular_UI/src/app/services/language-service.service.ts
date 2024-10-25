@@ -8,7 +8,7 @@ export class LanguageServiceService {
 
   private language :BehaviorSubject<string>;
   constructor() { 
-    this.language=new BehaviorSubject<string>('en');
+    this.language=new BehaviorSubject<string>('English');
   }
    
 
