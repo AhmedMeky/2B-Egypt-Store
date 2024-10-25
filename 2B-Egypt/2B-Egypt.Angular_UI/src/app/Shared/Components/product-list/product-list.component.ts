@@ -109,7 +109,6 @@ export class ProductListComponent implements OnInit {
   SelectedProductId(id:string)
   {
     this.router.navigateByUrl(`/product-details/${id}`);
-
   }
 }
 
