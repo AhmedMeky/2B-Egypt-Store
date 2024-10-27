@@ -1,4 +1,5 @@
 ﻿using _2B_Egypt.Domain.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -106,4 +107,67 @@ public class AccountController : ControllerBase
         return await Task.FromResult(Ok());
     }
 
+
+    [HttpPost("[Action]")]
+    public async Task<IActionResult> Logout()
+    {
+        await signInManager.SignOutAsync();
+        return StatusCode(200, "Logout successfuly");
+    }
+
+
+    [HttpGet("userid")]
+    public async Task<IActionResult> GetUserIdByEmail(string email)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if (user == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(user.Id);
+    }
+
+    [HttpGet("GetAddress")]
+    public async Task<IActionResult> GetAddress(string email)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+
+        if (user is null)
+        {
+            return NotFound("User not found");
+        }
+        var userData = new
+        {
+            Id = user.Id,
+            PhoneNumber = user.PhoneNumber,
+            AddressLine1 = user.AddressLine1,
+            AddressLine2 = user.AddressLine2,
+            City = user.City,
+            Country = user.Country
+        };
+
+        return Ok(userData);
+    }
+
+
+    [HttpPost("AddAddress")]
+    public async Task<IActionResult> AddAddress(string email,[FromBody] AddressDTO address)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if(user is null)
+        {
+            return BadRequest("Email Not Found");
+        }
+        user.Country = address.Country;
+        user.City = address.City;
+        user.AddressLine1 = address.AddressLine1;
+        user.AddressLine2 = address.AddressLine2;
+        var result = await userManager.UpdateAsync(user);
+        if(result.Succeeded)
+        {
+            return StatusCode(200, "Address added successfully");
+        }
+        return BadRequest("Address not Added");
+    }
 }
