@@ -11,6 +11,7 @@ import { NavBarComponent } from './Shared/Components/nav-bar/nav-bar.component';
 
 import { TranslateModule } from '@ngx-translate/core';
 import { SidebarComponent } from './Shared/Components/sidebar/sidebar.component';
+import { IProduct } from '../models/IProduct';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ import { SidebarComponent } from './Shared/Components/sidebar/sidebar.component'
     ProductsByCategoryComponent,
     FooterComponent,
     SidebarComponent,
+    NavBarComponent,
   ],
 
   templateUrl: './app.component.html',
@@ -33,6 +35,9 @@ import { SidebarComponent } from './Shared/Components/sidebar/sidebar.component'
 export class AppComponent {
   title = '2B-Egypt.Angular_UI';
   lang: string = '';
+  // this.Counter++
+  counter:number=0;
+
 
   constructor(private _LanguageService: LanguageServiceService) {}
   ngOnInit(): void {
@@ -45,4 +50,8 @@ export class AppComponent {
   changelang() {
     this._LanguageService.cahngelanguage(this.lang == 'en' ? 'ar' : 'en');
   }
+  onAddToCart() {
+    this.counter++;
+ 
+}
 }

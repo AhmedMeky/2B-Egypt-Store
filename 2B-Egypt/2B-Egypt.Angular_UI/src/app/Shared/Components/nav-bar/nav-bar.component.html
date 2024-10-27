@@ -98,9 +98,14 @@
                 </div>
               </div> 
               <div style="margin-right:45px;">
-                <i class="fa-solid fa-cart-shopping fa-2x" style="color: orangered;"></i> 
-                <h5 style="color: orangered;">0</h5>
+                <a [routerLink]="['/cart']" style="text-decoration: none; color: orangered;">
+                  <i class="fa-solid fa-cart-shopping fa-2x"></i>
+                  <h5 >{{counter}}</h5>
+                </a>
               </div>
+              
+
+
             </div>
           </div>
         </div>

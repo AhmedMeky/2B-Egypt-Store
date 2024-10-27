@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, output, Output } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../../models/IProduct';
 import { FormsModule } from '@angular/forms'; 
@@ -28,6 +28,8 @@ IsMoreInfo:boolean=true;
 rating: number = 0;  
 Review:IReview= {} as IReview;
 isLoading: boolean =true;
+@Output() AddToCartCounter:EventEmitter<number>
+Counter:number=0;
 // stars part
 @Input() ratingPrice: number = 0;
   @Input() ratingQuilty: number = 0; 
@@ -38,7 +40,6 @@ isLoading: boolean =true;
   starsQuilty: boolean[] = [false,false,false,false,false];
   starsValue: boolean[] = [false,false,false,false,false];
   // stars part
-
   constructor(
     private _productService: ProductService,
     private route: ActivatedRoute,
@@ -46,7 +47,11 @@ isLoading: boolean =true;
     private _ReviewService : ReviewServiceService,
     private router : Router,
     private _cartService : CartService
-  ) {}
+) 
+  {
+    // define event
+   this.AddToCartCounter = new EventEmitter<number>();
+  }
   
   ngOnInit() {
     this.productId = this.route.snapshot.params['id'];
@@ -66,21 +71,25 @@ this.Review.valueRating = this.ratingValue.toString();
       });
     }
   }
-  addToCart(product: IProduct) {
+  addToCart() {
+    this._cartService.addToCartCounter(this.product)
+console.log(this.product)
+this.AddToCartCounter.emit(this.Counter)
+
     const cartItem: CartItem = {
-      productId: Number(product.id),
-      productName: product.nameAr,
-      price: product.price,
-      quantity: product?.unitInStock || 0,
-      totalPrice: product.price,
+      productId: (this.product.id),
+      productName: this.product.nameAr,
+      price: this.product.price,
+      quantity: this.product?.unitInStock || 0,
+      totalPrice: this.product.price,
       // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
-      image: product.images[0].imageUrl
+      image: this.product.images[0].imageUrl
     };
   
     console.log(cartItem);
     this._cartService.addToCart(cartItem);
     
-    this.router.navigateByUrl('cart');
+    // this.router.navigateByUrl('cart');
   }
   
   

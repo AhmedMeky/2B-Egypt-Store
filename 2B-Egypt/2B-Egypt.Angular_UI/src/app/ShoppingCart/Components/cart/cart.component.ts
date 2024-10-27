@@ -21,12 +21,14 @@ export class CartComponent implements OnInit{
     this.cartItems = this.cartService.getCartItems();
   }
 
-  removeItem(productId: number) {
+  removeItem(productId: string) {
+    console.log(productId)
     this.cartService.removeFromCart(productId);
     this.cartItems = this.cartService.getCartItems();
+   this.cartService.minusCartCounter();
   }
 
-  updateQuantity(productId: number, quantity: number) {
+  updateQuantity(productId: string, quantity: number) {
     this.cartService.updateQuantity(productId, quantity);
     this.cartItems = this.cartService.getCartItems();
   }
@@ -35,4 +37,32 @@ export class CartComponent implements OnInit{
     this.cartService.clearCart();
     this.cartItems = [];
   }
+  
+
+
+
+
+
+
+
+//   orderTotal = 0
+
+// ngOnInit() {
+//     // this.cartItems = this.cartService.getCartItems();
+//     this.cartItems.forEach(item=>{
+//       this.orderTotal+=item.price*item.quantity
+//     })
+//   }
+
+
+// updateQuantity(productId: number, quantity: number) {
+//     console.log('productId',productId)
+//     console.log('quantity',quantity)
+//     this.orderTotal=0
+//     this.cartItems.forEach(item=>{
+//       this.orderTotal+=item.price*item.quantity
+//     })
+//     // this.cartService.updateQuantity(productId, quantity);
+//     // this.cartItems = this.cartService.getCartItems();
+//   }
 }
