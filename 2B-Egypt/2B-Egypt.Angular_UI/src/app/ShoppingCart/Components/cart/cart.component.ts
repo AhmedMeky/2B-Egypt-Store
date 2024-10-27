@@ -1,15 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../Services/CartService';
 import { CartItem } from '../../Models/CartItem';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { CommonModule, JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
-  templateUrl: './cart.component.html'
-})
-export class CartComponent {
-  cartItems: CartItem[];
+  templateUrl: './cart.component.html',
+  standalone:true,
+  imports: [FormsModule,CommonModule,JsonPipe]
 
-  constructor(private cartService: CartService) {
+})
+export class CartComponent implements OnInit{
+  cartItems: CartItem[] =[];
+  imgmvcurl = 'http://localhost:5269/img/';
+  constructor(private cartService: CartService,private route:ActivatedRoute) {
+  }
+  ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
   }
 

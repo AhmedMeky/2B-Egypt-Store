@@ -8,6 +8,8 @@ import Cookies from 'js-cookie';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IReview } from '../../../models/ireview';
 import { ReviewServiceService } from '../../services/review-service.service';
+import { CartService } from '../../ShoppingCart/Services/CartService';
+import { CartItem } from '../../ShoppingCart/Models/CartItem';
 
 @Component({
   selector: 'app-product-details',
@@ -18,7 +20,9 @@ import { ReviewServiceService } from '../../services/review-service.service';
 })
 export class ProductDetailsComponent implements OnInit {  
   product: IProduct = {} as IProduct;
+  imgmvcurl = 'http://localhost:5269/img/';
   productId: string | null = null;
+  cart:CartItem = {} as CartItem
   PriceAfterSale: number = 0;
 IsMoreInfo:boolean=true;
 rating: number = 0;  
@@ -40,7 +44,8 @@ isLoading: boolean =true;
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
     private _ReviewService : ReviewServiceService,
-    private router : Router
+    private router : Router,
+    private _cartService : CartService
   ) {}
   
   ngOnInit() {
@@ -49,7 +54,6 @@ isLoading: boolean =true;
 this.Review.priceRating = this.ratingPrice.toString();
 this.Review.qualityRating = this.ratingQuilty.toString();
 this.Review.valueRating = this.ratingValue.toString();
-    // console.log(this.productId); // طباعة القيم للتحقق منها
     if (this.productId) {
       this._productService.getProductById(this.productId).subscribe({
         next: (res) => {
@@ -62,29 +66,49 @@ this.Review.valueRating = this.ratingValue.toString();
       });
     }
   }
-  
   addToCart(product: IProduct) {
-    if (!product.unitInStock || product.unitInStock <= 0) {
-      this.snackBar.open('Cannot add product to cart. Quantity must be greater than zero.', 'Close', {
-        duration: 3000,
-      });
-      return;
-    }
-
-    let cartData = Cookies.get('cartItems');
-    let cartItems: IProduct[] = cartData ? JSON.parse(cartData) : [];
-    const existingProduct = cartItems.find((item: IProduct) => item.id === product.id);
-    const quantityToAdd = product.quantity || 1;
-
-    if (existingProduct) {
-      existingProduct.quantity = (existingProduct.quantity || 0) + quantityToAdd;
-    } else {
-      cartItems.push({ ...product, quantity: quantityToAdd });
-    }
-
-    Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
-    product.inCart = true;
+    const cartItem: CartItem = {
+      productId: Number(product.id),
+      productName: product.nameAr,
+      price: product.price,
+      quantity: product?.unitInStock || 0,
+      totalPrice: product.price,
+      // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
+      image: product.images[0].imageUrl
+    };
+  
+    console.log(cartItem);
+    this._cartService.addToCart(cartItem);
+    
+    this.router.navigateByUrl('cart');
   }
+  
+  
+  
+  
+
+  // addToCart(product: IProduct) {
+  //   if (!product.unitInStock || product.unitInStock <= 0) {
+  //     this.snackBar.open('Cannot add product to cart. Quantity must be greater than zero.', 'Close', {
+  //       duration: 3000,
+  //     });
+  //     return;
+  //   }
+
+  //   let cartData = Cookies.get('cartItems');
+  //   let cartItems: IProduct[] = cartData ? JSON.parse(cartData) : [];
+  //   const existingProduct = cartItems.find((item: IProduct) => item.id === product.id);
+  //   const quantityToAdd = product.quantity || 1;
+
+  //   if (existingProduct) {
+  //     existingProduct.quantity = (existingProduct.quantity || 0) + quantityToAdd;
+  //   } else {
+  //     cartItems.push({ ...product, quantity: quantityToAdd });
+  //   }
+
+  //   Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
+  //   product.inCart = true;
+  // }
   activateTab(showMoreInfo: boolean) {
     this.IsMoreInfo = showMoreInfo; 
   }
@@ -92,21 +116,21 @@ this.Review.valueRating = this.ratingValue.toString();
   ratePrice(rating: number) {
     this.ratingPrice = rating;
     this.Review.priceRating =rating.toString();
-    this.ratingUpdated.emit(this.ratingPrice); // Emit the new rating
+    this.ratingUpdated.emit(this.ratingPrice);
     console.log('ratingPrice' , this.ratingPrice)
   }
 
   rateQuilty(rating: number) {
     this.ratingQuilty = rating;
     this.Review.qualityRating =rating.toString();
-    this.ratingUpdated.emit(this.ratingPrice); // Emit the new rating
+    this.ratingUpdated.emit(this.ratingPrice); 
     console.log('ratingQuilty' , this.ratingQuilty)
   }
 
   rateValue(rating: number) {
     this.ratingValue = rating;
     this.Review.valueRating =rating.toString();
-    this.ratingUpdated.emit(this.ratingValue); // Emit the new rating
+    this.ratingUpdated.emit(this.ratingValue); 
     console.log('ratingValue' , this.ratingValue)
   }
 //stars parts
@@ -121,12 +145,10 @@ this.Review.valueRating = this.ratingValue.toString();
 
 
   addreview() {
-    // console.log(this.Review); // طباعة القيم للتحقق منها
     this._ReviewService.addReview(this.Review).subscribe({
       
       next: (res) => {
-        alert("Review Added Successfully")
-        // this.router.navigateByUrl(`product-details/${this.productId}`);
+         this.router.navigateByUrl(`product-details/${this.productId}`);
       },
       error: (err) => {
         console.log(err);
