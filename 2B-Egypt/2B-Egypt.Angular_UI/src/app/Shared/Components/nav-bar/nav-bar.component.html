@@ -38,7 +38,7 @@
      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
      />
   </head>
-  <body>
+
     <!-- Example split danger button -->   
     <div style="background-image: url('/img/bank.jpg'); background-size: cover; height: 70px; background-position: center; "></div>
      <div style="height: 3px;background-color: orangered;"></div>
@@ -50,13 +50,10 @@
               <div> <a href="#">Create Account</a></div>
             </div>
  
-            <div> 
-              <!-- <i class="fa-solid fa-language fa-2x" style="color: orange;"></i>  -->
-             <select name="" id="" style="background-color: grey;">
-              <option> <a href="#">English</a></option>
-              <option> <a href="#">العربية</a></option>
-             </select>
-            </div>
+            <select (change)="changelang($event)" name="languageSelect" aria-label="Select language" style="background-color: grey;">
+              <option value="English">English</option>
+              <option value="العربية">العربية</option>
+            </select>
 
      </div>
     <div>
@@ -129,10 +126,10 @@
         </ul>
       </nav>
       <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
-        <a
-          href="#"
-          *ngFor="let cat of filteredSubcategories"
-          style="margin-right: 15px; position: relative;"
+        <a routerLink="/products-by-category" routerLinkActive="active"
+        (click)="SelectedProductId(cat.id)"
+          *ngFor="let cat of filteredSubcategories" 
+          style="margin-right: 15px; position: relative;" 
           >{{ cat.nameEn }}</a
         >
       </div>
@@ -144,5 +141,5 @@
         </ul>
       </div>
     </div>
-  </body>
+
 </html>

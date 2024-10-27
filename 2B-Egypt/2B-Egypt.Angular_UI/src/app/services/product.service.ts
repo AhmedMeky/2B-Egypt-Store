@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { IProduct } from '../../models/IProduct';
 
@@ -7,27 +7,41 @@ import { IProduct } from '../../models/IProduct';
   providedIn: 'root',
 })
 export class ProductService {
+  filterProductsByCategory(selectedCategory: string) {
+    throw new Error('Method not implemented.');
+  }
+  productColors: string[] = [];
   private apiUrl = 'http://localhost:5204/api/products';
   private imgmvcurl = 'http://localhost:5269/';
   constructor(private httpclient: HttpClient) {}
 
   getAllProducts(): Observable<IProduct[]> {
     return this.httpclient.get<IProduct[]>(this.apiUrl).pipe(
-      map(products => products.map(product => this.processProductImages(product)))
+      map((products) => {
+        return products.map((product) => {
+          const processedProduct = this.processProductImages(product);
+          console.log('Processed Product:', processedProduct);
+          console.log('Product Images:', processedProduct.images);
+
+          return processedProduct;
+        });
+      })
     );
   }
 
-  private processProductImages(product: IProduct): IProduct {
-    return {
-      ...product,
-      images: product.images.map(image => ({
+  processProductImages(product: IProduct): IProduct {
+    // Example implementation; adjust based on your actual logic
+    if (product.images && product.images.length > 0) {
+      product.images = product.images.map(image => ({
         ...image,
-        imageUrl: image.imageUrl.startsWith('http')
-          ? image.imageUrl
-          : `${this.imgmvcurl}${image.imageUrl}`,
-      })),
-    };
+        imageUrl: this.imgmvcurl + image.imageUrl // Adjust the URL to match your server path
+      }));
+    } else {
+      product.images = []; // Ensure images is an empty array if none are found
+    }
+    return product;
   }
+  
 
   getProductById(id: string): Observable<IProduct> {
     return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`);
@@ -45,10 +59,60 @@ export class ProductService {
     return this.httpclient.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-
-
-  getProductsByCategoryId(categoryId: string): Observable<IProduct[]> {
-    return this.httpclient.get<IProduct[]>(`${this.apiUrl}/category/${categoryId}`).pipe(
-      map(products => products.map(product => this.processProductImages(product))));
+  FilterwithName(filters: string): Observable<IProduct[]> {
+    return this.httpclient
+      .get<IProduct[]>(this.apiUrl)
+      .pipe(
+        map((products) =>
+          products
+            .filter((product) =>
+              product.nameEn.toLowerCase().includes(filters.toLowerCase())
+            )
+            .map((product) => this.processProductImages(product))
+        )
+      );
   }
+  Filterwithprice(filters: string, maxPrice: number): Observable<IProduct[]> {
+    return this.httpclient
+      .get<IProduct[]>(this.apiUrl)
+      .pipe(
+        map((products) =>
+          products
+            .filter((product) => product.price <= maxPrice)
+            .map((product) => this.processProductImages(product))
+        )
+      );
+  }
+
+  filterProductsByCategoryId(categoryId: string): Observable<IProduct[]> {
+    const url = `http://localhost:5204/api/Category/${categoryId}`;
+    return this.httpclient.get<IProduct[]>(url);
+  }
+  getProductsByCategoryId(categoryId: string): Observable<IProduct[]> {
+    return this.httpclient
+      .get<IProduct[]>(`${this.apiUrl}/category/${categoryId}`)
+      .pipe(
+        map((products) => {
+          console.log('Fetched Products:', products); // Log the response
+          return products.map((product) => {
+            const processedProduct = this.processProductImages(product);
+            console.log('Processed Product:', processedProduct);
+            console.log('Product Images:', processedProduct.images);
+            return processedProduct;
+          });
+        })
+      );
+  }
+  
+  
+  FilterWithDiscount(minDiscount: number): Observable<IProduct[]> {
+    return this.httpclient.get<IProduct[]>(this.apiUrl).pipe(
+      map(products => 
+        products
+          .filter(product => product.discount >= minDiscount) 
+          .map(product => this.processProductImages(product)) 
+      )
+    );
+  }
+  
 }

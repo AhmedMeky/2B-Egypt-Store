@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../../../models/IProduct';
 import { ProductService } from '../../../services/product.service';
@@ -7,36 +8,41 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import Cookies from 'js-cookie';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule,
+    SidebarComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
+
   products: IProduct[] = [] as IProduct[];
   imgmvcurl = 'http://localhost:5269/img/';
   cartData: IProduct | undefined;
   SelectedProduct:IProduct | null = null;
+  filteredProducts: IProduct[] = [] as IProduct[];
   constructor(
     private productService: ProductService,
     private router: Router,
     private snackBar: MatSnackBar
   ) {}
-
   ngOnInit(): void {
-
     this.productService.getAllProducts().subscribe({
       next: (res) => {
         this.products = res;
+        this.filteredProducts = [...this.products];
+       
         this.checkCartItems();
       },
       error: (error) => {
         console.error('Error fetching products:', error);
       },
     });
+    
   }
 
   checkCartItems() {
@@ -85,11 +91,11 @@ export class ProductListComponent implements OnInit {
   }
 
   handleQuantity(action: string, product: IProduct) {
-    product.quantity = product.quantity || 1;
+    product.quantity = product.quantity || 0;
 
-    if (action === 'plus' && product.quantity < 20) {
+    if (action === 'plus' && product.quantity < product.unitInStock) {
       product.quantity += 1;
-    } else if (action === 'min' && product.quantity > 1) {
+    } else if (action === 'min' && product.quantity > 0) {
       product.quantity -= 1;
     }
     this.updateCartQuantity(product);
@@ -106,12 +112,14 @@ export class ProductListComponent implements OnInit {
       }
     }
   }
-  SelectedProductId(id:string)
-  {
+
+  SelectedProductId(id:string) {
     this.router.navigateByUrl(`/product-details/${id}`);
-
   }
+
+  applyFilters(filteredProducts: IProduct[]) {
+    this.filteredProducts = filteredProducts;
+    console.log(this.filteredProducts); 
+  }
+ 
 }
-
-
-

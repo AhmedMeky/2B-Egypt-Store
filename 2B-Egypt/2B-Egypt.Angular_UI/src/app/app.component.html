@@ -1,11 +1,8 @@
-<!-- <div [dir]="(lang =='en')?'ltr':'rtl'"> -->
 
-<!-- <app-product-list></app-product-list>
-<app-product-details></app-product-details>  -->
-<app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
-<!-- <app-footer></app-footer> -->
-<!-- </div> -->
-
-
+<div [dir]="lang === 'English' ? 'ltr' : 'rtl'">
+    <app-nav-bar></app-nav-bar>
+    <router-outlet></router-outlet>
+    <!-- <app-footer></app-footer> -->
+     <!-- <app-sidebar></app-sidebar> -->
+  </div>
 

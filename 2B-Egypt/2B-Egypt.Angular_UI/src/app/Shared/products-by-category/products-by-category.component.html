@@ -1,12 +1,16 @@
-
-
-<div class="product-list">
-    <div *ngFor="let product of products" class="product-card" style="cursor: pointer;">
-      <div class="product-img-wrapper">
-        <img [src]="product.images.length > 0 ? product.images[0].imageUrl : 'default-product.jpg'"
+<div class="product-list product-details" >
+  <div *ngFor="let product of products" class="product-card" style="cursor: pointer">
+    <div class="product-card" style="cursor: pointer">
+      <div class="product-img-wrapper" (click)="SelectedProductId(product.id)">
+        <img [src]="
+        product.images.length > 0 
+          ? product.images[0].imageUrl 
+          : 'img/2b.png'"
         alt="{{ product.nameEn }}" class="product-img" />
+      
         <span *ngIf="product.discount > 0" class="discount-badge">-{{ product.discount }}%</span>
       </div>
+
       <h3 class="product-name">{{ product.nameEn }}</h3>
       <p class="product-description">{{ product.descriptionEn }}</p>
       <div class="price-section">
@@ -15,15 +19,23 @@
         </span>
         <span class="current-price">
           {{
-            product.price - (product.price * product.discount) / 100 | currency
+          product.price - (product.price * product.discount) / 100 | currency
           }}
+        </span>
+        <span *ngIf="product.discount > 0" class="discount-percentage">
+          Save {{ product.discount }}%
         </span>
       </div>
       <div class="quantity-section">
-        <button class="quantity-btn" (click)="handleQuantity('plus', product)">+</button>
+        <button class="quantity-btn" (click)="handleQuantity('plus', product)">
+          +
+        </button>
         <input type="text" [(ngModel)]="product.quantity" readonly class="quantity-input" />
-        <button class="quantity-btn" (click)="handleQuantity('min', product)">-</button>
+        <button class="quantity-btn" (click)="handleQuantity('min', product)">
+          -
+        </button>
       </div>
+
       <div class="cart-buttons">
         <button (click)="addToCart(product)" class="add-cart-btn">
           <i class="fas fa-shopping-cart"></i> Add to Cart
@@ -34,8 +46,7 @@
       </div>
     </div>
   </div>
-  
-
-
-  <!-- navbar.component.html -->
-
+  <ng-template #noProducts>
+    <p>No products available.</p>
+  </ng-template>
+</div>
