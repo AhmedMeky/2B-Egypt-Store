@@ -66,7 +66,7 @@ namespace _2B_Egypt.Infrastructure.Reposetories
          public async Task<List<Category>> GetAllParentAsync()
         {
             var response =   _context.Categories
-                .Where(c => c.ParentCategoryId == null)
+                .Where(c => c.ParentCategoryId == null && c.IsDeleted==false)
                 .Select(c => c)
                 .ToList();
             if(response.Count() == 0)

@@ -6,13 +6,11 @@ import { ProductsByCategoryComponent } from './Shared/products-by-category/produ
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './Shared/product-details/product-details.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
-
 import { NavBarComponent } from './Shared/Components/nav-bar/nav-bar.component';
 import { LoginComponent } from './Shared/login/login.component';
 import { SignUpComponent } from "./Shared/sign-up/sign-up.component";
+import { SliderComponent } from "./Shared/Components/slider/slider.component";
 
-import { TranslateModule } from '@ngx-translate/core';
-import { SidebarComponent } from './Shared/Components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +18,7 @@ import { SidebarComponent } from './Shared/Components/sidebar/sidebar.component'
   imports: [RouterOutlet, NavBarComponent,
     ProductListComponent, HttpClientModule, ProductDetailsComponent,
     ProductsByCategoryComponent, LoginComponent,
-    FooterComponent, SignUpComponent],
+    FooterComponent, SignUpComponent, SliderComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
@@ -39,4 +37,5 @@ export class AppComponent {
   changelang() {
     this._LanguageService.cahngelanguage(this.lang == 'en' ? 'ar' : 'en');
   }
+
 }

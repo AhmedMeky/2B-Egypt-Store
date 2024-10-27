@@ -1,140 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Font Awesome 6 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-    />
+<!-- Example split danger button -->
+<div
+  style="
+    background-image: url('/img/bank.jpg');
+    background-size: cover;
+    height: 70px;
+    background-position: center;
+  "
+></div>
+<div style="height: 3px; background-color: orangered"></div>
+<div id="smallnav">
+  <div style="display: flex; flex-direction: row; align-items: center">
+    <div><a href="#">Compare()</a></div>
+    <div><a href="#">Sign In</a></div>
+    <div><a href="#">Create Account</a></div>
+  </div>
 
-    <!-- Font Awesome 5 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
+  <select
+    (change)="changelang($event)"
+    name="languageSelect"
+    aria-label="Select language"
+    style="background-color: grey"
+  >
+    <option value="English">English</option>
+    <option value="العربية">العربية</option>
+  </select>
+</div>
+<div>
+  <div id="bigDivForNavbar">
+    <img src="/img/2b.png" width="15%" id="img2b" />
 
-    <!-- Font Awesome 4 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-
-    <!-- Example split danger button -->   
-    <div style="background-image: url('/img/bank.jpg'); background-size: cover; height: 70px; background-position: center; "></div>
-     <div style="height: 3px;background-color: orangered;"></div>
-     <div id="smallnav">
-
-            <div style="display: flex;flex-direction: row;align-items: center;">
-              <div> <a href="#">Compare()</a></div>
-              <div> <a href="#">Sign In</a></div>
-              <div> <a href="#">Create Account</a></div>
-            </div>
- 
-            <select (change)="changelang($event)" name="languageSelect" aria-label="Select language" style="background-color: grey;">
-              <option value="English">English</option>
-              <option value="العربية">العربية</option>
-            </select>
-
-     </div>
     <div>
-      <div id="bigDivForNavbar">
-        <img src="/img/2b.png" width="150px" id="img2b" />
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: 10px;
+          justify-content: space-between;
+          
+        "
+      >
+        <div id="searchandButton">
+          <input
+            type="search"
+            id="search"
+            class="form-control"
+            style="margin-right: 5px"
+          />
+          <button id="btnsearch" style="margin-right: 5px; width: 60px">
+            <img
+              src="/img/search.png"
+              width="25px"
+              style="margin-left: 10px; margin-right: 10px"
+            />
+          </button>
+          <!-- <label class="form-label" for="form1">Search</label> -->
+        </div>
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
 
-        <div>
+            width: 45%;
+          "
+        >
           <div
             style="
               display: flex;
               flex-direction: row;
-              align-items: center;
-              margin: 10px;
-              justify-content: space-between;
+              justify-content: space-around;
+
+              width: 40%;
             "
           >
-            <div style="display: flex; flex-direction: row; margin-right: 20px">
-              <input
-                type="search"
-                id="search"
-                class="form-control"
-                style="margin-right: 5px"
-              />
-              <button id="btnsearch" style="margin-right: 5px">Search</button>
-              <!-- <label class="form-label" for="form1">Search</label> -->
+            <div class="headsetandlocation">
+              <i
+                class="fa-solid fa-headset"
+                style="color: black; margin-left: 8px; font-size: 30px"
+              ></i>
+              <div style="margin: 0; color: #f37021; font-weight: bold">
+                16420
+              </div>
             </div>
-            <div style="display: flex;flex-direction: row;justify-content: space-between;">
-              <div style="display: flex;flex-direction: row;justify-content: space-around;width: 250px;">
-                <div style="display: block; align-items: center">
-                  <i
-                    class="fa-solid fa-headset fa-2x"
-                    style="margin-right: 5px; color: black"
-                  ></i>
-                  <h5 style="margin: 0; color: orangered">16512</h5>
-                </div>
-                <div>
-                  <i
-                    class="fa-solid fa-location-dot fa-2x"
-                    style="color: black"
-                  ></i>
-                  <h5 style="margin: 0; color: orangered">Stores</h5>
-                </div>
-              </div> 
-              <div style="margin-right:45px;">
-                <i class="fa-solid fa-cart-shopping fa-2x" style="color: orangered;"></i> 
-                <h5 style="color: orangered;">0</h5>
+            <div class="headsetandlocation">
+              <i
+                class="fa-solid fa-location-dot"
+                style="color: black; margin-left: 8px; font-size: 30px"
+              ></i>
+              <div style="margin: 0; color: #f37021; font-weight: bold">
+                Stores
               </div>
             </div>
           </div>
+          >
+
+          <div class="cart-container">
+            <div style="width: 60px; padding-top: 15px" id="listbars">
+              <a href="#"
+                ><i class="fa fa-bars fa-large" style="color: #f37021"></i
+              ></a>
+            </div>
+            <div
+              style="
+                background-color: grey;
+                display: inline-block;
+                height: 45px;
+                width: 1px;
+                background-color: white;
+              "
+            ></div>
+            <a href="#">
+              <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
+              <span class="item-count">5</span>
+            </a>
+          </div>
         </div>
       </div>
-      <!-- <nav id="nav">
-        <ul style="display: flex; padding: 0; margin: 0; list-style-type: none">
-          <li *ngFor="let cat of Categories" style="margin-right: 15px">
-            <a href="#">{{ cat.nameEn }}</a>
-          </li>
-        </ul>
-      </nav> -->
-
-      <nav id="nav">
-        <ul style="display: flex; padding: 0; margin: 0; list-style-type: none">
-          <li
-            *ngFor="let cat of ParentCategories"
-            style="margin-right: 15px; position: relative"
-          >
-            <a (mouseover)="ShowSubCategories(cat.id)"  >
-              {{ cat.nameEn }}
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
-        <a routerLink="/products-by-category" routerLinkActive="active"
-        (click)="SelectedProductId(cat.id)"
-          *ngFor="let cat of filteredSubcategories" 
-          style="margin-right: 15px; position: relative;" 
-          >{{ cat.nameEn }}</a
-        >
-      </div>
-      <div id="sidelist">
-        <ul *ngFor="let cat of ParentCategories">
-          <li>
-            <a href="#">{{ cat.nameEn }}</a>
-          </li>
-        </ul>
-      </div>
     </div>
+  </div>
 
-</html>
+  <nav
+    id="nav"
+    style="
+      overflow: hidden;
+      white-space: nowrap;
+      margin-left: 10%;
+      margin-right: 10%;
+    "
+  >
+    <ul
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+      "
+    >
+      <li
+        *ngFor="let cat of ParentCategories"
+        style="margin-right: 7px; position: relative"
+      >
+        <a (mouseover)="ShowSubCategories(cat.id)">
+          {{ cat.nameEn }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
+    <a
+      routerLink="/products-by-category"
+      routerLinkActive="active"
+      (click)="SelectedProductId(cat.id)"
+      *ngFor="let cat of filteredSubcategories"
+      style="margin-right: 7px; position: relative"
+      >{{ cat.nameEn }}</a
+    >
+  </div>
+  <div id="sidelist">
+    <ul *ngFor="let cat of ParentCategories">
+      <li>
+        <a href="#">{{ cat.nameEn }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div>
+  <img
+    src="/img/halan.jpg"
+    alt=""
+    style="
+      padding-top: 15px;
+      width: 100%;
+      padding-left: 10%;
+      padding-right: 10%;
+    "
+  />
+</div>
+
+<div
+  style="
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+    margin: 10px;
+    margin-left: 9%;
+    margin-right: 9%;
+    justify-content: space-between;
+  "
+>
+  <div class="rectangle">
+    <img src="/img/image.png" style="color: orange; width: 28%" />
+    <div style="margin: 1px; height: 50%; font-size: 15px">Delivery</div>
+  </div>
+  <div class="rectangle">
+    <img src="/img/cor.png" style="width: 30%" />
+    <div style="margin: 3px">Corporate</div>
+  </div>
+  <div class="rectangle">
+    <img src="/img/2b.png" style="width: 30%" />
+    <div style="margin: 3px">Service</div>
+  </div>
+  <div class="rectangle">
+    <img src="/img/free.png" style="width: 30%" />
+    <div style="margin: 3px">Shopping</div>
+  </div>
+</div>

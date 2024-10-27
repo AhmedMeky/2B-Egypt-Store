@@ -6,11 +6,12 @@ import { ICategory } from '../../../../models/icategory';
 import { HttpClientModule } from '@angular/common/http';
 import { CategorywithSubcategories } from '../../../../models/categorywith-subcategories';
 import { LanguageServiceService } from '../../../services/language-service.service';
+import { MegaMenuModule } from 'primeng/megamenu';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule],
+  imports: [CommonModule, RouterModule, HttpClientModule,MegaMenuModule],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })

@@ -7,20 +7,44 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 #smallnav {
-  background-color: grey;
-  height: 45px;
+  background-color: #f0f0ed;
+  height: 35px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between; 
-  padding-right: 50px;
+  justify-content: space-between;
+  padding-right: 10%;
+  padding-left:8%;
 }
+#smallnav > div > div a {
+  font-size: 14px !important;
+  font-family: "Cairo" !important;
+  color: #6d6d6c !important;
+}
+.rectangle {
+  background-color: rgb(206, 216, 215);
+  display: flex;
+  flex-direction: row; 
+  flex-wrap: wrap;
+  width: 22%;
+  height: 50%;
+  margin: 15px;
+  line-height: 50px;
+  padding-left: 20px;
+  border-radius: 3px; 
+  transition: background-color 0.3s ease;
+} 
+.rectangle:hover {
+  background-color: #f37021; /* Change background color on hover */ 
+ 
+} 
+ 
 nav {
   background-color: black;
   margin-left: 50px;
   margin-right: 50px;
   /* width: 100%; */
 
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: space-around;
 }
 
@@ -37,7 +61,7 @@ nav li {
 }
 nav a {
   font-weight: bold;
-  height: 100%;
+  /* height: 100%; */
   padding: 0 30px;
   text-decoration: none;
   display: flex;
@@ -48,14 +72,50 @@ nav a:hover {
   transition: 1s;
   color: orangered;
 }
+.cart-container {
+  position: relative;
+  /* display: inline-block; */
+  display: flex;
+  flex-direction: row;
+  margin-right: 45px;
+}
+
+.cart-icon {
+  display: block;
+  width: 35px; /* Set the width of the cart image */
+  /* background-color: black; */
+}
+
+.item-count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #f37021;
+  color: black;
+  border-radius: 50%;
+  padding: 5px 5px;
+  margin-right: 29px;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  line-height: 10px;
+}
 #img2b {
   margin-left: 30px;
+  max-height: 200px;
+  max-width: 100%;
 }
 #search {
-  width: 500px;
+  /* width: 500px; */
+  width: 100%;
   height: 45px;
   border-radius: 7px;
-  box-shadow: none;
+  box-shadow: none; 
+  border-right: 0px; 
+  padding-left: 8px;
 }
 #btnandsearch {
   margin: 15px;
@@ -65,9 +125,12 @@ nav a:hover {
   display: flex;
   align-items: center;
   flex-direction: row;
-  /* margin-left: 40px; */
-  margin-right: 0px;
+  padding-left: 7%;
+  padding-right: 7%;
+
+  /* background-color: red; */
   width: 100%;
+  height: 150px;
   /* background-color: red; */
 }
 #bigDivForNavbar > div {
@@ -76,9 +139,10 @@ nav a:hover {
   padding: 10px; /* Example padding */
 }
 #btnsearch {
-  background-color: rgb(255, 102, 0);
+  background-color: #f37021;
   border: none;
-  border-radius: 2px;
+  border-radius: 2px; 
+  border-left: 0;
 }
 #sidelist {
   display: none;
@@ -105,26 +169,77 @@ nav a:hover {
 } */
 a {
   font-weight: bold;
+  font-size: small;
   height: 100%;
   padding: 0 30px;
   text-decoration: none;
   display: flex;
   align-items: center;
   color: white;
+} 
+#listbars{
+  display: none;
 }
-@media (max-width: 600px) {
+#searchandButton {
+  display: flex;
+  flex-direction: row;
+  width: 45%;
+}
+@media (max-width: 800px) { 
+  #listbars{
+    display: block;
+  }
   #nav {
     display: none;
   }
   #sidelist {
     display: block;
   }
+  #searchandButton {
+    display: none;
+  }
+  .headsetandlocation {
+    display: none;
+  }
+  #smallnav {
+    display: none;
+  }
+  #bigDivForNavbar {
+    justify-content: space-evenly;
+    height: 50px;
+    /* background-color: red;  */
+    width: 100%;
+  }
+  .cart-container {
+    justify-content: end; 
+    background-color: black;
+  } 
+  /* .rectangle{
+    display: block;
+  } */
 }
-@media (min-width: 480) {
+@media (min-width: 800px) { 
+  #listbars{
+    display: none;
+  }
   #nav {
     display: block;
   }
   #sidelist {
     display: none;
+  }
+  #search {
+    display: flex;
+  }
+  .headsetandlocation {
+    display: flex;
+    flex-direction: column;
+  }
+  #searchandButton {
+    display: flex;
+    flex-direction: row;
+  }
+  #smallnav {
+    display: flex;
   }
 }
