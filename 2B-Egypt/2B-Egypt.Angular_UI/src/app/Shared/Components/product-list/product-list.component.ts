@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from '../../../../models/IProduct';
 import { ProductService } from '../../../services/product.service';
@@ -9,12 +8,16 @@ import { FormsModule } from '@angular/forms';
 import Cookies from 'js-cookie';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { NavBarComponent } from "../nav-bar/nav-bar.component";
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslationService } from '../../../services/translation.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule,
-    SidebarComponent],
+    SidebarComponent, NavBarComponent,TranslateModule],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
@@ -25,11 +28,13 @@ export class ProductListComponent implements OnInit {
   cartData: IProduct | undefined;
   SelectedProduct:IProduct | null = null;
   filteredProducts: IProduct[] = [] as IProduct[];
+  public translate: TranslateService;
   constructor(
     private productService: ProductService,
     private router: Router,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    translateService: TranslateService
+  ) { this.translate = translateService;}
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe({
       next: (res) => {
@@ -120,6 +125,15 @@ export class ProductListComponent implements OnInit {
   applyFilters(filteredProducts: IProduct[]) {
     this.filteredProducts = filteredProducts;
     console.log(this.filteredProducts); 
+  }
+  getLocalizedProductName(product: IProduct): string {
+    const lang = this.translate.currentLang; 
+    return lang === 'ar' ? product.nameAr : product.nameEn;
+  }
+
+  getLocalizedProductDescription(product: IProduct): string {
+    const lang = this.translate.currentLang;
+    return lang === 'ar' ? product.descriptionAr : product.descriptionEn;
   }
  
 }

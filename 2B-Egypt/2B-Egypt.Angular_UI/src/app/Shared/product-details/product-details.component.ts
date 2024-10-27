@@ -6,11 +6,12 @@ import { CommonModule, JsonPipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import Cookies from 'js-cookie';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [FormsModule, JsonPipe,CommonModule],
+  imports: [FormsModule, JsonPipe,CommonModule,TranslateModule],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']  
 })

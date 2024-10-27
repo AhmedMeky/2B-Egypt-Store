@@ -30,14 +30,13 @@ export class ProductService {
   }
 
   processProductImages(product: IProduct): IProduct {
-    // Example implementation; adjust based on your actual logic
     if (product.images && product.images.length > 0) {
       product.images = product.images.map(image => ({
         ...image,
-        imageUrl: this.imgmvcurl + image.imageUrl // Adjust the URL to match your server path
+        imageUrl: this.imgmvcurl + image.imageUrl 
       }));
     } else {
-      product.images = []; // Ensure images is an empty array if none are found
+      product.images = [];
     }
     return product;
   }

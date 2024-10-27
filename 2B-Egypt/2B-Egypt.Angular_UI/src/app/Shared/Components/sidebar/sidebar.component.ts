@@ -4,11 +4,13 @@ import { ProductService } from '../../../services/product.service';
 import { IProduct } from '../../../../models/IProduct';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LanguageServiceService } from '../../../services/language-service.service';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
@@ -19,66 +21,130 @@ export class SidebarComponent implements OnInit {
   products: IProduct[] = [];
   selectedPrice: number = 9000;
   minDiscount: number = 0;
-
+  currentLang: string = 'en';
   @Output() filterChange = new EventEmitter<IProduct[]>();
-
+  public translate: TranslateService;
   constructor(
     private categoryService: CategoryService,
-    private productService: ProductService
-  ) {}
+    private productService: ProductService,
+    private languageService: LanguageServiceService,
+    translateService: TranslateService
+  ) { this.translate = translateService;}
 
   ngOnInit(): void {
     this.categoryService.getAllCategories().subscribe((data) => {
       this.categories = data;
+      // this.translate.use(data);
+    });
+    this.languageService.getlanguage().subscribe((lang: string) => {
+      this.currentLang = lang;
+      this.loadCategories();
+      this.translate.use(lang);
+    });}
+  
+  loadCategories(): void {
+    this.categoryService.getAllCategories().subscribe((data) => {
+      this.categories = data.map((category) => {
+        return {
+          ...category,
+          displayName:
+            this.currentLang === 'ar' ? category.nameAr : category.nameEn,
+        };
+      });
     });
   }
+  // filterProducts(): void {
+  //   let filteredProducts: IProduct[] = [];
+  //   const categoryFilter =
+  //     this.selectedCategory !== 'all'
+  //       ? this.productService.getProductsByCategoryId(this.selectedCategory)
+  //       : this.productService.getAllProducts();
+
+  //   categoryFilter.subscribe({
+  //     next: (products) => {
+  //       filteredProducts = products;
+  //       if (this.selectedProductName) {
+  //         this.productService
+  //           .FilterwithName(this.selectedProductName)
+  //           .subscribe({
+  //             next: (productsByName) => {
+  //               filteredProducts = filteredProducts.filter((product) =>
+  //                 productsByName.some((p) => p.id === product.id)
+  //               );
+
+  //               filteredProducts = filteredProducts.filter(
+  //                 (product) => product.price <= this.selectedPrice
+  //               );
+
+  //               filteredProducts = filteredProducts.filter(
+  //                 (product) => product.discount >= this.minDiscount
+  //               );
+
+  //               this.filterChange.emit(filteredProducts);
+  //             },
+  //             error: (error) => {
+  //               console.error(
+  //                 'Error fetching filtered products by name:',
+  //                 error
+  //               );
+  //             },
+  //           });
+  //       } else {
+  //         filteredProducts = filteredProducts.filter(
+  //           (product) => product.price <= this.selectedPrice
+  //         );
+
+  //         filteredProducts = filteredProducts.filter(
+  //           (product) => product.discount >= this.minDiscount
+  //         );
+
+  //         this.filterChange.emit(filteredProducts);
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.error('Error fetching filtered products by categoryId:', error);
+  //     },
+  //   });
+  // }
   filterProducts(): void {
     let filteredProducts: IProduct[] = [];
-    const categoryFilter = this.selectedCategory !== 'all'
-      ? this.productService.getProductsByCategoryId(this.selectedCategory)
-      : this.productService.getAllProducts();
+    const categoryFilter =
+        this.selectedCategory !== 'all'
+            ? this.productService.getProductsByCategoryId(this.selectedCategory)
+            : this.productService.getAllProducts();
 
     categoryFilter.subscribe({
-      next: (products) => {
-        filteredProducts = products;
-        if (this.selectedProductName) {
-          this.productService.FilterwithName(this.selectedProductName).subscribe({
-            next: (productsByName) => {
-              filteredProducts = filteredProducts.filter((product) =>
-                productsByName.some((p) => p.id === product.id)
-              );
+        next: (products) => {
+            filteredProducts = products;
+            if (this.selectedProductName) {
+                this.productService
+                    .FilterwithName(this.selectedProductName)
+                    .subscribe({
+                        next: (productsByName) => {
+                            filteredProducts = filteredProducts.filter((product) => {
+                                const productName = this.currentLang === 'ar' ? product.nameAr : product.nameEn;
+                                return productName.toLowerCase().includes(this.selectedProductName.toLowerCase());
+                            });
+                            filteredProducts = filteredProducts.filter((product) => product.price <= this.selectedPrice);
+                            filteredProducts = filteredProducts.filter((product) => product.discount >= this.minDiscount);
 
-              filteredProducts = filteredProducts.filter(
-                (product) => product.price <= this.selectedPrice
-              );
+                            this.filterChange.emit(filteredProducts);
+                        },
+                        error: (error) => {
+                            console.error('Error fetching filtered products by name:', error);
+                        },
+                    });
+            } else {
+                filteredProducts = filteredProducts.filter((product) => product.price <= this.selectedPrice);
+                filteredProducts = filteredProducts.filter((product) => product.discount >= this.minDiscount);
 
-              filteredProducts = filteredProducts.filter(
-                (product) => product.discount >= this.minDiscount
-              );
-
-              this.filterChange.emit(filteredProducts);
-            },
-            error: (error) => {
-              console.error('Error fetching filtered products by name:', error);
-            },
-          });
-        } else {
-          filteredProducts = filteredProducts.filter(
-            (product) => product.price <= this.selectedPrice
-          );
-
-          filteredProducts = filteredProducts.filter(
-            (product) => product.discount >= this.minDiscount
-          );
-
-          this.filterChange.emit(filteredProducts);
-        }
-      },
-      error: (error) => {
-        console.error('Error fetching filtered products by categoryId:', error);
-      },
+                this.filterChange.emit(filteredProducts);
+            }
+        },
+        error: (error) => {
+            console.error('Error fetching filtered products by categoryId:', error);
+        },
     });
-  }
+}
 
- 
 }

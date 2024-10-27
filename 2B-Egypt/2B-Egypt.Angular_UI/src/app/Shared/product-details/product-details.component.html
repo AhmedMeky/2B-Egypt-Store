@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Details</title>
+    <title>{{ 'PRODUCT_DETAILS.TITLE' | translate }}</title>
 
     <style>
 .more-info-reviews {
@@ -205,20 +205,20 @@
 
       <div class="product-info">
         <h1 class="product-title">{{ product?.nameEn }}</h1>
-        <p><strong>Description:</strong> {{ product?.descriptionEn }}</p>
+        <p><strong>{{ 'PRODUCT_DETAILS.DESCRIPTION' | translate }} </strong>{{ product?.descriptionEn }}</p>
 <hr>
         <p class="price">
-          <span class="special-price">EGP{{ product?.price }}</span>
+          <span class="special-price">{{ 'PRODUCT_DETAILS.SPECIAL_PRICE' | translate }}{{ product?.price }}</span>
           <strong>EGP{{ PriceAfterSale }}</strong>
           &nbsp;
           <span  class="stock-status">
-          {{ product && product.unitInStock > 0 ? "In Stock" : "Out of Stock" }}
+            {{ product && product.unitInStock > 0 ? ('PRODUCT_DETAILS.STOCK_STATUS.IN_STOCK' | translate) : ('PRODUCT_DETAILS.STOCK_STATUS.OUT_OF_STOCK' | translate) }}
         </span>
         </p>
 
         <div class="cart-buttons">
           <button (click)="addToCart(product)" class="add-cart-btn">
-            <i class="fas fa-shopping-cart"></i> Add to Cart
+            <i class="fas fa-shopping-cart"></i>{{'ADD_TO_CART'| translate}}
           </button>
           <!-- <button *ngIf="product.inCart" (click)="removeFromCart(+product.id)" class="remove-cart-btn">
                       Remove from Cart
@@ -228,19 +228,19 @@
     </div>
 
     <div class="more-info-reviews">
-        <a id="more-info" [class.active]="IsMoreInfo" (click)="activateTab(true)">More Information</a>
-        <a id="reviews" [class.active]="!IsMoreInfo" (click)="activateTab(false)">Reviews</a>
+        <a id="more-info" [class.active]="IsMoreInfo" (click)="activateTab(true)">{{ 'PRODUCT_DETAILS.MORE_INFORMATION' | translate }}</a>
+        <a id="reviews" [class.active]="!IsMoreInfo" (click)="activateTab(false)">{{ 'PRODUCT_DETAILS.REVIEWS' | translate }}</a>
     </div>
     
     <div *ngIf="IsMoreInfo">
         <div class="product-details">
-          <h2>Product Specifications</h2>
+          <h2>{{ 'PRODUCT_DETAILS.PRODUCT_SPECIFICATIONS' | translate }}</h2>
           <ul>
             <li>
-              <strong>Category:</strong> {{ product?.category?.nameEn }}
+              <strong>{{ 'PRODUCT_DETAILS.CATEGORY' | translate }}</strong>{{ product?.category?.nameEn }}
             </li>
             <li>
-              <strong>Brand:</strong> {{ product?.brand?.nameAr }}
+              <strong>{{ 'PRODUCT_DETAILS.BRAND' | translate }}</strong> {{ product?.brand?.nameAr }}
             </li>
           </ul>
         </div>
@@ -248,7 +248,7 @@
     </div>
     
     <div *ngIf="!IsMoreInfo">
-        <h2>Reviews</h2>
+        <h2>{{ 'PRODUCT_DETAILS.REVIEWS' | translate }}</h2>
     </div>
 
     

@@ -1,13 +1,20 @@
 .main-container {
-    display: flex;
-    height: 800px;
-  }
-  
-  .sidebar {
-    width: 250px;
-    padding: 20px; 
-    height: 100vh;
-  }
+  display: flex;
+  width: 100%;
+  min-height: 100vh; 
+}
+
+.sidebar {
+  flex: 0 0 250px; 
+  height: 100vh; 
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-right: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  direction: ltr;
+}
+
   
   .filters {
     margin-bottom: 20px; 
@@ -58,31 +65,66 @@
   }
   
   .filter-input {
-    flex: 1;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-    transition: border-color 0.3s ease;
+    padding: .5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 60%;
   }
   
   .filter-input:focus {
-    border-color: #007bff;
+    border-color: #ff7f00;
     outline: none;
   }
   
   .filter-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 0.5rem .5rem;
+    background-color: #ff7f00; 
+    color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    font-weight: bold;
+    transition: background-color 0.3s;
   }
   
   .filter-button:hover {
-    background-color: #0056b3;
+    background-color: #ff7f00;
   }
   
+  .discount-container {
+    background-color: #f9f9f9; 
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+  }
+  
+  .filter-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+ 
+  
+  body[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+body[dir="ltr"] {
+    direction: ltr;
+    text-align: left;
+}
+
+
+input {
+    text-align: inherit;
+}

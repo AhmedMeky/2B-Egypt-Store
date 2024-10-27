@@ -5,13 +5,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LanguageServiceService {
-
+  currentLang: string = 'en';
   private language :BehaviorSubject<string>;
   constructor() { 
-    this.language=new BehaviorSubject<string>('English');
+    this.language=new BehaviorSubject<string>('en');
   }
-   
-
   getlanguage():Observable<string>{
     return this.language.asObservable()
   }
@@ -19,4 +17,11 @@ export class LanguageServiceService {
   {
     this.language.next(newvalue)
   }
+  setLanguage(lang: string): void {
+    this.currentLang = lang;
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+   
 }
+
+}
+
