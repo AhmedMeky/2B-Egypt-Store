@@ -37,5 +37,8 @@ public class AutoMapperProfile : Profile
         // Admin
         CreateMap<CreateAdminDTO, User>().ReverseMap();
 
+        // User 
+        CreateMap<CreateUserDTO,User>().ReverseMap();
+
     }
 }

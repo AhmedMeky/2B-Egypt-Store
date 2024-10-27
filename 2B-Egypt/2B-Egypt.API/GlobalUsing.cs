@@ -1,5 +1,21 @@
 ﻿global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Authentication.Cookies;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Identity;
+global using System.IdentityModel.Tokens.Jwt;
+global using System.Security.Claims;
+global using Microsoft.EntityFrameworkCore;
+global using AutoMapper;
 global using _2B_Egypt.Application.DTOs.ReviewDTOs;
+global using _2B_Egypt.Application.DTOs.UserDTOs;
 global using _2B_Egypt.Application.IServices;
 global using _2B_Egypt.Application.DTOs;
+global using _2B_Egypt.Application.IRepositories;
+global using _2B_Egypt.Application.Mapper;
+global using _2B_Egypt.Application.Services;
+global using _2B_Egypt.Domain.Models;
+global using _2B_Egypt.Infrastructure.Context;
+global using _2B_Egypt.Infrastructure.Reposetories;
+
