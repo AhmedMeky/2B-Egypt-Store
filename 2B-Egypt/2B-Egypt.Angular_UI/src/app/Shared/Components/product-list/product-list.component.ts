@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IProduct } from '../../../../models/IProduct';
 import { ProductService } from '../../../services/product.service';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { NavBarComponent } from "../nav-bar/nav-bar.component";
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslationService } from '../../../services/translation.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CartService } from '../../../ShoppingCart/Services/CartService';
 
 @Component({
   selector: 'app-product-list',
@@ -24,17 +25,25 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 export class ProductListComponent implements OnInit {
 
   products: IProduct[] = [] as IProduct[];
+  product:IProduct ={} as IProduct;
   imgmvcurl = 'http://localhost:5269/img/';
   cartData: IProduct | undefined;
   SelectedProduct:IProduct | null = null;
   filteredProducts: IProduct[] = [] as IProduct[];
   public translate: TranslateService;
+
+  @Output() AddToCartCounter:EventEmitter<number>
+  Counter:number=0;
   constructor(
     private productService: ProductService,
     private router: Router,
     private snackBar: MatSnackBar,
-    translateService: TranslateService
-  ) { this.translate = translateService;}
+    translateService: TranslateService,
+    private _cartService:CartService
+  ) 
+  { this.translate = translateService;
+    this.AddToCartCounter = new EventEmitter<number>();
+  }
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe({
       next: (res) => {
@@ -60,27 +69,13 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  addToCart(product: IProduct) {
-    if (!product.unitInStock || product.unitInStock <= 0) {
-      this.snackBar.open('Cannot add product to cart. Quantity must be greater than zero.', 'Close', {
-        duration: 3000,
-      });
-      return;
-    }
-    let cartData = Cookies.get('cartItems');
-    let cartItems: IProduct[] = cartData ? JSON.parse(cartData) : [];
-    const existingProduct = cartItems.find((item: IProduct) => item.id === product.id);
-    const quantityToAdd = product.quantity || 1;
 
-    if (existingProduct) {
-      existingProduct.quantity = (existingProduct.quantity || 0) + quantityToAdd;
-    } else {
-      cartItems.push({ ...product, quantity: quantityToAdd });
-    }
-
-    Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
-    product.inCart = true;
-  }
+addToCart(product: IProduct)
+{
+  this._cartService.addToCartCounter(this.product)
+  console.log(this.product);
+  this.AddToCartCounter.emit(this.Counter)
+}
 
   removeFromCart(productId: number) {
     let cartData = Cookies.get('cartItems');

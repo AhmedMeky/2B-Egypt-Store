@@ -1,4 +1,5 @@
 import { IBrand } from "./ibrand";
+import { IReview } from "./ireview";
 
 export interface IProduct {
     id: string;            
@@ -21,7 +22,8 @@ export interface IProduct {
     inCart?: boolean;     
     quantity?: number; 
     // category?: ICategory;    
-    brand?: IBrand;          
+    brand?: IBrand;     
+    Review?:IReview;     
     // images?: IProductImage[];   
     // facilities?: IFacility[];   
     // reviews?: IReview[];        

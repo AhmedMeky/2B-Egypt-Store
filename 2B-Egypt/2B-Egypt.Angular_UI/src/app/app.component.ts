@@ -26,7 +26,8 @@ import { TranslationService } from './services/translation.service';
     ProductsByCategoryComponent,
     FooterComponent,
     SidebarComponent,
-    TranslateModule
+    TranslateModule,
+    NavBarComponent,
   ],
 
   templateUrl: './app.component.html',
@@ -37,6 +38,9 @@ export class AppComponent {
   lang: string = '';
   products: IProduct[] = [] as IProduct[];
   filteredProducts: IProduct[] = [] as IProduct[];
+  // this.Counter++
+  counter:number=0;
+
 
   constructor(private productService: ProductService, private _LanguageService: LanguageServiceService, private translate:TranslateService)
   {
@@ -79,4 +83,9 @@ export class AppComponent {
     this.filteredProducts = filteredProducts;
     console.log(this.filteredProducts);
   }
+
+  onAddToCart() {
+    this.counter++;
+ 
+}
 }

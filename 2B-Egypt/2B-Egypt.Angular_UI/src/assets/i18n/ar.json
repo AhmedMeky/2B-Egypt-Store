@@ -69,6 +69,9 @@
   },
 
   "PRODUCT_DETAILS": {
+    "PRICE": "السعر",
+    "QUALITY": "الجودة",
+    "VALUE": "القيمة",
     "TITLE": "تفاصيل المنتج",
     "DESCRIPTION": "الوصف:",
     "CATEGORY": "الفئة:",
@@ -83,6 +86,36 @@
     "REVIEWS": "التعليقات",
     "PRODUCT_SPECIFICATIONS": "مواصفات المنتج"
   },
+  "REVIEW_FORM": {
+    "NICKNAME": "اسم مستعار",
+    "SUMMARY": "ملخص",
+    "REVIEW": "مراجعة",
+    "NICKNAME_REQUIRED": "اسم المستعار مطلوب.",
+    "NICKNAME_MAXLENGTH": "لا يمكن أن يتجاوز الاسم المستعار 50 حرفًا.",
+    "SUMMARY_REQUIRED": "الملخص مطلوب.",
+    "SUMMARY_MAXLENGTH": "لا يمكن أن يتجاوز الملخص 100 حرف.",
+    "REVIEW_REQUIRED": "نص المراجعة مطلوب.",
+    "REVIEW_MAXLENGTH": "لا يمكن أن يتجاوز نص المراجعة 1000 حرف.",
+    "SUBMIT": "إرسال"
+  },
+  "summary": "ملخص",
+  "subtotal": "المجموع الفرعي",
+  "order_total": "إجمالي الطلب",
+  "go_to_checkout": "انتقل إلى الدفع",
+
+  "shopping_cart": "عربة التسوق الخاصة بك",
+  "item": "المنتج",
+  "price": "السعر",
+  "qty": "الكمية",
+  "subtotal": "المجموع الفرعي",
+  "action": "الإجراء",
+  "remove": "إزالة",
+  "clear_cart": "مسح السلة",
+  "no_items": "لا توجد عناصر في عربة التسوق الخاصة بك",
+  "continue_shopping": "اضغط هنا لمتابعة التسوق",
+  "order_total": "إجمالي الطلب",
+  "subtotal_label": "المجموع الفرعي",
+  "go_to_checkout": "انتقل إلى الدفع",
 
   "QUANTITY_INCREASE": "+",
   "QUANTITY_DECREASE": "-",

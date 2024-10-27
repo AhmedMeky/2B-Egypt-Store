@@ -62,9 +62,7 @@
   "SEARCH_BUTTON": "Search",
   "SUPPORT_NUMBER": "16512",
   "STORES": "Stores",
-  "CART_ITEMS": "0"
-  ,
-
+  "CART_ITEMS": "0",
   "PRODUCT_DETAILS": {
     "TITLE": "Product Details",
     "DESCRIPTION": "Description:",
@@ -72,6 +70,9 @@
     "BRAND": "Brand:",
     "PRICE": "Price",
     "SPECIAL_PRICE": "EGP",
+    "PRICE": "Price",
+    "QUALITY": "Quality",
+    "VALUE": "Value",
     "STOCK_STATUS": {
       "IN_STOCK": "In Stock",
       "OUT_OF_STOCK": "Out of Stock"
@@ -80,11 +81,38 @@
     "REVIEWS": "Reviews",
     "PRODUCT_SPECIFICATIONS": "Product Specifications"
   },
+  "REVIEW_FORM": {
+    "NICKNAME": "NickName",
+    "SUMMARY": "Summary",
+    "REVIEW": "Review",
+    "NICKNAME_REQUIRED": "Nickname is required.",
+    "NICKNAME_MAXLENGTH": "Nickname cannot exceed 50 characters.",
+    "SUMMARY_REQUIRED": "Summary is required.",
+    "SUMMARY_MAXLENGTH": "Summary cannot exceed 100 characters.",
+    "REVIEW_REQUIRED": "Review text is required.",
+    "REVIEW_MAXLENGTH": "Review text cannot exceed 1000 characters.",
+    "SUBMIT": "Submit"
+  },
 
   "QUANTITY_INCREASE": "+",
   "QUANTITY_DECREASE": "-",
   "ADD_TO_CART": "Add to Cart",
   "NO_PRODUCTS": "No products available.",
+  "shopping_cart": "Your Shopping Cart",
+  "item": "Item",
+  "price": "Price",
+  "qty": "Qty",
+  "subtotal": "Subtotal",
+  "action": "Action",
+  "remove": "Remove",
+  "clear_cart": "Clear Cart",
+  "no_items": "You have no items in your shopping cart",
+  "continue_shopping": "Click here to continue shopping",
+
+  "summary": "Summary",
+  "subtotal": "Subtotal",
+  "order_total": "Order Total",
+  "go_to_checkout": "GO TO CHECKOUT",
 
   "Login": "Login",
   "SignUp": "Sign Up",
