@@ -41,10 +41,14 @@ export class ProductService {
     return product;
   }
   
-
   getProductById(id: string): Observable<IProduct> {
-    return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`);
+    return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`).pipe(
+      map((product: IProduct) => {
+        return this.processProductImages(product);
+      })
+    );
   }
+  
 
   addProduct(product: IProduct): Observable<IProduct> {
     return this.httpclient.post<IProduct>(this.apiUrl, product);

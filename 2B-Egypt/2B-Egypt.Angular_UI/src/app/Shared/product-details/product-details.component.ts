@@ -1,9 +1,9 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
   OnInit,
-  output,
   Output,
 } from '@angular/core';
 import { ProductService } from '../../services/product.service';
@@ -62,19 +62,28 @@ export class ProductDetailsComponent implements OnInit {
     private router: Router,
     private _cartService: CartService,
     translateService: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {
     this.translate = translateService;
     // define event
     this.AddToCartCounter = new EventEmitter<number>();
   }
+//   this.route.paramMap.subscribe(params => {
+//     this.productId = params.get('id')!;
+    
+// });
 
-  ngOnInit() {
-    this.productId = this.route.snapshot.params['id'];
-    this.Review.productId = this.route.snapshot.params['id'];
+ngOnInit() {
+  // Subscribe to route parameters
+  this.route.paramMap.subscribe((params) => {
+    this.productId = params.get('id')!;
+    this.Review.productId = this.productId;
     this.Review.priceRating = this.ratingPrice.toString();
     this.Review.qualityRating = this.ratingQuilty.toString();
     this.Review.valueRating = this.ratingValue.toString();
+
     if (this.productId) {
+      // Fetch product data based on new product ID
       this._productService.getProductById(this.productId).subscribe({
         next: (res) => {
           this.product = res;
@@ -87,7 +96,9 @@ export class ProductDetailsComponent implements OnInit {
         },
       });
     }
-  }
+  });
+}
+
 
   addToCart() {
     this._cartService.addToCartCounter(this.product);
@@ -127,6 +138,9 @@ export class ProductDetailsComponent implements OnInit {
     return this.translate.currentLang === 'ar' 
       ? this.product.brand?.nameAr ?? 'Default Brand Name' 
       : this.product.brand?.nameEn ?? 'Default Brand Name'; 
+  }
+  trackByIndex(index: number, item: any): number {
+    return index;
   }
   
   activateTab(showMoreInfo: boolean) {
