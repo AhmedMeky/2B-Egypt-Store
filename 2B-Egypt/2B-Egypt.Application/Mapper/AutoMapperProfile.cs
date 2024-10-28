@@ -42,7 +42,7 @@ public class AutoMapperProfile : Profile
 
         //  Order
         CreateMap<CreateOrderItemDTO,OrderItem>().ReverseMap();
-        CreateMap<CreateOrderDTO,OrderService>().ReverseMap();
+        CreateMap<CreateOrderDTO,Order>().ReverseMap();
 
     }
 }
