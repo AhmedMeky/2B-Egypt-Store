@@ -12,7 +12,8 @@ export class ProductService {
   }
   productColors: string[] = [];
   private apiUrl = 'http://localhost:5204/api/products';
-  private imgmvcurl = 'http://localhost:5269/';
+  // private imgmvcurl = 'http://localhost:5269/';
+  private imgmvcurl = 'http://localhost:29510/';
   constructor(private httpclient: HttpClient) {}
 
   getAllProducts(): Observable<IProduct[]> {
@@ -30,22 +31,26 @@ export class ProductService {
   }
 
   processProductImages(product: IProduct): IProduct {
-    // Example implementation; adjust based on your actual logic
     if (product.images && product.images.length > 0) {
       product.images = product.images.map(image => ({
         ...image,
-        imageUrl: this.imgmvcurl + image.imageUrl // Adjust the URL to match your server path
+        imageUrl: this.imgmvcurl + image.imageUrl 
       }));
     } else {
-      product.images = []; // Ensure images is an empty array if none are found
+      product.images = [];
     }
     return product;
   }
   
 
   getProductById(id: string): Observable<IProduct> {
-    return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`);
+    return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`).pipe(
+      map((product: IProduct) => {
+        return this.processProductImages(product);
+      })
+    );
   }
+
 
   addProduct(product: IProduct): Observable<IProduct> {
     return this.httpclient.post<IProduct>(this.apiUrl, product);

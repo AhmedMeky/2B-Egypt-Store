@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IProduct } from '../../../../models/IProduct';
 import { ProductService } from '../../../services/product.service';
@@ -9,6 +8,10 @@ import { FormsModule } from '@angular/forms';
 import Cookies from 'js-cookie';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { NavBarComponent } from "../nav-bar/nav-bar.component";
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslationService } from '../../../services/translation.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
 
@@ -16,7 +19,7 @@ import { CartItem } from '../../../ShoppingCart/Models/CartItem';
   selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule,
-    SidebarComponent],
+    SidebarComponent, NavBarComponent,TranslateModule],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
@@ -28,16 +31,19 @@ export class ProductListComponent implements OnInit {
   cartData: IProduct | undefined;
   SelectedProduct:IProduct | null = null;
   filteredProducts: IProduct[] = [] as IProduct[];
+  public translate: TranslateService;
+
   @Output() AddToCartCounter:EventEmitter<number>
   Counter:number=0;
   constructor(
     private productService: ProductService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private _cartService:CartService,
-  ) {
+    translateService: TranslateService,
+    private _cartService:CartService
+  ) 
+  { this.translate = translateService;
     this.AddToCartCounter = new EventEmitter<number>();
-
   }
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe({
@@ -71,7 +77,8 @@ addToCart(product: IProduct)
   this.AddToCartCounter.emit(this.Counter)
       const cartItem: CartItem = {
         productId: (product.id),
-        productName: product.nameAr,
+        productName: product.nameEn,
+        productNamear: product.nameAr,
         price: product.price,
         quantity: product?.quantity || 1,
         totalPrice: product.price,
@@ -82,29 +89,6 @@ addToCart(product: IProduct)
       };
       this._cartService.addToCart(cartItem);
 }
-
-
-  // addToCart(product: IProduct) {
-  //   if (!product.unitInStock || product.unitInStock <= 0) {
-  //     this.snackBar.open('Cannot add product to cart. Quantity must be greater than zero.', 'Close', {
-  //       duration: 3000,
-  //     });
-  //     return;
-  //   }
-  //   let cartData = Cookies.get('cartItems');
-  //   let cartItems: IProduct[] = cartData ? JSON.parse(cartData) : [];
-  //   const existingProduct = cartItems.find((item: IProduct) => item.id === product.id);
-  //   const quantityToAdd = product.quantity || 1;
-
-  //   if (existingProduct) {
-  //     existingProduct.quantity = (existingProduct.quantity || 0) + quantityToAdd;
-  //   } else {
-  //     cartItems.push({ ...product, quantity: quantityToAdd });
-  //   }
-
-  //   Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
-  //   product.inCart = true;
-  // }
 
   removeFromCart(productId: number) {
     let cartData = Cookies.get('cartItems');
@@ -149,6 +133,15 @@ addToCart(product: IProduct)
   applyFilters(filteredProducts: IProduct[]) {
     this.filteredProducts = filteredProducts;
     console.log(this.filteredProducts); 
+  }
+  getLocalizedProductName(product: IProduct): string {
+    const lang = this.translate.currentLang; 
+    return lang === 'ar' ? product.nameAr : product.nameEn;
+  }
+
+  getLocalizedProductDescription(product: IProduct): string {
+    const lang = this.translate.currentLang;
+    return lang === 'ar' ? product.descriptionAr : product.descriptionEn;
   }
  
 }

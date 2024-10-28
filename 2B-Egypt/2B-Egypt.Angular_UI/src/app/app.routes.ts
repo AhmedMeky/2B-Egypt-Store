@@ -9,7 +9,7 @@ import { CartComponent } from './ShoppingCart/Components/cart/cart.component';
 export const routes: Routes = [
     { path: '', component: ProductListComponent },
     { path: 'products', component: ProductListComponent },
-    { path: 'category/:id', component: ProductsByCategoryComponent },
+    { path: 'products-by-category/:id', component: ProductsByCategoryComponent },
     { path: 'product-details/:id', component: ProductDetailsComponent},
     { path: 'Categories', component: NavBarComponent },
     { path: 'cart', component:CartComponent },

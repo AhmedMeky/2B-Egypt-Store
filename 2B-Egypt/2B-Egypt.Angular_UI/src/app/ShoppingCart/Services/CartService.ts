@@ -63,7 +63,7 @@ export class CartService {
     this.cartCounter--;
   }
   getCounter(): number {
-    return this.cartCounter;
+    return this.cart.length;
   }
   minCounter(): number {
     return this.cartminus;

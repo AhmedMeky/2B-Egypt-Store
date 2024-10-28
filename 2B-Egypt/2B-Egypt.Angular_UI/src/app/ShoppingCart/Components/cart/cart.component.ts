@@ -4,20 +4,31 @@ import { CartItem } from '../../Models/CartItem';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule, JsonPipe } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IProduct } from '../../../../models/IProduct';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   standalone:true,
-  imports: [FormsModule,CommonModule,JsonPipe,RouterModule]
+  imports: [FormsModule,CommonModule,JsonPipe,RouterModule,TranslateModule]
+
 
 })
 export class CartComponent implements OnInit {
   cartItems: CartItem[] =[];
   showStockError: boolean = false;
-  subTotal:number=0
+  subTotal:number=0;
+  public translate: TranslateService;
+
+
   imgmvcurl = 'http://localhost:5269/img/';
-  constructor(private cartService: CartService,private route:ActivatedRoute) {
+  product: IProduct = {} as IProduct;
+  cart: CartItem = {} as CartItem;
+
+  constructor(private cartService: CartService,private route:ActivatedRoute, public translateService: TranslateService,) {
+    this.translate = translateService;
+
   }
  
   ngOnInit() {
@@ -28,7 +39,12 @@ export class CartComponent implements OnInit {
  
       this.subTotal+= item.price*item.quantity
     })
+    
   }
+  getLocalizedProductName(item: CartItem): string {
+    return this.translateService.currentLang === 'ar' ? item.productNamear : item.productName;
+  }
+  
 
   removeItem(productId: string) {
     console.log(productId)
@@ -82,6 +98,7 @@ decreaseQuantity(item: CartItem) {
     this.cartService.clearCart();
     this.cartItems = [];
   }
+ 
   
 
 
@@ -90,24 +107,5 @@ decreaseQuantity(item: CartItem) {
 
 
 
-//   orderTotal = 0
 
-// ngOnInit() {
-//     // this.cartItems = this.cartService.getCartItems();
-//     this.cartItems.forEach(item=>{
-//       this.orderTotal+=item.price*item.quantity
-//     })
-//   }
-
-
-// updateQuantity(productId: number, quantity: number) {
-//     console.log('productId',productId)
-//     console.log('quantity',quantity)
-//     this.orderTotal=0
-//     this.cartItems.forEach(item=>{
-//       this.orderTotal+=item.price*item.quantity
-//     })
-//     // this.cartService.updateQuantity(productId, quantity);
-//     // this.cartItems = this.cartService.getCartItems();
-//   }
 }
