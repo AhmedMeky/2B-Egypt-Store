@@ -5,4 +5,5 @@ export interface CartItem {
   price: number;
   totalPrice: number; // price * quantity
   image:String;
+  stock:number;
 }

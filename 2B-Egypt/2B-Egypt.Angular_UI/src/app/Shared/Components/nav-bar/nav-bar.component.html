@@ -81,29 +81,34 @@
               <!-- <label class="form-label" for="form1">Search</label> -->
             </div>
             <div style="display: flex;flex-direction: row;justify-content: space-between;">
-              <div style="display: flex;flex-direction: row;justify-content: space-around;width: 250px;">
+              <div style="display: flex;flex-direction: row;justify-content: space-around;width: 250px;   margin-right: 120px;">
                 <div style="display: block; align-items: center">
                   <i
                     class="fa-solid fa-headset fa-2x"
                     style="margin-right: 5px; color: black"
                   ></i>
-                  <h5 style="margin: 0; color: orangered">16512</h5>
+                  <h5 style="margin-right:  30px; color: orangered">16512</h5>
                 </div>
                 <div>
                   <i
                     class="fa-solid fa-location-dot fa-2x"
                     style="color: black"
                   ></i>
-                  <h5 style="margin: 0; color: orangered">Stores</h5>
+                  <h5 style="margin-right:  30px; color: orangered">Stores</h5>
+                </div>
+                <div>
+                  <i   [routerLink]="['/cart']"
+                    class="fa-solid fa-cart-shopping fa-2x"
+                    style="color: orangered; cursor: pointer;"  ></i>
+                  <h5 style="margin-left:10px ;   color: orangered;">{{ counter }}</h5>
                 </div>
               </div> 
-              <div style="margin-right:45px;">
+              <!-- <div style="margin-right:45px; display: flex ;">
                 <a [routerLink]="['/cart']" style="text-decoration: none; color: orangered;">
                   <i class="fa-solid fa-cart-shopping fa-2x"></i>
-                  <h5 >{{counter}}</h5>
                 </a>
-              </div>
-              
+                <h5 style="color: orangered;">{{ counter }}</h5>
+              </div> -->
 
 
             </div>

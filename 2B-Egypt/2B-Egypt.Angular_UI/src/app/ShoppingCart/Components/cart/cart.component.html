@@ -14,7 +14,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of cartItems">
+                        <tr *ngFor="let item of cartItems ; ">
                             <td style="max-width: 300px;">
                                 <div style="display: flex;">
                                     <!-- <img class="imageItem" [src]="item.image" width="100px" height="100px"> -->
@@ -26,12 +26,14 @@
                             <td> EGP {{item.price}}</td>
                             <td>
                                 <div class="quantity">
-                                    <i class="fa fa-angle-up"
-                                    (click)="updateQuantity(item.productId, item.quantity);item.quantity=item.quantity+1"></i>
+                                    <i class="fa fa-angle-up"   (click)="item.quantity < item.stock?increaseQuantity(item):''"></i>
                                     {{item.quantity}}
-                                    <i class="fa fa-angle-down" [style.cursor]="item.quantity == 1 ? 'auto':'pointer'"
-                                    (click)="item.quantity == 1 ? '':item.quantity=item.quantity-1;updateQuantity(item.productId, item.quantity)"></i>
+                                    <i class="fa fa-angle-down"   [style.cursor]="item.quantity === 1 ? 'auto' : 'pointer'"
+                                       (click)="decreaseQuantity(item)"></i>
                                 </div>
+                                <span *ngIf="item.quantity>=item.stock" style="color: red;">Exceeded available stock quantity
+                                </span>
+                                
                             </td>
                             <td>EGP {{ item.price * item.quantity}}</td>
                             <td> <button (click)="removeItem(item.productId)" class="remove-btn">Remove</button>
@@ -61,14 +63,14 @@
                       <hr style="margin: 5px;">
                       <div style="display: flex;justify-content: space-between;">
                           <span>subtotal</span>
-                          <!-- <span style="color: black;">EGP {{orderTotal}}</span> -->
+                          <span style="color: black;">EGP {{subTotal}}</span>
                       </div>
                       <hr style="margin: 5px;">
                       <div style="display: flex;justify-content: space-between;">
                           <h5>Order Total</h5>
-                          <!-- <h5 style="color: black;">EGP {{orderTotal}}</h5> -->
+                          <h5 style="color: black;">EGP {{subTotal}}</h5>
                       </div>
-                      <button class="btn btn-warning btn-block">GO TO CHECKOUT</button>
+                      <button class="btn btn-warning btn-block" >GO TO CHECKOUT</button>
                   </div>
               </div>
           </div>
@@ -80,7 +82,8 @@
   </div>
   <div *ngIf="cartItems.length == 0">
       <p>You have no items in your shopping cart</p>
-      <p>Clich <span class="clickHere">here</span> to continue shopping</p>
+      <p  >Click <a class="clickHere" routerLink="/products">here</a>
+        to continue shopping</p>
   </div>
 
 </div>
@@ -135,17 +138,17 @@
   }
 
   .remove-btn {
-      background-color: #ff4d4d;
+      background-color: orangered;
       color: white;
-      border: none;
+      border-radius: 5px;
       padding: 10px;
       cursor: pointer;
   }
 
   .clear-cart-btn {
-      background-color: #ff4d4d;
+      background-color: orangered;
       color: white;
-      border: none;
+      border-radius: 5px;
       padding: 10px;
       cursor: pointer;
   }

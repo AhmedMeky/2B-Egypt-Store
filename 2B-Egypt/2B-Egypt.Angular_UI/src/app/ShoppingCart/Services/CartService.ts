@@ -18,11 +18,13 @@ export class CartService {
     console.log(item)
     const existingItem = this.cart.find(i => i.productId === item.productId);
     if (existingItem) {
-      existingItem.quantity += item.quantity;
+      // existingItem.quantity += item.quantity;
       existingItem.totalPrice = existingItem.quantity * existingItem.price;
     } else {
       this.cart.push(item);
+      this.addToCartCounter();
     }
+    
     this.saveCart();
   }
 
@@ -30,7 +32,7 @@ export class CartService {
     this.cart = this.cart.filter(item => item.productId !== productId);
     this.saveCart();
   }
-
+  
   updateQuantity(productId: string, quantity: number) {
     const item = this.cart.find(i => i.productId === productId);
     if (item) {
@@ -52,8 +54,10 @@ export class CartService {
     this.cart = [];
     localStorage.removeItem('cart');
   }
-  addToCartCounter(product: IProduct) {
-    this.cartCounter++;
+  addToCartCounter() {
+   
+      this.cartCounter++;
+    
   }
   minusCartCounter() {
     this.cartCounter--;

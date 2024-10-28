@@ -10,6 +10,7 @@ import Cookies from 'js-cookie';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
+import { CartItem } from '../../../ShoppingCart/Models/CartItem';
 
 @Component({
   selector: 'app-product-list',
@@ -66,9 +67,20 @@ export class ProductListComponent implements OnInit {
 
 addToCart(product: IProduct)
 {
-  this._cartService.addToCartCounter(this.product)
-  console.log(this.product);
+  console.log(product)
   this.AddToCartCounter.emit(this.Counter)
+      const cartItem: CartItem = {
+        productId: (product.id),
+        productName: product.nameAr,
+        price: product.price,
+        quantity: product?.quantity || 1,
+        totalPrice: product.price,
+        // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
+        image: "",
+        stock: product.unitInStock 
+  
+      };
+      this._cartService.addToCart(cartItem);
 }
 
 

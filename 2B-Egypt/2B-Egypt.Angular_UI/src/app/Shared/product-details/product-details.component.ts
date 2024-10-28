@@ -72,24 +72,20 @@ this.Review.valueRating = this.ratingValue.toString();
     }
   }
   addToCart() {
-    this._cartService.addToCartCounter(this.product)
 console.log(this.product)
 this.AddToCartCounter.emit(this.Counter)
-
     const cartItem: CartItem = {
       productId: (this.product.id),
       productName: this.product.nameAr,
       price: this.product.price,
-      quantity: this.product?.unitInStock || 0,
+      quantity: this.product?.quantity || 1,
       totalPrice: this.product.price,
       // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
-      image: this.product.images[0].imageUrl
+      image: this.product.images[0].imageUrl,
+      stock: this.product.unitInStock 
+
     };
-  
-    console.log(cartItem);
     this._cartService.addToCart(cartItem);
-    
-    // this.router.navigateByUrl('cart');
   }
   
   
@@ -157,7 +153,11 @@ this.AddToCartCounter.emit(this.Counter)
     this._ReviewService.addReview(this.Review).subscribe({
       
       next: (res) => {
-         this.router.navigateByUrl(`product-details/${this.productId}`);
+        this.Review = {} as IReview;
+        this.ratingPrice=0
+        this.ratingQuilty=0
+        this.ratingValue=0
+        //  this.router.navigateByUrl(`product-details/${this.productId}`);
       },
       error: (err) => {
         console.log(err);

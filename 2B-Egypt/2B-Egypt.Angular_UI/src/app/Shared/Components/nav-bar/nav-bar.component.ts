@@ -24,9 +24,9 @@ export class NavBarComponent implements OnInit {
   filteredSubcategories: ICategory[] = [] as ICategory[];
 
   categorywithSubCategories: CategorywithSubcategories[] = [] ;
-  
+   
+
   lang: string = 'English'; // Default language
-  // @Input() counter: number = 0;
     constructor(private categoryService: CategoryService,  private router: Router, private _LanguageService: LanguageServiceService
     ,private _cartService:CartService ) {}
 
@@ -145,6 +145,9 @@ export class NavBarComponent implements OnInit {
 //   this.router.navigateByUrl('cart');
 // }
 get counter(): number {
-  return this._cartService.getCounter(); 
+  let getCartItems = this._cartService.getCartItems()
+  
+  console.log(getCartItems)
+  return getCartItems.length; 
 }
 }
