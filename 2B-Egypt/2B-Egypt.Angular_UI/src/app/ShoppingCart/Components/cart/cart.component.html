@@ -84,6 +84,11 @@
     </div>
   </div>
 </div>
+  <div *ngIf="cartItems.length == 0">
+    <p><span class="clickHere" >{{ 'continue_shopping' | translate }}</span> </p>
+  </div>
+</div>
+
 
 
 <style>

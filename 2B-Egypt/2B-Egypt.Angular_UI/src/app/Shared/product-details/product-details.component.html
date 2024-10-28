@@ -42,6 +42,9 @@
       background-color: orange;
     }
 
+      .more-info-reviews a.active::after {
+        background-color: orange;
+      }
 
     .carousel-indicators img {
       border: 1px solid #e57b34;
@@ -145,6 +148,7 @@
         <img [src]="image.imageUrl" class="d-block w-100" alt="{{ getLocalizedProductName() }}" />
       </div>
     </div>
+  </div>
 
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
       data-bs-slide="prev">
