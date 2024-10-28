@@ -12,7 +12,8 @@ export class ProductService {
   }
   productColors: string[] = [];
   private apiUrl = 'http://localhost:5204/api/products';
-  private imgmvcurl = 'http://localhost:5269/';
+  // private imgmvcurl = 'http://localhost:5269/';
+  private imgmvcurl = 'http://localhost:29510/';
   constructor(private httpclient: HttpClient) {}
 
   getAllProducts(): Observable<IProduct[]> {
@@ -49,6 +50,7 @@ export class ProductService {
     );
   }
   
+
 
   addProduct(product: IProduct): Observable<IProduct> {
     return this.httpclient.post<IProduct>(this.apiUrl, product);

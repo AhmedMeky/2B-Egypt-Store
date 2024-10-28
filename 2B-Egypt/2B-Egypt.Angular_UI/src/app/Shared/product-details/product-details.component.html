@@ -27,7 +27,7 @@
     }
 
     .more-info-reviews a::after {
-      content: "";
+      content: '';
       display: block;
       width: 100%;
       height: 2px;
@@ -40,6 +40,18 @@
 
     .more-info-reviews a.active::after {
       background-color: orange;
+    }
+
+    .more-info-reviews a::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: lightgray;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: background-color 0.3s;
     }
 
     .carousel-indicators img {
@@ -126,73 +138,75 @@
 
 <div style="display: flex; align-items: center; justify-content: center">
   <div style="width: 30%" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false">
-    <!-- Carousel Indicators (Thumbnails) -->
     <div class="carousel-indicators">
-      <img *ngFor="let image of product.images; let i = index; trackBy: trackByIndex"
-           [src]="image.imageUrl"
-           class="img-thumbnail d-block"
-           [class.active]="i == 0"
-           [attr.data-bs-target]="'#carouselExampleIndicators'"
-           [attr.data-bs-slide-to]="i"
-           [attr.aria-label]="'Slide ' + (i + 1)"
-           [attr.alt]="'Slide ' + (i + 1) + ' Thumbnail'" />
+      <img *ngFor="let image of product.images; let i = index; trackBy: trackByIndex" [src]="image.imageUrl"
+        class="img-thumbnail d-block" [class.active]="i == 0" [attr.data-bs-target]="'#carouselExampleIndicators'"
+        [attr.data-bs-slide-to]="i" [attr.aria-label]="'Slide ' + (i + 1)"
+        [attr.alt]="'Slide ' + (i + 1) + ' Thumbnail'" />
     </div>
 
-    <!-- Carousel Items (Slides) -->
     <div class="carousel-inner">
-      <div *ngFor="let image of product.images; let i = index"
-           class="carousel-item"
-           [class.active]="i === 0">
+      <div *ngFor="let image of product.images; let i = index" class="carousel-item" [class.active]="i === 0">
         <img [src]="image.imageUrl" class="d-block w-100" alt="{{ getLocalizedProductName() }}" />
       </div>
     </div>
 
     <!-- Carousel Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
 
-  <!-- Product Info Section -->
-  <div class="product-info">
-    <h1 class="product-title">{{ getLocalizedProductName() }}</h1>
-    <p>
-      <strong>{{ "PRODUCT_DETAILS.DESCRIPTION" | translate }}</strong> {{ getLocalizedProductDescription() }}
-    </p>
-    <hr />
-    <p class="price">
-      <span class="special-price">{{ "PRODUCT_DETAILS.SPECIAL_PRICE" | translate }} {{ product.price }}</span>
-      <strong>{{ PriceAfterSale | currency }}</strong>
-      &nbsp;
-      <span class="stock-status">
-        {{
-          product && product.unitInStock > 0
-          ? ("PRODUCT_DETAILS.STOCK_STATUS.IN_STOCK" | translate)
-          : ("PRODUCT_DETAILS.STOCK_STATUS.OUT_OF_STOCK" | translate)
-        }}
-      </span>
-    </p>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
 
-    <div class="cart-buttons">
-      <button (click)="addToCart()" class="add-cart-btn">
-        <i class="fas fa-shopping-cart"></i> {{ "ADD_TO_CART" | translate }}
-      </button>
-    </div>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="product-info">
+  <h1 class="product-title">{{ getLocalizedProductName()}}</h1>
+  <p><strong> {{ "PRODUCT_DETAILS.DESCRIPTION" | translate }}
+      :</strong> {{ getLocalizedProductDescription() }}</p>
+  <hr>
+  <p class="price">
+    <span class="special-price">{{ product?.price | currency }}</span>
+    <strong>{{ PriceAfterSale|currency }}</strong>
+    &nbsp;
+    <span class="stock-status">
+      {{
+      product && product.unitInStock > 0
+      ? ("PRODUCT_DETAILS.STOCK_STATUS.IN_STOCK" | translate)
+      : ("PRODUCT_DETAILS.STOCK_STATUS.OUT_OF_STOCK" | translate)
+      }}
+    </span>
+  </p>
+
+  <div class="cart-buttons">
+    <button (click)="addToCart()" class="add-cart-btn">
+      <i class="fas fa-shopping-cart"></i> {{ "ADD_TO_CART" | translate }}
+
+    </button>
+
   </div>
 </div>
 
+
 <div class="more-info-reviews">
-  <a id="more-info" [class.active]="IsMoreInfo" (click)="activateTab(true)">{{
-    "PRODUCT_DETAILS.MORE_INFORMATION" | translate
-  }}</a>
-  <a id="reviews" [class.active]="!IsMoreInfo" (click)="activateTab(false)">{{
-    "PRODUCT_DETAILS.REVIEWS" | translate
-  }}</a>
+  <a id="more-info" [class.active]="IsMoreInfo" (click)="activateTab(true)">{{"PRODUCT_DETAILS.MORE_INFORMATION" |
+    translate }}</a>
+  <a id="reviews" [class.active]="!IsMoreInfo" (click)="activateTab(false)">{{"PRODUCT_DETAILS.REVIEWS" | translate
+    }}</a>
 </div>
 
 <div *ngIf="IsMoreInfo">
@@ -205,49 +219,57 @@
       <li>
         <strong>{{ "PRODUCT_DETAILS.BRAND" | translate }}</strong> {{ getLocalizedbrand() }}
       </li>
+      <li>
+        <strong>{{ "PRODUCT_DETAILS.DESCRIPTION" | translate }}</strong> {{ getLocalizedProductDescription() }}
+      </li>
     </ul>
   </div>
 </div>
-
 <div *ngIf="!IsMoreInfo">
-  <form style="margin: 25px" (ngSubmit)="addreview()" #reviewForm="ngForm">
-    <!-- Rating for Price -->
+
+
+
+  <form style="margin: 25px;" (ngSubmit)="addreview()" #reviewForm="ngForm">
+
+    <!-- stars parts -->
     <div class="star-rating">
-      <h2 style="margin: 0">{{ "PRODUCT_DETAILS.PRICE" | translate }}</h2>
+      <h2 style="margin: 0;">{{ "PRODUCT_DETAILS.PRICE" | translate }}</h2>
       <span *ngFor="let star of starsPrice; let i = index" (click)="ratePrice(i + 1)">
-        <i [class]="ratingPrice > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
+        <i [class]="ratingPrice > i ? 'fas fa-star' :'far fa-star'" style="font-size: 24px; margin-right: 10px;"></i>
+
       </span>
     </div>
 
-    <!-- Rating for Quality -->
     <div class="star-rating">
-      <h2 style="margin: 0">{{ "PRODUCT_DETAILS.QUALITY" | translate }}</h2>
+      <h2 style="margin: 0;">{{ "PRODUCT_DETAILS.QUALITY" | translate }}</h2>
       <span *ngFor="let star of starsQuilty; let i = index" (click)="rateQuilty(i + 1)">
-        <i [class]="ratingQuilty > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
+        <i [class]="ratingQuilty > i ? 'fas fa-star' :'far fa-star'" style="font-size: 24px; margin-right: 10px;"></i>
       </span>
     </div>
 
-    <!-- Rating for Value -->
     <div class="star-rating">
-      <h2 style="margin: 0">{{ "PRODUCT_DETAILS.VALUE" | translate }}</h2>
+      <h2 style="margin: 0;">{{ "PRODUCT_DETAILS.VALUE" | translate }}
+      </h2>
       <span *ngFor="let star of starsValue; let i = index" (click)="rateValue(i + 1)">
-        <i [class]="ratingValue > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
+        <i [class]="ratingValue > i ? 'fas fa-star' :'far fa-star'" style="font-size: 24px; margin-right: 10px;"></i>
       </span>
     </div>
 
-    <!-- Review Form Fields -->
+    <!-- stars parts -->
     <div class="form-group">
       <label for="NickName">{{ "REVIEW_FORM.NICKNAME" | translate }}</label>
-      <input type="text" class="form-control" [(ngModel)]="Review.nickName" id="NickName" name="nickName" required maxlength="50" #nickName="ngModel" />
+      <input type="text" class="form-control" [(ngModel)]="Review.nickName" id="NickName" name="nickName" required
+        maxlength="50" #nickName="ngModel">
       <div *ngIf="nickName.invalid && nickName.touched" class="text-danger">
-        <div *ngIf="nickName.errors?.['required']">{{ "REVIEW_FORM.NICKNAME_REQUIRED" | translate }}</div>
-        <div *ngIf="nickName.errors?.['maxlength']">{{ "REVIEW_FORM.NICKNAME_MAXLENGTH" | translate }}</div>
+        <div *ngIf="nickName.errors?.['required']"> {{ "REVIEW_FORM.NICKNAME_REQUIRED" | translate }}</div>
+        <div *ngIf="nickName.errors?.['maxlength']"> {{ "REVIEW_FORM.NICKNAME_MAXLENGTH" | translate }}</div>
       </div>
     </div>
 
     <div class="form-group">
       <label for="Summary">{{ "REVIEW_FORM.SUMMARY" | translate }}</label>
-      <input type="text" class="form-control" [(ngModel)]="Review.summary" name="summary" id="Summary" required maxlength="100" #summary="ngModel" />
+      <input type="text" class="form-control" [(ngModel)]="Review.summary" name="summary" id="Summary" required
+        maxlength="100" #summary="ngModel">
       <div *ngIf="summary.invalid && summary.touched" class="text-danger">
         <div *ngIf="summary.errors?.['required']">{{ "REVIEW_FORM.SUMMARY_REQUIRED" | translate }}</div>
         <div *ngIf="summary.errors?.['maxlength']">{{ "REVIEW_FORM.SUMMARY_MAXLENGTH" | translate }}</div>
@@ -256,18 +278,16 @@
 
     <div class="form-group">
       <label for="reviewText">{{ "REVIEW_FORM.REVIEW" | translate }}</label>
-      <textarea class="form-control" [(ngModel)]="Review.reviewText" name="reviewText" id="reviewText" required maxlength="1000" #reviewText="ngModel"></textarea>
+      <textarea type="text" class="form-control" [(ngModel)]="Review.reviewText" name="reviewText" id="reviewText"
+        required maxlength="1000" #reviewText="ngModel">
+            </textarea>
       <div *ngIf="reviewText.invalid && reviewText.touched" class="text-danger">
         <div *ngIf="reviewText.errors?.['required']">{{ "REVIEW_FORM.REVIEW_REQUIRED" | translate }}</div>
         <div *ngIf="reviewText.errors?.['maxlength']">{{ "REVIEW_FORM.REVIEW_MAXLENGTH" | translate }}</div>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-warning" style="margin: 20px 0px" [disabled]="reviewForm.invalid">
-      {{ "REVIEW_FORM.SUBMIT" | translate }}
-    </button>
+    <button type="submit" class="btn btn-warning" style="margin: 20px  0px" [disabled]="reviewForm.invalid">{{
+      "REVIEW_FORM.SUBMIT" | translate }}</button>
   </form>
 </div>
-
-
-</html>

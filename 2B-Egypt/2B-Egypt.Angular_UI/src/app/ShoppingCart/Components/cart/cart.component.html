@@ -14,88 +14,81 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of cartItems">
-              <td style="max-width: 300px">
-                <div style="display: flex">
+            <tr *ngFor="let item of cartItems ; ">
+              <td style="max-width: 300px;">
+                <div style="display: flex;">
                   <!-- <img class="imageItem" [src]="item.image" width="100px" height="100px"> -->
                   <span class="productName">
-                   {{getLocalizedProductName(item)}}
+                    {{getLocalizedProductName(item)}}
                   </span>
                 </div>
               </td>
               <td> {{ item.price| currency }}</td>
               <td>
                 <div class="quantity">
-                  <i
-                    class="fa fa-angle-up"
-                    (click)="
-                      updateQuantity(item.productId, item.quantity);
-                      item.quantity = item.quantity + 1
-                    "
-                  ></i>
-                  {{ item.quantity }}
-                  <i
-                    class="fa fa-angle-down"
-                    [style.cursor]="item.quantity == 1 ? 'auto' : 'pointer'"
-                    (click)="
-                      item.quantity == 1
-                        ? ''
-                        : (item.quantity = item.quantity - 1);
-                      updateQuantity(item.productId, item.quantity)
-                    "
-                  ></i>
+                  <i class="fa fa-angle-up" (click)="item.quantity < item.stock?increaseQuantity(item):''"></i>
+                  {{item.quantity}}
+                  <i class="fa fa-angle-down" [style.cursor]="item.quantity === 1 ? 'auto' : 'pointer'"
+                    (click)="decreaseQuantity(item)"></i>
                 </div>
+                <span *ngIf="item.quantity>=item.stock" style="color: red;">  Exceeded available stock quantity. Maximum available is {{ item.stock }}.
+
+                </span>
+
               </td>
               <td> {{ item.price * item.quantity |currency}}</td>
-              <td>
-                <button (click)="removeItem(item.productId)" class="clear-cart-btn">{{ 'clear_cart' | translate }}</button>
-              </td>
+              <button (click)="removeItem(item.productId)" class="clear-cart-btn">{{ 'remove' | translate
+                }}</button>
             </tr>
           </tbody>
         </table>
 
-        <!-- <div *ngFor="let item of cartItems" class="cart-item">
-                  <div class="item-details">
-                      <h3>{{ item.productName }}</h3>
-                      <p>Price: ${{ item.price }}</p>
-                      <p>Quantity:
-                          <input type="number" [(ngModel)]="item.quantity"
-                          (change)="updateQuantity(item.productId, item.quantity)" min="1" />
-                        </p>
-                        
-                        <p>Total: ${{ item.price * item.quantity}}</p>
-                    </div>
-                  <button (click)="removeItem(item.productId)" class="remove-btn">Remove</button>
-              </div> -->
+
+
+
       </div>
       <div class="col-md-3">
-        <div
-          class="card"
-          style="width: 100%; border: 1px solid gray; padding: 10px"
-        >
-        <h3 style="margin: 0" class="card-title">{{ 'summary' | translate }}</h3>
-        <hr style="margin: 5px" />
-        <div style="display: flex; justify-content: space-between">
-            <span>{{ 'subtotal' | translate }}</span>
+        <div class="card" style="width: 100%;border: 1px solid gray; padding: 10px;">
+          <div class="card-body">
+            <h3 style="margin: 0;" class="card-title">Summary</h3>
+            <hr style="margin: 5px;">
+            <div style="display: flex;justify-content: space-between;">
+              <span>subtotal</span>
+              <span style="color: black;">EGP {{subTotal}}</span>
+            </div>
+            <hr style="margin: 5px;">
+            <div style="display: flex;justify-content: space-between;">
+              <h5>Order Total</h5>
+              <h5 style="color: black;">EGP {{subTotal}}</h5>
+            </div>
+            <button class="btn btn-warning btn-block">GO TO CHECKOUT</button>
+          </div>
         </div>
-        <hr style="margin: 5px" />
-        <div style="display: flex; justify-content: space-between">
-            <h5>{{ 'order_total' | translate }}</h5>        </div>
-        <button class="btn btn-warning btn-block">{{ 'go_to_checkout' | translate }}</button>
-        
+      </div>
+    </div>
     <div class="cart-footer">
-        <button (click)="clearCart()" class="clear-cart-btn">{{ 'clear_cart' | translate }}</button>
+      <button (click)="clearCart()" class="clear-cart-btn">Clear Cart</button>
       <!-- <h3>Total Price: ${{ cartItems.reduce((total, item) => total + item.totalPrice, 0) }}</h3> -->
     </div>
+
+    <div *ngIf="cartItems.length == 0">
+      <p>You have no items in your shopping cart</p>
+      <p>Click <a class="clickHere" routerLink="/products">here</a>
+        {{ 'continue_shopping' | translate }}</p>
+    </div>
+
+
+
+    <div *ngIf="cartItems.length == 0">
+      <p><span class="clickHere">{{ 'continue_shopping' | translate }}</span> </p>
+    </div>
   </div>
-  <div *ngIf="cartItems.length == 0">
-    
-    <p>{{ 'continue_shopping' | translate }}</p>
 </div>
   <div *ngIf="cartItems.length == 0">
     <p><span class="clickHere" >{{ 'continue_shopping' | translate }}</span> </p>
   </div>
 </div>
+
 
 
 <style>
@@ -148,6 +141,19 @@
   }
 
   .remove-btn {
+   background-color: orangered;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .clear-cart-btn {
+    background-color: orangered;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
     background-color: #ff4d4d;
     color: white;
     border: none;

@@ -39,8 +39,8 @@ export class ProductDetailsComponent implements OnInit {
   IsMoreInfo: boolean = true;
   rating: number = 0;
   Review: IReview = {} as IReview;
-  ratings: { [key: string]: number } = { price: 0, quality: 0, value: 0 };
-  stars = Array(3).fill([false, false, false, false, false]);
+  // ratings: { [key: string]: number } = { price: 0, quality: 0, value: 0 };
+  // stars = Array(3).fill([false, false, false, false, false]);
   isLoading: boolean = true;
   @Output() AddToCartCounter: EventEmitter<number>;
   Counter: number = 0;
@@ -69,10 +69,14 @@ export class ProductDetailsComponent implements OnInit {
     this.AddToCartCounter = new EventEmitter<number>();
   }
 
-
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
       this.productId = params.get('id')!;
+      this.Review.productId = this.productId;
+      this.Review.priceRating = this.ratingPrice.toString();
+      this.Review.qualityRating = this.ratingQuilty.toString();
+      this.Review.valueRating = this.ratingValue.toString();
+
       if (this.productId) {
         // Fetch product data based on new product ID
         this._productService.getProductById(this.productId).subscribe({
@@ -87,37 +91,32 @@ export class ProductDetailsComponent implements OnInit {
           },
         });
       }
-      this.Review.productId = this.productId;
-      this.Review.priceRating = this.ratingPrice.toString();
-      this.Review.qualityRating = this.ratingQuilty.toString();
-      this.Review.valueRating = this.ratingValue.toString();
     });
-
-    
-    // this.productId = this.route.snapshot.params['id'];
-    // this.Review.productId = this.route.snapshot.params['id'];
-    // this.Review.priceRating = this.ratingPrice.toString();
-    // this.Review.qualityRating = this.ratingQuilty.toString();
-    // this.Review.valueRating = this.ratingValue.toString();
-    // if (this.productId) {
-    //   this._productService.getProductById(this.productId).subscribe({
-    //     next: (res) => {
-    //       this.product = res;
-    //       this.product.images;
-    //       this.PriceAfterSale =
-    //         this.product.price -
-    //         this.product.discount * 0.01 * this.product.price;
-    //     },
-    //     error: (err) => {
-    //       console.log(err);
-    //     },
-    //   });
-    // }
   }
-  
+
+  // ngOnInit() {
+  //   this.productId = this.route.snapshot.params['id'];
+  //   this.Review.productId = this.route.snapshot.params['id'];
+  //   this.Review.priceRating = this.ratingPrice.toString();
+  //   this.Review.qualityRating = this.ratingQuilty.toString();
+  //   this.Review.valueRating = this.ratingValue.toString();
+  //   if (this.productId) {
+  //     this._productService.getProductById(this.productId).subscribe({
+  //       next: (res) => {
+  //         this.product = res;
+  //         this.PriceAfterSale =
+  //           this.product.price -
+  //           this.product.discount * 0.01 * this.product.price;
+  //       },
+  //       error: (err) => {
+  //         console.log(err);
+  //       },
+  //     });
+  //   }
+  // }
 
   addToCart() {
-    this._cartService.addToCartCounter(this.product);
+    this._cartService.addToCartCounter();
     console.log(this.product);
     this.AddToCartCounter.emit(this.Counter);
 
@@ -125,40 +124,44 @@ export class ProductDetailsComponent implements OnInit {
       productId: this.product.id,
       productName: this.product.nameEn,
       price: this.product.price,
-      quantity: this.product?.unitInStock || 0,
+      quantity: this.product?.quantity || 1,
       totalPrice: this.product.price,
-      productNamear:this.product.nameAr,
+      productNamear: this.product.nameAr,
       // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
       image: this.product.images[0].imageUrl,
+      stock: this.product.unitInStock,
     };
-
-    console.log(cartItem);
-    this._cartService.addToCart(cartItem);
     this._cartService.addToCart(cartItem);
     this.snackBar.open(this.translate.instant('ADD_TO_CART'), 'Close', {
-      duration: 2000,});
-
-    // this.router.navigateByUrl('cart');
+      duration: 2000,
+    });
   }
+
   getLocalizedProductName(): string {
-    return this.translate.currentLang === 'ar' ? this.product.nameAr : this.product.nameEn;
+    return this.translate.currentLang === 'ar'
+      ? this.product.nameAr
+      : this.product.nameEn;
   }
 
   getLocalizedProductDescription(): string {
-    return this.translate.currentLang === 'ar' ? this.product.descriptionAr : this.product.descriptionEn;
+    return this.translate.currentLang === 'ar'
+      ? this.product.descriptionAr
+      : this.product.descriptionEn;
   }
   getLocalizedcatogary(): string {
-    return this.translate.currentLang === 'ar' ? this.product?.category?.nameAr : this.product.category.nameEn;
+    return this.translate.currentLang === 'ar'
+      ? this.product?.category?.nameAr
+      : this.product.category.nameEn;
   }
   getLocalizedbrand(): string {
-    return this.translate.currentLang === 'ar' 
-      ? this.product.brand?.nameAr ?? 'Default Brand Name' 
-      : this.product.brand?.nameEn ?? 'Default Brand Name'; 
+    return this.translate.currentLang === 'ar'
+      ? this.product.brand?.nameAr ?? 'Default Brand Name'
+      : this.product.brand?.nameEn ?? 'Default Brand Name';
   }
   trackByIndex(index: number, item: any): number {
     return index;
   }
-  
+
   activateTab(showMoreInfo: boolean) {
     this.IsMoreInfo = showMoreInfo;
   }
@@ -187,7 +190,10 @@ export class ProductDetailsComponent implements OnInit {
   addreview() {
     this._ReviewService.addReview(this.Review).subscribe({
       next: (res) => {
-        this.router.navigateByUrl(`product-details/${this.productId}`);
+        this.Review = {} as IReview;
+        this.ratingPrice = 0;
+        this.ratingQuilty = 0;
+        this.ratingValue = 0;
       },
       error: (err) => {
         console.log(err);
