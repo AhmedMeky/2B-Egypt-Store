@@ -4,22 +4,35 @@ import { CartItem } from '../../Models/CartItem';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule, JsonPipe } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IProduct } from '../../../../models/IProduct';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   standalone:true,
-  imports: [FormsModule,CommonModule,JsonPipe]
+  imports: [FormsModule,CommonModule,JsonPipe,TranslateModule]
 
 })
 export class CartComponent implements OnInit{
   cartItems: CartItem[] =[];
+  public translate: TranslateService;
   imgmvcurl = 'http://localhost:5269/img/';
-  constructor(private cartService: CartService,private route:ActivatedRoute) {
+  product: IProduct = {} as IProduct;
+  cart: CartItem = {} as CartItem;
+
+  constructor(private cartService: CartService,private route:ActivatedRoute, public translateService: TranslateService,) {
+    this.translate = translateService;
+
   }
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
+    console.log("Current language:", this.translateService.currentLang);
   }
+  getLocalizedProductName(item: CartItem): string {
+    return this.translateService.currentLang === 'ar' ? item.productNamear : item.productName;
+  }
+  
 
   removeItem(productId: string) {
     console.log(productId)
@@ -37,6 +50,7 @@ export class CartComponent implements OnInit{
     this.cartService.clearCart();
     this.cartItems = [];
   }
+ 
   
 
 

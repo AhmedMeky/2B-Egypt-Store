@@ -7,11 +7,13 @@ import { ProductService } from '../../services/product.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IProduct } from '../../../models/IProduct';
 import Cookies from 'js-cookie';
+import { SidebarComponent } from '../Components/sidebar/sidebar.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-products-by-category',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule,],
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule,SidebarComponent,TranslateModule],
   templateUrl: './products-by-category.component.html',
   styleUrl: './products-by-category.component.css',
 })
@@ -20,15 +22,16 @@ export class ProductsByCategoryComponent implements OnInit {
 
   products: IProduct[] = [] as IProduct[];
   filteredProducts: IProduct[] = [] as IProduct[];
- 
+  public translate: TranslateService;
   categoryId!: string;
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
+    translateService: TranslateService
     
-  ) {}
+  ) {this.translate = translateService;}
 
   
   ngOnInit(): void {
@@ -38,8 +41,6 @@ export class ProductsByCategoryComponent implements OnInit {
     });
     
       this.checkCartItems()
-    
- 
     
 };
 getProductsByCategoryIdt(categoryId: string): void {
@@ -161,5 +162,18 @@ getProductsByCategoryIdt(categoryId: string): void {
   {
     this.router.navigateByUrl(`/product-details/${id}`);
 
+  }
+  applyFilters(filteredProducts: IProduct[]) {
+    this.filteredProducts = filteredProducts;
+    console.log(this.filteredProducts); 
+  }
+  getLocalizedProductName(product: IProduct): string {
+    const lang = this.translate.currentLang; 
+    return lang === 'ar' ? product.nameAr : product.nameEn;
+  }
+
+  getLocalizedProductDescription(product: IProduct): string {
+    const lang = this.translate.currentLang;
+    return lang === 'ar' ? product.descriptionAr : product.descriptionEn;
   }
 }
