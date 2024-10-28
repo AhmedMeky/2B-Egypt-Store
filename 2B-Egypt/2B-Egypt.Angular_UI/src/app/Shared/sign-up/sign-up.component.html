@@ -1,107 +1,107 @@
-<div id="SignupDiv">
-  <div><h5 id="Head">Sign In</h5></div>
-  <div>
-    <h5 style="font-size: x-large; text-align: center">
-      Login With Social Profile
-    </h5>
-  </div>
-  <div style="display: inline-block; margin-left: 35%; margin-bottom: 20px">
-    <a href="#"> <img style="width: 90px" src="/img/facelogo.png" /></a>
+<form (submit)="onSubmit()">
+  <div id="SignupDiv">
+    <div><h5 id="Head">Sign Up</h5></div>
+    <div>
+      <h5 style="font-size: x-large; text-align: center">
+        Login With Social Profile
+      </h5>
+    </div>
+    <div style="display: inline-block; margin-left: 35%; margin-bottom: 20px">
+      <a href="#"> <img style="width: 90px" src="/img/facelogo.png" /></a>
 
-    <a href="#"> <img style="width: 80px" src="/img/googlelogo.png" /></a>
-  </div>
-  <div style="display: flex; flex-direction: row; width: 100%">
-    <div style="width: 50%">
-      <div>
-        <span style="margin: 7px; color: #bbb5b5">First Name</span>
-        <label style="color: red">*</label>
+      <a href="#"> <img style="width: 80px" src="/img/googlelogo.png" /></a>
+    </div>
+    <div style="display: flex; flex-direction: row; width: 100%">
+      <div style="width: 50%">
+        <div>
+          <span style="margin: 7px; color: #bbb5b5">First Name</span>
+          <label style="color: red">*</label>
+        </div>
+        <input
+          name="firstName"
+          placeholder="First Name here..."
+          type="text"
+          class="inputSignUp"
+          style="width: 95%"
+          [(ngModel)]="user.firstName"
+        />
       </div>
-      <input
-        placeholder="First Name here..."
-        type="text"
-        class="inputSignUp"
-        style="width: 95%"
-      />
-    </div>
-    <div style="width: 50%">
-      <div>
-        <span style="margin: 7px; color: #bbb5b5">Last Name</span>
-        <label style="color: red">*</label>
+      <div style="width: 50%">
+        <div>
+          <span style="margin: 7px; color: #bbb5b5">Last Name</span>
+          <label style="color: red">*</label>
+        </div>
+        <input
+          name="lastName"
+          placeholder="Last Name here..."
+          type="text"
+          class="inputSignUp"
+          style="width: 95%"
+          [(ngModel)]="user.lastName"
+        />
       </div>
-      <input
-        placeholder="Last Name here..."
-        type="text"
-        class="inputSignUp"
-        style="width: 95%"
-      />
     </div>
-  </div>
-  <div style="display: block">
-    <span style="margin: 7px; color: #bbb5b5">E-mail</span>
-    <label style="color: red">*</label>
     <div style="display: block">
-      <input
-        placeholder="e-mail here..."
-        type="email"
-        class="inputSignUp"
-        style="width: 100%"
-      />
+      <span style="margin: 7px; color: #bbb5b5">E-mail</span>
+      <label style="color: red">*</label>
+      <div style="display: block">
+        <input
+          name="email"
+          placeholder="e-mail here..."
+          type="email"
+          class="inputSignUp"
+          style="width: 100%"
+          [(ngModel)]="user.email"
+        />
+      </div>
     </div>
-  </div>
-  <div style="display: block">
-    <span style="margin: 7px; color: #bbb5b5">Phone Number</span>
-    <label style="color: red">*</label>
     <div style="display: block">
-      <input
-        placeholder="Phone number here"
-        type="number"
-        class="inputSignUp"
-        style="width: 100%"
-        id="phonetext"
-      />
+      <span style="margin: 7px; color: #bbb5b5">Phone Number</span>
+      <label style="color: red">*</label>
+      <div style="display: block">
+        <input
+          name="phoneNumber"
+          placeholder="Phone number here"
+          type="number"
+          class="inputSignUp"
+          style="width: 100%"
+          id="phonetext"
+          [(ngModel)]="user.phoneNumber"
+        />
+      </div>
     </div>
-  </div>
-  <div style="display: block">
-    <span style="margin: 7px; color: #bbb5b5">Password</span>
-    <label style="color: red">*</label>
     <div style="display: block">
-      <input
-        placeholder="Password  here"
-        type="password"
-        class="inputSignUp"
-        style="width: 100%"
-      />
+      <span style="margin: 7px; color: #bbb5b5">Password</span>
+      <label style="color: red">*</label>
+      <div style="display: block">
+        <input
+          name="password"
+          placeholder="Password  here"
+          type="password"
+          class="inputSignUp"
+          style="width: 100%"
+          [(ngModel)]="user.password"
+        />
+      </div>
     </div>
-  </div>
-  <div style="display: block">
-    <span style="margin: 7px; color: #bbb5b5">Confirm Password</span>
-    <label style="color: red">*</label>
     <div style="display: block">
-      <input
-        placeholder="Confirm Password  here"
-        type="password"
-        class="inputSignUp"
-        style="width: 100%"
-      />
+      <span style="margin: 7px; color: #bbb5b5">Confirm Password</span>
+      <label style="color: red">*</label>
+      <div style="display: block">
+        <input
+          name="confirmPassword"
+          placeholder="Confirm Password  here"
+          type="password"
+          class="inputSignUp"
+          style="width: 100%"
+          [(ngModel)]="user.confirmPassword"
+        />
+      </div>
     </div>
-  </div>
-  <div style="display: block">
-    <span style="margin: 7px; color: #bbb5b5"
-      >Please type the letters and numbers below</span
-    >
-    <label style="color: red">*</label>
-    <div style="display: block">
-      <input
-        placeholder="Captcha"
-        type="text"
-        class="inputSignUp"
-        style="width: 100%"
-      />
-    </div>
-  </div>
 
-  <div style="margin-top: 15px">
-    <button id="btnlogin">Sign In</button>
-    <a href="#">Forgot Your Password</a>
+    <div style="margin-top: 15px">
+      <button id="btnlogin" type="submit">Sign Up</button>
+      <a routerLink="/Login">Already have an Account</a>
+    </div>
   </div>
-</div>
+</form>

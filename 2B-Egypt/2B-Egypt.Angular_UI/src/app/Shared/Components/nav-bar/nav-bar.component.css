@@ -13,31 +13,14 @@ body {
   flex-direction: row;
   justify-content: space-between;
   padding-right: 10%;
-  padding-left:8%;
+  padding-left: 8%;
 }
 #smallnav > div > div a {
   font-size: 14px !important;
   font-family: "Cairo" !important;
   color: #6d6d6c !important;
 }
-.rectangle {
-  background-color: rgb(206, 216, 215);
-  display: flex;
-  flex-direction: row; 
-  flex-wrap: wrap;
-  width: 22%;
-  height: 50%;
-  margin: 15px;
-  line-height: 50px;
-  padding-left: 20px;
-  border-radius: 3px; 
-  transition: background-color 0.3s ease;
-} 
-.rectangle:hover {
-  background-color: #f37021; /* Change background color on hover */ 
- 
-} 
- 
+
 nav {
   background-color: black;
   margin-left: 50px;
@@ -113,8 +96,8 @@ nav a:hover {
   width: 100%;
   height: 45px;
   border-radius: 7px;
-  box-shadow: none; 
-  border-right: 0px; 
+  box-shadow: none;
+  border-right: 0px;
   padding-left: 8px;
 }
 #btnandsearch {
@@ -141,7 +124,7 @@ nav a:hover {
 #btnsearch {
   background-color: #f37021;
   border: none;
-  border-radius: 2px; 
+  border-radius: 2px;
   border-left: 0;
 }
 #sidelist {
@@ -152,11 +135,12 @@ nav a:hover {
 }
 
 #showsubcategories {
-  background-color: grey;
-  border-radius: 10px;
+  background-color:wheat;
+  border:solid;
+  /* border-radius: 10px; */
   height: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 10%;
+  margin-right: 10%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -176,8 +160,8 @@ a {
   display: flex;
   align-items: center;
   color: white;
-} 
-#listbars{
+}
+#listbars {
   display: none;
 }
 #searchandButton {
@@ -185,8 +169,8 @@ a {
   flex-direction: row;
   width: 45%;
 }
-@media (max-width: 800px) { 
-  #listbars{
+@media (max-width: 800px) {
+  #listbars {
     display: block;
   }
   #nav {
@@ -211,15 +195,15 @@ a {
     width: 100%;
   }
   .cart-container {
-    justify-content: end; 
+    justify-content: end;
     background-color: black;
-  } 
+  }
   /* .rectangle{
     display: block;
   } */
 }
-@media (min-width: 800px) { 
-  #listbars{
+@media (min-width: 800px) {
+  #listbars {
     display: none;
   }
   #nav {

@@ -11,8 +11,23 @@
 <div id="smallnav">
   <div style="display: flex; flex-direction: row; align-items: center">
     <div><a href="#">Compare()</a></div>
-    <div><a href="#">Sign In</a></div>
-    <div><a href="#">Create Account</a></div>
+    <!-- <div><a *ngIf="!isLoggedIn" routerLink="/Login">Sign In</a></div>  -->
+    <a
+      *ngIf="!isLoggedIn"
+      routerLink="/Login"
+      (click)="changeStat()"
+      style="color: grey"
+      >Sign In</a
+    >
+    <a
+      *ngIf="isLoggedIn"
+      routerLink="/Login"
+      (click)="logout()"
+      style="color: grey"
+      >Log Out</a
+    >
+    <div><a routerLink="/Signup">Create Account</a></div>
+    <!-- <div><button (click)="logout()">Log Out</button></div> -->
   </div>
 
   <select
@@ -37,7 +52,6 @@
           align-items: center;
           margin: 10px;
           justify-content: space-between;
-          
         "
       >
         <div id="searchandButton">
@@ -166,45 +180,5 @@
     </ul>
   </div>
 </div>
-
-<div>
-  <img
-    src="/img/halan.jpg"
-    alt=""
-    style="
-      padding-top: 15px;
-      width: 100%;
-      padding-left: 10%;
-      padding-right: 10%;
-    "
-  />
-</div>
-
-<div
-  style="
-    display: flex;
-    flex-direction: row;
-    height: 120px;
-    margin: 10px;
-    margin-left: 9%;
-    margin-right: 9%;
-    justify-content: space-between;
-  "
->
-  <div class="rectangle">
-    <img src="/img/image.png" style="color: orange; width: 28%" />
-    <div style="margin: 1px; height: 50%; font-size: 15px">Delivery</div>
-  </div>
-  <div class="rectangle">
-    <img src="/img/cor.png" style="width: 30%" />
-    <div style="margin: 3px">Corporate</div>
-  </div>
-  <div class="rectangle">
-    <img src="/img/2b.png" style="width: 30%" />
-    <div style="margin: 3px">Service</div>
-  </div>
-  <div class="rectangle">
-    <img src="/img/free.png" style="width: 30%" />
-    <div style="margin: 3px">Shopping</div>
-  </div>
-</div>
+<app-advertisment></app-advertisment>
+<router-outlet />

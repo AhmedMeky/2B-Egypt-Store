@@ -9,16 +9,17 @@ import { FooterComponent } from './Shared/Components/footer/footer.component';
 import { NavBarComponent } from './Shared/Components/nav-bar/nav-bar.component';
 import { LoginComponent } from './Shared/login/login.component';
 import { SignUpComponent } from "./Shared/sign-up/sign-up.component";
-import { SliderComponent } from "./Shared/Components/slider/slider.component";
-
-
+// import { SliderComponent } from "./Shared/Components/slider/slider.component";
+import { FormsModule } from '@angular/forms';
+import { AdvertismentComponent } from "./Shared/Components/advertisment/advertisment.component"; 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavBarComponent,
+  imports: [
+    RouterOutlet, NavBarComponent,
     ProductListComponent, HttpClientModule, ProductDetailsComponent,
     ProductsByCategoryComponent, LoginComponent,
-    FooterComponent, SignUpComponent, SliderComponent],
+    FooterComponent, SignUpComponent, AdvertismentComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

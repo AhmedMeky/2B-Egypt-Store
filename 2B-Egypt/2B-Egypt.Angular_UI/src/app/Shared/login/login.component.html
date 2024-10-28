@@ -1,15 +1,33 @@
-<div id="loginDiv">
-  <div><h5 id="Head">Sign In</h5></div>
-  <div><h5 style="font-size: x-large;text-align: center;">Login With Social Profile</h5></div>
-  <div style="display: inline-block; margin-left: 25%">
-    <img style="width: 90px" src="/img/facelogo.png" />
-    <img style="width: 80px" src="/img/googlelogo.png" />
+<form (submit)="onSubmit($event)">
+  <div id="loginDiv">
+    <div><h5 id="Head">Sign In</h5></div>
+    <div>
+      <h5 style="font-size: x-large; text-align: center">
+        Login With Social Profile
+      </h5>
+    </div>
+    <div style="display: inline-block; margin-left: 25%">
+      <img style="width: 90px" src="/img/facelogo.png" />
+      <img style="width: 80px" src="/img/googlelogo.png" />
+    </div>
+    <input
+      placeholder="E-mail"
+      type="email"
+      id="inputlogin" 
+      name="email"
+      [(ngModel)]="loginuser.email"
+    />
+    <br />
+    <input
+      placeholder="password"
+      type="password"
+      id="inputlogin" 
+      name="password"
+      [(ngModel)]="loginuser.password"
+    />
+    <div style="margin-top: 15px">
+      <button id="btnlogin" type="submit" >Sign In</button>
+      <a href="#">Forgot Your Password</a>
+    </div>
   </div>
-  <input placeholder="E-mail" type="email" id="inputlogin" />
-  <br />
-  <input placeholder="password" type="password" id="inputlogin" /> 
-  <div style="margin-top: 15px;"> 
-    <button id="btnlogin">Sign In</button> 
-    <a href="#">Forgot Your Password</a>
-  </div>
-</div>
+</form>

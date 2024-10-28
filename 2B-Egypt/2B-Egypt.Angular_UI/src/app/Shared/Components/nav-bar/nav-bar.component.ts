@@ -1,31 +1,37 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
 import { CategoryService } from '../../../services/category.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
 import { ICategory } from '../../../../models/icategory';
 import { HttpClientModule } from '@angular/common/http';
 import { CategorywithSubcategories } from '../../../../models/categorywith-subcategories';
 import { LanguageServiceService } from '../../../services/language-service.service';
 import { MegaMenuModule } from 'primeng/megamenu';
+import { SignUpComponent } from "../../sign-up/sign-up.component";
+import { AdvertismentComponent } from "../advertisment/advertisment.component";
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule,MegaMenuModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, MegaMenuModule, SignUpComponent, RouterLink, AdvertismentComponent],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
 export class NavBarComponent implements OnInit {
+[x: string]: any;
   ParentCategories: ICategory[] = [] as ICategory[];
   Categories: ICategory[] = [] as ICategory[];
   filteredSubcategories: ICategory[] = [] as ICategory[];
 
   categorywithSubCategories: CategorywithSubcategories[] = [] ;
   
-  lang: string = 'English'; // Default language
-  constructor(private categoryService: CategoryService,  private router: Router, private _LanguageService: LanguageServiceService) {}
+  lang: string = 'English'; // Default language 
+  isLoggedIn:boolean =false;
+  constructor(private categoryService: CategoryService,  private router: Router, private _LanguageService: LanguageServiceService ,private loginService:LoginService) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
+    this.isLoggedIn=false ;
     this._LanguageService.getlanguage().subscribe({
       next: (lang) => {
         this.lang = lang;
@@ -121,5 +127,12 @@ export class NavBarComponent implements OnInit {
         this._LanguageService.cahngelanguage(value);
     }
 
+}  
+logout(){
+this.loginService.logout() ; 
+this.isLoggedIn =true;
+} 
+changeStat(){
+  this.isLoggedIn =!this.isLoggedIn ;
 }
 }

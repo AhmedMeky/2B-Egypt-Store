@@ -7,9 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './slider.component.html',
   styleUrl: './slider.component.css'
 })
-export class SliderComponent {  
-  selectedImage:number =0 ;
-  slides:string[]=["/img/halan.jpg","/img/facelogo.png"] 
-
+export class SliderComponent {
 
 }
