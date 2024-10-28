@@ -116,7 +116,7 @@ public class AccountController : ControllerBase
     }
 
 
-    [HttpGet("userid")]
+    [HttpGet("[Action]")]
     public async Task<IActionResult> GetUserIdByEmail(string email)
     {
         var user = await userManager.FindByEmailAsync(email);

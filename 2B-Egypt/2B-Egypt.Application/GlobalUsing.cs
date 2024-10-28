@@ -12,4 +12,6 @@ global using _2B_Egypt.Application.DTOs.Shared;
 global using _2B_Egypt.Application.DTOs.AdminDTOs;
 global using _2B_Egypt.Application.DTOs.ReviewDTOs;
 global using _2B_Egypt.Application.DTOs.UserDTOs;
+global using _2B_Egypt.Application.DTOs.OrderItemDTOs;
+global using _2B_Egypt.Domain.Models.Enums;
 
