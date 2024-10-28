@@ -116,7 +116,7 @@ public class AccountController : ControllerBase
     }
 
 
-    [HttpGet("userid")]
+    [HttpGet("[Action]")]
     public async Task<IActionResult> GetUserIdByEmail(string email)
     {
         var user = await userManager.FindByEmailAsync(email);
@@ -127,6 +127,7 @@ public class AccountController : ControllerBase
 
         return Ok(user.Id);
     }
+
 
     [HttpGet("GetAddress")]
     public async Task<IActionResult> GetAddress(string email)

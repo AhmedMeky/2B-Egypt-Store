@@ -1,68 +1,203 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  output,
+  Output,
+} from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../../models/IProduct';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { CommonModule, JsonPipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import Cookies from 'js-cookie';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { IReview } from '../../../models/ireview';
+import { ReviewServiceService } from '../../services/review-service.service';
+import { CartService } from '../../ShoppingCart/Services/CartService';
+import { CartItem } from '../../ShoppingCart/Models/CartItem';
+import { ICategory } from '../../../models/icategory';
+import { IBrand } from '../../../models/ibrand';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [FormsModule, JsonPipe,CommonModule],
+  imports: [FormsModule, JsonPipe, CommonModule, TranslateModule],
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']  
+  styleUrls: ['./product-details.component.css'],
 })
-export class ProductDetailsComponent implements OnInit {  
+export class ProductDetailsComponent implements OnInit {
   product: IProduct = {} as IProduct;
+  catogary: ICategory = {} as ICategory;
+  brand: IBrand = {} as IBrand;
+  imgmvcurl = 'http://localhost:5269/img/';
   productId: string | null = null;
+  cart: CartItem = {} as CartItem;
   PriceAfterSale: number = 0;
-IsMoreInfo:boolean=true;
+  IsMoreInfo: boolean = true;
+  rating: number = 0;
+  Review: IReview = {} as IReview;
+  // ratings: { [key: string]: number } = { price: 0, quality: 0, value: 0 };
+  // stars = Array(3).fill([false, false, false, false, false]);
+  isLoading: boolean = true;
+  @Output() AddToCartCounter: EventEmitter<number>;
+  Counter: number = 0;
+  // stars part
+  @Input() ratingPrice: number = 0;
+  @Input() ratingQuilty: number = 0;
+  @Input() ratingValue: number = 0;
+  @Input() starCount: number = 5;
+  @Output() ratingUpdated = new EventEmitter<number>();
+  starsPrice: boolean[] = [false, false, false, false, false];
+  starsQuilty: boolean[] = [false, false, false, false, false];
+  starsValue: boolean[] = [false, false, false, false, false];
+  public translate: TranslateService;
+  // stars part
   constructor(
     private _productService: ProductService,
     private route: ActivatedRoute,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private _ReviewService: ReviewServiceService,
+    private router: Router,
+    private _cartService: CartService,
+    translateService: TranslateService,
+  ) {
+    this.translate = translateService;
+    // define event
+    this.AddToCartCounter = new EventEmitter<number>();
+  }
+
 
   ngOnInit() {
-    this.productId = this.route.snapshot.params['id'];
-    if (this.productId) {
-      this._productService.getProductById(this.productId).subscribe({
-        next: (res) => {
-          this.product = res; 
-          this.PriceAfterSale = this.product.price - (this.product.discount * 0.01 * this.product.price);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-    }
+    this.route.paramMap.subscribe((params) => {
+      this.productId = params.get('id')!;
+      this.Review.productId = this.productId;
+      this.Review.priceRating = this.ratingPrice.toString();
+      this.Review.qualityRating = this.ratingQuilty.toString();
+      this.Review.valueRating = this.ratingValue.toString();
+  
+      if (this.productId) {
+        // Fetch product data based on new product ID
+        this._productService.getProductById(this.productId).subscribe({
+          next: (res) => {
+            this.product = res;
+            this.PriceAfterSale =
+              this.product.price -
+              this.product.discount * 0.01 * this.product.price;
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
+
+
+  // ngOnInit() {
+  //   this.productId = this.route.snapshot.params['id'];
+  //   this.Review.productId = this.route.snapshot.params['id'];
+  //   this.Review.priceRating = this.ratingPrice.toString();
+  //   this.Review.qualityRating = this.ratingQuilty.toString();
+  //   this.Review.valueRating = this.ratingValue.toString();
+  //   if (this.productId) {
+  //     this._productService.getProductById(this.productId).subscribe({
+  //       next: (res) => {
+  //         this.product = res;
+  //         this.PriceAfterSale =
+  //           this.product.price -
+  //           this.product.discount * 0.01 * this.product.price;
+  //       },
+  //       error: (err) => {
+  //         console.log(err);
+  //       },
+  //     });
+  //   }
+  // }
+
+  addToCart() {
+    this._cartService.addToCartCounter();
+    console.log(this.product);
+    this.AddToCartCounter.emit(this.Counter);
+
+    const cartItem: CartItem = {
+      productId: this.product.id,
+      productName: this.product.nameEn,
+      price: this.product.price,
+      quantity: this.product?.quantity || 1,
+      totalPrice: this.product.price,
+      productNamear:this.product.nameAr,
+      // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
+      image: this.product.images[0].imageUrl,
+      stock: this.product.unitInStock 
+    };
+    this._cartService.addToCart(cartItem);
+    this.snackBar.open(this.translate.instant('ADD_TO_CART'), 'Close', {
+      duration: 2000,});
+    
+
+  
+  }
+
+  getLocalizedProductName(): string {
+    return this.translate.currentLang === 'ar' ? this.product.nameAr : this.product.nameEn;
+  }
+
+  getLocalizedProductDescription(): string {
+    return this.translate.currentLang === 'ar' ? this.product.descriptionAr : this.product.descriptionEn;
+  }
+  getLocalizedcatogary(): string {
+    return this.translate.currentLang === 'ar' ? this.product?.category?.nameAr : this.product.category.nameEn;
+  }
+  getLocalizedbrand(): string {
+    return this.translate.currentLang === 'ar' 
+      ? this.product.brand?.nameAr ?? 'Default Brand Name' 
+      : this.product.brand?.nameEn ?? 'Default Brand Name'; 
   }
   
-  addToCart(product: IProduct) {
-    if (!product.unitInStock || product.unitInStock <= 0) {
-      this.snackBar.open('Cannot add product to cart. Quantity must be greater than zero.', 'Close', {
-        duration: 3000,
-      });
-      return;
-    }
-
-    let cartData = Cookies.get('cartItems');
-    let cartItems: IProduct[] = cartData ? JSON.parse(cartData) : [];
-    const existingProduct = cartItems.find((item: IProduct) => item.id === product.id);
-    const quantityToAdd = product.quantity || 1;
-
-    if (existingProduct) {
-      existingProduct.quantity = (existingProduct.quantity || 0) + quantityToAdd;
-    } else {
-      cartItems.push({ ...product, quantity: quantityToAdd });
-    }
-
-    Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
-    product.inCart = true;
-  }
   activateTab(showMoreInfo: boolean) {
-    this.IsMoreInfo = showMoreInfo; 
+    this.IsMoreInfo = showMoreInfo;
   }
+  //stars parts
+  ratePrice(rating: number) {
+    this.ratingPrice = rating;
+    this.Review.priceRating = rating.toString();
+    this.ratingUpdated.emit(this.ratingPrice);
+    console.log('ratingPrice', this.ratingPrice);
+  }
+
+  rateQuilty(rating: number) {
+    this.ratingQuilty = rating;
+    this.Review.qualityRating = rating.toString();
+    this.ratingUpdated.emit(this.ratingPrice);
+    console.log('ratingQuilty', this.ratingQuilty);
+  }
+
+  rateValue(rating: number) {
+    this.ratingValue = rating;
+    this.Review.valueRating = rating.toString();
+    this.ratingUpdated.emit(this.ratingValue);
+    console.log('ratingValue', this.ratingValue);
+  }
+  //stars parts
+  addreview() {
+    this._ReviewService.addReview(this.Review).subscribe({
+      next: (res) => {
+        this.Review = {} as IReview;
+        this.ratingPrice=0
+        this.ratingQuilty=0
+        this.ratingValue=0
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+
+  trackByIndex(index: number, item: any): number {
+    return index;
+  }
+
 }

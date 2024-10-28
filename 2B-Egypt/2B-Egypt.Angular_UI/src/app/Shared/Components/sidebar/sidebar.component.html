@@ -1,0 +1,44 @@
+<<<<<<< HEAD
+=======
+<div class="main-container" >
+  <div class="sidebar">
+    <div class="filters">
+      <h3 style="text-align: center;">{{ 'FILTERS.TITLE' | translate }}</h3>
+      
+      <!-- Filter by Product Name -->
+      <div>
+        <label style="" for="productName">{{ 'FILTERS.PRODUCT_NAME' | translate }}:</label>
+        <input type="text" id="productName" [(ngModel)]="selectedProductName" (input)="filterProducts()" />
+      </div>
+      
+      <!-- Filter by Category -->
+      <div>
+        <label for="category" style="">{{ 'CATEGORY' | translate }}:</label>
+        <select id="category" [(ngModel)]="selectedCategory" (change)="filterProducts()">
+          <option style="" value="all">{{ 'ALL' | translate }}</option>
+          <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.displayName }}
+          </option>
+        </select>
+      </div>
+      
+      
+      <!-- Filter by Price -->
+      <div>
+        <label style="" for="price">{{ 'PRICE' | translate }}:</label>
+        <input type="range" id="price" min="1" max="9000" [(ngModel)]="selectedPrice" (input)="filterProducts()" />
+        <p style="">{{ 'MAX_PRICE' | translate }}: {{ selectedPrice }}</p>
+      </div>
+      
+      <!-- Filter by Discount -->
+      <div class="filter-container discount-container">
+        <label for="discount" class="filter-label" style="">{{ 'FILTERS.DISCOUNT' | translate }}:</label>
+        <div class="input-group">
+          <input type="number" id="discount" [(ngModel)]="minDiscount" class="filter-input" [placeholder]="'FILTERS.ENTER_DISCOUNT' | translate" />
+          <button (click)="filterProducts()" class="filter-button">{{ 'FILTERS.APPLY_FILTER' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+>>>>>>> ebf70170dd2792e0a08fb86287bc37e0a0e87642
