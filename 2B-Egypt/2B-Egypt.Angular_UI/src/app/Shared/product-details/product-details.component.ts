@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   OnInit,
+  output,
   Output,
 } from '@angular/core';
 import { ProductService } from '../../services/product.service';
@@ -65,40 +66,55 @@ export class ProductDetailsComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {
     this.translate = translateService;
-    // define event
     this.AddToCartCounter = new EventEmitter<number>();
   }
-//   this.route.paramMap.subscribe(params => {
-//     this.productId = params.get('id')!;
+
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.productId = params.get('id')!;
+      if (this.productId) {
+        // Fetch product data based on new product ID
+        this._productService.getProductById(this.productId).subscribe({
+          next: (res) => {
+            this.product = res;
+            this.PriceAfterSale =
+              this.product.price -
+              this.product.discount * 0.01 * this.product.price;
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+      this.Review.productId = this.productId;
+      this.Review.priceRating = this.ratingPrice.toString();
+      this.Review.qualityRating = this.ratingQuilty.toString();
+      this.Review.valueRating = this.ratingValue.toString();
+    });
+
     
-// });
-
-ngOnInit() {
-  // Subscribe to route parameters
-  this.route.paramMap.subscribe((params) => {
-    this.productId = params.get('id')!;
-    this.Review.productId = this.productId;
-    this.Review.priceRating = this.ratingPrice.toString();
-    this.Review.qualityRating = this.ratingQuilty.toString();
-    this.Review.valueRating = this.ratingValue.toString();
-
-    if (this.productId) {
-      // Fetch product data based on new product ID
-      this._productService.getProductById(this.productId).subscribe({
-        next: (res) => {
-          this.product = res;
-          this.PriceAfterSale =
-            this.product.price -
-            this.product.discount * 0.01 * this.product.price;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
-  });
-}
-
+    // this.productId = this.route.snapshot.params['id'];
+    // this.Review.productId = this.route.snapshot.params['id'];
+    // this.Review.priceRating = this.ratingPrice.toString();
+    // this.Review.qualityRating = this.ratingQuilty.toString();
+    // this.Review.valueRating = this.ratingValue.toString();
+    // if (this.productId) {
+    //   this._productService.getProductById(this.productId).subscribe({
+    //     next: (res) => {
+    //       this.product = res;
+    //       this.product.images;
+    //       this.PriceAfterSale =
+    //         this.product.price -
+    //         this.product.discount * 0.01 * this.product.price;
+    //     },
+    //     error: (err) => {
+    //       console.log(err);
+    //     },
+    //   });
+    // }
+  }
+  
 
   addToCart() {
     this._cartService.addToCartCounter(this.product);
