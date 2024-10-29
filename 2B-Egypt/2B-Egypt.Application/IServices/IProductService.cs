@@ -4,6 +4,7 @@ public interface IProductService
 {
     Task<ResponseDTO<CreateProductDTO>> CreateAsync(CreateProductDTO product);
     Task<List<GetProductDTO>> GetAllAsync();
+    Task<PagedResult<GetProductDTO>> GetProductsByCategoryIdWithPaginationAsync(Guid categoryId, int pageNumber, int pageSize);
     Task<PagedResult<GetProductDTO>> GetAllPaginationAsync(int pageNumber, int pageSize);
     Task<ResponseDTO<GetAllProductDTO>> GetByIdAsync(Guid id);
     Task<ResponseDTO<CreateProductDTO>> GetOneByIdAsync(Guid id);

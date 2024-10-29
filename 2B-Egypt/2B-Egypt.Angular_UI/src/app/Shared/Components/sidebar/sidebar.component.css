@@ -1,129 +1,139 @@
 .main-container {
   display: flex;
-  width: 10%;
+  width: 100%;
 }
 
 .sidebar {
-  flex: 0 0 250px; 
+  flex: 0 0 250px;
   position: sticky;
-  top: 60px; 
-  margin : 50px;
-  max-height: calc(100vh - 60px); 
-  background-color: #f8f8f8;
+  top: 60px;
+  margin: 50px;
+  max-height: calc(100vh - 60px);
   border-right: 1px solid #ddd;
   overflow-y: auto;
 }
 
-  
+.filters {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.filters h3 {
+  margin-bottom: 15px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.filters label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.filters input[type="text"],
+.filters select,
+.filters input[type="range"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.filter-button {
+  padding: 0.5rem 1rem;
+  background-color: #ff7f00;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #fb9734;
+}
+
+.discount-container {
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .main-container {
+    flex-direction: column;
+    padding: 0 10px;
+  }
+
+  .sidebar {
+    flex: 1;
+    max-height: none;
+    margin: 20px auto;
+    width: 90%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
   .filters {
-    margin-bottom: 20px; 
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px; 
-    background-color: #fff; 
+    padding: 10px;
   }
-  
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    margin: 0;
+    border: none;
+  }
+
   .filters h3 {
-    margin-bottom: 15px; 
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
-  
-  .filters label {
-    display: block; 
-    margin-bottom: 5px;
-    font-weight: bold;
+
+  .input-group {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
+
+  .filter-button {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .filter-input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .filters label,
+  .filters h3 {
+    font-size: 0.9em;
+  }
+
   .filters input[type="text"],
   .filters select,
-  .filters input[type="range"] {
-    width: 100%; 
-    padding: 10px; 
-    margin-bottom: 15px; 
-    border: 1px solid #ccc;
-    border-radius: 5px; 
-    font-size: 1em;
-  }
-  
-  .filters input[type="checkbox"] {
-    margin-right: 5px; 
-  }
-  
-  .filter-label {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px;
-    display: block;
-  }
-  
-  .input-group {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .filter-input {
-    padding: .5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 60%;
-  }
-  
-  .filter-input:focus {
-    border-color: #ff7f00;
-    outline: none;
-  }
-  
+  .filters input[type="range"],
   .filter-button {
-    padding: 0.5rem .5rem;
-    background-color: #ff7f00; 
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-  }
-  
-  .filter-button:hover {
-    background-color: #ff7f00;
-  }
-  
-  .discount-container {
-    background-color: #f9f9f9; 
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    margin-bottom: 1rem;
-  }
-  
-  .filter-label {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 0.5rem;
+    font-size: 0.9em;
   }
   
   .input-group {
-    display: flex;
-    align-items: center;
     gap: 0.5rem;
   }
-  
- 
-  
-  body[dir="rtl"] {
-    direction: rtl;
-    text-align: right;
-}
-
-body[dir="ltr"] {
-    direction: ltr;
-    text-align: left;
-}
-
-
-input {
-    text-align: inherit;
 }

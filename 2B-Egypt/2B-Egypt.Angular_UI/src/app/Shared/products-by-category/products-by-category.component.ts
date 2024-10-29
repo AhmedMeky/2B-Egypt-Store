@@ -24,6 +24,9 @@ export class ProductsByCategoryComponent implements OnInit {
   filteredProducts: IProduct[] = [] as IProduct[];
   public translate: TranslateService;
   categoryId!: string;
+  pageNumber: number = 1; 
+  pageSize: number = 6; 
+  totalProducts: number = 0; 
   constructor(
     private productService: ProductService,
     private snackBar: MatSnackBar,
@@ -37,40 +40,40 @@ export class ProductsByCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
         this.categoryId = params.get('id')!;
-        this.getProductsByCategoryIdt(this.categoryId);
+        this.getProductsByCategoryId(this.categoryId, this.pageNumber, this.pageSize);(this.categoryId);
     });
     
       this.checkCartItems()
     
 };
-getProductsByCategoryIdt(categoryId: string): void {
-  this.productService.getProductsByCategoryId(categoryId).subscribe({
+getProductsByCategoryId(categoryId: string, pageNumber: number, pageSize: number): void {
+  this.productService.getProductsByCategoryIdWithPagination(categoryId, pageNumber, pageSize).subscribe({
     next: (res) => {
-      this.products = res;
-      console.log('Fetched products:', this.products);  
-      this.products.forEach(product => {
-        console.log('Product Images Array:', product.images);
-        if (product.images.length > 0) {
-          console.log('Product Image URL:', product.images[0]?.imageUrl); 
-        } else {
-          console.log('No images for this product');
-        }
-      });
+      this.products = res.items; 
+      this.totalProducts = res.totalCount; 
+      console.log('Fetched products:', this.products);
     },
     error: (error) => {
       console.error('Error fetching products by category:', error);
     },
   });
 }
-
-
+onPageChange(page: number): void {
+  this.pageNumber = page;
+  this.getProductsByCategoryId(this.categoryId, this.pageNumber, this.pageSize);
+}
 // getProductsByCategoryIdt(categoryId: string): void {
 //   this.productService.getProductsByCategoryId(categoryId).subscribe({
 //     next: (res) => {
 //       this.products = res;
-//       console.log('Fetched products:', this.products);  // طباعة المنتجات
+//       console.log('Fetched products:', this.products);  
 //       this.products.forEach(product => {
-//         console.log('Product Image URL:', product.images[0]?.imageUrl);  // طباعة رابط الصورة
+//         console.log('Product Images Array:', product.images);
+//         if (product.images.length > 0) {
+//           console.log('Product Image URL:', product.images[0]?.imageUrl); 
+//         } else {
+//           console.log('No images for this product');
+//         }
 //       });
 //     },
 //     error: (error) => {
@@ -78,8 +81,6 @@ getProductsByCategoryIdt(categoryId: string): void {
 //     },
 //   });
 // }
-
-
 
   checkCartItems() {
     const cartData = Cookies.get('cartItems');
@@ -177,3 +178,5 @@ getProductsByCategoryIdt(categoryId: string): void {
     return lang === 'ar' ? product.descriptionAr : product.descriptionEn;
   }
 }
+
+

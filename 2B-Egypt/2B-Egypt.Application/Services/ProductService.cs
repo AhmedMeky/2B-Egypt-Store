@@ -89,6 +89,29 @@ public class ProductService : IProductService
 
         return pagedResult;
     }
+    public async Task<PagedResult<GetProductDTO>> GetProductsByCategoryIdWithPaginationAsync(Guid categoryId, int pageNumber, int pageSize)
+    {
+        var query = (await productRepository.GetAllAsync())
+                    .Include(prd => prd.Images)
+                    .Where(prd => !prd.IsDeleted && prd.CategoryId == categoryId) 
+                    .AsQueryable();
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(); 
+
+        var pagedResult = new PagedResult<GetProductDTO>
+        {
+            Items = mapper.Map<List<GetProductDTO>>(products),
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
+
+        return pagedResult;
+    }
+
 
     public async Task<ResponseDTO<CreateProductDTO>> GetOneByIdAsync(Guid id)
     {
