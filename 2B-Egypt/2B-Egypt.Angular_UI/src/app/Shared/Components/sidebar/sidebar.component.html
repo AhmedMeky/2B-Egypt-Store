@@ -24,7 +24,7 @@
       <!-- Filter by Price -->
       <div>
         <label style="" for="price">{{ 'PRICE' | translate }}:</label>
-        <input type="range" id="price" min="1" max="9000" [(ngModel)]="selectedPrice" (input)="filterProducts()" />
+        <input type="range" id="price" min="10" max="1000000" [(ngModel)]="selectedPrice" (input)="filterProducts()" />
         <p style="">{{ 'MAX_PRICE' | translate }}: {{ selectedPrice }}</p>
       </div>
       

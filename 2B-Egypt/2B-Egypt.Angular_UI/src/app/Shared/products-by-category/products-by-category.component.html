@@ -1,4 +1,5 @@
 <div class="product-list product-details" >
+  <app-sidebar (filterChange)="applyFilters($event)"></app-sidebar>
 
   <div *ngFor="let product of products" class="product-card" style="cursor: pointer">
     <div class="product-card" style="cursor: pointer">

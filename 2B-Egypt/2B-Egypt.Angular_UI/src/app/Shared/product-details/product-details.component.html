@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ "PRODUCT_DETAILS.TITLE" | translate }}</title>
+  <title>Product Details</title>
 
   <style>
     .more-info-reviews {
@@ -42,16 +42,8 @@
       background-color: orange;
     }
 
-    .more-info-reviews a::after {
-      content: "";
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: lightgray;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      transition: background-color 0.3s;
+    .more-info-reviews a.active::after {
+      background-color: orange;
     }
 
     .carousel-indicators img {
@@ -150,18 +142,6 @@
         <img [src]="image.imageUrl" class="d-block w-100" alt="{{ getLocalizedProductName() }}" />
       </div>
     </div>
-
-    <!-- Carousel Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
   </div>
 
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -200,7 +180,7 @@
 
   </div>
 </div>
-
+<!-- </div> -->
 
 <div class="more-info-reviews">
   <a id="more-info" [class.active]="IsMoreInfo" (click)="activateTab(true)">{{"PRODUCT_DETAILS.MORE_INFORMATION" |
@@ -290,4 +270,3 @@
     <button type="submit" class="btn btn-warning" style="margin: 20px  0px" [disabled]="reviewForm.invalid">{{
       "REVIEW_FORM.SUBMIT" | translate }}</button>
   </form>
-</div>
