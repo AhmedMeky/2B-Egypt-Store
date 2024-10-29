@@ -1,15 +1,14 @@
- 
 <!-- <app-nav-bar></app-nav-bar>   -->
 
-<!-- <app-sign-up></app-sign-up> --> 
- <!-- <app-login></app-login>  -->
- <!-- <router-outlet></router-outlet> -->
+<!-- <app-sign-up></app-sign-up> -->
+<!-- <app-login></app-login>  -->
+<!-- <router-outlet></router-outlet> -->
 <div [dir]="lang === 'en' ? 'ltr' : 'rtl'">
-    <app-nav-bar (filterChange)="applyFilters($event)"></app-nav-bar>
+  <app-nav-bar (filterChange)="applyFilters($event)"></app-nav-bar>
 
-    <router-outlet></router-outlet>
-    <app-footer></app-footer>
-     <!-- <app-sidebar></app-sidebar> -->
+ <div style="margin-bottom: 220px;">
+    <router-outlet></router-outlet> 
+ </div>
+  <app-footer></app-footer>
+  <!-- <app-sidebar></app-sidebar> -->
 </div>
-
- 
