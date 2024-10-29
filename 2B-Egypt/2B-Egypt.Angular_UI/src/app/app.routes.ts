@@ -7,10 +7,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './Shared/login/login.component';
 import { SignUpComponent } from './Shared/sign-up/sign-up.component';
 import { AuthorizationGuard } from './services/AuthorizationGuard.service';
+import { CartComponent } from './ShoppingCart/Components/cart/cart.component';
 
 export const routes: Routes = [ 
   // { path: '', component: LoginComponent },
-  // { path: '**', component: LoginComponent },
+  { path: 'cart', component: CartComponent },
   { path: 'Signup', component: SignUpComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'Home', component: AppComponent },

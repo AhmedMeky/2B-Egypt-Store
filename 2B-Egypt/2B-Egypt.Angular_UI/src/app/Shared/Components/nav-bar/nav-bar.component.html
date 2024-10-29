@@ -98,7 +98,7 @@
                   class="fa-solid fa-headset fa-2x"
                   style="margin-right: 5px; color: black"
                 ></i>
-                <h5 style="margin: 0; color: orangered">
+                <h5 style="margin: 0; color: orangered;font-size: 20px;">
                   {{ "SUPPORT_NUMBER" | translate }}
                 </h5>
               </div>
@@ -107,25 +107,25 @@
                   class="fa-solid fa-location-dot fa-2x"
                   style="color: black"
                 ></i>
-                <h5 style="margin: 0; color: orangered">
-                  <h5>{{ "STORES" | translate }}</h5>
+                <h5 style="margin: 0; color: orangered;font-size: 20px;">
+                  {{ "STORES" | translate }}
                 </h5>
               </div>
             </div>
-            <div style="margin-right: 45px">
-              <a
+            
+              <!-- <a
                 [routerLink]="['/cart']"
                 style="text-decoration: none; color: orangered"
-              >
-                <i class="fa-solid fa-cart-shopping fa-2x"></i>
+              > -->
+                <!-- <i class="fa-solid fa-cart-shopping fa-2x"></i>
                 <h5 style="color: orangered">
                   <h5>
                     {{ counter.toString() | translate }}
 
                   </h5>
-                </h5>
-              </a>
-            </div>
+                </h5> -->
+               
+            
           </div>
           >
 
@@ -144,9 +144,9 @@
                 background-color: white;
               "
             ></div>
-            <a href="#">
+            <a  [routerLink]="['/cart']">
               <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
-              <span class="item-count">5</span>
+              <span class="item-count"> {{ counter.toString() | translate }}</span>
             </a>
           </div>
         </div>
