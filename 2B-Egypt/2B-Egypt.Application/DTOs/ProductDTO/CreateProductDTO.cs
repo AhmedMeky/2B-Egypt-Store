@@ -2,7 +2,7 @@
 
 public class CreateProductDTO
 {
-    public Guid? Id ;
+    public Guid Id = Guid.NewGuid();
     [Required, MinLength(3), MaxLength(100), Display(Name="Name (Arabic)")]
     public string NameAr { get; set; }
 
