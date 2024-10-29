@@ -63,7 +63,18 @@ public class AccountController : ControllerBase
                 {
                     tokens = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
-                    user = new CreateUserDTO() { FirstName = user.FirstName, LastName = user.LastName, Email = user.Email!, PhoneNumber = user.PhoneNumber }
+                    user = new 
+                    {
+                        Id = user.Id,
+                        Email = user.Email!,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        PhoneNumber = user.PhoneNumber,
+                        Country = user.Country,
+                        City = user.City,
+                        AddressLine1 = user.AddressLine1,
+                        AddressLine2 = user.AddressLine2,
+                    }
                 });
             }
             else
@@ -99,7 +110,18 @@ public class AccountController : ControllerBase
                 {
                     tokens = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
-                    user = new CreateUserDTO() { FirstName = user.FirstName, LastName = user.LastName, Email = user.Email!, PhoneNumber = user.PhoneNumber }
+                    user = new  
+                    {
+                        Id = user.Id,
+                        Email = user.Email!,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        PhoneNumber = user.PhoneNumber,
+                        Country = user.Country,
+                        City = user.City,
+                        AddressLine1 = user.AddressLine1,
+                        AddressLine2 = user.AddressLine2,
+                    }
                 });
             }
             return BadRequest("Model state not valid");
@@ -164,6 +186,7 @@ public class AccountController : ControllerBase
         user.City = address.City;
         user.AddressLine1 = address.AddressLine1;
         user.AddressLine2 = address.AddressLine2;
+        user.PhoneNumber = address.PhoneNumber;
         var result = await userManager.UpdateAsync(user);
         if(result.Succeeded)
         {

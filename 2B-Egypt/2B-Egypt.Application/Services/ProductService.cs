@@ -47,6 +47,27 @@ public class ProductService : IProductService
         return mapper.Map<List<GetProductDTO>>(products);
     }
 
+    public async Task<PagedResult<GetProductDTO>> GetAllPaginationAsync(int pageNumber, int pageSize)
+    {
+        var query = (await productRepository.GetAllAsync()).AsQueryable();
+        
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        var pagedResult = new PagedResult<GetProductDTO>
+        {
+            Items = mapper.Map<List<GetProductDTO>>(products),
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
+        
+        return pagedResult;
+    }
+
     // get the details of a specific product by its Id
     public async Task<ResponseDTO<GetAllProductDTO>> GetByIdAsync(Guid id)
     {

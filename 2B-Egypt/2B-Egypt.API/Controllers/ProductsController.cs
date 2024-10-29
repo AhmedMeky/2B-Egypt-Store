@@ -32,6 +32,13 @@ namespace _2B_Egypt.API.Controllers
 
             return Ok(products);
         }
+
+        [HttpGet("productsWithPagination")]
+        public async Task<IActionResult> GetProductsWithPagination(int pageNumber = 1, int pageSize = 20)
+        {
+            var products = await _productService.GetAllPaginationAsync(pageNumber, pageSize);
+            return Ok(products);
+        }
         
         [HttpGet("category/{categoryId}")]
         public async Task<ActionResult<List<GetProductDTO>>> GetProductsByCategoryID(Guid categoryId)
