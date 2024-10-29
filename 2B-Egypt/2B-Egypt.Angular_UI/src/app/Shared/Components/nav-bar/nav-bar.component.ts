@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
   Input,
+  HostListener,
 } from '@angular/core';
 import { CategoryService } from '../../../services/category.service';
 import {
@@ -49,7 +50,8 @@ import { MegamenuComponent } from '../../../megamenu/megamenu.component';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit { 
+ 
   [x: string]: any;
   ParentCategories: ICategory[] = [] as ICategory[];
   Categories: ICategory[] = [] as ICategory[];

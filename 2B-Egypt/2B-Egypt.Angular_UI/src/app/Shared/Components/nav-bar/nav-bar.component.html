@@ -93,39 +93,41 @@
                 width: 250px;
               "
             >
-              <div style="display: block; align-items: center">
+              <div
+                style="
+                  display: block;
+                  align-items: center;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
                 <i
                   class="fa-solid fa-headset fa-2x"
                   style="margin-right: 5px; color: black"
                 ></i>
-                <h5 style="margin: 0; color: orangered;font-size: 20px;">
+                <div style="margin: 0; color: orangered; font-size: 20px">
                   {{ "SUPPORT_NUMBER" | translate }}
-                </h5>
+                </div>
               </div>
-              <div>
+              <div
+                style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                "
+              >
                 <i
                   class="fa-solid fa-location-dot fa-2x"
                   style="color: black"
                 ></i>
-                <h5 style="margin: 0; color: orangered;font-size: 20px;">
+                <div style="margin: 0; color: orangered; font-size: 20px">
                   {{ "STORES" | translate }}
-                </h5>
+                </div>
               </div>
             </div>
-            
-              <!-- <a
-                [routerLink]="['/cart']"
-                style="text-decoration: none; color: orangered"
-              > -->
-                <!-- <i class="fa-solid fa-cart-shopping fa-2x"></i>
-                <h5 style="color: orangered">
-                  <h5>
-                    {{ counter.toString() | translate }}
-
-                  </h5>
-                </h5> -->
-               
-            
           </div>
           >
 
@@ -137,16 +139,19 @@
             </div>
             <div
               style="
+                margin-left: 70px;
+
                 background-color: grey;
                 display: inline-block;
-                height: 45px;
+                height: 50px;
                 width: 1px;
-                background-color: white;
               "
             ></div>
-            <a  [routerLink]="['/cart']">
+            <a [routerLink]="['/cart']">
               <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
-              <span class="item-count"> {{ counter.toString() | translate }}</span>
+              <span class="item-count">
+                {{ counter.toString() | translate }}</span
+              >
             </a>
           </div>
         </div>
