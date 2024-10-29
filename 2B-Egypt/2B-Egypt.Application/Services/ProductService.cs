@@ -71,8 +71,6 @@ public class ProductService : IProductService
     public async Task<PagedResult<GetProductDTO>> GetAllPaginationAsync(int pageNumber, int pageSize)
     {
         var query = (await productRepository.GetAllAsync()).Include(prd => prd.Images)
-                    .Include(prd => prd.Category)
-                    .Include(prd => prd.Brand)
                     .Where(prd => !prd.IsDeleted).AsQueryable();
         
         var totalCount = await query.CountAsync();
