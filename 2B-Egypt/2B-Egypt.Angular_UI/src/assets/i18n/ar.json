@@ -57,6 +57,7 @@
 
   "COMPARE": "قارن()",
   "SIGN_IN": "تسجيل الدخول",
+  "Logout":"تسجيل الخروج",
   "CREATE_ACCOUNT": "إنشاء حساب",
   "SEARCH_PLACEHOLDER": "ابحث عن منتج بالاسم",
   "SEARCH_BUTTON": "بحث",

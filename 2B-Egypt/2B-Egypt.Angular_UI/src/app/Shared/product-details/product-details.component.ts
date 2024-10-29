@@ -4,7 +4,6 @@ import {
   EventEmitter,
   Input,
   OnInit,
-  output,
   Output,
 } from '@angular/core';
 import { ProductService } from '../../services/product.service';

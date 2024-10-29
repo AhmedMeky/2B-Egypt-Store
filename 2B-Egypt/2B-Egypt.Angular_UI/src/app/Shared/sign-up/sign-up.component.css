@@ -1,0 +1,44 @@
+#SignupDiv {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 50%;
+  padding: 15px;
+  margin-left: 25%;
+}
+#Head {
+  color: orangered;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+.inputSignUp {
+  /* border: solid; */
+  background: #f5f5f5 0% 0% no-repeat padding-box !important;
+  opacity: 1;
+  border: unset;
+  border-radius: 6px;
+  height: 45px;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  padding: 5px;
+  margin: 7px;
+}
+.inputSignUp:focus {
+  border-color: aqua;
+  outline: none !important;
+  border-color: green;
+  box-shadow: 0 0 10px #719ECE;
+}
+#btnlogin {
+  width: 80px;
+  height: 40px;
+  background-color: #ff662b;
+  border: none;
+  border-radius: 4px;
+  margin-right: 10px; 
+ 
+}
+a {
+  text-decoration: none;
+  color: #ff662b;
+}

@@ -22,6 +22,7 @@ export class SidebarComponent implements OnInit {
   selectedPrice: number = 9000;
   minDiscount: number = 0;
   currentLang: string = 'en';
+  lang: string = 'en';
   @Output() filterChange = new EventEmitter<IProduct[]>();
   public translate: TranslateService;
   constructor(
@@ -29,9 +30,18 @@ export class SidebarComponent implements OnInit {
     private productService: ProductService,
     private languageService: LanguageServiceService,
     translateService: TranslateService
-  ) { this.translate = translateService;}
+  ) {
+    this.translate = translateService;
+  }
 
   ngOnInit(): void {
+    this.languageService.getlanguage().subscribe({
+      next: (lang) => {
+        this.lang = lang;
+        document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+        this.translate.use(lang);
+      },
+    });
     this.categoryService.getAllCategories().subscribe((data) => {
       this.categories = data;
       // this.translate.use(data);
@@ -40,8 +50,9 @@ export class SidebarComponent implements OnInit {
       this.currentLang = lang;
       this.loadCategories();
       this.translate.use(lang);
-    });}
-  
+    });
+  }
+
   loadCategories(): void {
     this.categoryService.getAllCategories().subscribe((data) => {
       this.categories = data.map((category) => {
@@ -109,42 +120,55 @@ export class SidebarComponent implements OnInit {
   filterProducts(): void {
     let filteredProducts: IProduct[] = [];
     const categoryFilter =
-        this.selectedCategory !== 'all'
-            ? this.productService.getProductsByCategoryId(this.selectedCategory)
-            : this.productService.getAllProducts();
+      this.selectedCategory !== 'all'
+        ? this.productService.getProductsByCategoryId(this.selectedCategory)
+        : this.productService.getAllProducts();
 
     categoryFilter.subscribe({
-        next: (products) => {
-            filteredProducts = products;
-            if (this.selectedProductName) {
-                this.productService
-                    .FilterwithName(this.selectedProductName)
-                    .subscribe({
-                        next: (productsByName) => {
-                            filteredProducts = filteredProducts.filter((product) => {
-                                const productName = this.currentLang === 'ar' ? product.nameAr : product.nameEn;
-                                return productName.toLowerCase().includes(this.selectedProductName.toLowerCase());
-                            });
-                            filteredProducts = filteredProducts.filter((product) => product.price <= this.selectedPrice);
-                            filteredProducts = filteredProducts.filter((product) => product.discount >= this.minDiscount);
-
-                            this.filterChange.emit(filteredProducts);
-                        },
-                        error: (error) => {
-                            console.error('Error fetching filtered products by name:', error);
-                        },
-                    });
-            } else {
-                filteredProducts = filteredProducts.filter((product) => product.price <= this.selectedPrice);
-                filteredProducts = filteredProducts.filter((product) => product.discount >= this.minDiscount);
+      next: (products) => {
+        filteredProducts = products;
+        if (this.selectedProductName) {
+          this.productService
+            .FilterwithName(this.selectedProductName)
+            .subscribe({
+              next: (productsByName) => {
+                filteredProducts = filteredProducts.filter((product) => {
+                  const productName =
+                    this.currentLang === 'ar' ? product.nameAr : product.nameEn;
+                  return productName
+                    .toLowerCase()
+                    .includes(this.selectedProductName.toLowerCase());
+                });
+                filteredProducts = filteredProducts.filter(
+                  (product) => product.price <= this.selectedPrice
+                );
+                filteredProducts = filteredProducts.filter(
+                  (product) => product.discount >= this.minDiscount
+                );
 
                 this.filterChange.emit(filteredProducts);
-            }
-        },
-        error: (error) => {
-            console.error('Error fetching filtered products by categoryId:', error);
-        },
-    });
-}
+              },
+              error: (error) => {
+                console.error(
+                  'Error fetching filtered products by name:',
+                  error
+                );
+              },
+            });
+        } else {
+          filteredProducts = filteredProducts.filter(
+            (product) => product.price <= this.selectedPrice
+          );
+          filteredProducts = filteredProducts.filter(
+            (product) => product.discount >= this.minDiscount
+          );
 
+          this.filterChange.emit(filteredProducts);
+        }
+      },
+      error: (error) => {
+        console.error('Error fetching filtered products by categoryId:', error);
+      },
+    });
+  }
 }

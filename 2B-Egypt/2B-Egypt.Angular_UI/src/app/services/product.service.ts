@@ -23,7 +23,6 @@ export class ProductService {
           const processedProduct = this.processProductImages(product);
           console.log('Processed Product:', processedProduct);
           console.log('Product Images:', processedProduct.images);
-
           return processedProduct;
         });
       })
@@ -32,16 +31,15 @@ export class ProductService {
 
   processProductImages(product: IProduct): IProduct {
     if (product.images && product.images.length > 0) {
-      product.images = product.images.map(image => ({
+      product.images = product.images.map((image) => ({
         ...image,
-        imageUrl: this.imgmvcurl + image.imageUrl 
+        imageUrl: this.imgmvcurl + image.imageUrl,
       }));
     } else {
       product.images = [];
     }
     return product;
   }
-  
   getProductById(id: string): Observable<IProduct> {
     return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`).pipe(
       map((product: IProduct) => {
@@ -50,7 +48,6 @@ export class ProductService {
     );
   }
   
-
 
   addProduct(product: IProduct): Observable<IProduct> {
     return this.httpclient.post<IProduct>(this.apiUrl, product);
@@ -108,16 +105,16 @@ export class ProductService {
         })
       );
   }
-  
-  
+
   FilterWithDiscount(minDiscount: number): Observable<IProduct[]> {
-    return this.httpclient.get<IProduct[]>(this.apiUrl).pipe(
-      map(products => 
-        products
-          .filter(product => product.discount >= minDiscount) 
-          .map(product => this.processProductImages(product)) 
-      )
-    );
+    return this.httpclient
+      .get<IProduct[]>(this.apiUrl)
+      .pipe(
+        map((products) =>
+          products
+            .filter((product) => product.discount >= minDiscount)
+            .map((product) => this.processProductImages(product))
+        )
+      );
   }
-  
 }

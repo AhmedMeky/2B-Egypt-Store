@@ -7,29 +7,22 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailsComponent } from './Shared/product-details/product-details.component';
 import { FooterComponent } from './Shared/Components/footer/footer.component';
 import { NavBarComponent } from './Shared/Components/nav-bar/nav-bar.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { SidebarComponent } from './Shared/Components/sidebar/sidebar.component';
+import { LoginComponent } from './Shared/login/login.component';
+import { SignUpComponent } from "./Shared/sign-up/sign-up.component";
+// import { SliderComponent } from "./Shared/Components/slider/slider.component";
+import { FormsModule } from '@angular/forms';
+import { AdvertismentComponent } from "./Shared/Components/advertisment/advertisment.component"; 
 import { IProduct } from '../models/IProduct';
 import { ProductService } from './services/product.service';
-import { TranslationService } from './services/translation.service';
-
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   standalone: true,
-
   imports: [
-    RouterOutlet,
-    NavBarComponent,
-    ProductListComponent,
-    HttpClientModule,
-    ProductDetailsComponent,
-    ProductsByCategoryComponent,
-    FooterComponent,
-    SidebarComponent,
-    TranslateModule,
-    NavBarComponent,
-  ],
-
+    RouterOutlet, NavBarComponent,
+    ProductListComponent, HttpClientModule, ProductDetailsComponent,
+    ProductsByCategoryComponent, LoginComponent,
+    FooterComponent, SignUpComponent, AdvertismentComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })

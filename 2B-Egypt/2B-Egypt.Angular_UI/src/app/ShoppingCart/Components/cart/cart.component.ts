@@ -10,11 +10,13 @@ import { IProduct } from '../../../../models/IProduct';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  standalone: true,
-  imports: [FormsModule, CommonModule, JsonPipe, RouterModule, TranslateModule],
+  standalone:true,
+  imports: [FormsModule,CommonModule,JsonPipe,RouterModule,TranslateModule]
+
+
 })
 export class CartComponent implements OnInit {
-  cartItems: CartItem[] = [];
+  cartItems: CartItem[] =[];
   showStockError: boolean = false;
   subTotal: number = 0;
   public translate: TranslateService;
@@ -32,11 +34,14 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
-    console.log(this.cartItems);
-    this.subTotal = 0;
-    this.cartItems.forEach((item) => {
-      this.subTotal += item.price * item.quantity;
-    });
+    console.log(this.cartItems)
+    this.subTotal = 0
+    this.cartItems.forEach(item=>{
+ 
+      this.subTotal+= item.price*item.quantity
+    })
+    
+    console.log("Current language:", this.translateService.currentLang);
   }
   getLocalizedProductName(item: CartItem): string {
     return this.translateService.currentLang === 'ar'

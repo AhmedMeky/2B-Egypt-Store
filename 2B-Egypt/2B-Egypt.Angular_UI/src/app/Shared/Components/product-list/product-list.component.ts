@@ -14,6 +14,7 @@ import { TranslationService } from '../../../services/translation.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
+import { LanguageServiceService } from '../../../services/language-service.service';
 
 @Component({
   selector: 'app-product-list',
@@ -31,7 +32,8 @@ export class ProductListComponent implements OnInit {
   cartData: IProduct | undefined;
   SelectedProduct:IProduct | null = null;
   filteredProducts: IProduct[] = [] as IProduct[];
-  public translate: TranslateService;
+  lang: string = 'en';
+ 
 
   @Output() AddToCartCounter:EventEmitter<number>
   Counter:number=0;
@@ -40,12 +42,22 @@ export class ProductListComponent implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
     translateService: TranslateService,
-    private _cartService:CartService
+    private _cartService:CartService,
+    private _LanguageService: LanguageServiceService,
+    public translate: TranslateService
   ) 
   { this.translate = translateService;
     this.AddToCartCounter = new EventEmitter<number>();
   }
   ngOnInit(): void {
+    this._LanguageService.getlanguage().subscribe({
+      next: (lang) => {
+        this.lang = lang;
+        document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+        this.translate.use(lang);
+      },
+    });
+    this.translate.setDefaultLang('en');
     this.productService.getAllProducts().subscribe({
       next: (res) => {
         this.products = res;

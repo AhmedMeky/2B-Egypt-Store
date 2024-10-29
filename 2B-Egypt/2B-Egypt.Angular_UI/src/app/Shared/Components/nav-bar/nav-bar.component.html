@@ -1,68 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-    <!-- Font Awesome 6 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-    />
+<!-- Example split danger button -->
+<div style="
+    background-image: url('/img/bank.jpg');
+    background-size: cover;
+    height: 70px;
+    background-position: center;
+  "></div>
+<div style="height: 3px; background-color: orangered"></div>
+<div id="smallnav">
+  <div style="display: flex; flex-direction: row; align-items: center">
+    <div><a href="#">{{ "COMPARE" | translate }}</a></div>
+    <!-- <div><a *ngIf="!isLoggedIn" routerLink="/Login">Sign In</a></div>  -->
+    <a *ngIf="!isLoggedIn" routerLink="/Login" (click)="changeStat()" style="color: grey">{{ "SIGN_IN" | translate }}</a>
+    <a *ngIf="isLoggedIn" routerLink="/Login" (click)="logout()" style="color: grey">{{"Logout" | translate}}</a>
+    <div><a routerLink="/Signup">{{ "CREATE_ACCOUNT" | translate }}</a></div>
+    <!-- <div><button (click)="logout()">Log Out</button></div> -->
+  </div>
 
-    <!-- Font Awesome 5 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-
-    <!-- Font Awesome 4 -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-    />
-  </head>
-
-  <!-- Example split danger button -->
-  <div
-    style="
-      background-image: url('/img/bank.jpg');
-      background-size: cover;
-      height: 70px;
-      background-position: center;
-    "
-  ></div>
-  <div style="height: 3px; background-color: orangered"></div>
-  <div id="smallnav">
-    <div style="display: flex; flex-direction: row; align-items: center">
-      <div>
-        <a href="#">{{ "COMPARE" | translate }}</a>
-      </div>
-      <div>
-        <a href="#">{{ "SIGN_IN" | translate }}</a>
-      </div>
-      <div>
-        <a href="#">{{ "CREATE_ACCOUNT" | translate }}</a>
-      </div>
-    </div>
-
-    <select
+  <select
       (change)="changelang($event)"
       name="languageSelect"
       aria-label="Select language"
@@ -71,129 +25,125 @@
       <option value="en">English</option>
       <option value="ar">العربية</option>
     </select>
-  </div>
-  <div>
-    <div id="bigDivForNavbar">
-      <img src="/img/2b.png" width="150px" id="img2b" />
+</div>
+<div>
+  <div id="bigDivForNavbar">
+    <img src="/img/2b.png" width="15%" id="img2b" />
 
-      <div>
-        <div
-          style="
+    <div>
+      <div style="
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin: 10px;
+          justify-content: space-between;
+        ">
+        <div id="searchandButton">
+          <input type="search" id="search" class="form-control" style="margin-right: 5px" />
+          <button id="btnsearch" style="margin-right: 5px; width: 60px">
+            <img src="/img/search.png" width="25px" style="margin-left: 10px; margin-right: 10px" />
+          </button>
+          <!-- <label class="form-label" for="form1">Search</label> -->
+        </div>
+        <div style="
             display: flex;
             flex-direction: row;
-            align-items: center;
-            margin: 10px;
             justify-content: space-between;
-          "
-        >
-          <div style="display: flex; flex-direction: row; margin-right: 20px">
-            <input
-              type="search"
-              id="search"
-              class="form-control"
-              style="margin-right: 5px"
-              placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"
-              [(ngModel)]="selectedProductName"
-            />
-            <button
-              (click)="filterProductsByName()"
-              id="btnsearch"
-              style="margin-right: 5px"
-            >
-              {{ "SEARCH_BUTTON" | translate }}
-            </button>
-          </div>
-
-          <div
-            style="
+            width: 45%;
+          ">
+          <div style="
               display: flex;
               flex-direction: row;
               justify-content: space-between;
-            "
-          >
-            <div
-              style="
+            ">
+            <div style="
                 display: flex;
                 flex-direction: row;
                 justify-content: space-around;
                 width: 250px;
-              "
-            >
-              <div style="display: block; align-items: center">
-                <i
-                  class="fa-solid fa-headset fa-2x"
-                  style="margin-right: 5px; color: black"
-                ></i>
-                <h5 style="margin: 0; color: orangered">
+              ">
+              <div style="
+                  display: block;
+                  align-items: center;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                ">
+                <i class="fa-solid fa-headset fa-2x" style="margin-right: 5px; color: black"></i>
+                <div style="margin: 0; color: orangered; font-size: 20px">
                   {{ "SUPPORT_NUMBER" | translate }}
-                </h5>
+                </div>
               </div>
-              <div>
-                <i
-                  class="fa-solid fa-location-dot fa-2x"
-                  style="color: black"
-                ></i>
-                <h5 style="margin: 0; color: orangered">
-                  <h5>{{ "STORES" | translate }}</h5>
-                </h5>
+              <div style="
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                ">
+                <i class="fa-solid fa-location-dot fa-2x" style="color: black"></i>
+                <div style="margin: 0; color: orangered; font-size: 20px">
+                  {{ "STORES" | translate }}
+                </div>
               </div>
             </div>
-            <div style="margin-right: 45px">
-              <a
-                [routerLink]="['/cart']"
-                style="text-decoration: none; color: orangered"
-              >
-                <i class="fa-solid fa-cart-shopping fa-2x"></i>
-                <h5 style="color: orangered">
-                  <h5>
-                    {{ counter }}
+          </div>
+          >
 
-                  </h5>
-                </h5>
-              </a>
+          <div class="cart-container">
+            <div style="width: 60px; padding-top: 15px" id="listbars">
+              <a href="#"><i class="fa fa-bars fa-large" style="color: #f37021"></i></a>
             </div>
+            <div style="
+                margin-left: 70px;
+
+                background-color: grey;
+                display: inline-block;
+                height: 50px;
+                width: 1px;
+              "></div>
+            <a [routerLink]="['/cart']">
+              <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
+              <span class="item-count">
+                {{ counter}}</span>
+            </a>
           </div>
         </div>
       </div>
     </div>
-    <!-- <nav id="nav">
-        <ul style="display: flex; padding: 0; margin: 0; list-style-type: none">
-          <li *ngFor="let cat of Categories" style="margin-right: 15px">
-            <a href="#">{{ cat.nameEn }}</a>
-          </li>
-        </ul>
-      </nav> -->
-
-    <nav id="nav">
-      <ul style="display: flex; padding: 0; margin: 0; list-style-type: none">
-        <li
-          *ngFor="let cat of ParentCategories"
-          style="margin-right: 15px; position: relative"
-        >
-          <a (mouseover)="ShowSubCategories(cat.id)">
-            {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
-      <a
-        routerLink="/products-by-category"
-        routerLinkActive="active"
-        (click)="SelectedProductId(cat.id)"
-        *ngFor="let cat of filteredSubcategories"
-        style="margin-right: 15px; position: relative"
-      >
-        {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
-      </a>
-    </div>
-
-    <div id="sidelist">
-      <ul *ngFor="let cat of ParentCategories">
-        <li>
-          <a href=""></a>
-        </li>
-      </ul>
-    </div>
   </div>
-</html>
+
+  <nav id="nav" style="
+      overflow: hidden;
+      white-space: nowrap;
+      margin-left: 10%;
+      margin-right: 10%;
+    ">
+    <ul style="
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+      ">
+      <li *ngFor="let cat of ParentCategories" style="margin-right: 7px; position: relative">
+        <a (mouseover)="ShowSubCategories(cat.id)">
+          {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
+    <a routerLink="/products-by-category" routerLinkActive="active" (click)="SelectedProductId(cat.id)"
+      *ngFor="let cat of filteredSubcategories" style="margin-right: 7px; position: relative"> {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a>
+  </div>
+  <div id="sidelist">
+    <ul *ngFor="let cat of ParentCategories">
+      <li>
+        <a href="#"> {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a>
+      </li>
+    </ul>
+  </div>
+</div>
+<app-advertisment></app-advertisment>
+<router-outlet />

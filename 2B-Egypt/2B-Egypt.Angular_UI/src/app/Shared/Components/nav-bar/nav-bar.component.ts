@@ -6,13 +6,23 @@ import {
   OnInit,
   Output,
   Input,
+  HostListener,
 } from '@angular/core';
 import { CategoryService } from '../../../services/category.service';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterModule,
+} from '@angular/router';
 import { ICategory } from '../../../../models/icategory';
 import { HttpClientModule } from '@angular/common/http';
 import { CategorywithSubcategories } from '../../../../models/categorywith-subcategories';
 import { LanguageServiceService } from '../../../services/language-service.service';
+// import { MegaMenuModule } from 'primeng/megamenu';
+import { SignUpComponent } from '../../sign-up/sign-up.component';
+import { AdvertismentComponent } from '../advertisment/advertisment.component';
+import { LoginService } from '../../../services/login.service';
 import { IProduct } from '../../../../models/IProduct';
 import { ProductService } from '../../../services/product.service';
 import { FormsModule } from '@angular/forms';
@@ -29,14 +39,19 @@ import { ProductDetailsComponent } from '../../product-details/product-details.c
     CommonModule,
     RouterModule,
     HttpClientModule,
+    SignUpComponent,
+    RouterLink,
+    AdvertismentComponent,
     FormsModule,
     TranslateModule,
-    // ProductDetailsComponent,
   ],
+
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-export class NavBarComponent implements OnInit {
+export class NavBarComponent implements OnInit { 
+ 
+  [x: string]: any;
   ParentCategories: ICategory[] = [] as ICategory[];
   Categories: ICategory[] = [] as ICategory[];
   filteredSubcategories: ICategory[] = [] as ICategory[];
@@ -44,6 +59,7 @@ export class NavBarComponent implements OnInit {
 
   categorywithSubCategories: CategorywithSubcategories[] = [];
   lang: string = 'en';
+  isLoggedIn: boolean = false;
   @Output() filterChange = new EventEmitter<IProduct[]>();
   // @Input() counter: number = 0;
   constructor(
@@ -52,10 +68,12 @@ export class NavBarComponent implements OnInit {
     private _LanguageService: LanguageServiceService,
     private productService: ProductService,
     private translate: TranslationService,
-    private _cartService: CartService
+    private _cartService: CartService,
+    private loginService: LoginService
   ) {
     this.translate.setDefaultLang('en');
     this.translate.use('en');
+    this.isLoggedIn = false;
   }
   switchLanguage(event: Event): void {
     const selectElement = event.target as HTMLSelectElement | null;
@@ -141,9 +159,48 @@ export class NavBarComponent implements OnInit {
   //   }));
   // }
 
+  // transformCategories(categories: ICategory[]): CategorywithSubcategories[] {
+  //   const groupedMap: { [key: string]: ICategory[] } = {};
+
+  //   for (const cat of categories) {
+  //     if (cat.parentCategoryId == null) {
+  //       if (!groupedMap[cat.id]) {
+  //         groupedMap[cat.id] = [];
+  //       }
+  //       groupedMap[cat.id].push(cat);
+  //     } else {
+  //       if (!groupedMap[cat.parentCategoryId]) {
+  //         groupedMap[cat.parentCategoryId] = [];
+  //       }
+  //       groupedMap[cat.parentCategoryId].push(cat);
+  //     }
+  //   }
+
+  //   const groupedCategories: CategorywithSubcategories[] = Object.keys(
+  //     groupedMap
+  //   ).map((parentId) => {
+  //     const subcategories = groupedMap[parentId];
+  //     const representativeCategory = subcategories[0];
+
+  //     return {
+  //       id: representativeCategory.id,
+  //       nameAr:
+  //         this.lang === 'ar'
+  //           ? representativeCategory.nameAr
+  //           : representativeCategory.nameEn,
+  //       nameEn: representativeCategory.nameEn,
+  //       subcategories: subcategories.map((sub) => ({
+  //         ...sub,
+  //         name: this.lang === 'ar' ? sub.nameAr : sub.nameEn,
+  //       })),
+  //     };
+  //   });
+
+  //   return groupedCategories;
+  // }
   transformCategories(categories: ICategory[]): CategorywithSubcategories[] {
     const groupedMap: { [key: string]: ICategory[] } = {};
-
+  
     for (const cat of categories) {
       if (cat.parentCategoryId == null) {
         if (!groupedMap[cat.id]) {
@@ -157,74 +214,35 @@ export class NavBarComponent implements OnInit {
         groupedMap[cat.parentCategoryId].push(cat);
       }
     }
-
-    const groupedCategories: CategorywithSubcategories[] = Object.keys(
-      groupedMap
-    ).map((parentId) => {
+  
+    const groupedCategories: CategorywithSubcategories[] = Object.keys(groupedMap).map((parentId) => {
       const subcategories = groupedMap[parentId];
       const representativeCategory = subcategories[0];
-
+  
       return {
         id: representativeCategory.id,
-        nameAr:
-          this.lang === 'ar'
-            ? representativeCategory.nameAr
-            : representativeCategory.nameEn,
-        nameEn: representativeCategory.nameEn,
+        nameAr: representativeCategory.nameAr, // Retaining nameAr if needed
+        nameEn: representativeCategory.nameEn, // Retaining nameEn if needed
         subcategories: subcategories.map((sub) => ({
           ...sub,
-          name: this.lang === 'ar' ? sub.nameAr : sub.nameEn,
+          name: sub.nameEn, // Assuming you want to keep the English name
         })),
       };
     });
-
+  
     return groupedCategories;
   }
-
   SelectedProductId(id: string): void {
     this.router.navigateByUrl(`/products-by-category/${id}`);
   }
 
-  filterProductsByName(): void {
-    let filteredProducts: IProduct[] = [];
-    if (this.selectedProductName) {
-      this.productService.FilterwithName(this.selectedProductName).subscribe({
-        next: (productsByName) => {
-          filteredProducts = productsByName;
-          this.filterChange.emit(filteredProducts);
-        },
-        error: (error) => {
-          console.error('Error fetching filtered products by name:', error);
-        },
-      });
-    } else {
-      this.productService.getAllProducts().subscribe({
-        next: (products) => {
-          filteredProducts = products;
-          this.filterChange.emit(filteredProducts);
-        },
-        error: (error) => {
-          console.error('Error fetching all products:', error);
-        },
-      });
-    }
+  logout() {
+    this.loginService.logout();
+    this.isLoggedIn = true;
   }
-  // addToCart(product: IProduct) {
-  //   const cartItem: CartItem = {
-  //     productId: Number(product.id),
-  //     productName: product.nameAr,
-  //     price: product.price,
-  //     quantity: product?.unitInStock || 0,
-  //     totalPrice: product.price,
-  //     // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
-  //     image: product.images[0].imageUrl
-  //   };
-
-  //   console.log(cartItem);
-  //   this._cartService.addToCart(cartItem);
-
-  //   this.router.navigateByUrl('cart');
-  // }
+  changeStat() {
+    this.isLoggedIn = !this.isLoggedIn;
+  }
   get counter(): number {
     return this._cartService.getCounter();
   }
