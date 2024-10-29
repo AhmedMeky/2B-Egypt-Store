@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
   selectedProductName = '';
   categories: any[] = [];
   products: IProduct[] = [];
-  selectedPrice: number = 9000;
+  selectedPrice: number = 1000000;
   minDiscount: number = 0;
   currentLang: string = 'en';
   lang: string = 'en';

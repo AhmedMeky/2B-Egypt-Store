@@ -47,10 +47,36 @@ public class ProductService : IProductService
         return mapper.Map<List<GetProductDTO>>(products);
     }
 
+    //public async Task<PagedResult<GetProductDTO>> GetAllPaginationAsync(int pageNumber, int pageSize)
+    //{
+    //    var query = (await productRepository.GetAllAsync()).AsQueryable();
+        
+    //    var totalCount = await query.CountAsync();
+    //    var products = await query
+    //        .Skip((pageNumber - 1) * pageSize)
+    //        .Take(pageSize)
+    //        .ToListAsync();
+
+    //    var pagedResult = new PagedResult<GetProductDTO>
+    //    {
+    //        Items = mapper.Map<List<GetProductDTO>>(products),
+    //        TotalCount = totalCount,
+    //        PageNumber = pageNumber,
+    //        PageSize = pageSize
+    //    };
+        
+    //    return pagedResult;
+    //}
+
     public async Task<PagedResult<GetProductDTO>> GetAllPaginationAsync(int pageNumber, int pageSize)
     {
-        var query = (await productRepository.GetAllAsync()).AsQueryable();
-        
+        var query = (await productRepository.GetAllAsync())
+            .Include(prd => prd.Images) // Make sure to include images here
+            .Include(prd => prd.Category)
+            .Include(prd => prd.Brand)
+            .Where(prd => !prd.IsDeleted)
+            .AsQueryable();
+
         var totalCount = await query.CountAsync();
         var products = await query
             .Skip((pageNumber - 1) * pageSize)
@@ -64,7 +90,7 @@ public class ProductService : IProductService
             PageNumber = pageNumber,
             PageSize = pageSize
         };
-        
+
         return pagedResult;
     }
 

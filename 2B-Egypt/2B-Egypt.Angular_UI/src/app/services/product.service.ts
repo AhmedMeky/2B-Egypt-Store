@@ -117,4 +117,24 @@ export class ProductService {
         )
       );
   }
+  getProductsWithPagination(pageNumber: number, pageSize: number): Observable<{ items: IProduct[], totalCount: number }> {
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
+
+    return this.httpclient.get<{ items: IProduct[], totalCount: number }>(`${this.apiUrl}/productsWithPagination`, { params }).pipe(
+      map((response) => {
+        response.items = response.items.map((product: IProduct) => {
+          const processedProduct = this.processProductImages(product);
+          console.log('Processed Product:', processedProduct);
+          console.log('Product Images:', processedProduct.images);
+          return processedProduct;
+        });
+        return response;
+      })
+    );
+  }
 }
+
+
+

@@ -1,5 +1,6 @@
+<div class="main-container">
+<app-sidebar (filterChange)="applyFilters($event)"></app-sidebar>
 <div class="product-list product-details">
-  <app-sidebar (filterChange)="applyFilters($event)"></app-sidebar>
   <div *ngFor="let product of filteredProducts" class="product-card" style="cursor: pointer">
     <div class="product-card" *ngIf="filteredProducts.length > 0; else noProducts">
       <div class="product-img-wrapper" (click)="SelectedProductId(product.id)">
@@ -10,8 +11,8 @@
 
     <h3 class="product-name">{{ getLocalizedProductName(product) }}</h3>
     <p class="product-description">{{ getLocalizedProductDescription(product) }}</p>
+    <span class="old-price" *ngIf="product.discount > 0">{{ product.price | currency }}</span>
     <div class="price-section">
-      <span class="old-price" *ngIf="product.discount > 0">{{ product.price | currency }}</span>
       <span class="current-price">{{ product.price - (product.price * product.discount) / 100 | currency }}</span>
     </div>
 
@@ -28,8 +29,19 @@
       </div>
     </div>
   </div>
+</div>
 
   <ng-template #noProducts>
     <p>{{ 'NO_PRODUCTS' | translate }}</p>
   </ng-template>
+</div>
+
+<div class="pagination-controls">
+  <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+    Prev
+  </button>
+  <span style="border: 2px solid gray ;">Page {{ currentPage }}</span>
+  <button (click)="onPageChange(currentPage + 1)" [disabled]="products.length < pageSize">
+    Next
+  </button>
 </div>
