@@ -8,6 +8,7 @@ import { LoginComponent } from './Shared/login/login.component';
 import { SignUpComponent } from './Shared/sign-up/sign-up.component';
 import { AuthorizationGuard } from './services/AuthorizationGuard.service';
 import { CartComponent } from './ShoppingCart/Components/cart/cart.component';
+import { OrderListComponent } from './Shared/Components/order-list/order-list.component';
 
 export const routes: Routes = [ 
   { path: '', component: ProductListComponent },
@@ -20,4 +21,5 @@ export const routes: Routes = [
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'Categories', component: NavBarComponent },
   { path: 'products-by-category/:id', component: ProductsByCategoryComponent },
+  { path: 'order-list', component: OrderListComponent }, 
 ];
