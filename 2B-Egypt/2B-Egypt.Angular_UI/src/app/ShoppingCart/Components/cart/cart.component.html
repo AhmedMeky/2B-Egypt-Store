@@ -31,7 +31,8 @@
                   <i class="fa fa-angle-down" [style.cursor]="item.quantity === 1 ? 'auto' : 'pointer'"
                     (click)="decreaseQuantity(item)"></i>
                 </div>
-                <span *ngIf="item.quantity>=item.stock" style="color: red;">  Exceeded available stock quantity. Maximum available is {{ item.stock }}.
+                <span *ngIf="item.quantity>=item.stock" style="color: red;"> Exceeded available stock quantity. Maximum
+                  available is {{ item.stock }}.
 
                 </span>
 
@@ -91,6 +92,8 @@
 
 
 
+
+
 <style>
   .table {
     vertical-align: middle;
@@ -141,7 +144,7 @@
   }
 
   .remove-btn {
-   background-color: orangered;
+    background-color: orangered;
     color: white;
     border-radius: 5px;
     padding: 10px;

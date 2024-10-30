@@ -1,35 +1,63 @@
-<div class="product-list product-details">
-  <app-sidebar (filterChange)="applyFilters($event)"></app-sidebar>
-  <div *ngFor="let product of filteredProducts" class="product-card" style="cursor: pointer">
-    <div class="product-card" *ngIf="filteredProducts.length > 0; else noProducts">
-      <div class="product-img-wrapper" (click)="SelectedProductId(product.id)">
-    <img [src]="product.images.length > 0 ? product.images[0].imageUrl : 'img/2b.png'" 
-           alt="{{ getLocalizedProductName(product) }}" class="product-img" />
-      <span *ngIf="product.discount > 0" class="discount-badge">-{{ product.discount }}%</span>
+<div class="container-fluid main-container mt-4">
+  <div class="row ">
+    <div class="col-md-3 mb-4">
+      <app-sidebar (filterChange)="applyFilters($event)"></app-sidebar>
     </div>
+    <div class="col-md-9">
+      <div class="row ">
+        <div *ngFor="let product of filteredProducts" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+          <div class="card product-card" style="cursor: pointer">
+            <div *ngIf="filteredProducts.length > 0; else noProducts">
+              <div class="product-img-wrapper" (click)="SelectedProductId(product.id)">
+                <img [src]="product.images.length > 0 ? product.images[0].imageUrl : 'img/2b.png'" 
+                     alt="{{ getLocalizedProductName(product) }}" class="card-img-top product-img" />
+                <span *ngIf="product.discount > 0" class="discount-badge">-{{ product.discount }}%</span>
+              </div>
 
-    <h3 class="product-name">{{ getLocalizedProductName(product) }}</h3>
-    <p class="product-description">{{ getLocalizedProductDescription(product) }}</p>
-    <div class="price-section">
-      <span class="old-price" *ngIf="product.discount > 0">{{ product.price | currency }}</span>
-      <span class="current-price">{{ product.price - (product.price * product.discount) / 100 | currency }}</span>
-    </div>
+              <div class="card-body text-center">
+                <h5 class="card-title product-name">{{ getLocalizedProductName(product) }}</h5>
+                <p class="card-text product-description">{{ getLocalizedProductDescription(product) }}</p>
+                <span *ngIf="product.discount > 0" class="old-price">{{ product.price | currency }}</span>
+                <div class="price-section">
+                  <span class="current-price">{{ product.price - (product.price * product.discount) / 100 | currency }}</span>
+                </div>
 
-      <div class="quantity-section">
-        <button class="quantity-btn" (click)="handleQuantity('plus', product)">{{ 'QUANTITY_INCREASE' | translate }}</button>
-        <input type="text" [(ngModel)]="product.quantity" readonly class="quantity-input" />
-        <button class="quantity-btn" (click)="handleQuantity('min', product)">{{ 'QUANTITY_DECREASE' | translate }}</button>
+                <div class="quantity-section my-3">
+                  <button class="btn quantity-btn" (click)="handleQuantity('plus', product)">
+                    {{ 'QUANTITY_INCREASE' | translate }}
+                  </button>
+                  <input type="text" [(ngModel)]="product.quantity" readonly class="quantity-input mx-2" />
+                  <button class="btn quantity-btn" (click)="handleQuantity('min', product)">
+                    {{ 'QUANTITY_DECREASE' | translate }}
+                  </button>
+                </div>
+
+                <div class="cart-buttons">
+                  <button (click)="addToCart(product)" class="btn add-cart-btn">
+                    <i class="fas fa-shopping-cart"></i> {{ 'ADD_TO_CART' | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="cart-buttons">
-        <button (click)="addToCart(product)" class="add-cart-btn">
-          <i class="fas fa-shopping-cart"></i> {{ 'ADD_TO_CART' | translate }}
-        </button>
-      </div>
+      <ng-template #noProducts>
+        <p class="text-center">{{ 'NO_PRODUCTS' | translate }}</p>
+      </ng-template>
     </div>
   </div>
 
-  <ng-template #noProducts>
-    <p>{{ 'NO_PRODUCTS' | translate }}</p>
-  </ng-template>
+  <div class="pagination-controls text-center my-4">
+    <button class="btn" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+      Prev
+    </button>
+    <span class="mx-2">Page {{ currentPage }}</span>
+    <button class="btn" (click)="onPageChange(currentPage + 1)" [disabled]="products.length < pageSize">
+      Next
+    </button>
+  </div>
 </div>
+
+
+

@@ -74,27 +74,28 @@
     <h4 style="margin-left: 30px;" class="mt-5">Payment Method</h4>
     <div class="list-group payment-methods">
         <label class="list-group-item d-flex align-items-center">
-            <input type="radio" name="paymentMethod" class="mr-3">
+            <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="Cash On Delivery">
             <i class="fa-solid fa-money-bill icon"></i>
             <span>Cash On Delivery</span>
-        </label>
-        <label class="list-group-item d-flex align-items-center">
-            <input type="radio" name="paymentMethod" class="mr-3">
+          </label>
+          <label class="list-group-item d-flex align-items-center">
+            <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="Credit Card">
             <i class="fa fa-cc-visa icon"></i>
             <span>Credit Card</span>
-        </label>
-        <label class="list-group-item d-flex align-items-center">
-            <input type="radio" name="paymentMethod" class="mr-3">
+          </label>
+          <label class="list-group-item d-flex align-items-center">
+            <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="Paypal Card">
             <i class="fa fa-cc-paypal icon"></i>
             <span>Paypal Card</span>
-        </label>
-        <label class="list-group-item d-flex align-items-center">
-            <input type="radio" name="paymentMethod" class="mr-3">
+          </label>
+          <label class="list-group-item d-flex align-items-center">
+            <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="Electronic wallets">
             <i class="fa-solid fa-wallet icon"></i>
             <span>Electronic wallets</span>
-        </label>
+          </label>
+          
     </div>
     
     <button style="margin-left: 30px;" class="btn btn-secondary" [class.active]="IsShipping" (click)="goToShipping(true)">Back</button>
-    <button style="margin-left: 30px;" type="button" (click)="createOrder()" class="btn btn-warning">create order</button>
-   
+    <button style="margin-left: 30px;" type="button" (click)="createOrder()" class="btn btn-warning">Create Order</button>
+    

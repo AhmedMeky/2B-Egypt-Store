@@ -19,6 +19,8 @@ import { ICategory } from '../../../../models/icategory';
 import { HttpClientModule } from '@angular/common/http';
 import { CategorywithSubcategories } from '../../../../models/categorywith-subcategories';
 import { LanguageServiceService } from '../../../services/language-service.service';
+
+//  import { MegaMenuModule } from 'primeng/megamenu';
 import { SignUpComponent } from '../../sign-up/sign-up.component';
 import { AdvertismentComponent } from '../advertisment/advertisment.component';
 import { LoginService } from '../../../services/login.service';
@@ -38,8 +40,7 @@ import { MegamenuComponent } from '../../../megamenu/megamenu.component';
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule,
-    MegamenuComponent,
+   HttpClientModule,
     SignUpComponent,
     RouterLink,
     AdvertismentComponent,

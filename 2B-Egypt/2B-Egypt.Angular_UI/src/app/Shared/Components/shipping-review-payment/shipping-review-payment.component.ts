@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ShippingService } from '../../../services/shipping.service';
 import { IShippingData } from '../../../../models/ishipping-data';
@@ -16,8 +16,9 @@ import { CartItem } from '../../../ShoppingCart/Models/CartItem';
   templateUrl: './shipping-review-payment.component.html',
   styleUrls: ['./shipping-review-payment.component.css'],
 })
-export class ShippingReviewPaymentComponent implements OnInit {
+export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
   IsShipping : boolean = true;
+  selectedPaymentMethod: string = '';
   order:IOrder = {} as IOrder
   email:string="";
   @ViewChild('shippingStep', { static: false }) shippingStep!: ElementRef;
@@ -39,10 +40,13 @@ export class ShippingReviewPaymentComponent implements OnInit {
   };
   
   constructor(private _shippingService: ShippingService ,private _order:OrderService , private _cartService:CartService) {}
+  ngOnChanges(): void {
+   
+  }
   ngOnInit() {
     this.IsShipping=true;
     this.order.transactionId = "1";
-    this.order.paymentType = "cash";
+    this.order.paymentType = this.selectedPaymentMethod;
     const userString = sessionStorage.getItem("user");
     let array  = this._cartService.getCartItems()
     this.order.totalAmount = array.reduce((sum, item) => sum + item.totalPrice, 0);
@@ -66,37 +70,37 @@ export class ShippingReviewPaymentComponent implements OnInit {
       var getToken =sessionStorage.getItem("token");
       if (getToken)
         {
-    
-    console.log(this.order.userId)
-  }
-  if (userString) {
-    const user = JSON.parse(userString);
-    this.email = user.email; 
-    this.order.userId=user.id;
-        console.log(this.email)
-    }
-  }
-  
-  addAddress() {
-
-
-    this._shippingService.addAddress(this.email,this.shippingData).subscribe({
-      next: (res) => {
-        this.shippingData=res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    })
-     
-  }
-
-
-  createOrder()
-{
-  this._order.creatOrder(this.order).subscribe({
-    next: (res) => {
-      // this.order = res
+          
+          console.log(this.order.userId)
+        }
+        if (userString) {
+          const user = JSON.parse(userString);
+          this.email = user.email; 
+          this.order.userId=user.id;
+          console.log(this.email)
+        }
+      }
+      
+      addAddress() {
+        
+        
+        this._shippingService.addAddress(this.email,this.shippingData).subscribe({
+          next: (res) => {
+            this.shippingData=res;
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        })
+        
+      }
+      
+      
+      createOrder()
+      {
+        this.order.paymentType = this.selectedPaymentMethod;
+        this._order.creatOrder(this.order).subscribe({
+          next: (res) => {
     },
     error: (err) => {
     },

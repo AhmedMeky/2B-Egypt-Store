@@ -57,6 +57,7 @@
 
   "COMPARE": "Compare()",
   "SIGN_IN": "Sign In",
+  "Logout":"Log out",
   "CREATE_ACCOUNT": "Create Account",
   "SEARCH_PLACEHOLDER": "Search product by name",
   "SEARCH_BUTTON": "Search",

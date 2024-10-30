@@ -14,6 +14,7 @@ import { OrderComponent } from './Shared/Components/order/order.component';
 export const routes: Routes = [ 
   { path: '', component: LoginComponent },
   // { path: '', component: ProductListComponent },
+  { path: '', component: ProductListComponent },
   { path: 'cart', component: CartComponent },
   { path: 'Signup', component: SignUpComponent },
   { path: 'Login', component: LoginComponent },

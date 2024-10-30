@@ -14,50 +14,67 @@ import { TranslationService } from '../../../services/translation.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
+import { LanguageServiceService } from '../../../services/language-service.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule,
-    SidebarComponent, NavBarComponent,TranslateModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, SidebarComponent, NavBarComponent, TranslateModule],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-
   products: IProduct[] = [] as IProduct[];
-  product:IProduct ={} as IProduct;
-  imgmvcurl = 'http://localhost:5269/img/';
-  cartData: IProduct | undefined;
-  SelectedProduct:IProduct | null = null;
   filteredProducts: IProduct[] = [] as IProduct[];
-  public translate: TranslateService;
+  currentPage = 1;
+  pageSize = 8;
+  totalProducts = 0;
+  lang: string = 'en';
 
-  @Output() AddToCartCounter:EventEmitter<number>
-  Counter:number=0;
+  @Output() AddToCartCounter: EventEmitter<number> = new EventEmitter<number>();
+  Counter: number = 0;
+
   constructor(
     private productService: ProductService,
     private router: Router,
     private snackBar: MatSnackBar,
     translateService: TranslateService,
-    private _cartService:CartService
-  ) 
-  { this.translate = translateService;
-    this.AddToCartCounter = new EventEmitter<number>();
+    private _cartService: CartService,
+    private _LanguageService: LanguageServiceService,
+    public translate: TranslateService
+  ) {
+    this.translate = translateService;
   }
+
   ngOnInit(): void {
-    this.productService.getAllProducts().subscribe({
+    this._LanguageService.getlanguage().subscribe({
+      next: (lang) => {
+        this.lang = lang;
+        document.documentElement.dir = lang === 'en' ? 'ltr' : 'rtl';
+        this.translate.use(lang);
+      },
+    });
+    this.translate.setDefaultLang('en');
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    this.productService.getProductsWithPagination(this.currentPage, this.pageSize).subscribe({
       next: (res) => {
-        this.products = res;
+        this.products = res.items; 
         this.filteredProducts = [...this.products];
-       
+        this.totalProducts = res.totalCount; 
         this.checkCartItems();
       },
       error: (error) => {
         console.error('Error fetching products:', error);
       },
     });
-    
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage = page;
+    this.loadProducts();
   }
 
   checkCartItems() {
@@ -126,22 +143,19 @@ addToCart(product: IProduct)
     }
   }
 
-  SelectedProductId(id:string) {
+  SelectedProductId(id: string) {
     this.router.navigateByUrl(`/product-details/${id}`);
   }
 
   applyFilters(filteredProducts: IProduct[]) {
     this.filteredProducts = filteredProducts;
-    console.log(this.filteredProducts); 
   }
+
   getLocalizedProductName(product: IProduct): string {
-    const lang = this.translate.currentLang; 
-    return lang === 'ar' ? product.nameAr : product.nameEn;
+    return this.translate.currentLang === 'ar' ? product.nameAr : product.nameEn;
   }
 
   getLocalizedProductDescription(product: IProduct): string {
-    const lang = this.translate.currentLang;
-    return lang === 'ar' ? product.descriptionAr : product.descriptionEn;
+    return this.translate.currentLang === 'ar' ? product.descriptionAr : product.descriptionEn;
   }
- 
 }
