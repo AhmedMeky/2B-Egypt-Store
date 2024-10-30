@@ -25,7 +25,7 @@ export class ProductsByCategoryComponent implements OnInit {
   public translate: TranslateService;
   categoryId!: string;
   pageNumber: number = 1; 
-  pageSize: number = 6; 
+  pageSize: number = 8; 
   totalProducts: number = 0; 
   constructor(
     private productService: ProductService,
