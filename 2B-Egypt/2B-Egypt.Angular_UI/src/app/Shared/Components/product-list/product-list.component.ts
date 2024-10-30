@@ -79,7 +79,7 @@ addToCart(product: IProduct)
         productId: (product.id),
         productName: product.nameEn,
         productNamear: product.nameAr,
-        price: product.price,
+        price: product.price - (product.price * product.discount) / 100 ,
         quantity: product?.quantity || 1,
         totalPrice: product.price,
         // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''

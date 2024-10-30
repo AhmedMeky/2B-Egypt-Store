@@ -34,8 +34,8 @@ export class CartComponent implements OnInit {
     console.log(this.cartItems)
     this.subTotal = 0
     this.cartItems.forEach(item=>{
- 
       this.subTotal+= item.price*item.quantity
+ 
     })
     
     console.log("Current language:", this.translateService.currentLang);

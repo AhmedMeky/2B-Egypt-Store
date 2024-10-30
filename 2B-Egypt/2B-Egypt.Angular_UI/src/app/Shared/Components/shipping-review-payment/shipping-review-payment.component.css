@@ -1,0 +1,73 @@
+
+.progress-step {
+  text-align: center;
+  font-size: 14px;
+  position: relative;
+}
+.progress-step .circle {
+  background-color: #ddd;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  line-height: 30px;
+  margin-bottom: 5px;
+}
+.progress-step.active .circle {
+  background-color: orange;
+}
+.progress-step.active .text {
+  color: orange;
+  font-weight: bold;
+}
+.progress-line {
+  width: 100px;
+  height: 4px;
+  background-color: #ddd;
+  position: absolute;
+  top: 14px;
+  left: 35px;
+}
+.progress-step.active + .progress-line {
+  background-color: orange;
+}
+
+
+
+
+
+/* payment part */
+
+.payment-methods .list-group-item {
+    padding: 15px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .payment-methods .list-group-item:hover {
+    background-color: #f8f9fa; 
+  }
+  
+  .payment-methods input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+  }
+  
+  .payment-methods .icon {
+    font-style: italic;
+    font-size: 25px;
+    margin-right: 10px;
+    color: #007bff; 
+  }
+  
+  .payment-methods span {
+    font-weight: 500;
+    color: #333;
+  }
+  

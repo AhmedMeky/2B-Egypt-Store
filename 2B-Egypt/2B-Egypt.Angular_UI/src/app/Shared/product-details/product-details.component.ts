@@ -82,6 +82,7 @@ export class ProductDetailsComponent implements OnInit {
         this._productService.getProductById(this.productId).subscribe({
           next: (res) => {
             this.product = res;
+            console.log('ssssssssssss' ,   this.product)
             this.PriceAfterSale =
               this.product.price -
               this.product.discount * 0.01 * this.product.price;
@@ -124,7 +125,7 @@ export class ProductDetailsComponent implements OnInit {
     const cartItem: CartItem = {
       productId: this.product.id,
       productName: this.product.nameEn,
-      price: this.product.price,
+      price: this.product.price - (this.product.price * this.product.discount) / 100,
       quantity: this.product?.quantity || 1,
       totalPrice: this.product.price,
       productNamear:this.product.nameAr,

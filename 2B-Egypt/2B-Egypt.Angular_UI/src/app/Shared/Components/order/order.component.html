@@ -1,0 +1,122 @@
+<button type="button" (click)="createOrder()" class="btn btn-warning">create order</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <title>Checkout Page</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .progress-step {
+      text-align: center;
+      font-size: 14px;
+      position: relative;
+    }
+    .progress-step .circle {
+      background-color: #ddd;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-block;
+      line-height: 30px;
+      margin-bottom: 5px;
+    }
+    .progress-step.active .circle {
+      background-color: orange;
+    }
+    .progress-step.active .text {
+      color: orange;
+      font-weight: bold;
+    }
+    .progress-line {
+      width: 100px;
+      height: 4px;
+      background-color: #ddd;
+      position: absolute;
+      top: 14px;
+      left: 35px;
+    }
+    .progress-step.active + .progress-line {
+      background-color: orange;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <!-- Progress Steps -->
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="progress-step active">
+      <div class="circle">✓</div>
+      <div class="text">Shipping</div>
+    </div>
+    <div class="progress-line"></div>
+    <div class="progress-step">
+      <div class="circle">2</div>
+      <div class="text">Review & Payments</div>
+    </div>
+  </div>
+
+  <!-- Payment Options -->
+  <h4 class="mt-5">Payment Method</h4>
+  <div class="list-group">
+    <label class="list-group-item d-flex align-items-center">
+      <input type="radio" name="paymentMethod" class="mr-3">
+      <img src="cash.png" alt="Cash on Delivery" style="width: 50px;">
+      Cash On Delivery
+    </label>
+    <label class="list-group-item d-flex align-items-center">
+      <input type="radio" name="paymentMethod" class="mr-3">
+      <img src="visa.png" alt="Debit/Credit Card" style="width: 50px;">
+      Debit/Credit Card
+    </label>
+    <label class="list-group-item d-flex align-items-center">
+      <input type="radio" name="paymentMethod" class="mr-3">
+      <img src="bank.png" alt="Bank Installment" style="width: 50px;">
+      Bank Installment
+    </label>
+    <label class="list-group-item d-flex align-items-center">
+      <input type="radio" name="paymentMethod" class="mr-3">
+      <img src="valu.png" alt="ValU" style="width: 50px;">
+      ValU
+    </label>
+    <label class="list-group-item d-flex align-items-center">
+      <input type="radio" name="paymentMethod" class="mr-3">
+      <img src="halan.png" alt="Halan" style="width: 50px;">
+      Halan
+    </label>
+    <label class="list-group-item d-flex align-items-center">
+      <input type="radio" name="paymentMethod" class="mr-3">
+      <img src="souhoola.png" alt="Souhoola" style="width: 50px;">
+      Souhoola
+    </label>
+    <label class="list-group-item d-flex align-items-center">
+      <input type="radio" name="paymentMethod" class="mr-3">
+      <img src="contact.png" alt="Contact" style="width: 50px;">
+      Contact
+    </label>
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="mt-4 d-flex justify-content-between">
+    <button class="btn btn-secondary" onclick="goToShipping()">Back to Shipping</button>
+    <button class="btn btn-primary" onclick="goToPayment()">Proceed to Payment</button>
+  </div>
+</div>
+
+<script>
+  function goToShipping() {
+    // Activate the Shipping step and deactivate Review & Payments
+    document.querySelectorAll('.progress-step')[0].classList.add('active');
+    document.querySelectorAll('.progress-step')[1].classList.remove('active');
+  }
+
+  function goToPayment() {
+    // Activate the Review & Payments step and deactivate Shipping
+    document.querySelectorAll('.progress-step')[1].classList.add('active');
+    document.querySelectorAll('.progress-step')[0].classList.remove('active');
+  }
+</script>
+
+</body>
+</html>
