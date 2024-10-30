@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace _2B_Egypt.Application.Services;
 
 public class OrderService : IOrderService
@@ -46,6 +48,33 @@ public class OrderService : IOrderService
         {
             Entity = _mapper.Map<CreateOrderDTO>(result),
             IsSuccessfull = true,
+        };
+    }
+
+    public async Task<ResponseDTO<List<GetAllOrderDTO>>> GetAllOrderAsync()
+    {
+        var orders = (await _OrderRepository.GetAllAsync())
+                        .Include(ord => ord.User)
+                        .Include(ord => ord.Payment)
+                        .AsNoTracking();
+        return new ResponseDTO<List<GetAllOrderDTO>>
+        {
+            Entity = _mapper.Map<List<GetAllOrderDTO>>(orders.ToList()),
+            IsSuccessfull = true 
+        };
+    }
+
+    public async Task<ResponseDTO<List<GetAllOrderDTO>>> GetAllOrderAsync(Guid  userId)
+    {
+        var orders = (await _OrderRepository.GetAllAsync())
+                        .Include(ord => ord.User)
+                        .Include(ord => ord.Payment)
+                        .Where(ord => ord.User.Id.Equals(userId))
+                        .AsNoTracking();
+        return new ResponseDTO<List<GetAllOrderDTO>>
+        {
+            Entity = _mapper.Map<List<GetAllOrderDTO>>(orders.ToList()),
+            IsSuccessfull = true
         };
     }
 }

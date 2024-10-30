@@ -1,0 +1,30 @@
+<div class="order-list-container">
+    <h2 class="title">My Orders</h2>
+    
+    <table class="order-table">
+      <thead>
+        <tr>
+          <th>Order Number</th>
+          <th>Date</th>
+          <th>Recipient</th>
+          <th>Order Total</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.orderNumber }}</td>
+          <td>{{ order.date | date:'yyyy/MM/dd' }}</td>
+          <td>{{ order.userName }}</td>
+          <td>{{ order.totalAmount | currency:'USD':'symbol-narrow':'1.2-2' }}</td>
+          <td [class.new]="order.status === 'New Order'">{{ order.status }}</td>
+          <td>
+            <a href="#" class="details-link" (click)="viewOrderDetails(order)">View Details</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    
+  

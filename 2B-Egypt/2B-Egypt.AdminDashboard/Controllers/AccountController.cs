@@ -3,13 +3,24 @@ public class AccountController : Controller
 {
     private readonly UserManager<User> userManager;
     private readonly SignInManager<User> signInManager;
+    private readonly RoleManager<IdentityRole> roleManager;
     private readonly IMapper mapper;
 
-    public AccountController(UserManager<User> userManager, SignInManager<User> _signInManager, IMapper mapper)
+    public AccountController(UserManager<User> userManager, SignInManager<User> _signInManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
     {
         this.userManager = userManager;
         this.signInManager = _signInManager;
+        this.roleManager = roleManager;
         this.mapper = mapper;
+    }
+    private async Task<bool> createRole(string name)
+    {
+        var role = new IdentityRole();
+        role.Name = name;
+        var result = await roleManager.CreateAsync(role);
+        if(result.Succeeded)
+           return true;
+        return false;
     }
 
     public IActionResult Index()
@@ -35,6 +46,8 @@ public class AccountController : Controller
             }
             var user = mapper.Map<User>(userDTO);
             user.UserName = user.Email;
+            //await createRole("Admin");
+            //await userManager.AddToRoleAsync(user,"Admin");
             var result = await userManager.CreateAsync(user, userDTO?.Password!);
             if(result.Succeeded)
             {

@@ -40,10 +40,12 @@ public class AutoMapperProfile : Profile
 
         // User 
         CreateMap<CreateUserDTO,User>().ReverseMap();
+        CreateMap<GetAllUserDTO,User>().ReverseMap();
 
         //  Order
         CreateMap<CreateOrderItemDTO,OrderItem>().ReverseMap();
         CreateMap<CreateOrderDTO,Order>().ReverseMap();
+        CreateMap<GetAllOrderDTO,Order>().ReverseMap();
 
 
     }
