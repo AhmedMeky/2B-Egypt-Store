@@ -23,7 +23,8 @@ public class GenericRepository<TEntity, TId> : IGenericRepository<TEntity, TId> 
     // get the entity by its Id
     public async Task<TEntity> GetByIdAsync(TId id)
     {
-        return await _dbSet.FirstOrDefaultAsync(entity => entity.Id.Equals(id));
+        var query = _dbSet.AsNoTracking();
+        return await query.FirstOrDefaultAsync(entity => entity.Id.Equals(id));
     }
 
     public async Task<TEntity> GetByIdAsync(TId id, string[] includes = null)

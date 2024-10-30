@@ -220,6 +220,7 @@ public class ProductService : IProductService
             };
         }
         product = mapper.Map<Product>(productDTO);
+        product.UpdatedAt = DateTime.Now;
         await productRepository.UpdateAsync(product);
         await productRepository.SaveChangesAsync();
         return new()

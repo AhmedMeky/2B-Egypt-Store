@@ -100,7 +100,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Update(CreateProductDTO product, List<IFormFile> images, Guid[] facilities)
+    public async Task<IActionResult> Update(CreateProductDTO product, List<IFormFile> images)
     {
         foreach (IFormFile image in images)
         {
@@ -119,14 +119,15 @@ public class ProductController : Controller
                 product.Images.Add(createImage);
             }
         }
-        foreach (var fId in facilities)
-        {
-            var fac = await _facilityService.GetByIdAsync(fId);
-            product.Facilities.Add(fac.Entity);
-        }
+        //foreach (var fId in facilities)
+        //{
+        //    var fac = await _facilityService.GetByIdAsync(fId);
+        //    product.Facilities.Add(fac.Entity);
+        //}
         if (ModelState.IsValid && product.Images.Count() != 0)
         {
             var productResponse = await _productService.UpdateAsync(product);
+            
             if (productResponse.IsSuccessfull)
                 return RedirectToAction("Index");
             else

@@ -10,7 +10,7 @@
 }
 
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Add New Product</h1>
+    <h1 class="h3 mb-0 text-gray-800"> Update Product</h1>
     <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm bg-success  shadow text-white ">
         Back To Products
     </a>
@@ -20,50 +20,55 @@
     <div class="col-md-4">
         <form asp-action="Update" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group" hidden>
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" name="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="NameAr" class="control-label"></label>
-                <input asp-for="NameAr" class="form-control" value=@(Model?.NameAr) />
+                <input asp-for="NameAr" class="form-control" />
                 <span asp-validation-for="NameAr" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="NameEn" class="control-label"></label>
-                <input asp-for="NameEn" class="form-control" value=@(Model?.NameEn) />
+                <input asp-for="NameEn" class="form-control" />
                 <span asp-validation-for="NameEn" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="ColorAr" class="control-label"></label>
-                <input asp-for="ColorAr" class="form-control" value=@(Model?.ColorAr) />
+                <input asp-for="ColorAr" class="form-control"  />
                 <span asp-validation-for="ColorAr" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ColorEn" class="control-label"></label>
-                <input asp-for="ColorEn" class="form-control" value=@(Model?.ColorEn) />
+                <input asp-for="ColorEn" class="form-control"  />
                 <span asp-validation-for="ColorEn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DescriptionAr" class="control-label"></label>
-                <textarea asp-for="DescriptionAr" class="form-control" value=@(Model?.DescriptionAr) rows="5" placeholder="Please Enter $ between each property"></textarea>
+                <textarea asp-for="DescriptionAr" class="form-control" rows="5" placeholder="Please Enter $ between each property"></textarea>
                 <span asp-validation-for="DescriptionAr" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DescriptionEn" class="control-label"></label>
-                <textarea asp-for="DescriptionEn" class="form-control" value=@(Model?.DescriptionEn) rows="5" placeholder="Please Enter $ between each property"></textarea>
+                <textarea asp-for="DescriptionEn" class="form-control" rows="5" placeholder="Please Enter $ between each property"></textarea>
                 <span asp-validation-for="DescriptionEn" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" min="1" value=@(Model?.Price) />
+                <input asp-for="Price" class="form-control" min="1" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UnitInStock" class="control-label"></label>
-                <input asp-for="UnitInStock" class="form-control" min="1" value=@(Model?.UnitInStock) />
+                <input asp-for="UnitInStock" class="form-control" min="1" />
                 <span asp-validation-for="UnitInStock" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Discount" class="control-label"></label>
-                <input asp-for="Discount" class="form-control" min="1" value=@(Model?.Discount) />
+                <input asp-for="Discount" class="form-control" min="0" />
                 <span asp-validation-for="Discount" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -84,7 +89,7 @@
             </select> *@
             <div class="form-group">
                 <label for="Images">Images:</label>
-                <input type="file" class="form-control-file" name="Images" multiple>
+                <input type="file" class="form-control-file" name="Images" multiple min="1" required>
             </div>
 
             @* <div class="form-group">
