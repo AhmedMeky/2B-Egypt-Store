@@ -42,9 +42,9 @@
       background-color: orange;
     }
 
-      .more-info-reviews a.active::after {
-        background-color: orange;
-      }
+    .more-info-reviews a.active::after {
+      background-color: orange;
+    }
 
     .carousel-indicators img {
       border: 1px solid #e57b34;
@@ -131,64 +131,56 @@
 <div style="display: flex; align-items: center; justify-content: center">
   <div style="width: 30%" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false">
     <div class="carousel-indicators">
-      <img *ngFor="let image of product.images; let i = index; trackBy: trackByIndex"
-           [src]="image.imageUrl"
-           class="img-thumbnail d-block"
-           [class.active]="i == 0"
-           [attr.data-bs-target]="'#carouselExampleIndicators'"
-           [attr.data-bs-slide-to]="i"
-           [attr.aria-label]="'Slide ' + (i + 1)"
-           [attr.alt]="'Slide ' + (i + 1) + ' Thumbnail'" />
+      <img *ngFor="let image of product.images; let i = index; trackBy: trackByIndex" [src]="image.imageUrl"
+        class="img-thumbnail d-block" [class.active]="i == 0" [attr.data-bs-target]="'#carouselExampleIndicators'"
+        [attr.data-bs-slide-to]="i" [attr.aria-label]="'Slide ' + (i + 1)"
+        [attr.alt]="'Slide ' + (i + 1) + ' Thumbnail'" />
     </div>
 
     <div class="carousel-inner">
-      <div *ngFor="let image of product.images; let i = index"
-           class="carousel-item"
-           [class.active]="i === 0">
+      <div *ngFor="let image of product.images; let i = index" class="carousel-item" [class.active]="i === 0">
         <img [src]="image.imageUrl" class="d-block w-100" alt="{{ getLocalizedProductName() }}" />
       </div>
     </div>
   </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<div class="product-info">
+  <h1 class="product-title">{{ getLocalizedProductName()}}</h1>
+  <p><strong> {{ "PRODUCT_DETAILS.DESCRIPTION" | translate }}
+      :</strong> {{ getLocalizedProductDescription() }}</p>
+  <hr>
+  <p class="price">
+    <span class="special-price">{{ product?.price | currency }}</span>
+    <strong>{{ PriceAfterSale|currency }}</strong>
+    &nbsp;
+    <span class="stock-status">
+      {{
+      product && product.unitInStock > 0
+      ? ("PRODUCT_DETAILS.STOCK_STATUS.IN_STOCK" | translate)
+      : ("PRODUCT_DETAILS.STOCK_STATUS.OUT_OF_STOCK" | translate)
+      }}
+    </span>
+  </p>
+
+  <div class="cart-buttons">
+    <button (click)="addToCart()" class="add-cart-btn">
+      <i class="fas fa-shopping-cart"></i> {{ "ADD_TO_CART" | translate }}
+
     </button>
-
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-      data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  <div class="product-info">
-    <h1 class="product-title">{{ getLocalizedProductName()}}</h1>
-    <p><strong> {{ "PRODUCT_DETAILS.DESCRIPTION" | translate }}
-        :</strong> {{ getLocalizedProductDescription() }}</p>
-    <hr>
-    <p class="price">
-      <span class="special-price">{{ product?.price | currency }}</span>
-      <strong>{{ PriceAfterSale|currency }}</strong>
-      &nbsp;
-      <span class="stock-status">
-        {{
-        product && product.unitInStock > 0
-        ? ("PRODUCT_DETAILS.STOCK_STATUS.IN_STOCK" | translate)
-        : ("PRODUCT_DETAILS.STOCK_STATUS.OUT_OF_STOCK" | translate)
-        }}
-      </span>
-    </p>
-
-    <div class="cart-buttons">
-      <button (click)="addToCart()" class="add-cart-btn">
-        <i class="fas fa-shopping-cart"></i> {{ "ADD_TO_CART" | translate }}
-
-      </button>
 
     </div>
   </div>
-
+<!-- </div> -->
 
 <div class="more-info-reviews">
   <a id="more-info" [class.active]="IsMoreInfo" (click)="activateTab(true)">{{"PRODUCT_DETAILS.MORE_INFORMATION" |

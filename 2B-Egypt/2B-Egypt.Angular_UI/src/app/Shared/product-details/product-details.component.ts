@@ -1,9 +1,9 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
   OnInit,
-  output,
   Output,
 } from '@angular/core';
 import { ProductService } from '../../services/product.service';
@@ -62,12 +62,11 @@ export class ProductDetailsComponent implements OnInit {
     private router: Router,
     private _cartService: CartService,
     translateService: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {
     this.translate = translateService;
-    // define event
     this.AddToCartCounter = new EventEmitter<number>();
   }
-
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -76,7 +75,7 @@ export class ProductDetailsComponent implements OnInit {
       this.Review.priceRating = this.ratingPrice.toString();
       this.Review.qualityRating = this.ratingQuilty.toString();
       this.Review.valueRating = this.ratingValue.toString();
-  
+
       if (this.productId) {
         // Fetch product data based on new product ID
         this._productService.getProductById(this.productId).subscribe({
@@ -93,7 +92,6 @@ export class ProductDetailsComponent implements OnInit {
       }
     });
   }
-
 
   // ngOnInit() {
   //   this.productId = this.route.snapshot.params['id'];
@@ -127,35 +125,42 @@ export class ProductDetailsComponent implements OnInit {
       price: this.product.price,
       quantity: this.product?.quantity || 1,
       totalPrice: this.product.price,
-      productNamear:this.product.nameAr,
+      productNamear: this.product.nameAr,
       // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
       image: this.product.images[0].imageUrl,
-      stock: this.product.unitInStock 
+      stock: this.product.unitInStock,
     };
     this._cartService.addToCart(cartItem);
     this.snackBar.open(this.translate.instant('ADD_TO_CART'), 'Close', {
-      duration: 2000,});
-    
-
-  
+      duration: 2000,
+    });
   }
 
   getLocalizedProductName(): string {
-    return this.translate.currentLang === 'ar' ? this.product.nameAr : this.product.nameEn;
+    return this.translate.currentLang === 'ar'
+      ? this.product.nameAr
+      : this.product.nameEn;
   }
 
   getLocalizedProductDescription(): string {
-    return this.translate.currentLang === 'ar' ? this.product.descriptionAr : this.product.descriptionEn;
+    return this.translate.currentLang === 'ar'
+      ? this.product.descriptionAr
+      : this.product.descriptionEn;
   }
   getLocalizedcatogary(): string {
-    return this.translate.currentLang === 'ar' ? this.product?.category?.nameAr : this.product.category.nameEn;
+    return this.translate.currentLang === 'ar'
+      ? this.product?.category?.nameAr
+      : this.product.category.nameEn;
   }
   getLocalizedbrand(): string {
-    return this.translate.currentLang === 'ar' 
-      ? this.product.brand?.nameAr ?? 'Default Brand Name' 
-      : this.product.brand?.nameEn ?? 'Default Brand Name'; 
+    return this.translate.currentLang === 'ar'
+      ? this.product.brand?.nameAr ?? 'Default Brand Name'
+      : this.product.brand?.nameEn ?? 'Default Brand Name';
   }
-  
+  trackByIndex(index: number, item: any): number {
+    return index;
+  }
+
   activateTab(showMoreInfo: boolean) {
     this.IsMoreInfo = showMoreInfo;
   }
@@ -185,19 +190,13 @@ export class ProductDetailsComponent implements OnInit {
     this._ReviewService.addReview(this.Review).subscribe({
       next: (res) => {
         this.Review = {} as IReview;
-        this.ratingPrice=0
-        this.ratingQuilty=0
-        this.ratingValue=0
+        this.ratingPrice = 0;
+        this.ratingQuilty = 0;
+        this.ratingValue = 0;
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
-
-
-  trackByIndex(index: number, item: any): number {
-    return index;
-  }
-
 }

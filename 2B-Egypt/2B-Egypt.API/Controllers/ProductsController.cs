@@ -39,7 +39,21 @@ namespace _2B_Egypt.API.Controllers
             var products = await _productService.GetAllPaginationAsync(pageNumber, pageSize);
             return Ok(products);
         }
-        
+        [HttpGet("productsByCategory")]
+        public async Task<IActionResult> GetProductsByCategoryIdWithPagination(Guid categoryId, int pageNumber = 1, int pageSize = 20)
+        {
+            
+            if (categoryId == Guid.Empty)
+            {
+                return BadRequest("Category ID cannot be null or empty.");
+            }
+
+            var pagedResult = await _productService.GetProductsByCategoryIdWithPaginationAsync(categoryId, pageNumber, pageSize);
+
+            return Ok(pagedResult);
+        }
+
+
         [HttpGet("category/{categoryId}")]
         public async Task<ActionResult<List<GetProductDTO>>> GetProductsByCategoryID(Guid categoryId)
         {
