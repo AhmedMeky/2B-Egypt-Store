@@ -19,7 +19,7 @@ export const routes: Routes = [
   { path: 'Signup', component: SignUpComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'Home', component: AppComponent },
-  { path: 'products', component: ProductListComponent ,canActivate:[AuthorizationGuard]},
+  { path: 'products', component: ProductListComponent },/*canActivate:[AuthorizationGuard]*/
   { path: 'category/:id', component: ProductsByCategoryComponent },
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'Categories', component: NavBarComponent },

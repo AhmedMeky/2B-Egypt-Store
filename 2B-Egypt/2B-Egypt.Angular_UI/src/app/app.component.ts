@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IPayPalConfig } from 'ngx-paypal';
 import { RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './Shared/Components/product-list/product-list.component';
 import { LanguageServiceService } from './services/language-service.service';
@@ -15,10 +16,12 @@ import { AdvertismentComponent } from "./Shared/Components/advertisment/advertis
 import { IProduct } from '../models/IProduct';
 import { ProductService } from './services/product.service';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxPayPalModule } from 'ngx-paypal';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
+  imports: [ 
+    NgxPayPalModule,
     RouterOutlet, NavBarComponent,
     ProductListComponent, HttpClientModule, ProductDetailsComponent,
     ProductsByCategoryComponent, LoginComponent,
