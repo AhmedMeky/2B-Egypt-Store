@@ -83,14 +83,12 @@
                          <a class="collapse-item" asp-controller="Brand" asp-action="index"> Brands </a>
                          <a class="collapse-item" asp-controller="Brand" asp-action="Create"> Create Brand</a> 
 
-                         <a class="collapse-item" asp-action="Create"> Create Brand </a>
-                        <a class="collapse-item" asp-action="Edit" method="post"> Update  Brand</a>
-
-
                         <h6 class="collapse-header">Order:</h6>
                         <a class="collapse-item" asp-controller="Order" asp-action="Index"> Orders </a>
                     
-                        <a class="collapse-item" asp-controller="Order" asp-action="Index"> View Orders </a>
+                        <h6 class="collapse-header">Users:</h6>
+                        <a class="collapse-item" asp-controller="User" asp-action="Index"> Users </a>
+                        <a class="collapse-item" asp-controller="User" asp-action="Create"> Create User </a>
 
                         <h6 class="collapse-header">Specifications:</h6>
                         <a class="collapse-item" asp-controller="Facility" asp-action="Create"> Create Specifications </a>
@@ -176,16 +174,16 @@
                          
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="@Url.Action("Register", "Account")">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Create Acount
                                 </a> 
                       
-                                <a class="dropdown-item" href="@Url.Action("UpdateAdminData", "Admin")">
+                                <a class="dropdown-item" href="@Url.Action("UpdateAdminData", "Account")">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                                <a class="dropdown-item" href="@Url.Action("ChangePassword", "Admin")">
+                                <a class="dropdown-item" href="@Url.Action("ChangePassword", "Account")">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Change Password
                                 </a>

@@ -47,9 +47,31 @@ public class ProductService : IProductService
         return mapper.Map<List<GetProductDTO>>(products);
     }
 
+    //public async Task<PagedResult<GetProductDTO>> GetAllPaginationAsync(int pageNumber, int pageSize)
+    //{
+    //    var query = (await productRepository.GetAllAsync()).AsQueryable();
+        
+    //    var totalCount = await query.CountAsync();
+    //    var products = await query
+    //        .Skip((pageNumber - 1) * pageSize)
+    //        .Take(pageSize)
+    //        .ToListAsync();
+
+    //    var pagedResult = new PagedResult<GetProductDTO>
+    //    {
+    //        Items = mapper.Map<List<GetProductDTO>>(products),
+    //        TotalCount = totalCount,
+    //        PageNumber = pageNumber,
+    //        PageSize = pageSize
+    //    };
+        
+    //    return pagedResult;
+    //}
+
     public async Task<PagedResult<GetProductDTO>> GetAllPaginationAsync(int pageNumber, int pageSize)
     {
-        var query = (await productRepository.GetAllAsync()).AsQueryable();
+        var query = (await productRepository.GetAllAsync()).Include(prd => prd.Images)
+                    .Where(prd => !prd.IsDeleted).AsQueryable();
         
         var totalCount = await query.CountAsync();
         var products = await query
@@ -64,8 +86,50 @@ public class ProductService : IProductService
             PageNumber = pageNumber,
             PageSize = pageSize
         };
-        
+
         return pagedResult;
+    }
+    public async Task<PagedResult<GetProductDTO>> GetProductsByCategoryIdWithPaginationAsync(Guid categoryId, int pageNumber, int pageSize)
+    {
+        var query = (await productRepository.GetAllAsync())
+                    .Include(prd => prd.Images)
+                    .Where(prd => !prd.IsDeleted && prd.CategoryId == categoryId) 
+                    .AsQueryable();
+        var totalCount = await query.CountAsync();
+        var products = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(); 
+
+        var pagedResult = new PagedResult<GetProductDTO>
+        {
+            Items = mapper.Map<List<GetProductDTO>>(products),
+            TotalCount = totalCount,
+            PageNumber = pageNumber,
+            PageSize = pageSize
+        };
+
+        return pagedResult;
+    }
+
+
+    public async Task<ResponseDTO<CreateProductDTO>> GetOneByIdAsync(Guid id)
+    {
+        var product = (await productRepository.GetByIdAsync(id, ["Category", "Brand"]));
+        if (product is null)
+        {
+            return new ()
+            {
+                Entity = null!,
+                IsSuccessfull = false,
+                Message = "There is no product with this Id"
+            };
+        }
+        return new ()
+        {
+            Entity = mapper.Map<CreateProductDTO>(product),
+            IsSuccessfull = true
+        };
     }
 
     // get the details of a specific product by its Id
@@ -143,10 +207,30 @@ public class ProductService : IProductService
         return mapper.Map<List<GetProductDTO>>(products);
     }
 
-    public Task<ResponseDTO<CreateProductDTO>> UpdateAsync(CreateProductDTO product)
+    public async Task<ResponseDTO<CreateProductDTO>> UpdateAsync(CreateProductDTO productDTO)
     {
-        throw new NotImplementedException();
+        var product = await productRepository.GetByIdAsync(productDTO.Id);
+        if(product is null)
+        {
+            return new()
+            {
+                Entity = null!,
+                IsSuccessfull = false,
+                Message = "there is no product with this Id"
+            };
+        }
+        product.Images = [];
+        product = mapper.Map<Product>(productDTO);
+        product.UpdatedAt = DateTime.Now;
+        await productRepository.UpdateAsync(product);
+        await productRepository.SaveChangesAsync();
+        return new()
+        {
+            Entity = productDTO,
+            IsSuccessfull = true
+        };
     }
+
 
     public async Task SoftDeleteAsync(Guid id)
     {

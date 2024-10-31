@@ -86,6 +86,58 @@ public class ProductController : Controller
         return View(productRespone.Entity);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Update(Guid id)
+    {
+        var productResponse = await _productService.GetOneByIdAsync(id);
+        var categories = (await _categoryService.GetAllAsync()).Entity;
+        ViewBag.categories = new SelectList(categories, "Id", "NameEn", productResponse.Entity.CategoryId);
+        var brands = await _brandService.GetAllAsync();
+        ViewBag.brands = new SelectList(brands, "Id", "NameEn", productResponse.Entity.BrandId);
+        var facilities = await _facilityService.GetAllAsync();
+        ViewBag.facilities = facilities.Entity;
+        return View(productResponse.Entity);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Update(CreateProductDTO product, List<IFormFile> images)
+    {
+        product.Images = [];
+        foreach (IFormFile image in images)
+        {
+            if (image.Length > 0)
+            {
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img");
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + image.FileName;
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(fileStream);
+                }
+                CreateImageWithPraductDTO createImage = new();
+                createImage.ImageUrl = "/img/" + uniqueFileName;
+                product.Images.Add(createImage);
+            }
+        }
+        //foreach (var fId in facilities)
+        //{
+        //    var fac = await _facilityService.GetByIdAsync(fId);
+        //    product.Facilities.Add(fac.Entity);
+        //}
+        if (ModelState.IsValid && product.Images.Count() != 0)
+        {
+            var productResponse = await _productService.UpdateAsync(product);
+            
+            if (productResponse.IsSuccessfull)
+                return RedirectToAction("Index");
+            else
+                return View("Error404", productResponse.Message);
+        }
+
+        return RedirectToAction("Update", product);
+    }
+
     public async Task<IActionResult> Delete(Guid id, bool isSoftDelete = true)
     {
 

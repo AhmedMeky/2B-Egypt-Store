@@ -1,4 +1,5 @@
 ﻿using _2B_Egypt.Application.DTOs.AdminDTOs;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace _2B_Egypt.Application.Mapper;
 
@@ -39,10 +40,13 @@ public class AutoMapperProfile : Profile
 
         // User 
         CreateMap<CreateUserDTO,User>().ReverseMap();
+        CreateMap<GetAllUserDTO,User>().ReverseMap();
 
         //  Order
         CreateMap<CreateOrderItemDTO,OrderItem>().ReverseMap();
         CreateMap<CreateOrderDTO,Order>().ReverseMap();
+        CreateMap<GetAllOrderDTO,Order>().ReverseMap();
+
 
     }
 }

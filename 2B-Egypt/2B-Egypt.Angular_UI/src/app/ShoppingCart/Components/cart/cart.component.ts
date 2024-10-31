@@ -18,93 +18,84 @@ import { IProduct } from '../../../../models/IProduct';
 export class CartComponent implements OnInit {
   cartItems: CartItem[] =[];
   showStockError: boolean = false;
-  subTotal:number=0;
+  subTotal: number = 0;
   public translate: TranslateService;
   imgmvcurl = 'http://localhost:5269/img/';
   product: IProduct = {} as IProduct;
   cart: CartItem = {} as CartItem;
 
-  constructor(private cartService: CartService,private route:ActivatedRoute, public translateService: TranslateService,) {
+  constructor(
+    private cartService: CartService,
+    private route: ActivatedRoute,
+    public translateService: TranslateService
+  ) {
     this.translate = translateService;
-
   }
- 
+
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
     console.log(this.cartItems)
     this.subTotal = 0
     this.cartItems.forEach(item=>{
- 
       this.subTotal+= item.price*item.quantity
+ 
     })
     
     console.log("Current language:", this.translateService.currentLang);
   }
   getLocalizedProductName(item: CartItem): string {
-    return this.translateService.currentLang === 'ar' ? item.productNamear : item.productName;
+    return this.translateService.currentLang === 'ar'
+      ? item.productNamear
+      : item.productName;
   }
-  
 
   removeItem(productId: string) {
-    console.log(productId)
+    console.log(productId);
     this.cartService.removeFromCart(productId);
     this.cartItems = this.cartService.getCartItems();
-   this.cartService.minusCartCounter();
+    this.cartService.minusCartCounter();
   }
 
   updateQuantity(productId: string, quantity: number) {
-    const productInCart = this.cartItems.find(item => item.productId === productId);
-    
+    const productInCart = this.cartItems.find(
+      (item) => item.productId === productId
+    );
+
     if (productInCart) {
-        if (quantity > productInCart.stock) {
-            this.showStockError = true; 
-        } else {
-            this.showStockError = false; 
-            productInCart.quantity = quantity; 
-            this.cartService.updateQuantity(productId, quantity);
-        }
+      if (quantity > productInCart.stock) {
+        this.showStockError = true;
+      } else {
+        this.showStockError = false;
+        productInCart.quantity = quantity;
+        this.cartService.updateQuantity(productId, quantity);
+      }
     }
-}
-
-increaseQuantity(item: CartItem) {
-  const newQuantity = item.quantity + 1; 
-  this.updateQuantity(item.productId, newQuantity); 
-  item.quantity = newQuantity; 
-  this.subTotal = 0
-  this.cartItems.forEach(item=>{
-
-    this.subTotal+= item.price*item.quantity
-  })
-}
-
-decreaseQuantity(item: CartItem) {
-  if (item.quantity > 1) {
-      const newQuantity = item.quantity - 1; 
-      this.updateQuantity(item.productId, newQuantity); 
-      item.quantity = newQuantity; 
   }
-  this.subTotal = 0
-  this.cartItems.forEach(item=>{
 
-    this.subTotal+= item.price*item.quantity
-  })
-}
+  increaseQuantity(item: CartItem) {
+    const newQuantity = item.quantity + 1;
+    this.updateQuantity(item.productId, newQuantity);
+    item.quantity = newQuantity;
+    this.subTotal = 0;
+    this.cartItems.forEach((item) => {
+      this.subTotal += item.price * item.quantity;
+    });
+  }
 
-
-
+  decreaseQuantity(item: CartItem) {
+    if (item.quantity > 1) {
+      const newQuantity = item.quantity - 1;
+      this.updateQuantity(item.productId, newQuantity);
+      item.quantity = newQuantity;
+    }
+    this.subTotal = 0;
+    this.cartItems.forEach((item) => {
+      this.subTotal += item.price * item.quantity;
+    });
+  }
 
   clearCart() {
     this.cartService.clearCart();
     this.cartItems = [];
   }
- 
-  
-
-
-
-
-
-
-
-
 }

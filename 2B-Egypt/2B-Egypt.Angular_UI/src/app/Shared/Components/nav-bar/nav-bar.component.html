@@ -3,23 +3,27 @@
 <div style="height: 3px; background-color: orangered"></div>
 <div id="smallnav">
   <div style="display: flex; flex-direction: row; align-items: center">
-    <div><a href="#">Compare()</a></div>
+    <div>
+      <a href="#">{{ "COMPARE" | translate }}</a>
+    </div>
     <!-- <div><a *ngIf="!isLoggedIn" routerLink="/Login">Sign In</a></div>  -->
     <a
       *ngIf="!isLoggedIn"
       routerLink="/Login"
       (click)="changeStat()"
       style="color: grey"
-      >Sign In</a
+      >{{ "SIGN_IN" | translate }}</a
     >
     <a
       *ngIf="isLoggedIn"
       routerLink="/Login"
       (click)="logout()"
       style="color: grey"
-      >Log Out</a
+      >{{ "Logout" | translate }}</a
     >
-    <div><a routerLink="/Signup">Create Account</a></div>
+    <div>
+      <a routerLink="/Signup">{{ "CREATE_ACCOUNT" | translate }}</a>
+    </div>
     <!-- <div><button (click)="logout()">Log Out</button></div> -->
   </div>
 
@@ -29,8 +33,8 @@
     aria-label="Select language"
     style="background-color: grey"
   >
-    <option value="English">English</option>
-    <option value="العربية">العربية</option>
+    <option value="en">English</option>
+    <option value="ar">العربية</option>
   </select>
 </div>
 <div>
@@ -38,7 +42,7 @@
     <img src="/img/2b.png" width="15%" id="img2b" />
 
     <div>
-      <div style="" id="divforEndjustfy">
+      <div id="divforEndjustfy">
         <div id="searchandButton">
           <input
             type="search"
@@ -102,8 +106,8 @@
             <a [routerLink]="['/cart']">
               <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
               <span class="item-count">
-                {{ counter.toString() | translate }}</span
-              >
+                {{ counter.toString() | translate }}
+              </span>
             </a>
           </div>
         </div>
@@ -134,7 +138,7 @@
         style="margin-right: 7px; position: relative"
       >
         <a (mouseover)="ShowSubCategories(cat.id)">
-          {{ cat.nameEn }}
+          {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
         </a>
       </li>
     </ul>
@@ -146,7 +150,8 @@
       (click)="SelectedProductId(cat.id)"
       *ngFor="let cat of filteredSubcategories"
       style="margin-right: 7px; position: relative"
-      >{{ cat.nameEn }}</a
+    >
+      {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
     >
   </div>
   <!-- <div id="sidelist" *ngIf="BarsAppears">
@@ -196,7 +201,7 @@
     </div>
   </div> -->
 
-  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative;">
+  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
     <div
       (click)="toggleDropdown()"
       style="
@@ -220,22 +225,26 @@
     >
       <div *ngFor="let cat of categorywithSubCategories">
         <div
-          style="padding: 10px; cursor: pointer; text-align: left; color: black;"
+          style="padding: 10px; cursor: pointer; text-align: left; color: black"
           (click)="toggleSubDropdown(cat)"
         >
           <strong>{{ cat.nameEn }}</strong>
         </div>
-        <div *ngIf="cat.isSubDropdownOpen" style="padding: 5px;">
-          <select style="width: 100%;">
-            <option value="">Select a subcategory</option>
-            <option *ngFor="let subCat of ParentCategories" [value]="subCat.nameEn">{{ subCat.nameEn }}</option>
+        <div *ngIf="cat" style="padding: 5px">
+          <select>
+            <option style="width: 80%" value="">Select a subcategory</option>
+            <option
+              style="width: 80%"
+              *ngFor="let subCat of cat.subcategories"
+              [value]="subCat.nameEn"
+            >
+              {{ subCat.nameEn }}
+            </option>
           </select>
         </div>
       </div>
     </div>
   </div>
-  
-
 </div>
 <div style="margin-inline: 10%">
   <input

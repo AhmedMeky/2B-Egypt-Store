@@ -17,6 +17,7 @@ global using _2B_Egypt.Application.DTOs.ProductImageDTO;
 global using _2B_Egypt.Domain.Models;
 global using _2B_Egypt.AdminDashboard.ViewModels;
 global using _2B_Egypt.Application.DTOs.AdminDTOs;
+global using _2B_Egypt.Application.DTOs.OrderDTOs;
 global using AutoMapper;
 global using Microsoft.AspNetCore.Identity;
 
