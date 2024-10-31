@@ -31,7 +31,7 @@ export class ProductDetailsComponent implements OnInit {
   product: IProduct = {} as IProduct;
   catogary: ICategory = {} as ICategory;
   brand: IBrand = {} as IBrand;
-  imgmvcurl = 'http://localhost:5269/img/';
+  imgmvcurl = 'http://localhost:5204/img/';
   productId: string | null = null;
   cart: CartItem = {} as CartItem;
   PriceAfterSale: number = 0;

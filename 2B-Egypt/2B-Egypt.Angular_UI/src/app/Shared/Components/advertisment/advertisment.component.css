@@ -2,17 +2,31 @@
     background-color: rgb(206, 216, 215);
     display: flex;
     flex-direction: row; 
-    flex-wrap: wrap;
-    width: 22%;
+    flex-wrap: nowrap;
+    width: 25%;
     height: 50%;
-    margin: 15px;
+    margin: 12px;
     line-height: 50px;
     padding-left: 20px;
-    border-radius: 3px; 
+    border-radius: 3px;  
+    margin-inline: 25px;
     transition: background-color 0.3s ease;
   } 
   .rectangle:hover {
     background-color: #f37021; /* Change background color on hover */ 
    
   } 
-  
+  /* @media (max-width: 650px) { 
+    .rectangle {
+     flex-direction: column; 
+     
+    } 
+  } */
+  @media (max-width:1336){
+
+    .rectangle{
+      display: flex;
+      flex-direction: column;
+    }
+
+  }

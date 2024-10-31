@@ -51,6 +51,10 @@ import { ProductDetailsComponent } from '../../product-details/product-details.c
   styleUrl: './nav-bar.component.css',
 })
 export class NavBarComponent implements OnInit { 
+  BarsAppears = false; // Control the visibility of the dropdown
+  isDropdownOpen = false; // Track whether the dropdown is open
+  selectedCategory: string | null = null;
+  searchAppears:boolean=false;
  
   [x: string]: any;
   ParentCategories: ICategory[] = [] as ICategory[];
@@ -246,5 +250,46 @@ export class NavBarComponent implements OnInit {
   }
   get counter(): number {
     return this._cartService.getCounter();
+  } 
+  changeSearchAppearance(){
+    this.searchAppears =!this.searchAppears ;
+  }  
+  changeBarsAppearance(){
+    this.BarsAppears =!this.BarsAppears ;
+  } 
+ toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen; // Toggle main dropdown visibility
+  }
+
+  toggleSubDropdown(category: any) {
+    // Close other sub dropdowns and toggle the clicked one
+    this.ParentCategories.forEach(cat => {
+      if (cat !== category) {
+        cat.isSubDropdownOpen = false; // Close other dropdowns
+      }
+    });
+    category.isSubDropdownOpen = !category.isSubDropdownOpen; // Toggle the clicked dropdown
+  }
+
+  selectCategory(category: string) {
+    this.selectedCategory = category; // Set the selected category
+  }
+
+  closeDropdown() {
+    this.isDropdownOpen = false; // Close the main dropdown
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClick(event: MouseEvent) {
+    const dropdownElement = document.getElementById('sidelist');
+    const targetElement = event.target as HTMLElement;
+
+    // Check if the clicked target is not inside the dropdown
+    if (dropdownElement && !dropdownElement.contains(targetElement)) {
+      this.isDropdownOpen = false; // Close the main dropdown
+      this.ParentCategories.forEach(cat => {
+        cat.isSubDropdownOpen = false; // Close all sub dropdowns
+      });
+    }
   }
 }

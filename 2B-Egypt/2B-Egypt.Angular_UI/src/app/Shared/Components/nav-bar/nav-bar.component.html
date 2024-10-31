@@ -1,12 +1,5 @@
 <!-- Example split danger button -->
-<div
-  style="
-    background-image: url('/img/bank.jpg');
-    background-size: cover;
-    height: 70px;
-    background-position: center;
-  "
-></div>
+<div class="responsivediv" style="width: 100%"></div>
 <div style="height: 3px; background-color: orangered"></div>
 <div id="smallnav">
   <div style="display: flex; flex-direction: row; align-items: center">
@@ -45,15 +38,7 @@
     <img src="/img/2b.png" width="15%" id="img2b" />
 
     <div>
-      <div
-        style="
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          margin: 10px;
-          justify-content: space-between;
-        "
-      >
+      <div style="" id="divforEndjustfy">
         <div id="searchandButton">
           <input
             type="search"
@@ -61,7 +46,7 @@
             class="form-control"
             style="margin-right: 5px"
           />
-          <button id="btnsearch" style="margin-right: 5px; width: 60px">
+          <button id="btnsearch" style="margin-right: 5px; width: 10%px">
             <img
               src="/img/search.png"
               width="25px"
@@ -70,39 +55,10 @@
           </button>
           <!-- <label class="form-label" for="form1">Search</label> -->
         </div>
-        <div
-          style="
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 45%;
-          "
-        >
-          <div
-            style="
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-            "
-          >
-            <div
-              style="
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-                width: 250px;
-              "
-            >
-              <div
-                style="
-                  display: block;
-                  align-items: center;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  justify-content: center;
-                "
-              >
+        <div id="responsiveSearchBarsCart">
+          <div style="display: flex; flex-direction: row">
+            <div class="hiddenDiv">
+              <div class="headsetandlocation">
                 <i
                   class="fa-solid fa-headset fa-2x"
                   style="margin-right: 5px; color: black"
@@ -111,14 +67,7 @@
                   {{ "SUPPORT_NUMBER" | translate }}
                 </div>
               </div>
-              <div
-                style="
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  justify-content: center;
-                "
-              >
+              <div class="headsetandlocation">
                 <i
                   class="fa-solid fa-location-dot fa-2x"
                   style="color: black"
@@ -132,15 +81,18 @@
           >
 
           <div class="cart-container">
-            <div style="width: 60px; padding-top: 15px" id="listbars">
-              <a href="#"
+            <div style="padding-top: 15px" id="listbars">
+              <a (click)="changeSearchAppearance()"
+                ><i class="fa fa-search fa-large" style="color: #f37021"></i
+              ></a>
+            </div>
+            <div style="padding-top: 15px" id="listbars">
+              <a (click)="changeBarsAppearance()"
                 ><i class="fa fa-bars fa-large" style="color: #f37021"></i
               ></a>
             </div>
             <div
               style="
-                margin-left: 70px;
-
                 background-color: grey;
                 display: inline-block;
                 height: 50px;
@@ -197,13 +149,108 @@
       >{{ cat.nameEn }}</a
     >
   </div>
-  <div id="sidelist">
-    <ul *ngFor="let cat of ParentCategories">
-      <li>
-        <a href="#">{{ cat.nameEn }}</a>
-      </li>
-    </ul>
+  <!-- <div id="sidelist" *ngIf="BarsAppears">
+    <select *ngFor="let cat of ParentCategories" style="display: block">
+      <div style="background-color: black;">
+        <option style="width: 100%">
+          <a href="#">{{ cat.nameEn }}</a>
+        </option>
+      </div>
+    </select>
+  </div> -->
+  <!-- <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
+    <div
+      (click)="toggleDropdown()"
+      style="
+        background-color: black;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+      "
+    >
+      {{ selectedCategory || "Select a category" }}
+    </div>
+    <div
+      *ngIf="isDropdownOpen"
+      style="
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        width: 100%;
+        z-index: 1;
+      "
+    >
+      <div
+        *ngFor="let cat of ParentCategories"
+        (click)="selectCategory(cat.nameEn)"
+        style="padding: 10px; cursor: pointer; text-align: left; color: black"
+      >
+        <ul>
+          <li>
+            <select style="display: block">
+              <option style="display: block" value="">{{ cat.nameEn }}</option>
+            </select>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div> -->
+
+  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative;">
+    <div
+      (click)="toggleDropdown()"
+      style="
+        background-color: black;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+      "
+    >
+      {{ selectedCategory || "Select a category" }}
+    </div>
+    <div
+      *ngIf="isDropdownOpen"
+      style="
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        width: 100%;
+        z-index: 1;
+      "
+    >
+      <div *ngFor="let cat of categorywithSubCategories">
+        <div
+          style="padding: 10px; cursor: pointer; text-align: left; color: black;"
+          (click)="toggleSubDropdown(cat)"
+        >
+          <strong>{{ cat.nameEn }}</strong>
+        </div>
+        <div *ngIf="cat.isSubDropdownOpen" style="padding: 5px;">
+          <select style="width: 100%;">
+            <option value="">Select a subcategory</option>
+            <option *ngFor="let subCat of ParentCategories" [value]="subCat.nameEn">{{ subCat.nameEn }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
+  
+
+</div>
+<div style="margin-inline: 10%">
+  <input
+    type="search"
+    *ngIf="searchAppears"
+    placeholder="search"
+    style="
+      height: 45px;
+      border-radius: 4px;
+      box-shadow: none;
+      border-right: 8px;
+      padding-left: 8px;
+      width: 100%;
+    "
+  />
 </div>
 <app-advertisment></app-advertisment>
 <router-outlet />
