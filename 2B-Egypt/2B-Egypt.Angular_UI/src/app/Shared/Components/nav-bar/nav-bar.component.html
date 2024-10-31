@@ -201,7 +201,12 @@
     </div>
   </div> -->
 
-  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
+  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative"> 
+    <div style="height: 50px;display: flex; flex-direction: row;flex-grow: 1;"> 
+      <div style="background-color: #FF662B;margin:2px; width: 100px;color: white;" >Menu</div>
+      <div style="background-color: #FF662B;margin:2px; width: 100px;color: white;">Account</div>
+      <div style="background-color: #FF662B;margin:2px; width: 100px;color: white;">Settings</div>
+    </div>
     <div
       (click)="toggleDropdown()"
       style="

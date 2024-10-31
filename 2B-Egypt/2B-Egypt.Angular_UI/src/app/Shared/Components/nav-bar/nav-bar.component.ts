@@ -56,7 +56,9 @@ export class NavBarComponent implements OnInit {
   isDropdownOpen = false; // Track whether the dropdown is open
   selectedCategory: string | null = null;
   searchAppears:boolean=false;
- 
+  selectedDiv: string = ''; // Property to keep track of the selected div
+
+
   [x: string]: any;
   ParentCategories: ICategory[] = [] as ICategory[];
   Categories: ICategory[] = [] as ICategory[];
@@ -120,6 +122,9 @@ export class NavBarComponent implements OnInit {
         console.error('Error fetching Parent Categories:', error);
       },
     });
+  } 
+  selectDiv(divName: string) {
+    this.selectedDiv = divName; // Update the selected div
   }
   loadCategories(): void {
     this.categoryService.getAllCategories().subscribe({
