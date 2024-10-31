@@ -9,8 +9,13 @@ import { SignUpComponent } from './Shared/sign-up/sign-up.component';
 import { AuthorizationGuard } from './services/AuthorizationGuard.service';
 import { CartComponent } from './ShoppingCart/Components/cart/cart.component';
 import { OrderListComponent } from './Shared/Components/order-list/order-list.component';
+import { ShippingReviewPaymentComponent } from './Shared/Components/shipping-review-payment/shipping-review-payment.component';
+import { OrderComponent } from './Shared/Components/order/order.component';
+
 
 export const routes: Routes = [ 
+  { path: '', component: LoginComponent },
+  // { path: '', component: ProductListComponent },
   { path: '', component: ProductListComponent },
   { path: 'cart', component: CartComponent },
   { path: 'Signup', component: SignUpComponent },
@@ -22,4 +27,6 @@ export const routes: Routes = [
   { path: 'Categories', component: NavBarComponent },
   { path: 'products-by-category/:id', component: ProductsByCategoryComponent },
   { path: 'order-list', component: OrderListComponent }, 
+  { path: 'shipping', component: ShippingReviewPaymentComponent },
+  { path: 'order', component: OrderComponent },
 ];

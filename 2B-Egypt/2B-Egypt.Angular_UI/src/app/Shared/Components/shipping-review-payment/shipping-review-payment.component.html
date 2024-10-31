@@ -1,0 +1,101 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div *ngIf="IsShipping">
+  <!-- Progress Steps -->
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="progress-step active" #shippingStep>
+      <div class="circle">1</div>
+      <div class="text">Shipping</div>
+    </div>
+    <div  class="progress-line"></div>
+    <div style="margin-left: 20px;" class="progress-step" #paymentStep>
+      <div class="circle">2</div>
+      <div class="text">Review & Payments</div>
+    </div>
+  </div>
+
+
+<form (ngSubmit)="addAddress()" style="margin-left: 20px;">
+    <div class="mb-3">
+      <label for="country" class="form-label">Country</label>
+      <select class="form-control" id="country" disabled [(ngModel)]="shippingData.country" name="country">
+        <option>{{ country }}</option> 
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="city" class="form-label">City</label>
+      <select class="form-control" id="city" [(ngModel)]="shippingData.city" name="city">
+        <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+      </select>
+    </div>
+   
+    <div class="mb-3">
+      <label for="addressLine1" class="form-label">Street Address: Line 1</label>
+      <input type="text" class="form-control" id="addressLine1" [(ngModel)]="shippingData.addressLine1" name="addressLine1">
+    </div>
+    <div class="mb-3">
+      <label for="addressLine2" class="form-label">Street Address: Line 2</label>
+      <input type="text" class="form-control" id="addressLine2" [(ngModel)]="shippingData.addressLine2" name="addressLine2">
+    </div>
+    <div class="mb-3">
+      <label for="phoneNumber" class="form-label">Phone Number</label>
+      <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="shippingData.phoneNumber" name="phoneNumber">
+    </div>
+
+
+      <!-- Navigation Buttons -->
+    <div class="mt-4 d-flex ">
+    <button class="btn btn-secondary" [routerLink]="['/cart']" [class.active]="IsShipping" (click)="goToShipping(true)">Back </button>
+    <button  style="margin-left: 40px;" type="submit" class="btn btn-warning" [class.active]="!IsShipping" (click)="goToPayment(false)" >Next</button>
+</div>
+
+
+
+
+
+</form>
+</div>
+
+
+<div *ngIf="!IsShipping">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="progress-step active" #shippingStep>
+            <div class="circle">1</div>
+            <div class="text">Shipping</div>
+        </div>
+        <div class="progress-line"></div>
+        <div style="margin-left: 20px;" class="progress-step" #paymentStep>
+            <div class="circle">2</div>
+            <div class="text">Review & Payments</div>
+        </div>
+    </div>
+    <!-- Payment Options -->
+    <h4 style="margin-left: 30px;" class="mt-5">Payment Method</h4>
+    <div class="list-group payment-methods">
+        <label class="list-group-item d-flex align-items-center">
+            <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="Cash On Delivery">
+            <i class="fa-solid fa-money-bill icon"></i>
+            <span>Cash On Delivery</span>
+          </label>
+          <label class="list-group-item d-flex align-items-center">
+            <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="Credit Card">
+            <i class="fa fa-cc-visa icon"></i>
+            <span>Credit Card</span>
+          </label>
+          <label class="list-group-item d-flex align-items-center">
+            <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="Paypal Card">
+            <i class="fa fa-cc-paypal icon"></i>
+            <span>Paypal Card</span>
+          </label>
+          <label class="list-group-item d-flex align-items-center">
+            <input type="radio" name="paymentMethod" [(ngModel)]="selectedPaymentMethod" value="Electronic wallets">
+            <i class="fa-solid fa-wallet icon"></i>
+            <span>Electronic wallets</span>
+          </label>
+          
+    </div>
+    
+    <button style="margin-left: 30px;" class="btn btn-secondary" [class.active]="IsShipping" (click)="goToShipping(true)">Back</button>
+    <button style="margin-left: 30px;" type="button" (click)="createOrder()" class="btn btn-warning">Create Order</button>
+    

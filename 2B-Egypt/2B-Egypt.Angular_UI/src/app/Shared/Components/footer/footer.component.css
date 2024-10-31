@@ -105,3 +105,25 @@ button{
     li{
         padding-bottom: 10px;
     }
+    @media (max-width: 768px) {
+        .social-icons2 {
+          margin-bottom: 15px;
+        }
+        
+        .d-flex.flex-md-row {
+          flex-direction: column !important;
+          align-items: center;
+        }
+      
+        #payments-methods img {
+          margin-bottom: 10px;
+        }
+      }
+      
+
+      @media (max-width: 576px) { /* الشاشات الصغيرة */
+        .no-margin-sm {
+            margin-right: 0 !important;
+        }
+    }
+    

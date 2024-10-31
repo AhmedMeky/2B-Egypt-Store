@@ -19,7 +19,8 @@ import { ICategory } from '../../../../models/icategory';
 import { HttpClientModule } from '@angular/common/http';
 import { CategorywithSubcategories } from '../../../../models/categorywith-subcategories';
 import { LanguageServiceService } from '../../../services/language-service.service';
-// import { MegaMenuModule } from 'primeng/megamenu';
+
+//  import { MegaMenuModule } from 'primeng/megamenu';
 import { SignUpComponent } from '../../sign-up/sign-up.component';
 import { AdvertismentComponent } from '../advertisment/advertisment.component';
 import { LoginService } from '../../../services/login.service';
@@ -31,6 +32,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { ProductDetailsComponent } from '../../product-details/product-details.component';
+import { MegamenuComponent } from '../../../megamenu/megamenu.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -38,7 +40,7 @@ import { ProductDetailsComponent } from '../../product-details/product-details.c
   imports: [
     CommonModule,
     RouterModule,
-    HttpClientModule,
+   HttpClientModule,
     SignUpComponent,
     RouterLink,
     AdvertismentComponent,

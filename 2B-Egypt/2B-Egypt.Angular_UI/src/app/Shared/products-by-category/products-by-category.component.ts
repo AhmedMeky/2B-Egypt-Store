@@ -178,5 +178,3 @@ onPageChange(page: number): void {
     return lang === 'ar' ? product.descriptionAr : product.descriptionEn;
   }
 }
-
-

@@ -1,30 +1,30 @@
-<div class="order-list-container">
-    <h2 class="title">My Orders</h2>
-    
-    <table class="order-table">
-      <thead>
+<div class="order-list-container container">
+  <h2 class="title text-center my-4">My Orders</h2>
+
+  <div class="table-responsive">
+    <table class="table table-striped order-table">
+      <thead class="thead-dark d-none d-md-table-header-group">
         <tr>
-          <th>Order Number</th>
-          <th>Date</th>
-          <th>Recipient</th>
-          <th>Order Total</th>
-          <th>Status</th>
-          <th>Action</th>
+          <th scope="col">Order Number</th>
+          <th scope="col">Date</th>
+          <th scope="col">Recipient</th>
+          <th scope="col">Order Total</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of orders">
-          <td>{{ order.orderNumber }}</td>
-          <td>{{ order.date | date:'yyyy/MM/dd' }}</td>
-          <td>{{ order.userName }}</td>
-          <td>{{ order.totalAmount | currency:'USD':'symbol-narrow':'1.2-2' }}</td>
-          <td [class.new]="order.status === 'New Order'">{{ order.status }}</td>
-          <td>
-            <a href="#" class="details-link" (click)="viewOrderDetails(order)">View Details</a>
+        <tr *ngFor="let order of orders" class="order-row">
+          <td data-label="Order Number">{{ order.orderNumber }}</td>
+          <td data-label="Date">{{ order.date | date:'yyyy/MM/dd' }}</td>
+          <td data-label="Recipient">{{ order.userName }}</td>
+          <td data-label="Order Total">{{ order.totalAmount | currency:'USD':'symbol-narrow':'1.2-2' }}</td>
+          <td data-label="Status">{{ getStatusText(order.stateEn) }}</td>
+          <td data-label="Action">
+            <a class="details-link btn btn-sm" (click)="viewOrderDetails(order)">View Details</a>
           </td>
         </tr>
       </tbody>
     </table>
-  
-    
-  
+  </div>
+</div>

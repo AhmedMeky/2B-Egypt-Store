@@ -87,19 +87,37 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  addToCart(product: IProduct) {
-    this.AddToCartCounter.emit(this.Counter);
-    const cartItem: CartItem = {
-      productId: product.id,
-      productName: product.nameEn,
-      productNamear: product.nameAr,
-      price: product.price,
-      quantity: product?.quantity || 1,
-      totalPrice: product.price,
-      image: "",
-      stock: product.unitInStock
-    };
-    this._cartService.addToCart(cartItem);
+
+addToCart(product: IProduct)
+{
+  console.log(product)
+  this.AddToCartCounter.emit(this.Counter)
+      const cartItem: CartItem = {
+        productId: (product.id),
+        productName: product.nameEn,
+        productNamear: product.nameAr,
+        price: product.price - (product.price * product.discount) / 100 ,
+        quantity: product?.quantity || 1,
+        totalPrice: product.price,
+        // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
+        image: "",
+        stock: product.unitInStock 
+  
+      };
+      this._cartService.addToCart(cartItem);
+}
+
+  removeFromCart(productId: number) {
+    let cartData = Cookies.get('cartItems');
+    if (cartData) {
+      let cartItems: IProduct[] = JSON.parse(cartData);
+      cartItems = cartItems.filter((item: IProduct) => Number(item.id) !== productId);
+      Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
+
+      if (cartItems.length === 0) {
+        Cookies.remove('cartItems');
+      }
+    }
   }
 
   handleQuantity(action: string, product: IProduct) {

@@ -105,8 +105,10 @@
             <a [routerLink]="['/cart']">
               <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
               <span class="item-count">
-                {{ counter}}</span>
-            </a>
+                  {{ counter.toString() | translate }}
+              </span>
+          </a>
+          
           </div>
         </div>
       </div>

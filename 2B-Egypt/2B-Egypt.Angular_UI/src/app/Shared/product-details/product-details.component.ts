@@ -68,6 +68,32 @@ export class ProductDetailsComponent implements OnInit {
     this.AddToCartCounter = new EventEmitter<number>();
   }
 
+  ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.productId = params.get('id')!;
+      this.Review.productId = this.productId;
+      this.Review.priceRating = this.ratingPrice.toString();
+      this.Review.qualityRating = this.ratingQuilty.toString();
+      this.Review.valueRating = this.ratingValue.toString();
+
+      if (this.productId) {
+        // Fetch product data based on new product ID
+        this._productService.getProductById(this.productId).subscribe({
+          next: (res) => {
+            this.product = res;
+            console.log('ssssssssssss' ,   this.product)
+            this.PriceAfterSale =
+              this.product.price -
+              this.product.discount * 0.01 * this.product.price;
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
+
   // ngOnInit() {
     // this.route.paramMap.subscribe((params) => {
     //   this.productId = params.get('id')!;
@@ -92,28 +118,6 @@ export class ProductDetailsComponent implements OnInit {
     //   }
     // });
   //}
-
-  ngOnInit() {
-    this.productId = this.route.snapshot.params['id'];
-    this.Review.productId = this.route.snapshot.params['id'];
-    this.Review.priceRating = this.ratingPrice.toString();
-    this.Review.qualityRating = this.ratingQuilty.toString();
-    this.Review.valueRating = this.ratingValue.toString();
-    if (this.productId) {
-      this._productService.getProductById(this.productId).subscribe({
-        next: (res) => {
-          this.product = res;
-          this.PriceAfterSale =
-            this.product.price -
-            this.product.discount * 0.01 * this.product.price;
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
-    }
-  }
-
   addToCart() {
     this._cartService.addToCartCounter();
     console.log(this.product);
@@ -122,7 +126,7 @@ export class ProductDetailsComponent implements OnInit {
     const cartItem: CartItem = {
       productId: this.product.id,
       productName: this.product.nameEn,
-      price: this.product.price,
+      price: this.product.price - (this.product.price * this.product.discount) / 100,
       quantity: this.product?.quantity || 1,
       totalPrice: this.product.price,
       productNamear: this.product.nameAr,

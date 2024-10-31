@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FooterComponent } from './footer.component';
+import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core'; 
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -8,7 +10,9 @@ describe('FooterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FooterComponent]
+      declarations: [FooterComponent], 
+      imports: [RouterModule.forRoot([]), BrowserModule],
+      schemas: [NO_ERRORS_SCHEMA] 
     })
     .compileComponents();
     
