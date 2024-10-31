@@ -51,7 +51,6 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     let array  = this._cartService.getCartItems()
     console.log(array);
     // this.product.discount * 0.01 * this.product.price;
-    console.log(this.order.totalAmount);
     
     let Items = array.map(item => ({
       productId: item.productId,
@@ -64,7 +63,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     let subTotal = 0
     for(let total of array)
       {
-        subTotal+=total.totalPrice
+        subTotal+=total.price
       }
       this.order.totalAmount = subTotal;
       console.log(subTotal)
