@@ -14,6 +14,7 @@ export class OrderDetailsComponent {
   orderId!: string;
   orderDetails: any;
   errorMessage: string | null = null;
+  
 
   constructor(
     private orderService: OrderService,
@@ -26,6 +27,7 @@ export class OrderDetailsComponent {
       this.orderService.getOrderDetails(orderId).subscribe({
         next: (data) => {
           this.orderDetails = data;
+          console.log(this.orderDetails = data);
         },
         error: (error) => {
           console.error('Error fetching order details:', error);
@@ -33,5 +35,17 @@ export class OrderDetailsComponent {
       });
     }
   }
+  getStatusText(statusCode: number): string {
+    switch (statusCode) {
+      case 1: return 'Pending';          
+      case 2: return 'Confirmed';       
+      case 3: return 'Shipped';          
+      case 4: return 'Attempted delivery'; 
+      case 5: return 'Received';        
+      case 6: return 'Canceled';        
+      default: return 'Unknown';          
+    }
+  }
+  
 }
 
