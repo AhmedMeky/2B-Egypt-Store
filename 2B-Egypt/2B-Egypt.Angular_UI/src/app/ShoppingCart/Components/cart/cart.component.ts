@@ -38,6 +38,7 @@ export class CartComponent implements OnInit {
     this.subTotal = 0
     this.cartItems.forEach(item=>{
       this.subTotal+= item.price*item.quantity
+      console.log(item.price)
  
     })
     

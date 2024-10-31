@@ -127,6 +127,7 @@ export class ProductDetailsComponent implements OnInit {
       quantity: this.product?.quantity || 1,
       totalPrice: this.product.price,
       productNamear: this.product.nameAr,
+      discount:this.product.discount,
       // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
       image: this.product.images[0].imageUrl,
       stock: this.product.unitInStock,

@@ -49,7 +49,9 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     this.order.paymentType = this.selectedPaymentMethod;
     const userString = sessionStorage.getItem("user");
     let array  = this._cartService.getCartItems()
-    this.order.totalAmount = array.reduce((sum, item) => sum + item.totalPrice, 0);
+    console.log(array);
+    // this.product.discount * 0.01 * this.product.price;
+    console.log(this.order.totalAmount);
     
     let Items = array.map(item => ({
       productId: item.productId,
@@ -64,6 +66,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
       {
         subTotal+=total.totalPrice
       }
+      this.order.totalAmount = subTotal;
       console.log(subTotal)
       console.log(array)
       // this.order.orderItems  = array.map(({ productId, totalPrice , quantity }) => ({ productId, totalPrice , quantity }));
@@ -127,3 +130,175 @@ goToPayment(checkshipping: boolean): void {
   });
 }
 }
+
+
+
+
+// /*import { Component } from '@angular/core';
+// import { ICreateOrderRequest, IPayPalConfig, NgxPayPalModule } from 'ngx-paypal';
+
+// @Component({
+//   selector: 'app-paypal2',
+//   standalone: true,
+//   imports: [NgxPayPalModule],
+//   templateUrl: './paypal2.component.html',
+//   styleUrl: './paypal2.component.css'
+// })
+// export class Paypal2Component {  
+
+//   public payPalConfig?: IPayPalConfig;
+//   ngOnInit(): void {
+//     this.initConfig();
+//   }
+
+//   private initConfig(): void { 
+
+
+//     this.payPalConfig = {
+//     currency: 'EUR',
+//     clientId: 'Ab9lglzdiPC5mJxHHMPic0jFslZGTrvFsPNg9-4RP9IU3oI_RXIHGWE7DHCGTlVMUt-DCDghXm6F9ELf',
+//     createOrderOnClient: (data) => <ICreateOrderRequest>{
+//       intent: 'CAPTURE',
+//       purchase_units: [
+//         {
+//           amount: {
+//             currency_code: 'EUR',
+//             value: '9.99',
+//             breakdown: {
+//               item_total: {
+//                 currency_code: 'EUR',
+//                 value: '9.99'
+//               }
+//             }
+//           }, 
+//           items: [
+//             {
+//               name: 'Enterprise Subscription',
+//               quantity: '1',
+//               category: 'DIGITAL_GOODS',
+//               unit_amount: {
+//                 currency_code: 'EUR',
+//                 value: '9.99',
+//               },
+//             }
+//           ]
+//         }
+//       ]
+//     },
+//     advanced: {
+//       commit: 'true'
+//     },
+//     style: {
+//       label: 'paypal',
+//       layout: 'vertical'
+//     },
+//     onApprove: (data, actions) => {
+//       console.log('onApprove - transaction was approved, but not authorized', data, actions);
+//       actions.order.get().then((details: any) => {
+//         console.log('onApprove - you can get full order details inside onApprove: ', details);
+//       });
+//     },
+//     onClientAuthorization: (data) => {
+//       console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+//     },
+//     onCancel: (data, actions) => {
+//       console.log('OnCancel', data, actions);
+//     },
+//     onError: err => {
+//       console.log('OnError', err);
+//     },
+//     onClick: (data, actions) => {
+//       console.log('onClick', data, actions);
+//     },
+//   };
+//   }
+// }
+// */
+
+// import { Component } from '@angular/core';
+// import { ICreateOrderRequest, IPayPalConfig, NgxPayPalModule } from 'ngx-paypal';
+
+// @Component({
+//   selector: 'app-paypal2',
+//   standalone: true,
+//   imports: [NgxPayPalModule],
+//   templateUrl: './paypal2.component.html',
+//   styleUrls: ['./paypal2.component.css'] // Corrected to styleUrls
+// })
+// export class Paypal2Component {  
+
+//   public payPalConfig?: IPayPalConfig;
+
+//   ngOnInit(): void {
+//     this.initConfig();
+//   }
+
+//   private initConfig(): void { 
+//     this.payPalConfig = {
+//       currency: 'EUR',
+//       clientId: 'Ab9lglzdiPC5mJxHHMPic0jFslZGTrvFsPNg9-4RP9IU3oI_RXIHGWE7DHCGTlVMUt-DCDghXm6F9ELf', // Replace with your actual sandbox client ID
+//       createOrderOnClient: (data) => <ICreateOrderRequest>{
+//         intent: 'CAPTURE', // Use CAPTURE if you want to capture immediately
+//         purchase_units: [
+//           {
+//             amount: {
+//               currency_code: 'EUR',
+//               value: '9.99',
+//               breakdown: {
+//                 item_total: {
+//                   currency_code: 'EUR',
+//                   value: '9.99'
+//                 }
+//               }
+//             },
+//             items: [
+//               {
+//                 name: 'Enterprise Subscription',
+//                 quantity: '1',
+//                 category: 'DIGITAL_GOODS',
+//                 unit_amount: {
+//                   currency_code: 'EUR',
+//                   value: '9.99',
+//                 },
+//               }
+//             ]
+//           }
+//         ]
+//       },
+//       advanced: {
+//         commit: 'true'
+//       },
+//       style: {
+//         label: 'paypal',
+//         layout: 'vertical'
+//       },
+//       onApprove: (data, actions) => {
+//         console.log('onApprove - transaction was  approved, but not authorized', data, actions);
+//         // Capture the funds from the transaction 
+       
+//         return actions.order.capture().then((details: any) => {
+//           console.log('Transaction completed by ' + details.payer.name.given_name);
+//           console.log('Transaction Id' + details.Id);
+//           console.log('onApprove - you can get full order details inside onApprove: ', details);
+//           if (details.status === 'COMPLETED') {
+//             console.log('Transaction was successfully captured.');
+//           } else {
+//             console.log('Transaction was not captured successfully.');
+//           }
+//         });
+//       },
+//       onClientAuthorization: (data) => {
+//         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+//       },
+//       onCancel: (data, actions) => {
+//         console.log('OnCancel', data, actions);
+//       },
+//       onError: err => { 
+//         console.log('OnError', err);
+//       },
+//       onClick: (data, actions) => {
+//         console.log('onClick', data, actions);
+//       },
+//     };
+//   }
+// }
