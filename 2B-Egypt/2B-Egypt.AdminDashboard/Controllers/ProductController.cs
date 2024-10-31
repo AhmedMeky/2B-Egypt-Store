@@ -102,6 +102,7 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Update(CreateProductDTO product, List<IFormFile> images)
     {
+        product.Images = [];
         foreach (IFormFile image in images)
         {
             if (image.Length > 0)

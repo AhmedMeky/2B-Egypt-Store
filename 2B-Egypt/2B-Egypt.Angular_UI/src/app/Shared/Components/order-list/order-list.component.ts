@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { OrderService } from '../../../services/order.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule,MatTableModule ],
+  imports: [CommonModule,MatTableModule,RouterLink ],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css'
 })

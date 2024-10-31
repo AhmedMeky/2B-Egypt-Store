@@ -11,6 +11,7 @@ import { CartComponent } from './ShoppingCart/Components/cart/cart.component';
 import { OrderListComponent } from './Shared/Components/order-list/order-list.component';
 import { ShippingReviewPaymentComponent } from './Shared/Components/shipping-review-payment/shipping-review-payment.component';
 import { OrderComponent } from './Shared/Components/order/order.component';
+import { OrderDetailsComponent } from './Shared/Components/order-details/order-details.component';
 
 
 export const routes: Routes = [ 
@@ -27,6 +28,8 @@ export const routes: Routes = [
   { path: 'Categories', component: NavBarComponent },
   { path: 'products-by-category/:id', component: ProductsByCategoryComponent },
   { path: 'order-list', component: OrderListComponent }, 
+  { path: 'order/:orderId', component: OrderDetailsComponent },
   { path: 'shipping', component: ShippingReviewPaymentComponent },
   { path: 'order', component: OrderComponent },
+
 ];

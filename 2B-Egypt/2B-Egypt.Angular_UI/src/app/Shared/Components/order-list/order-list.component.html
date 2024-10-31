@@ -21,7 +21,7 @@
           <td data-label="Order Total">{{ order.totalAmount | currency:'USD':'symbol-narrow':'1.2-2' }}</td>
           <td data-label="Status">{{ getStatusText(order.stateEn) }}</td>
           <td data-label="Action">
-            <a class="details-link btn btn-sm" (click)="viewOrderDetails(order)">View Details</a>
+            <a class="details-link btn btn-sm" [routerLink]="['/order', order.id]">View Details</a>
           </td>
         </tr>
       </tbody>

@@ -71,7 +71,7 @@ builder.Services.AddScoped<IFacilityRepository, FacilityRepository>();
 
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
-
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // ========================================================================
 

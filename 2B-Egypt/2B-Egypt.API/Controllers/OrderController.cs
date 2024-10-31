@@ -50,8 +50,20 @@ public class OrderController : ControllerBase
                 StateAr = ord.Status_Er,
                 StateEn = ord.Status_En
             })
+
     };
         return StatusCode(200,response.orders);
+    }
+
+    [HttpGet("[Action]")]
+    [HttpGet("Details/{orderId}")]
+
+    public async Task<ActionResult> Details(Guid orderId)
+    {
+        var orderResponse = await _orderService.GetOrderByIdAsync(orderId);
+        if(orderResponse.IsSuccessfull)
+            return StatusCode(200,orderResponse.Entity);
+        return NotFound();
     }
 
 }
