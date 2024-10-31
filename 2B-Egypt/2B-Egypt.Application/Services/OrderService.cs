@@ -1,3 +1,4 @@
+using _2B_Egypt.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace _2B_Egypt.Application.Services;
@@ -76,5 +77,32 @@ public class OrderService : IOrderService
             Entity = _mapper.Map<List<GetAllOrderDTO>>(orders.ToList()),
             IsSuccessfull = true
         };
+    }
+
+    public async Task<ResponseDTO<OrderDetailsDTO>> GetOrderByIdAsync(Guid orderId)
+    {
+        var order = await _OrderRepository.GetByIdAsync(orderId, ["Payment", "OrderItems.Product"]);
+        OrderDetailsDTO orderDetails = new()
+        {
+            OrderNumber = order.OrderNumber,
+            CreatedAt = order.CreatedAt,
+            TotalAmount = order.TotalAmount,
+            Status_En = order.Status_En,
+            Status_Er = order.Status_Er
+        };
+        orderDetails.OrderItems = order.OrderItems
+            .Select(orditem => new OrderItemDetailsDTO() 
+                                    { 
+                                        ItemTotalPrice = orditem.Quantity * orditem.Product.Price - (orditem.Quantity * orditem.Product.Price * orditem.Product.Discount / 100m),
+                                        NameAr = orditem.Product.NameAr,
+                                        NameEn = orditem.Product.NameEn,
+                                        Discount = orditem.Quantity * orditem.Product.Price * orditem.Product.Discount /100m,
+                                        Price = orditem.Product.Price,
+                                        Quantity = orditem.Quantity,
+                                    }).ToList();
+
+        orderDetails.Discount = orderDetails.OrderItems.Sum(item => item.Discount);
+        orderDetails.TotalAmount = orderDetails.OrderItems.Sum(item => item.ItemTotalPrice);
+        return new ResponseDTO<OrderDetailsDTO>() { Entity = orderDetails, IsSuccessfull = true};
     }
 }

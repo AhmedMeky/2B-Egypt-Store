@@ -1,3 +1,4 @@
+namespace _2B_Egypt.Application.DTOs.OrderDTOs;
 public class GetAllOrderDTO
 {
     public Guid Id { get; set; }
