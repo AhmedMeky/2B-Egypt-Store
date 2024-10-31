@@ -219,6 +219,7 @@ public class ProductService : IProductService
                 Message = "there is no product with this Id"
             };
         }
+        product.Images = [];
         product = mapper.Map<Product>(productDTO);
         product.UpdatedAt = DateTime.Now;
         await productRepository.UpdateAsync(product);
