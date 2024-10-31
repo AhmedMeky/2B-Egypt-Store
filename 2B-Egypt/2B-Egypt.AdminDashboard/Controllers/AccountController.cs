@@ -6,22 +6,22 @@ public class AccountController : Controller
     private readonly RoleManager<IdentityRole> roleManager;
     private readonly IMapper mapper;
 
-    public AccountController(UserManager<User> userManager, SignInManager<User> _signInManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
+    public AccountController(UserManager<User> userManager, SignInManager<User> _signInManager, /*RoleManager<IdentityRole> roleManager,*/ IMapper mapper)
     {
         this.userManager = userManager;
         this.signInManager = _signInManager;
-        this.roleManager = roleManager;
+        //this.roleManager = roleManager;
         this.mapper = mapper;
     }
-    private async Task<bool> createRole(string name)
-    {
-        var role = new IdentityRole();
-        role.Name = name;
-        var result = await roleManager.CreateAsync(role);
-        if(result.Succeeded)
-           return true;
-        return false;
-    }
+    //private async Task<bool> createRole(string name)
+    //{
+    //    var role = new IdentityRole();
+    //    role.Name = name;
+    //    var result = await roleManager.CreateAsync(role);
+    //    if(result.Succeeded)
+    //       return true;
+    //    return false;
+    //}
 
     public IActionResult Index()
     {
