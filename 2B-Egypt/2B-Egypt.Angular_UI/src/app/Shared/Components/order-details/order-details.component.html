@@ -1,44 +1,45 @@
 <div *ngIf="orderDetails" class="container mt-5">
   <div class="card shadow-lg">
-    <div class="card-header text-center  text-white" style="background-color: #ff7f00;">
-      <h2>Order Details</h2>
+    <div class="card-header text-center text-white" style="background-color: #ff7f00;">
+      <h2>{{ 'ORDER_DETAILS.TITLEO' | translate }}</h2>
     </div>
     <div class="card-body">
       <div class="row mb-3">
         <div class="col-md-6">
-          <p><strong>Order Number:</strong> {{ orderDetails.orderNumber }}</p>
+          <p><strong>{{ 'ORDER_DETAILS.ORDER_NUMBER' | translate }}:</strong> {{ orderDetails.orderNumber }}</p>
         </div>
         <div class="col-md-6">
-          <p><strong>Created At:</strong> {{ orderDetails.createdAt | date: 'yyyy/MM/dd HH:mm:ss' }}</p>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <p><strong>Status :</strong> {{ getStatusText(orderDetails.status_En) }}</p>
-        </div>
-        <div class="col-md-6">
-          <p><strong>Discount:</strong> {{ orderDetails.discount | currency:'USD' }}</p>
+          <p><strong>{{ 'ORDER_DETAILS.CREATED_AT' | translate }}:</strong> {{ orderDetails.createdAt | date: 'yyyy/MM/dd HH:mm:ss' }}</p>
         </div>
       </div>
       <div class="row mb-3">
         <div class="col-md-6">
-          <p><strong>Total Amount:</strong> {{ orderDetails.totalAmount | currency:'USD' }}</p>
+          <p><strong>{{ 'ORDER_DETAILS.STATUS' | translate }}:</strong> {{ getStatusText(orderDetails.status_En) }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>{{ 'ORDER_DETAILS.DISCOUNT' | translate }}:</strong> {{ orderDetails.discount | currency:'USD' }}</p>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p><strong>{{ 'ORDER_DETAILS.TOTAL_AMOUNT' | translate }}:</strong> {{ orderDetails.totalAmount | currency:'USD' }}</p>
         </div>
       </div>
 
-      <h3 class="mt-4">Order Items</h3>
+      
       <div class="row">
         <div class="col-md-6 col-lg-4 mb-3" *ngFor="let item of orderDetails.orderItems">
           <div class="card h-100">
             <div class="card-body">
-              <p><strong>Product Name:</strong> {{ item.nameEn }}</p>
-              <p><strong>Quantity:</strong> {{ item.quantity }}</p>
-              <p><strong>Price:</strong> {{ item.price | currency:'USD' }}</p>
-              <p><strong>Total Price:</strong> {{ item.itemTotalPrice | currency:'USD' }}</p>
+              <p><strong>{{ 'ORDER_DETAILS.PRODUCT_NAME' | translate }}:</strong>{{ getLocalizedProductName(item) }}</p>
+              <p><strong>{{ 'ORDER_DETAILS.QUANTITY' | translate }}:</strong> {{ item.quantity }}</p>
+              <p><strong>{{ 'ORDER_DETAILS.PRICE' | translate }}:</strong> {{ item.price | currency:'USD' }}</p>
+              <p><strong>{{ 'ORDER_DETAILS.TOTAL_PRICE' | translate }}:</strong> {{ item.itemTotalPrice | currency:'USD' }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <a [routerLink]="['/order-list']" style="color: #ff7f00;">{{ 'ORDER_DETAILS.BACK_TO_ORDERS' | translate }}</a>
   </div>
 </div>

@@ -3,12 +3,14 @@ import { OrderService } from '../../../services/order.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 
 
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule,MatTableModule,RouterLink ],
+  imports: [CommonModule,MatTableModule,RouterLink,TranslateModule ],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css'
 })
@@ -16,28 +18,59 @@ import { RouterLink } from '@angular/router';
 
 export class OrderListComponent {
   orders: any[] = [];
-  getStatusText(statusCode: number): string {
+  
+  // getStatusText(statusCode: number): string {
+  //   switch (statusCode) {
+  //     case 1:
+  //       return this.translate.instant('STATUS.PENDING');          
+  //     case 2:
+  //       return this.translate.instant('STATUS.CONFIRMED');       
+  //     case 3:
+  //       return this.translate.instant('STATUS.SHIPPED');          
+  //     case 4:
+  //       return this.translate.instant('STATUS.ATTEMPTED_DELIVERY'); 
+  //     case 5:
+  //       return this.translate.instant('STATUS.RECEIVED');        
+  //     case 6:
+  //       return this.translate.instant('STATUS.CANCELED');        
+  //     default:
+  //       return this.translate.instant('UNKNOWN_STATUS');          
+  //   }
+  // }
+  getStatusText(statusCode: number): Observable<string> {
+    let statusKey: string;
+  
     switch (statusCode) {
       case 1:
-        return 'Pending';          
+        statusKey = 'STATUS.PENDING';
+        break;
       case 2:
-        return 'Confirmed';       
+        statusKey = 'STATUS.CONFIRMED';
+        break;
       case 3:
-        return 'Shipped';          
+        statusKey = 'STATUS.SHIPPED';
+        break;
       case 4:
-        return 'Attempted delivery'; 
+        statusKey = 'STATUS.ATTEMPTED_DELIVERY';
+        break;
       case 5:
-        return 'Received';        
+        statusKey = 'STATUS.RECEIVED';
+        break;
       case 6:
-        return 'Canceled';        
+        statusKey = 'STATUS.CANCELED';
+        break;
       default:
-        return 'Unknown';          
+        statusKey = 'UNKNOWN_STATUS';
     }
+  
+    return this.translate.get(statusKey);
   }
   
-  constructor(private orderService: OrderService) {}
+  
+  constructor(private orderService: OrderService,private translate: TranslateService) {}
 
   ngOnInit(): void {
+    this.translate.setDefaultLang('en');
     const userSessionData = sessionStorage.getItem('user');
 
     if (userSessionData) {

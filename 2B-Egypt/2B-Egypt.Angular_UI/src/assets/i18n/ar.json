@@ -54,6 +54,48 @@
     "ENTER_DISCOUNT": "أدخل الحد الأدنى للخصم",
     "APPLY_FILTER": "تطبيق الفلتر"
   },
+  
+    "TITLEE": "طلبياتي",
+    "ORDER_NUMBER": "رقم الطلب",
+    "DATE": "التاريخ",
+    "RECIPIENT": "المستلم",
+    "ORDER_TOTAL": "إجمالي الطلب",
+    "STATUS": {
+      "PENDING": "قيد الانتظار",
+      "CONFIRMED": "مؤكد",
+      "SHIPPED": "شحن",
+      "ATTEMPTED_DELIVERY": "تمت محاولة التسليم",
+      "RECEIVED": "تم الاستلام",
+      "CANCELED": "ملغي"
+    },
+    "ACTION": "الإجراء",
+    "VIEW_DETAILS": "عرض التفاصيل",
+    "UNKNOWN_STATUS": "غير معروف",
+    "ORDER_DETAILS": {
+      "TITLEO": "تفاصيل الطلب",
+      "ORDER_NUMBER": "رقم الطلب",
+      "CREATED_AT": "تاريخ الإنشاء",
+      "STATUS": "الحالة",
+      "DISCOUNT": "الخصم",
+      "TOTAL_AMOUNT": "المبلغ الإجمالي",
+      "PRODUCT_NAME": "اسم المنتج",
+      "QUANTITY": "الكمية",
+      "PRICE": "السعر",
+      "TOTAL_PRICE": "السعر الإجمالي",
+      "BACK_TO_ORDERS": "العودة إلى طلباتي",
+      "UNKNOWN": "غير معروف"
+    },
+  
+  
+  "TITLE": "طلبياتي",
+  "ORDER_NUMBER": "رقم الطلب",
+  "DATE": "التاريخ",
+  "RECIPIENT": "المستلم",
+  "ORDER_TOTAL": "إجمالي الطلب",
+  "STATUS": "الحالة",
+  "ACTION": "الإجراء",
+  "VIEW_DETAILS": "عرض التفاصيل",
+  "UNKNOWN_STATUS": "غير معروف",
 
   "COMPARE": "قارن()",
   "SIGN_IN": "تسجيل الدخول",
