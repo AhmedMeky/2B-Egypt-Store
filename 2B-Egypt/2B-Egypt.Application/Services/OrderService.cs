@@ -86,7 +86,6 @@ public class OrderService : IOrderService
         {
             OrderNumber = order.OrderNumber,
             CreatedAt = order.CreatedAt,
-            TotalAmount = order.TotalAmount,
             Status_En = order.Status_En,
             Status_Er = order.Status_Er
         };

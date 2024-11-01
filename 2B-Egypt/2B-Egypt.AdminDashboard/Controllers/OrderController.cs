@@ -18,5 +18,10 @@ namespace _2B_Egypt.AdminDashboard.Controllers
             return View(orderResponse.Entity);
         }
 
+        public async Task<IActionResult> Details(Guid orderId)
+        {
+            var orderResponse = await _orderService.GetAllOrderAsync();
+            return View(orderResponse.Entity);
+        }
     }
 }
