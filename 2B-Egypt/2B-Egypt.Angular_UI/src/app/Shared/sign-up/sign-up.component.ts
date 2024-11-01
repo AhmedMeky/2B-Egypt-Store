@@ -3,11 +3,13 @@ import { IUser } from '../../../models/iuser';
 import { FormsModule, NgModel } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Observer } from 'rxjs';
+import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink,TranslateModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })

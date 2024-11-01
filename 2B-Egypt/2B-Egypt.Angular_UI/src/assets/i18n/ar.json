@@ -68,6 +68,28 @@
       "RECEIVED": "تم الاستلام",
       "CANCELED": "ملغي"
     },
+    
+      "LOGIN": {
+        "TITLE": "تسجيل الدخول",
+        "SOCIAL_LOGIN": "تسجيل الدخول باستخدام حسابات التواصل الاجتماعي",
+        "EMAIL": "البريد الإلكتروني",
+        "PASSWORD": "كلمة المرور",
+        "SIGN_IN": "تسجيل الدخول",
+        "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟"
+  
+    },
+    
+    
+      "SIGN_UP": "إنشاء حساب",
+      "LOGIN_WITH_SOCIAL": "تسجيل الدخول باستخدام حساب اجتماعي",
+      "FIRST_NAME": "الاسم الأول",
+      "LAST_NAME": "اسم العائلة",
+      "EMAIL": "البريد الإلكتروني",
+      "PHONE_NUMBER": "رقم الهاتف",
+      "PASSWORD": "كلمة المرور",
+      "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+      "ALREADY_HAVE_ACCOUNT": "لديك حساب بالفعل",
+    
     "ACTION": "الإجراء",
     "VIEW_DETAILS": "عرض التفاصيل",
     "UNKNOWN_STATUS": "غير معروف",

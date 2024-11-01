@@ -4,11 +4,12 @@ import { LoginService } from '../../services/login.service';
 import { FormsModule } from '@angular/forms';
 import { Loginuser } from '../../../models/loginuser';
 import { firstValueFrom } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,TranslateModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'], // Corrected from styleUrl to styleUrls
 })
