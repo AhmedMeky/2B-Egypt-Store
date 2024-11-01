@@ -6,4 +6,6 @@ export interface IOrder {
     transactionId:string ,
     paymentType : string, 
     orderItems:any,
+    StateEn:number,
+    Statear:number
 }

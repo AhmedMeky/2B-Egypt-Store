@@ -104,4 +104,12 @@ public class OrderService : IOrderService
         orderDetails.TotalAmount = orderDetails.OrderItems.Sum(item => item.ItemTotalPrice);
         return new ResponseDTO<OrderDetailsDTO>() { Entity = orderDetails, IsSuccessfull = true};
     }
+
+    public async Task<ResponseDTO<Order>> GetOrderDetailsByIdAsync(Guid orderId)
+    {
+        var order = await _OrderRepository.GetByIdAsync(orderId, ["Payment","User","OrderItems.Product"]);
+        if (order is null)
+            return new() { Entity = null, IsSuccessfull = false, Message = "There is no order with this Id" };
+        return new() { Entity = order, IsSuccessfull = true };
+    }
 }

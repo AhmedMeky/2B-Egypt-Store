@@ -1,10 +1,12 @@
 <div class="container-fluid main-container mt-4">
+
   <div class="row ">
     <div class="col-md-3 mb-4">
       <app-sidebar (filterChange)="applyFilters($event)"></app-sidebar>
     </div>
     <div class="col-md-9">
       <div class="row ">
+
         <div *ngFor="let product of filteredProducts" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
           <div class="card product-card" style="cursor: pointer">
             <div *ngIf="filteredProducts.length > 0; else noProducts">

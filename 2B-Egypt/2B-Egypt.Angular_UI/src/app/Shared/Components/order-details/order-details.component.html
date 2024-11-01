@@ -1,0 +1,19 @@
+<!-- <div *ngIf="orderDetails; else errorTemplate">
+    <h3>تفاصيل الطلب</h3>
+    <p>رقم الطلب: {{ orderDetails.id }}</p>
+    <p>تاريخ الطلب: {{ orderDetails.orderDate | date }}</p>
+  </div>
+  
+  <ng-template #errorTemplate>
+    <p *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</p>
+  </ng-template> -->
+  
+  <div *ngIf="orderDetails">
+    <h2>Order Details</h2>
+    <p><strong>Order Number:</strong> {{ orderDetails.orderNumber }}</p>
+    <p><strong>Date:</strong> {{ orderDetails.orderDate  | date }}</p>
+    <p><strong>User Name:</strong> {{ orderDetails.userName }}</p>
+    <p><strong>Total Amount:</strong> {{ orderDetails.totalAmount | currency}}</p>
+    <p><strong>Status:</strong> {{ orderDetails.stateEn == 1 ? 'Pending' : 'Completed' }}</p>
+  </div>
+  

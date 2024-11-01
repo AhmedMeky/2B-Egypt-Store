@@ -95,26 +95,29 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   // ngOnInit() {
-  //   this.productId = this.route.snapshot.params['id'];
-  //   this.Review.productId = this.route.snapshot.params['id'];
-  //   this.Review.priceRating = this.ratingPrice.toString();
-  //   this.Review.qualityRating = this.ratingQuilty.toString();
-  //   this.Review.valueRating = this.ratingValue.toString();
-  //   if (this.productId) {
-  //     this._productService.getProductById(this.productId).subscribe({
-  //       next: (res) => {
-  //         this.product = res;
-  //         this.PriceAfterSale =
-  //           this.product.price -
-  //           this.product.discount * 0.01 * this.product.price;
-  //       },
-  //       error: (err) => {
-  //         console.log(err);
-  //       },
-  //     });
-  //   }
-  // }
+    // this.route.paramMap.subscribe((params) => {
+    //   this.productId = params.get('id')!;
+    //   // this.Review.productId = this.productId;
+    //   // this.Review.priceRating = this.ratingPrice.toString();
+    //   // this.Review.qualityRating = this.ratingQuilty.toString();
+    //   // this.Review.valueRating = this.ratingValue.toString();
 
+    //   if (this.productId) {
+    //     // Fetch product data based on new product ID
+    //     this._productService.getProductById(this.productId).subscribe({
+    //       next: (res) => {
+    //         this.product = res;
+    //         this.PriceAfterSale =
+    //           this.product.price -
+    //           this.product.discount * 0.01 * this.product.price;
+    //       },
+    //       error: (err) => {
+    //         console.log(err);
+    //       },
+    //     });
+    //   }
+    // });
+  //}
   addToCart() {
     this._cartService.addToCartCounter();
     console.log(this.product);
@@ -155,6 +158,7 @@ export class ProductDetailsComponent implements OnInit {
       return this.product?.category?.nameEn || ''; 
     }
   }
+  
   getLocalizedbrand(): string {
     return this.translate.currentLang === 'ar'
       ? this.product.brand?.nameAr ?? 'Default Brand Name'
