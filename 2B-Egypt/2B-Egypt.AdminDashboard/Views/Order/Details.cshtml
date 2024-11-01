@@ -42,37 +42,37 @@
       </div>
       <div class="row mb-3">
           <div class="col-md-6">
-              <p><strong>Client Phone:</strong> @(Model.User.PhoneNumber)</p>
+              <p><strong>Client Phone:</strong> @(Model?.User?.PhoneNumber)</p>
           </div>
           <div class="col-md-6">
-              <p><strong>Client Address</strong> @(Model.User.Country + " - " + Model.User.City + " - " + Model.User.AddressLine1) </p>
+              <p><strong>Client Address</strong> @(Model?.User?.Country + " - " + Model?.User?.City + " - " + Model?.User?.AddressLine1) </p>
           </div>
       </div>
       <div class="row mb-3">
           <div class="col-md-6">
-              <p><strong>Payment Type:</strong> @(Model.Payment.PaymentType)</p>
+              <p><strong>Payment Type:</strong> @(Model?.Payment?.PaymentType)</p>
           </div>
           <div class="col-md-6">
-              <p><strong>Transaction Id:</strong> @(Model.Payment.TransactionId) </p>
+              <p><strong>Transaction Id:</strong> @(Model?.Payment?.TransactionId) </p>
           </div>
       </div>
       <div class="row mb-3">
         <div class="col-md-6">
-                        <p><strong>Total Amount:</strong>@Model.TotalAmount </p>
+                        <p><strong>Total Amount:</strong>@Model?.TotalAmount </p>
         </div>
       </div>
 
       
       <div class="row">
         <div class="col-md-6 col-lg-4 mb-3" >
-                        @foreach (var item in Model.OrderItems)
+                        @foreach (var item in Model?.OrderItems??[])
                         {
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <p><strong>Product Name:</strong>@item.Product.NameEn</p>
-                                    <p><strong>Quantity:</strong> @item.Quantity</p>
-                                    <p><strong>Price:</strong> @item.Product.Price</p>
-                                    <p><strong>Item Total Price</strong> @((item.Quantity * item.Product.Price) - (item.Quantity* item.Product.Price* item.Product.Discount / 100)) </p>
+                                    <p><strong>Product Name:</strong>@item?.Product?.NameEn</p>
+                                    <p><strong>Quantity:</strong> @item?.Quantity</p>
+                                    <p><strong>Price:</strong> @item?.Product?.Price</p>
+                                    <p><strong>Item Total Price</strong> @((item?.Quantity * item?.Product?.Price) - (item?.Quantity* item?.Product?.Price* item?.Product?.Discount / 100)) </p>
                                 </div>
                             </div>
                         }
