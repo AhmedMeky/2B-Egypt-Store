@@ -3,82 +3,84 @@
 @{
     ViewData["title"] = "Order Details";
 }
-<!-- include bootstrap css -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <a class="btn btn-success btn-lg" asp-controller="Order" asp-action="index">Back to Orders</a>
 </div>
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    
 <div class="container mt-5">
-  <div class="card shadow-lg">
-    <div class="card-header text-center text-white" style="background-color: #ff7f00;">
-      <h2>Order Details</h2>
-    </div>
-    <div class="card-body">
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <p><strong>Order Number:</strong> @Model.OrderNumber</p>
+    <div class="card shadow-lg">
+        <div class="card-header text-center text-white" style="background-color: #ff7f00;">
+            <h2>Order Details</h2>
         </div>
-        <div class="col-md-6">
-          <p><strong>Order Date:</strong> @Model.CreatedAt </p>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <p><strong>Order Status:</strong> @Model.Status_En</p>
-        </div>
-        <div class="col-md-6">
-          <p><strong>Order Discount</strong> @Model.OrderItems.Sum(item => item.Quantity*item.Product.Price*item.Product.Discount/100) EPG</p>
-        </div>
-      </div>
-      <div class="row mb-3">
-       <div class="col-md-6">
-                        <p><strong>Client Name:</strong> @(Model.User.FirstName + " " + Model.User.LastName)</p>
-       </div>
-       <div class="col-md-6">
-           <p><strong>Client Email</strong> @(Model.User.Email) </p>
-       </div>
-      </div>
-      <div class="row mb-3">
-          <div class="col-md-6">
-              <p><strong>Client Phone:</strong> @(Model.User.PhoneNumber)</p>
-          </div>
-          <div class="col-md-6">
-              <p><strong>Client Address</strong> @(Model.User.Country + " - " + Model.User.City + " - " + Model.User.AddressLine1) </p>
-          </div>
-      </div>
-      <div class="row mb-3">
-          <div class="col-md-6">
-              <p><strong>Payment Type:</strong> @(Model.Payment.PaymentType)</p>
-          </div>
-          <div class="col-md-6">
-              <p><strong>Transaction Id:</strong> @(Model.Payment.TransactionId) </p>
-          </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-md-6">
-                        <p><strong>Total Amount:</strong>@Model.TotalAmount </p>
-        </div>
-      </div>
-
-      
-      <div class="row">
-        <div class="col-md-6 col-lg-4 mb-3" >
-                        @foreach (var item in Model.OrderItems)
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Order Number:</strong> @Model.OrderNumber</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Order Date:</strong> @Model.CreatedAt </p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Order Status:</strong> @Model.Status_En</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Order Discount:</strong> @Model.OrderItems.Sum(item => item.Quantity * item.Product.Price * item.Product.Discount / 100) EGP</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Client Name:</strong> @(Model.User.FirstName + " " + Model.User.LastName)</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Client Email:</strong> @(Model.User.Email)</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Client Phone:</strong> @(Model.User.PhoneNumber)</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Client Address:</strong> @(Model.User.Country + " - " + Model.User.City + " - " + Model.User.AddressLine1)</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Payment Type:</strong> @(Model.Payment.PaymentType)</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Transaction Id:</strong> @(Model.Payment.TransactionId)</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Total Amount:</strong> @Model.TotalAmount</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <h3>Cart Items</h3>
+                    @if (Model.OrderItems.Any())
+                    {
+                        foreach (var item in Model.OrderItems)
                         {
-                            <div class="card h-100">
+                            <div class="card mb-2">
                                 <div class="card-body">
-                                    <p><strong>Product Name:</strong>@item.Product.NameEn</p>
+                                    <p><strong>Product Name:</strong> @item.Product.NameEn</p>
                                     <p><strong>Quantity:</strong> @item.Quantity</p>
                                     <p><strong>Price:</strong> @item.Product.Price</p>
-                                    <p><strong>Item Total Price</strong> @((item.Quantity * item.Product.Price) - (item.Quantity* item.Product.Price* item.Product.Discount / 100)) </p>
+                                    <p><strong>Item Total Price:</strong> @((item.Quantity * item.Product.Price) - (item.Quantity * item.Product.Price * item.Product.Discount / 100))</p>
                                 </div>
                             </div>
                         }
-                    </div>
-      </div>
+                    }
+                    else
+                    {
+                        <p>No items in the cart.</p>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 </div>
