@@ -15,7 +15,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
 import { LanguageServiceService } from '../../../services/language-service.service';
-
+ 
 @Component({
   selector: 'app-product-list',
   standalone: true,

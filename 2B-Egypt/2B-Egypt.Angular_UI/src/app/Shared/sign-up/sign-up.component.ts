@@ -41,7 +41,10 @@ export class SignUpComponent {
 
     console.log('User  Data:', this.user);
     this.loginService.UserRegister(this.user).subscribe(
-      (response) => {
+      (response) => { 
+        console.log(response);
+        sessionStorage.setItem('token', response.tokens);
+        sessionStorage.setItem('user', JSON.stringify(response.user));
         console.log('Sign up successful', response);
       },
       (error) => {

@@ -1,5 +1,5 @@
 <div class="cart-container">
-  <h2>{{ "shopping_ sxcart" | translate }}</h2>
+  <h2>{{ " shopping cart" | translate }}</h2>
   <div *ngIf="cartItems.length > 0">
     <div class="row">
       <div class="col-md-9">
@@ -62,7 +62,7 @@
               <h5>Order Total</h5>
               <h5 style="color: black;">EGP {{subTotal}}</h5>
             </div>
-            <button  [routerLink]="['/shipping']"  class="btn btn-warning btn-block">GO TO CHECKOUT</button>
+            <button  routerLink="/shipping"  class="btn btn-warning btn-block">GO TO CHECKOUT</button>
           </div>
         </div>
       </div>
@@ -80,13 +80,11 @@
 
 
 
-    <div *ngIf="cartItems.length == 0">
-      <p><span class="clickHere">{{ 'continue_shopping' | translate }}</span> </p>
-    </div>
+  
   </div>
 </div>
-  <div *ngIf="cartItems.length == 0">
-    <p><span class="clickHere" >{{ 'continue_shopping' | translate }}</span> </p>
+  <div  *ngIf="cartItems.length == 0">
+    <p  ><span routerLink="/products" class="clickHere" >{{ 'continue_shopping' | translate }}</span> </p>
   </div>
 
 

@@ -2,7 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CartService } from '../../Services/CartService';
 import { CartItem } from '../../Models/CartItem';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule,Router } from '@angular/router';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { IProduct } from '../../../../models/IProduct';
@@ -22,23 +22,29 @@ export class CartComponent implements OnInit {
   product: IProduct = {} as IProduct;
   cart: CartItem = {} as CartItem;
 
-  constructor(private cartService: CartService,private route:ActivatedRoute, public translateService: TranslateService,) {
+  constructor(private cartService: CartService,private route:ActivatedRoute, public translateService: TranslateService,private router:Router) {
     // this.translate = translateService;
 
   }
  
   ngOnInit() {
     this.cartItems = this.cartService.getCartItems();
-  }
-  
+console.log(this.cartItems)
+for(let s of this.cartItems)
+this.subTotal+=(s.price*s.quantity)
+// this.subTotal=this.ca
+}
 
-  removeItem(productId: string) {
-    console.log(productId)
-    this.cartService.removeFromCart(productId);
-    this.cartItems = this.cartService.getCartItems();
+
+removeItem(productId: string) {
+  console.log(productId)
+  this.cartService.removeFromCart(productId);
+  this.cartItems = this.cartService.getCartItems();
+  this.subTotal=0
+  for(let s of this.cartItems)
+    this.subTotal+=(s.price*s.quantity)   
    this.cartService.minusCartCounter();
-  }
-
+}
   updateQuantity(productId: string, quantity: number) {
     const productInCart = this.cartItems.find(item => item.productId === productId);
     
@@ -95,7 +101,18 @@ decreaseQuantity(item: CartItem) {
       : item.productName;
   }
 
-
+// gotoShipping()
+// {
+//   let check = sessionStorage.getItem('user')
+//   if(check)
+//   {
+//     this.router.navigateByUrl(`shipping`);
+//   }
+//   else{
+//     this.router.navigateByUrl(`Login`);
+    
+//   }
+// }
 
 //   orderTotal = 0
 

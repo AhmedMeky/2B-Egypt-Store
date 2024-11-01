@@ -1,1 +1,103 @@
-﻿
+﻿@*      @model Order
+
+     @{
+         viewdata["title"] = "order details";
+     }
+     <!-- include bootstrap css -->
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+     <div class="d-sm-flex align-items-center justify-content-between mb-4">
+         <h1 class="h3 mb-0 text-gray-800"> details</h1>
+         <a class="btn btn-success btn-lg" asp-controller="product" asp-action="index">back to products</a>
+     </div>
+     <hr />
+     <div class="container">
+         <div class="row">
+             <div class="col-md-6">
+             <div class="col-md-6">
+                 <div class="card-body p-0">
+                     <h1 class=" fw-bolder"> @Model?.Number</h1>
+                     <div class="pt-5">
+                         <h4 class=""> description :</h4>
+                         <p class="fs-5">@model?.descriptionen</p>
+                         <p class="fs-5">@model?.descriptionar</p>
+                     </div>
+                     <div class="row">
+                         <div class="col-md-6">
+                             <div class="pt-5">
+                                 <h4 > color :</h4>
+                                 <p class="fs-5">@model.coloren (@model.colorar)</p>
+                             </div>
+                             <div class="pt-5">
+                         <h4 class=""> specifications :</h4>
+                         @if(model?.facilities is not null && model?.facilities?.count > 0)
+                         {
+                             @foreach(var facility in model.facilities)
+                             {
+                                         <strong> <p class="fs-5">@facility?.nameen</p> </strong> <p class="fs-5">@facility?.valueen</p> <br />
+                             }
+                         }
+                     </div>
+                             <div class="pt-5">
+                                 <h4 > price :</h4>
+                                 <p class="fs-5">@model.price epg</p>
+                             </div>
+                             <div class="pt-5">
+                                 <h4> discount :</h4>
+                                 <p class="fs-5">(@model.discount)%</p>
+                             </div>
+                             <div class="pt-5">
+                                 <h4 > stock quantity :</h4>
+                                 <p class="fs-5">@model.unitinstock</p>
+                             </div>
+                         </div>
+                         <div class="col-md-6">
+                             <div class="pt-5">
+                                 <h4 > rate :</h4>
+                                 @if (model?.reviews is not null && model?.reviews?.count > 0)
+                                 {
+                                     <p class="fs-5">@model?.reviews?.select(rv => rv.qualityrating)?.average()??0</p>
+                                 }
+                                 else
+                                 {
+                                     <p class="fs-5">3</p>
+                                 }
+                             </div>
+                             <div class="pt-5">
+                                 <h4 > reviews :</h4>
+                                 @if (model?.reviews is not null && model?.reviews?.count > 0)
+                                 {
+                                     @foreach (var item in model?.reviews)
+                                     {
+                                         <p class="fs-5">price rating : @item.pricerating</p>
+                                         <p class="fs-5"> value rating : @item.valuerating</p>
+                                         <p class="fs-5"> quality rating :@item.qualityrating</p>
+                                         <p class="fs-5">summary : @item.summary</p>
+                                         <p class="fs-5">nickname : @item.nickname</p>
+                                         <p class="fs-5">review : @item.reviewtext</p>
+                                         <hr />
+                                     }
+                                 }
+                                 else
+                                 {
+                                     <p class="fs-5">there is no reviews yet.</p>
+                                 }
+                             </div>
+                         </div>
+                     </div>
+
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <!-- include bootstrap js -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+     <script>
+   
+     </script>
+
+ *@

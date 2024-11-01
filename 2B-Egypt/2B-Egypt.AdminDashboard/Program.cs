@@ -27,6 +27,8 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(option =>
 
 
 
+
+
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
           .AddCookie(options =>
           {

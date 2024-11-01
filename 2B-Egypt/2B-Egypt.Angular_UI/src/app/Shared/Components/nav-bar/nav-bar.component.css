@@ -1,12 +1,19 @@
 * {
   margin: 0;
   padding: 0;
-} 
- 
+}
+
 body {
   min-height: 100vh;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
+.responsivediv {
+  background-image: url("/img/bank.jpg");
+  height: 70px; /* Full viewport height */
+  width: 100%; 
+   /* Full width */
+}
+
 #smallnav {
   background-color: #f0f0ed;
   height: 35px;
@@ -21,7 +28,13 @@ body {
   font-family: "Cairo" !important;
   color: #6d6d6c !important;
 }
-
+#responsiveSearchBarsCart{
+  display: flex;
+  flex-direction: row; 
+  /* background-color: blue; */
+  justify-content: end;
+  width: 45%;
+}
 nav {
   background-color: black;
   margin-left: 50px;
@@ -59,14 +72,16 @@ nav a:hover {
 .cart-container {
   position: relative;
   /* display: inline-block; */
-  display: flex;
+  display: flex; 
   flex-direction: row;
-  margin-right: 45px;
+  /* background-color: green; */
+  /* margin-right: 45px; */
 }
 
 .cart-icon {
   display: block;
-  width: 35px; /* Set the width of the cart image */
+  width: 35px;
+  /* Set the width of the cart image */
   /* background-color: black; */
 }
 
@@ -104,6 +119,14 @@ nav a:hover {
 #btnandsearch {
   margin: 15px;
 }
+.headsetandlocation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  margin-right: 5px;
+  margin-left: 5px;
+}
 #bigDivForNavbar {
   /* background-color: rebeccapurple; */
   display: flex;
@@ -133,11 +156,18 @@ nav a:hover {
   background-color: rgb(156, 156, 214);
   display: none;
   flex-direction: row;
+  margin-block: 10%;
 }
-
+#divforEndjustfy{
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  margin: 2%;
+  justify-content: end;
+}
 #showsubcategories {
-  background-color:wheat;
-  border:solid;
+  background-color: white;
+  border: solid 2px;
   /* border-radius: 10px; */
   height: 50px;
   margin-left: 10%;
@@ -145,6 +175,13 @@ nav a:hover {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  transition: 0.5s;
+}
+#showsubcategories > a {
+  color: black;
+}
+#showsubcategories > a:hover {
+  color: #f37021;
 }
 /* nav >ul >li> a:hover #showsubcategories{
   display: block;
@@ -156,7 +193,7 @@ a {
   font-weight: bold;
   font-size: small;
   height: 100%;
-  padding: 0 30px;
+  padding: 0 15px;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -170,9 +207,15 @@ a {
   flex-direction: row;
   width: 45%;
 }
-@media (max-width: 800px) {
+@media (max-width: 800px) { 
+  #responsiveSearchBarsCart{ 
+    justify-content: end;
+  }
   #listbars {
     display: block;
+  } 
+  .hiddenDiv{
+    display: flex;
   }
   #nav {
     display: none;
@@ -183,27 +226,52 @@ a {
   #searchandButton {
     display: none;
   }
-  .headsetandlocation {
-    display: none;
-  }
+
   #smallnav {
     display: none;
   }
   #bigDivForNavbar {
-    justify-content: space-evenly;
+    justify-content: space-between;
     height: 50px;
     /* background-color: red;  */
     width: 100%;
   }
   .cart-container {
     justify-content: end;
-    background-color: black;
+    /* background-color: green; */
   }
   /* .rectangle{
     display: block;
   } */
+} 
+/* Optional styles for the dropdown */
+#sidelist {
+  width: 100%;
 }
-@media (min-width: 800px) {
+
+#sidelist div {
+  transition: background-color 0.3s;
+}
+
+#sidelist div:hover {
+  background-color: #f0f0f0; /* Change background on hover */
+}
+.hiddenDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 30%;
+}
+@media (min-width: 800px) { 
+  #bigDivForNavbar{
+    justify-content: end;
+  }
+  #divforEndjustfy{ 
+    justify-content: end;
+  }
+  .hiddenDiv {
+    display: flex;
+  }
   #listbars {
     display: none;
   }
@@ -216,15 +284,40 @@ a {
   #search {
     display: flex;
   }
-  .headsetandlocation {
-    display: flex;
-    flex-direction: column;
-  }
+
   #searchandButton {
     display: flex;
     flex-direction: row;
   }
   #smallnav {
     display: flex;
+  } 
+  .cart-container {
+    justify-content: end;
+    background-color: white;
+  }
+}
+
+@media (max-width: 800px) {
+  .headsetandlocation {
+    display: none;
+  }
+  .hiddenDiv {
+    display: none;
+  }
+  #bigDivForNavbar {
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 500px) {
+  .headsetandlocation {
+    display: none;
+  }
+  .hiddenDiv {
+    display: none;
+  }
+  #bigDivForNavbar {
+    justify-content: space-between;
   }
 }

@@ -1,0 +1,30 @@
+<div class="order-list-container container">
+  <h2 class="title text-center my-4">My Orders</h2>
+
+  <div class="table-responsive">
+    <table class="table table-striped order-table">
+      <thead class="thead-dark d-none d-md-table-header-group">
+        <tr>
+          <th scope="col">Order Number</th>
+          <th scope="col">Date</th>
+          <th scope="col">Recipient</th>
+          <th scope="col">Order Total</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders" class="order-row">
+          <td data-label="Order Number">{{ order.orderNumber }}</td>
+          <td data-label="Date">{{ order.date | date:'yyyy/MM/dd' }}</td>
+          <td data-label="Recipient">{{ order.userName }}</td>
+          <td data-label="Order Total">{{ order.totalAmount | currency:'USD':'symbol-narrow':'1.2-2' }}</td>
+          <td data-label="Status">{{ getStatusText(order.stateEn) }}</td>
+          <td data-label="Action">
+            <a class="details-link btn btn-sm" [routerLink]="['/order', order.id]">View Details</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

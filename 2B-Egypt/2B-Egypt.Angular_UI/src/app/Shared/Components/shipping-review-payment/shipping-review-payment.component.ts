@@ -3,14 +3,14 @@ import { Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } fr
 import { FormsModule } from '@angular/forms';
 import { ShippingService } from '../../../services/shipping.service';
 import { IShippingData } from '../../../../models/ishipping-data';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { OrderService } from '../../../services/order.service';
 import { IOrder } from '../../../../models/iorder';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
 
 @Component({
-  selector: 'app-shipping-review-payment',
+  selector: 'app-shipping-review-payment', 
   standalone: true,
   imports: [CommonModule, FormsModule , RouterModule],
   templateUrl: './shipping-review-payment.component.html',
@@ -29,9 +29,9 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     'Mohandessin', 'Dokki', 'Agouza', 'Bulaq', 'Imbaba',
     'Pyramids', 'Giza', 'Ossim', 'Kerdasa', 'Faisal', 'El Haram',
     '6th of October', 'Al Ahram', 'Al Khatatba', 'Al Awqaf', 'Al Manial', 'Other'
-  ];
+  ]; 
   
-  shippingData: IShippingData = {
+  shippingData: IShippingData = { 
     country: this.country,
     city: '',
     addressLine1: '',
@@ -39,7 +39,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     phoneNumber: ''
   };
   
-  constructor(private _shippingService: ShippingService ,private _order:OrderService , private _cartService:CartService) {}
+  constructor(private _shippingService: ShippingService ,private _order:OrderService , private _cartService:CartService ,private router:Router) {}
   ngOnChanges(): void {
    
   }
@@ -55,7 +55,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     let Items = array.map(item => ({
       productId: item.productId,
       quantity: item.quantity,
-      itemTotalPrice: item.totalPrice
+      itemTotalPrice: item.price
     }));
     
     console.log(Items)
@@ -94,7 +94,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
             console.log(err);
           },
         })
-        
+         
       }
       
       
@@ -103,10 +103,15 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
         this.order.paymentType = this.selectedPaymentMethod;
         this._order.creatOrder(this.order).subscribe({
           next: (res) => {
+            localStorage.clear()
+            this.router.navigateByUrl('order-list').then(() => {
+              window.location.reload();
+            });
     },
     error: (err) => {
     },
 })
+
 }
 
 goToShipping(checkshipping: boolean): void {

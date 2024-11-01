@@ -56,6 +56,8 @@ public class OrderController : ControllerBase
     }
 
     [HttpGet("[Action]")]
+    [HttpGet("Details/{orderId}")]
+
     public async Task<ActionResult> Details(Guid orderId)
     {
         var orderResponse = await _orderService.GetOrderByIdAsync(orderId);
