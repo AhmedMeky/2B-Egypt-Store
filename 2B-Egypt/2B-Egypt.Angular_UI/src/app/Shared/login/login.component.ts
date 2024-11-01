@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
 import { FormsModule } from '@angular/forms';
 import { Loginuser } from '../../../models/loginuser';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -26,23 +27,39 @@ export class LoginComponent implements OnInit {
     this.isLoggedIn = !!sessionStorage.getItem('token'); // Check for token in session storage
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-    console.log(this.loginuser);
+//  async onSubmit(event: Event) {
+//     event.preventDefault();
+//     console.log(this.loginuser);
 
-    this.authService.login(this.loginuser).subscribe({
-      next: (response) => {
-        console.log(response);
-        sessionStorage.setItem('token', response.tokens);
-        sessionStorage.setItem('user', JSON.stringify(response.user)); // Save user details
-        this.isLoggedIn = true; // Set login status to true
-        this.router.navigate(['/products']); // Navigate to the home page or another page on successful login
-      },
-      error: (err) => {
-        console.error('Login failed', err);
-      },
-    });
+//    await this.authService.login(this.loginuser).subscribe({
+//       next: (response) => {
+//         console.log(response);
+//         sessionStorage.setItem('token', response.tokens);
+//         sessionStorage.setItem('user', JSON.stringify(response.user)); // Save user details
+//         this.isLoggedIn = true; // Set login status to true
+//         this.router.navigate(['/products']); // Navigate to the home page or another page on successful login
+//       },
+//       error: (err) => {
+//         console.error('Login failed', err);
+//       },
+//     });
+//   }
+async onSubmit(event: Event) {
+  event.preventDefault();
+  console.log(this.loginuser);
+
+  try {
+    const response = await firstValueFrom(this.authService.login(this.loginuser)); // Await the login response
+    console.log(response);
+    sessionStorage.setItem('token', response.tokens);
+    sessionStorage.setItem('user', JSON.stringify(response.user)); // Save user details
+    this.isLoggedIn = true; // Set login status to true
+    this.router.navigate(['/products']); // Navigate to the home page or another page on successful login
+  } catch (err) {
+    console.error('Login failed', err);
+    // Optionally, display an error message to the user
   }
+}
 
   logOut() {
     sessionStorage.removeItem('token'); // Clear the token
