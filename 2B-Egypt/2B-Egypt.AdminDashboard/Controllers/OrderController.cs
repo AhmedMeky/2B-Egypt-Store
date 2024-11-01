@@ -15,6 +15,8 @@ namespace _2B_Egypt.AdminDashboard.Controllers
         public async Task<IActionResult> Index()
         {
             var orderResponse = await _orderService.GetAllOrderAsync();
+            if (!orderResponse.IsSuccessfull)
+                return View("Error404");
             return View(orderResponse.Entity);
         }
 
