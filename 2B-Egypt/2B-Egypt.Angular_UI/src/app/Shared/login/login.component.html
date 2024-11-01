@@ -1,40 +1,41 @@
-<form (submit)="onSubmit($event)">
-  <div id="loginDiv">
-    <div><h5 id="Head">Sign In</h5></div>
-    <div>
-      <h5 style="font-size: x-large; text-align: center">
-        Login With Social Profile
-      </h5>
+<form (submit)="onSubmit($event)" class="container mt-5">
+  <div id="loginDiv" class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h5 class="text-center" translate="LOGIN.TITLE"></h5>
+      <h5 class="text-center" style="font-size: x-large;" translate="LOGIN.SOCIAL_LOGIN"></h5>
+      <div class="text-center mb-3">
+        <i class="fab fa-facebook" style="font-size: 40px; margin-right: 10px; color: #3b5998;"></i>
+        <i class="fab fa-google" style="font-size: 40px; color: #db4437;"></i>
+      </div>
+      <div class="form-group">
+        <input
+          placeholder="{{ 'LOGIN.EMAIL' | translate }}"
+          type="email"
+          id="inputlogin" 
+          name="email"
+          [(ngModel)]="loginuser.email"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          placeholder="{{ 'LOGIN.PASSWORD' | translate }}"
+          type="password"
+          id="inputlogin" 
+          name="password"
+          [(ngModel)]="loginuser.password"
+          class="form-control"
+          required
+        />
+      </div>
+      <div class="text-center" style="margin-top: 15px;">
+        <button id="btnlogin" type="submit" class="btn" style="background-color: #ff662b; color: white; width: 90px;" >
+          {{ 'LOGIN.SIGN_IN' | translate }}
+        </button>
+        <br>
+        <a href="#" style="color: #ff662b;" translate="LOGIN.FORGOT_PASSWORD"></a>
+      </div>
     </div>
-    <div style="display: inline-block; margin-left: 25%">
-      <img style="width: 90px" src="/img/facelogo.png" />
-      <img style="width: 80px" src="/img/googlelogo.png" />
-    </div>
-    <input
-    placeholder="E-mail"
-    type="email"
-    id="inputlogin" 
-    name="email"
-    [(ngModel)]="loginuser.email"
-  />
-  <br />
-  <span *ngIf="!isLoggedIn" style="color: red;">Invalid Email or password.</span>
-  
-  <input 
-  
-    placeholder="Password"
-    type="password"
-    id="inputlogin" 
-    name="password"
-    [(ngModel)]="loginuser.password"
-  />
-  <br />
-  <span *ngIf="!isLoggedIn" style="color: red;">Invalid Email or password.</span>
-
-    <div style="margin-top: 15px">
-      <button id="btnlogin" type="submit" (click)="changeStat()">Sign In</button>
-      <a href="#">Forgot Your Password</a>
-    </div> 
-    
   </div>
 </form>

@@ -1,4 +1,3 @@
-<!-- Example split danger button -->
 <div class="responsivediv" style="width: 100%"></div>
 <div style="height: 3px; background-color: orangered"></div>
 <div id="smallnav">
@@ -152,52 +151,6 @@
       {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
     >
   </div>
-  <!-- <div id="sidelist" *ngIf="BarsAppears">
-    <select *ngFor="let cat of ParentCategories" style="display: block">
-      <div style="background-color: black;">
-        <option style="width: 100%">
-          <a href="#">{{ cat.nameEn }}</a>
-        </option>
-      </div>
-    </select>
-  </div> -->
-  <!-- <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
-    <div
-      (click)="toggleDropdown()"
-      style="
-        background-color: black;
-        color: white;
-        padding: 10px;
-        cursor: pointer;
-      "
-    >
-      {{ selectedCategory || "Select a category" }}
-    </div>
-    <div
-      *ngIf="isDropdownOpen"
-      style="
-        position: absolute;
-        background-color: white;
-        border: 1px solid black;
-        width: 100%;
-        z-index: 1;
-      "
-    >
-      <div
-        *ngFor="let cat of ParentCategories"
-        (click)="selectCategory(cat.nameEn)"
-        style="padding: 10px; cursor: pointer; text-align: left; color: black"
-      >
-        <ul>
-          <li>
-            <select style="display: block">
-              <option style="display: block" value="">{{ cat.nameEn }}</option>
-            </select>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
 
   <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
     <div style="height: 50px; display: flex; flex-direction: row; flex-grow: 1">

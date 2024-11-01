@@ -69,17 +69,39 @@ export class OrderListComponent {
   
   constructor(private orderService: OrderService,private translate: TranslateService) {}
 
+  // ngOnInit(): void {
+  //   this.translate.setDefaultLang('en');
+  //   const userSessionData = sessionStorage.getItem('user');
+
+  //   if (userSessionData) {
+  //     const userData = JSON.parse(userSessionData);
+  //     const userId = userData.id;
+
+  //     this.orderService.getAllOrders(userId).subscribe(
+  //       (response) => {
+  //         this.orders = response;
+  //         console.log('Orders:', this.orders); 
+  //       },
+  //       (error) => {
+  //         console.error('Error fetching orders:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.error('User data not found in session storage');
+  //   }
+  // }
   ngOnInit(): void {
     this.translate.setDefaultLang('en');
     const userSessionData = sessionStorage.getItem('user');
-
+  
     if (userSessionData) {
       const userData = JSON.parse(userSessionData);
       const userId = userData.id;
-
+  
       this.orderService.getAllOrders(userId).subscribe(
         (response) => {
-          this.orders = response;
+          this.orders = response.sort((a: any, b: any) => b.orderNumber - a.orderNumber);
+
           console.log('Orders:', this.orders); 
         },
         (error) => {
@@ -90,6 +112,7 @@ export class OrderListComponent {
       console.error('User data not found in session storage');
     }
   }
+  
   
   viewOrderDetails(order: any) {
     console.log('Order details:', order);

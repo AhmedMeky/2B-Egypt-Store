@@ -116,13 +116,35 @@
       "CANCELED": "Canceled"
     },
     
+      "SIGN_UP": "Sign Up",
+      "LOGIN_WITH_SOCIAL": "Login With Social Profile",
+      "FIRST_NAME": "First Name",
+      "LAST_NAME": "Last Name",
+      "EMAIL": "E-mail",
+      "PHONE_NUMBER": "Phone Number",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "ALREADY_HAVE_ACCOUNT": "Already have an Account",
+    
+        "LOGIN": {
+          "TITLE": "Sign In",
+          "SOCIAL_LOGIN": "Login With Social Profile",
+          "EMAIL": "E-mail",
+          "PASSWORD": "Password",
+          "SIGN_IN": "Sign In",
+          "FORGOT_PASSWORD": "Forgot Your Password?"
+        },
+    
+      
+    
+    
     "ACTION": "Action",
     "VIEW_DETAILS": "View Details",
     "UNKNOWN_STATUS": "Unknown",
     "ORDER_DETAILS": {
     "TITLEO": "Order Details",
     "ORDER_NUMBER": "Order Number",
-    "CREATED_AT": "Created At",
+    "CREATED_AT": "DATE",
     "STATUS": "Status",
     "DISCOUNT": "Discount",
     "TOTAL_AMOUNT": "Total Amount",
