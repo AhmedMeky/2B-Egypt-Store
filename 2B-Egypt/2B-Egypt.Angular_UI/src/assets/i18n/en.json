@@ -42,7 +42,6 @@
     "paymentsMethods": "Payments Methods",
     "copyright": "©2024 All rights reserved to Tobi Computer Company"
   },
-
   "FILTERS": {
     "TITLE": "Filters",
     "PRODUCT_NAME": "Product Name",
@@ -54,10 +53,18 @@
     "ENTER_DISCOUNT": "Enter minimum discount",
     "APPLY_FILTER": "Apply Filter"
   },
-
+  "TITLE": "My Orders",
+  "ORDER_NUMBER": "Order Number",
+  "DATE": "Date",
+  "RECIPIENT": "Recipient",
+  "ORDER_TOTAL": "Order Total",
+  "STATUS": "Status",
+  "ACTION": "Action",
+  "VIEW_DETAILS": "View Details",
+  "UNKNOWN_STATUS": "Unknown",
   "COMPARE": "Compare()",
   "SIGN_IN": "Sign In",
-  "Logout":"Log out",
+  "Logout": "Log out",
   "CREATE_ACCOUNT": "Create Account",
   "SEARCH_PLACEHOLDER": "Search product by name",
   "SEARCH_BUTTON": "Search",
@@ -94,7 +101,41 @@
     "REVIEW_MAXLENGTH": "Review text cannot exceed 1000 characters.",
     "SUBMIT": "Submit"
   },
-
+  
+    "TITLEE": "My Orders",
+    "ORDER_NUMBER": "Order Number",
+    "DATE": "Date",
+    "RECIPIENT": "Recipient",
+    "ORDER_TOTAL": "Order Total",
+    "STATUS": {
+      "PENDING": "Pending",
+      "CONFIRMED": "Confirmed",
+      "SHIPPED": "Shipped",
+      "ATTEMPTED_DELIVERY": "Attempted Delivery",
+      "RECEIVED": "Received",
+      "CANCELED": "Canceled"
+    },
+    
+    "ACTION": "Action",
+    "VIEW_DETAILS": "View Details",
+    "UNKNOWN_STATUS": "Unknown",
+    "ORDER_DETAILS": {
+    "TITLEO": "Order Details",
+    "ORDER_NUMBER": "Order Number",
+    "CREATED_AT": "Created At",
+    "STATUS": "Status",
+    "DISCOUNT": "Discount",
+    "TOTAL_AMOUNT": "Total Amount",
+    "PRODUCT_NAME": "Product Name",
+    "QUANTITY": "Quantity",
+    "PRICE": "Price",
+    "TOTAL_PRICE": "Total Price",
+    "BACK_TO_ORDERS": "Back to My Orders",
+    "UNKNOWN": "Unknown"
+  },
+    
+  
+  
   "QUANTITY_INCREASE": "+",
   "QUANTITY_DECREASE": "-",
   "ADD_TO_CART": "Add to Cart",
@@ -109,12 +150,10 @@
   "clear_cart": "Clear Cart",
   "no_items": "You have no items in your shopping cart",
   "continue_shopping": "Click here to continue shopping",
-
   "summary": "Summary",
   "subtotal": "Subtotal",
   "order_total": "Order Total",
   "go_to_checkout": "GO TO CHECKOUT",
-
   "Login": "Login",
   "SignUp": "Sign Up",
   "Logout": "Log out",

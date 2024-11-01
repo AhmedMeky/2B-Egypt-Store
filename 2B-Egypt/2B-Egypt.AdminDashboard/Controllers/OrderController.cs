@@ -18,9 +18,9 @@ namespace _2B_Egypt.AdminDashboard.Controllers
             return View(orderResponse.Entity);
         }
 
-        public async Task<IActionResult> Details(Guid orderId)
+        public async Task<IActionResult> Details(Guid id)
         {
-            var orderResponse = await _orderService.GetOrderDetailsByIdAsync(orderId);
+            var orderResponse = await _orderService.GetOrderDetailsByIdAsync(id);
             if (!orderResponse.IsSuccessfull)
                 return View("Error404");
             return View(orderResponse.Entity);

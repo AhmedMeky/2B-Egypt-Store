@@ -3,6 +3,7 @@ import { IUser } from '../../../models/iuser';
 import { FormsModule, NgModel } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Observer } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,7 +12,8 @@ import { Observer } from 'rxjs';
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
-export class SignUpComponent {
+export class SignUpComponent { 
+  alreadyExists:boolean =false;
   loginservice: LoginService | undefined;
   @Input() user: IUser | any = {
     firstName: '',
@@ -20,8 +22,9 @@ export class SignUpComponent {
     phoneNumber: '',
     password: '',
     confirmPassword: '',
-  };
-  constructor(private loginService: LoginService) {
+  }; 
+  
+  constructor(private loginService: LoginService,private route:Router) {
     this.loginservice = loginService;
   }
   onSubmit() { 
@@ -45,9 +48,12 @@ export class SignUpComponent {
         console.log(response);
         sessionStorage.setItem('token', response.tokens);
         sessionStorage.setItem('user', JSON.stringify(response.user));
-        console.log('Sign up successful', response);
+        console.log('Sign up successful', response); 
+        this.alreadyExists=false;
       },
-      (error) => {
+      (error) => { 
+        this.alreadyExists =true;
+
         console.error('Sign up failed', error);
         if (error.error) {
           console.error('Error details:', error.error);
@@ -66,5 +72,8 @@ export class SignUpComponent {
   //       console.error('Sign up failed', error);
   //     }
   //   );
-  // }
+  // } 
+  GotoLogin(){
+    this.route.navigateByUrl(`/Login`);
+  }
 }

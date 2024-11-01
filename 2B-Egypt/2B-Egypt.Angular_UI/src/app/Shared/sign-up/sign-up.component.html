@@ -53,7 +53,8 @@
             class="inputSignUp"
             style="width: 100%"
             [(ngModel)]="user.email"
-          />
+          /> 
+          <span style="color: red;" *ngIf="alreadyExists">email already exists</span>
         </div>
       </div>
       <div style="display: block">
@@ -102,7 +103,7 @@
 
       <div style="margin-top: 15px">
         <button id="btnlogin" type="submit">Sign Up</button>
-        <a routerLink="/Login">Already have an Account</a>
+        <a style="color: orangered;cursor: pointer;" (click)="GotoLogin()">Already have an Account</a>
       </div>
     </div>
   </form>

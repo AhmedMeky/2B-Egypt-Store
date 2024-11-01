@@ -11,23 +11,30 @@
       <img style="width: 80px" src="/img/googlelogo.png" />
     </div>
     <input
-      placeholder="E-mail"
-      type="email"
-      id="inputlogin" 
-      name="email"
-      [(ngModel)]="loginuser.email"
-    />
-    <br />
-    <input
-      placeholder="password"
-      type="password"
-      id="inputlogin" 
-      name="password"
-      [(ngModel)]="loginuser.password"
-    />
+    placeholder="E-mail"
+    type="email"
+    id="inputlogin" 
+    name="email"
+    [(ngModel)]="loginuser.email"
+  />
+  <br />
+  <span *ngIf="!isLoggedIn" style="color: red;">Invalid Email or password.</span>
+  
+  <input 
+  
+    placeholder="Password"
+    type="password"
+    id="inputlogin" 
+    name="password"
+    [(ngModel)]="loginuser.password"
+  />
+  <br />
+  <span *ngIf="!isLoggedIn" style="color: red;">Invalid Email or password.</span>
+
     <div style="margin-top: 15px">
-      <button id="btnlogin" type="submit" >Sign In</button>
+      <button id="btnlogin" type="submit" (click)="changeStat()">Sign In</button>
       <a href="#">Forgot Your Password</a>
-    </div>
+    </div> 
+    
   </div>
 </form>
