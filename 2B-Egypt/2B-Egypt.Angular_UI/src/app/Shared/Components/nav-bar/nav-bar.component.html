@@ -5,51 +5,74 @@
     <div>
       <a href="#">{{ "COMPARE" | translate }}</a>
     </div>
-    <a *ngIf="!isLoggedIn" routerLink="/Login" (click)="changeStat()" style="color: grey">{{ "SIGN_IN" | translate
-      }}</a>
-    <a *ngIf="isLoggedIn" routerLink="/Login" (click)="logout()" style="color: grey">{{ "Logout" | translate }}</a>
+    <!-- <div><a *ngIf="!isLoggedIn" routerLink="/Login">Sign In</a></div>  -->
+    <a *ngIf="isLoggedIn == false" routerLink="/Login" style="color: grey">{{
+      "SIGN_IN" | translate
+    }}</a>
+
+    <a
+      *ngIf="2 > 1"
+      routerLink="/Login"
+      (click)="logout()"
+      style="color: grey"
+      >{{ "Logout" | translate }}</a
+    >
+    
     <div>
       <a routerLink="/Signup">{{ "CREATE_ACCOUNT" | translate }}</a>
     </div>
+    <!-- <div><button (click)="logout()">Log Out</button></div> -->
   </div>
-  <button class="btn" style="color: #f37021;">
-    <i [routerLink]="['/products']" class="fas fa-home" style="color: #f37021;"></i> {{"Home"| translate}}
+  <button [routerLink]="['/products']"  class="btn" style="color: #f37021;">
+    <i class="fas fa-home" style="color: #f37021;"></i> {{"Home"| translate}}
   </button>
-  
 
-  <select (change)="changelang($event)" name="languageSelect" aria-label="Select language"
-    style="background-color: grey">
+  <select
+    (change)="changelang($event)"
+    name="languageSelect"
+    aria-label="Select language"
+    style="background-color: grey"
+  >
+
     <option value="en">English</option>
     <option value="ar">العربية</option>
   </select>
-  
 </div>
 <div>
   <div id="bigDivForNavbar">
-    <img src="/img/2b.png" width="15%" id="img2b" />
+
+    <img routerLink="/Home" src="/img/2b.png" width="15%" id="img2b" style="cursor: pointer;" />
 
     <div>
       <div id="divforEndjustfy">
+        
         <div id="responsiveSearchBarsCart">
           <div style="display: flex; flex-direction: row">
             <div class="hiddenDiv">
               <div class="headsetandlocation">
-                <i class="fa-solid fa-headset fa-2x" style="margin-right: 5px; color: black"></i>
+                <i
+                  class="fa-solid fa-headset fa-2x"
+                  style="margin-right: 5px; color: black"
+                ></i>
                 <div style="margin: 0; color: orangered; font-size: 20px">
                   {{ "SUPPORT_NUMBER" | translate }}
                 </div>
               </div>
               <div class="headsetandlocation">
-                <i class="fa-solid fa-location-dot fa-2x" style="color: black"></i>
+                <i
+                  class="fa-solid fa-location-dot fa-2x"
+                  style="color: black"
+                ></i>
                 <div style="margin: 0; color: orangered; font-size: 20px">
                   {{ "STORES" | translate }}
                 </div>
               </div>
             </div>
           </div>
+          >
 
-          <div class="cart-container ">
-
+          <div class="cart-container">
+            
             <div style="padding-top: 15px" id="listbars">
               <a (click)="toggleCategories()">
                 <i class="fa fa-bars fa-large" style="color: #f37021"></i>
@@ -80,8 +103,14 @@
                 </li>
               </ul>
             </div>
-
-            <div style="background-color: grey; display: inline-block; height: 50px; width: 1px;"></div>
+            <div
+              style="
+                background-color: grey;
+                display: inline-block;
+                height: 50px;
+                width: 1px;
+              "
+            ></div>
             <a [routerLink]="['/cart']">
               <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
               <span class="item-count">
@@ -94,10 +123,139 @@
     </div>
   </div>
 
+  <nav
+    id="nav"
+    style="
+      overflow: hidden;
+      white-space: nowrap;
+      margin-left: 10%;
+      margin-right: 10%;
+    "
+  >
+    <ul
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+      "
+    >
+      <li
+        *ngFor="let cat of ParentCategories"
+        style="margin-right: 7px; position: relative"
+      >
+        <a (mouseover)="ShowSubCategories(cat.id)">
+          {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
+    <a
+      routerLink="/products-by-category"
+      routerLinkActive="active"
+      (click)="SelectedProductId(cat.id)"
+      *ngFor="let cat of filteredSubcategories"
+      style="margin-right: 7px; position: relative"
+    >
+      {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
+    >
+  </div>
 
-
-
-
-
+  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
+    <div style="height: 50px; display: flex; flex-direction: row; flex-grow: 1">
+      <div
+        style="
+          background-color: #ff662b;
+          margin: 2px;
+          width: 100px;
+          color: white;
+        "
+      >
+        Menu
+      </div>
+      <div
+        style="
+          background-color: #ff662b;
+          margin: 2px;
+          width: 100px;
+          color: white;
+        "
+      >
+        Account
+      </div>
+      <div
+        style="
+          background-color: #ff662b;
+          margin: 2px;
+          width: 100px;
+          color: white;
+        "
+      >
+        Settings
+      </div>
+    </div>
+    <div
+      (click)="toggleDropdown()"
+      style="
+        background-color: black;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+      "
+    >
+      {{ selectedCategory || "Select a category" }}
+    </div>
+    <div
+      *ngIf="isDropdownOpen"
+      style="
+        position: absolute;
+        background-color: white;
+        border: 1px solid black;
+        width: 100%;
+        z-index: 1;
+      "
+    >
+      <div *ngFor="let cat of categorywithSubCategories">
+        <div
+          style="padding: 10px; cursor: pointer; text-align: left; color: black"
+          (click)="toggleSubDropdown(cat)"
+        >
+          <strong>{{ cat.nameEn }}</strong>
+        </div>
+        <div *ngIf="cat" style="padding: 5px">
+          <select>
+            <option style="width: 80%" value="">Select a subcategory</option>
+            <option
+              style="width: 80%"
+              *ngFor="let subCat of cat.subcategories"
+              [value]="subCat.nameEn"
+            >
+              {{ subCat.nameEn }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="margin-inline: 10%">
+  <input
+    type="search"
+    *ngIf="searchAppears"
+    placeholder="search"
+    style="
+      height: 45px;
+      border-radius: 4px;
+      box-shadow: none;
+      border-right: 8px;
+      padding-left: 8px;
+      width: 100%;
+    "
+  />
+</div>
 <app-advertisment></app-advertisment>
-<router-outlet></router-outlet>
+<router-outlet ></router-outlet>
+
+
