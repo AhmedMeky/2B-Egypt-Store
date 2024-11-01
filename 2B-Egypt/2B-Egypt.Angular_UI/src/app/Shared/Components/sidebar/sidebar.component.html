@@ -4,10 +4,12 @@
     <div class="filters">
       <h3 style="text-align: center;">{{ 'FILTERS.TITLE' | translate }}</h3>
       
-      <div>
+      <div >
         <label style="" for="productName">{{ 'FILTERS.PRODUCT_NAME' | translate }}:</label>
-        <input type="text" id="productName" [(ngModel)]="selectedProductName" (input)="filterProducts()" />
+        <input type="text" id="productName" [(ngModel)]="selectedProductName" (input)="filterProducts() " />
+        <i class="fas fa-search"  style="color:#fb9734; font-size:x-large;margin-left: 8px;"></i>
       </div>
+      
       
       <div>
         <label for="category" style="">{{ 'CATEGORY' | translate }}:</label>

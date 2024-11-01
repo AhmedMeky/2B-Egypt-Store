@@ -71,6 +71,7 @@ export class AppComponent {
       
       
     }}
+    
 
   applyFilters(filteredProducts: IProduct[]) {
     this.filteredProducts = filteredProducts;

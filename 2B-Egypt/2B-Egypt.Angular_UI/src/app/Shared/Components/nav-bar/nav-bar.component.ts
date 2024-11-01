@@ -40,7 +40,7 @@ import { MegamenuComponent } from '../../../megamenu/megamenu.component';
   imports: [
     CommonModule,
     RouterModule,
-   HttpClientModule,
+    HttpClientModule,
     SignUpComponent,
     RouterLink,
     AdvertismentComponent,
@@ -51,20 +51,24 @@ import { MegamenuComponent } from '../../../megamenu/megamenu.component';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-export class NavBarComponent implements OnInit { 
+export class NavBarComponent implements OnInit {
   BarsAppears = false; // Control the visibility of the dropdown
   isDropdownOpen = false; // Track whether the dropdown is open
   selectedCategory: string | null = null;
-  searchAppears:boolean=false;
+  searchAppears: boolean = false;
   selectedDiv: string = ''; // Property to keep track of the selected div
+  searchTerm: string = '';
+  @Input() products: IProduct[] = [];
+  filteredProducts: IProduct[] = [];
 
+  selectedParentId: string | null = null;
 
   [x: string]: any;
   ParentCategories: ICategory[] = [] as ICategory[];
   Categories: ICategory[] = [] as ICategory[];
   filteredSubcategories: ICategory[] = [] as ICategory[];
   selectedProductName = '';
-
+  showCategories: boolean = false;
   categorywithSubCategories: CategorywithSubcategories[] = [];
   lang: string = 'en';
   isLoggedIn: boolean = false;
@@ -122,7 +126,12 @@ export class NavBarComponent implements OnInit {
         console.error('Error fetching Parent Categories:', error);
       },
     });
-  } 
+    
+  }
+  toggleCategories() {
+    this.showCategories = !this.showCategories;
+  }
+ 
   selectDiv(divName: string) {
     this.selectedDiv = divName; // Update the selected div
   }
@@ -159,59 +168,15 @@ export class NavBarComponent implements OnInit {
   }
 
   ShowSubCategories(id: string): void {
+    this.selectedParentId = id;
     this.filteredSubcategories = this.Categories.filter(
       (sub) => sub.parentCategoryId === id
     );
   }
-  // transformCategories(categories: ICategory[]): CategorywithSubcategories[] {
-  //   return categories.map(cat => ({
-  //     ...cat,
-  //     displayName: this.translate.instant(this.lang === 'ar' ? cat.nameAr : cat.nameEn)
-  //   }));
-  // }
-
-  // transformCategories(categories: ICategory[]): CategorywithSubcategories[] {
-  //   const groupedMap: { [key: string]: ICategory[] } = {};
-
-  //   for (const cat of categories) {
-  //     if (cat.parentCategoryId == null) {
-  //       if (!groupedMap[cat.id]) {
-  //         groupedMap[cat.id] = [];
-  //       }
-  //       groupedMap[cat.id].push(cat);
-  //     } else {
-  //       if (!groupedMap[cat.parentCategoryId]) {
-  //         groupedMap[cat.parentCategoryId] = [];
-  //       }
-  //       groupedMap[cat.parentCategoryId].push(cat);
-  //     }
-  //   }
-
-  //   const groupedCategories: CategorywithSubcategories[] = Object.keys(
-  //     groupedMap
-  //   ).map((parentId) => {
-  //     const subcategories = groupedMap[parentId];
-  //     const representativeCategory = subcategories[0];
-
-  //     return {
-  //       id: representativeCategory.id,
-  //       nameAr:
-  //         this.lang === 'ar'
-  //           ? representativeCategory.nameAr
-  //           : representativeCategory.nameEn,
-  //       nameEn: representativeCategory.nameEn,
-  //       subcategories: subcategories.map((sub) => ({
-  //         ...sub,
-  //         name: this.lang === 'ar' ? sub.nameAr : sub.nameEn,
-  //       })),
-  //     };
-  //   });
-
-  //   return groupedCategories;
-  // }
+  
   transformCategories(categories: ICategory[]): CategorywithSubcategories[] {
     const groupedMap: { [key: string]: ICategory[] } = {};
-  
+
     for (const cat of categories) {
       if (cat.parentCategoryId == null) {
         if (!groupedMap[cat.id]) {
@@ -225,11 +190,11 @@ export class NavBarComponent implements OnInit {
         groupedMap[cat.parentCategoryId].push(cat);
       }
     }
-  
+
     const groupedCategories: CategorywithSubcategories[] = Object.keys(groupedMap).map((parentId) => {
       const subcategories = groupedMap[parentId];
       const representativeCategory = subcategories[0];
-  
+
       return {
         id: representativeCategory.id,
         nameAr: representativeCategory.nameAr, // Retaining nameAr if needed
@@ -240,7 +205,7 @@ export class NavBarComponent implements OnInit {
         })),
       };
     });
-  
+
     return groupedCategories;
   }
   SelectedProductId(id: string): void {
@@ -256,14 +221,14 @@ export class NavBarComponent implements OnInit {
   }
   get counter(): number {
     return this._cartService.getCounter();
-  } 
-  changeSearchAppearance(){
-    this.searchAppears =!this.searchAppears ;
-  }  
-  changeBarsAppearance(){
-    this.BarsAppears =!this.BarsAppears ;
-  } 
- toggleDropdown() {
+  }
+  changeSearchAppearance() {
+    this.searchAppears = !this.searchAppears;
+  }
+  changeBarsAppearance() {
+    this.BarsAppears = !this.BarsAppears;
+  }
+  toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen; // Toggle main dropdown visibility
   }
 
@@ -284,18 +249,28 @@ export class NavBarComponent implements OnInit {
   closeDropdown() {
     this.isDropdownOpen = false; // Close the main dropdown
   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    if (window.innerWidth > 800) {
+      this.showCategories = false;
+    }
+  }
+
 
   @HostListener('document:click', ['$event'])
   handleClick(event: MouseEvent) {
     const dropdownElement = document.getElementById('sidelist');
     const targetElement = event.target as HTMLElement;
 
-    // Check if the clicked target is not inside the dropdown
     if (dropdownElement && !dropdownElement.contains(targetElement)) {
-      this.isDropdownOpen = false; // Close the main dropdown
+      this.isDropdownOpen = false; 
       this.ParentCategories.forEach(cat => {
-        cat.isSubDropdownOpen = false; // Close all sub dropdowns
+        cat.isSubDropdownOpen = false; 
       });
     }
   }
+
 }
+  
+
+
