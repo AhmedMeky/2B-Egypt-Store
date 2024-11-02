@@ -12,8 +12,8 @@ export class ProductService {
   }
   productColors: string[] = [];
   private apiUrl = 'http://localhost:5204/api/products';
-  private imgmvcurl = 'http://localhost:5269/';
-  // private imgmvcurl = 'http://localhost:29510/';
+  // private imgmvcurl = 'http://localhost:5269/';
+  private imgmvcurl = 'http://localhost:29510/';
   constructor(private httpclient: HttpClient) {}
 
   getAllProducts(): Observable<IProduct[]> {
@@ -40,7 +40,6 @@ export class ProductService {
     }
     return product;
   }
-
   getProductById(id: string): Observable<IProduct> {
     return this.httpclient.get<IProduct>(`${this.apiUrl}/${id}`).pipe(
       map((product: IProduct) => {
@@ -48,6 +47,7 @@ export class ProductService {
       })
     );
   }
+  
 
   addProduct(product: IProduct): Observable<IProduct> {
     return this.httpclient.post<IProduct>(this.apiUrl, product);
@@ -117,13 +117,12 @@ export class ProductService {
         )
       );
   }
-
-
   getProductsWithPagination(pageNumber: number, pageSize: number): Observable<{ items: IProduct[], totalCount: number }> {
-    const params = new HttpParams().set('pageNumber', pageNumber.toString()).set('pageSize', pageSize.toString());
-    
-      return this.httpclient.get <{ items: IProduct[], totalCount: number }>(`${this.apiUrl}/productsWithPagination`, { params }).pipe(
+    const params = new HttpParams()
+      .set('pageNumber', pageNumber.toString())
+      .set('pageSize', pageSize.toString());
 
+    return this.httpclient.get<{ items: IProduct[], totalCount: number }>(`${this.apiUrl}/productsWithPagination`, { params }).pipe(
       map((response) => {
         response.items = response.items.map((product: IProduct) => {
           const processedProduct = this.processProductImages(product);
@@ -150,5 +149,9 @@ export class ProductService {
     );
 }
 
+  
+
 }
+
+
 

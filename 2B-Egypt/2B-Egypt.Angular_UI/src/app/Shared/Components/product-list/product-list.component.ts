@@ -15,7 +15,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
 import { LanguageServiceService } from '../../../services/language-service.service';
-
+ 
 @Component({
   selector: 'app-product-list',
   standalone: true,
@@ -99,6 +99,7 @@ addToCart(product: IProduct)
         price: product.price - (product.price * product.discount) / 100 ,
         quantity: product?.quantity || 1,
         totalPrice: product.price,
+        discount:product.discount,
         // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
         image: "",
         stock: product.unitInStock 

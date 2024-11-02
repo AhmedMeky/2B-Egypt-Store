@@ -14,11 +14,9 @@ import { OrderComponent } from './Shared/Components/order/order.component';
 import { OrderDetailsComponent } from './Shared/Components/order-details/order-details.component';
 
 
-export const routes: Routes = [ 
+export const routes: Routes = [
   { path: '', component: ProductListComponent },
-  // { path: '', component: ProductListComponent },
-  { path: '', component: ProductListComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'cart', component: CartComponent},
   { path: 'Signup', component: SignUpComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'Home', component: AppComponent },
@@ -27,9 +25,9 @@ export const routes: Routes = [
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'Categories', component: NavBarComponent },
   { path: 'products-by-category/:id', component: ProductsByCategoryComponent },
-  { path: 'order-list', component: OrderListComponent }, 
+  { path: 'order-list', component: OrderListComponent },
   { path: 'order/:orderId', component: OrderDetailsComponent },
-  { path: 'shipping', component: ShippingReviewPaymentComponent },
+  { path: 'shipping', component: ShippingReviewPaymentComponent ,canActivate:[AuthorizationGuard] },
   { path: 'order', component: OrderComponent },
 
 ];
