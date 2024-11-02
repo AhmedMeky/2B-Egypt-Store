@@ -4,6 +4,7 @@ import { LoginService } from '../../services/login.service';
 import { FormsModule } from '@angular/forms';
 import { Loginuser } from '../../../models/loginuser';
 import { firstValueFrom } from 'rxjs';
+import { NgIf } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
     email: '',
     password: '',
   };
-
+  loading: boolean = false;
   isLoggedIn: boolean = false; // Track login status
 
   constructor(private authService: LoginService, private router: Router) {}
@@ -28,9 +29,9 @@ export class LoginComponent implements OnInit {
     this.isLoggedIn = !!sessionStorage.getItem('token'); // Check for token in session storage
   }
 
-//  async onSubmit(event: Event) {
-//     event.preventDefault();
-//     console.log(this.loginuser);
+  //  async onSubmit(event: Event) {
+  //     event.preventDefault();
+  //     console.log(this.loginuser);
 
 //    await this.authService.login(this.loginuser).subscribe({
 //       next: (response) => {

@@ -8,11 +8,12 @@ import { OrderService } from '../../../services/order.service';
 import { IOrder } from '../../../../models/iorder';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-shipping-review-payment', 
   standalone: true,
-  imports: [CommonModule, FormsModule , RouterModule],
+  imports: [CommonModule, FormsModule , RouterModule,TranslateModule],
   templateUrl: './shipping-review-payment.component.html',
   styleUrls: ['./shipping-review-payment.component.css'],
 })
@@ -30,6 +31,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     'Pyramids', 'Giza', 'Ossim', 'Kerdasa', 'Faisal', 'El Haram',
     '6th of October', 'Al Ahram', 'Al Khatatba', 'Al Awqaf', 'Al Manial', 'Other'
   ]; 
+  
   
   shippingData: IShippingData = { 
     country: this.country,

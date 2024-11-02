@@ -51,7 +51,8 @@
             type="email"
             class="inputSignUp form-control"
             [(ngModel)]="user.email"
-          />
+          /> 
+          <span style="color: red;" *ngIf="alreadyExists">email already exists</span>
         </div>
 
         <div class="col-sm-6 mb-3">

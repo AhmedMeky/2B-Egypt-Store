@@ -1,4 +1,23 @@
 {
+  
+    "shipping": "الشحن",
+    "reviewPayments": "المراجعة والدفع",
+    "country": "البلد",
+    "city": "المدينة",
+    "streetAddressLine1": "عنوان الشارع: العنوان 1",
+    "streetAddressLine2": "عنوان الشارع: العنوان 2",
+    "phoneNumber": "رقم الهاتف",
+    "back": "رجوع",
+    "next": "التالي",
+    "paymentMethod": "طريقة الدفع",
+    "cashOnDelivery": "الدفع عند الاستلام",
+    "creditCard": "بطاقة ائتمان",
+    "paypalCard": "بطاقة باي بال",
+    "electronicWallets": "المحافظ الإلكترونية",
+    "createOrder": "إنشاء الطلب",
+  
+  
+  "GO TO CHECKOUT":"اذهب الى الدفع",
   "Home":"الأساسية",
   "footer": {
     "beFirstToKnow": "كن أول من يعلم",
@@ -318,5 +337,24 @@
   "MAX_PRICE": "أقصى سعر",
   "DISCOUNT": "التصفية حسب الخصم",
   "ENTER_DISCOUNT": "أدخل الحد الأدنى للخصم",
-  "APPLY_FILTER": "تطبيق الفلتر"
+  "APPLY_FILTER": "تطبيق الفلتر",
+  "cities": {
+    "Mohandessin": "المهندسين",
+    "Dokki": "الدقي",
+    "Agouza": "العجوزة",
+    "Bulaq": "بولاق",
+    "Imbaba": "امبابة",
+    "Pyramids": "الأهرامات",
+    "Giza": "جيزة",
+    "Ossim": "أوسيم",
+    "Kerdasa": "كرداسة",
+    "Faisal": "فيصل",
+    "El Haram": "الهرم",
+    "6th of October": "6 أكتوبر",
+    "Al Ahram": "الأهرام",
+    "Al Khatatba": "الخاطبة",
+    "Al Awqaf": "الأوقاف",
+    "Al Manial": "المنيل",
+    "Other": "أخرى"
+  }
 }

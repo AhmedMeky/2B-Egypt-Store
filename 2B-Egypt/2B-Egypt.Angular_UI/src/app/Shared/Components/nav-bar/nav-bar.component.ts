@@ -213,11 +213,16 @@ export class NavBarComponent implements OnInit {
   }
 
   logout() {
-    this.loginService.logout();
-    this.isLoggedIn = true;
+    this.loginService.logout(); // Call your logout service
+    sessionStorage.removeItem('token'); // Clear the token
+    sessionStorage.removeItem('user'); // Clear user data
+    this.isLoggedIn = false; // Set login status to false
+    this.router.navigate(['/Login']); // Optionally navigate to the login page
   }
-  changeStat() {
-    this.isLoggedIn = !this.isLoggedIn;
+
+  checkLoginStatus() {
+    const token = sessionStorage.getItem('token');
+    this.isLoggedIn = !!token; // Set isLoggedIn based on the presence of the token
   }
   get counter(): number {
     return this._cartService.getCounter();

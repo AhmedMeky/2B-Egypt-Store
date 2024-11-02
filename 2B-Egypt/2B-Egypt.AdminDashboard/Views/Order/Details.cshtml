@@ -15,62 +15,64 @@
         <div class="card-body">
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <p><strong>Order Number:</strong> @Model.OrderNumber</p>
+                    <p><strong>Order Number:</strong> @Model?.OrderNumber</p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Order Date:</strong> @Model.CreatedAt </p>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <p><strong>Order Status:</strong> @Model.Status_En</p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Order Discount:</strong> @Model.OrderItems.Sum(item => item.Quantity * item.Product.Price * item.Product.Discount / 100) EGP</p>
+                    <p><strong>Order Date:</strong> @Model?.CreatedAt </p>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <p><strong>Client Name:</strong> @(Model.User.FirstName + " " + Model.User.LastName)</p>
+                    <p><strong>Order Status:</strong> @Model?.Status_En</p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Client Email:</strong> @(Model.User.Email)</p>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <p><strong>Client Phone:</strong> @(Model.User.PhoneNumber)</p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Client Address:</strong> @(Model.User.Country + " - " + Model.User.City + " - " + Model.User.AddressLine1)</p>
+                    <p><strong>Order Discount:</strong> @Model?.OrderItems?.Sum(item => item?.Quantity * item?.Product?.Price * item?.Product?.Discount / 100) EGP</p>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <p><strong>Payment Type:</strong> @(Model.Payment.PaymentType)</p>
+                    <p><strong>Client Name:</strong> @(Model?.User?.FirstName + " " + Model?.User?.LastName)</p>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Transaction Id:</strong> @(Model.Payment.TransactionId)</p>
+                    <p><strong>Client Email:</strong> @(Model?.User?.Email)</p>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <p><strong>Total Amount:</strong> @Model.TotalAmount</p>
+                    <p><strong>Client Phone:</strong> @(Model?.User?.PhoneNumber)</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Client Address:</strong> @(Model?.User?.Country + " - " + Model?.User?.City + " - " + Model?.User?.AddressLine1)</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Payment Type:</strong> @(Model?.Payment?.PaymentType)</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Transaction Id:</strong> @(Model?.Payment?.TransactionId)</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Total Amount:</strong> @Model?.TotalAmount</p>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-12">
                     <h3>Cart Items</h3>
-                    @if (Model.OrderItems.Any())
+                    @if (Model!.OrderItems.Any())
                     {
-                        foreach (var item in Model.OrderItems)
+                        foreach (var item in Model?.OrderItems??[])
                         {
                             <div class="card mb-2">
                                 <div class="card-body">
-                                    <p><strong>Product Name:</strong> @item.Product.NameEn</p>
-                                    <p><strong>Quantity:</strong> @item.Quantity</p>
-                                    <p><strong>Price:</strong> @item.Product.Price</p>
-                                    <p><strong>Item Total Price:</strong> @((item.Quantity * item.Product.Price) - (item.Quantity * item.Product.Price * item.Product.Discount / 100))</p>
+                                    <p><strong>Product Name:</strong> @item?.Product?.NameEn</p>
+                                    <p><strong>Product Price:</strong> @item?.Product?.Price</p>
+                                    <p><strong>Product Discount:</strong> @(item?.Product?.Price * item?.Product?.Discount / 100)</p>
+                                    <p><strong>Quantity:</strong> @item?.Quantity</p>
+                                    <p><strong>Item Total Discount:</strong> @(item?.Quantity * item?.Product?.Price * item?.Product?.Discount / 100)</p>
+                                    <p><strong>Item Total Price:</strong> @((item?.Quantity * item?.Product?.Price) - (item?.Quantity * item?.Product?.Price * item?.Product?.Discount / 100))</p>
                                 </div>
                             </div>
                         }

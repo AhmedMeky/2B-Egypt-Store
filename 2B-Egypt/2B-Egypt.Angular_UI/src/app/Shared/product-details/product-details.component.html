@@ -6,13 +6,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Product Details</title>
 
-  <style>
+ <style>
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .product-main {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      gap: 20px;
+    }
+
+    .carousel-container,
+    .product-info {
+      flex: 1 1 45%;
+      min-width: 300px;
+    }
+
+    .carousel-indicators {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      gap: 5px;
+    }
+
+    .carousel-indicators img {
+      border: 1px solid #e57b34;
+      border-radius: 5px;
+      width: 80px;
+      height: 60px;
+      cursor: pointer;
+    }
+
+    .product-title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .price {
+      font-size: 24px;
+      color: #e57b34;
+      margin: 15px 0;
+    }
+
+    .special-price {
+      font-size: 16px;
+      color: #555;
+      text-decoration: line-through;
+      margin-right: 10px;
+    }
+
+    .stock-status {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .cart-buttons {
+      margin-top: 15px;
+    }
+
     .more-info-reviews {
       display: flex;
       justify-content: center;
       margin-top: 7%;
       width: 100%;
-      position: relative;
     }
 
     .more-info-reviews a {
@@ -42,97 +105,23 @@
       background-color: orange;
     }
 
-    .more-info-reviews a.active::after {
-      background-color: orange;
+    .product-details,
+    .review-form {
+      width: 100%;
+      margin-top: 25px;
     }
 
-    .carousel-indicators {
-      margin-bottom: -45px;
-    }
-
-    .carousel-indicators img {
-      border: 1px solid #e57b34;
-      border-radius: 5px;
-      width: 100px;
-      height: 70px;
-      cursor: pointer;
-      margin-left: 2%;
-      margin-bottom: -10%;
-    }
-
-    .container {
-      display: flex;
-      margin: 0 auto;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 800px;
-    }
-
-    .product-image-container {
-      flex: 2;
-      margin-right: 10px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      padding: 50px;
-      background-color: #fff;
-    }
-
-    .product-image img {
-      max-width: 100%;
-      border-radius: 8px;
-    }
-
-    /* .product-info {
-            /* flex: 2; */
-    */ .product-title {
-      font-size: 20px;
-      margin: 0 0 10px;
-    }
-
-    .review {
-      font-size: 14px;
-      color: #888;
-      margin: 5px 0;
-    }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-      filter: invert(58%) sepia(93%) saturate(2537%) hue-rotate(359deg) brightness(103%) contrast(102%);
-    }
-
-    .price {
-      font-size: 24px;
-      color: #e57b34;
-      margin: 15px 0;
-    }
-
-    .special-price {
-      font-size: 16px;
-      color: #555;
-      text-decoration: line-through;
-      margin-left: 10px;
-    }
-
-    .stock-status,
-    .sku,
-    .pickup-info {
-      font-size: 14px;
-      margin: 5px 0;
-      color: #333;
-    }
-
-    .product-details {
-      margin-top: 20px;
-    }
-
-    .star-rating,
     .form-group {
+      margin-top: 15px;
+    }
+
+    .star-rating {
       margin-top: 15px;
     }
   </style>
 </head>
 
-<div style="display: flex; align-items: center; justify-content: center">
+<!-- <div style="display: flex; align-items: center; justify-content: center">
   <div style="width: 30%" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false">
     <div class="carousel-indicators">
       <img *ngFor="
@@ -187,7 +176,72 @@
       </button>
     </div>
   </div>
+</div> -->
+<div class="container">
+  <div class="row justify-content-center align-items-start">
+    <!-- Carousel Column -->
+    <div class="col-12 col-md-6" id="carouselExampleIndicators" class="carousel slide" data-bs-ride="false" >
+      <div class="carousel-indicators" >
+        <img
+          *ngFor="let image of product?.images; let i = index; trackBy: trackByIndex"
+          [src]="image.imageUrl"
+          class="img-thumbnail d-block"
+          style="width:100px; height:100px; "
+          [class.active]="i === 0"
+          [attr.data-bs-target]="'#carouselExampleIndicators'"
+          [attr.data-bs-slide-to]="i"
+          [attr.aria-label]="'Slide ' + (i + 1)"
+          [attr.alt]="'Slide ' + (i + 1) + ' Thumbnail'"
+        />
+      </div>
+
+      <div class="carousel-inner">
+        <div *ngFor="let image of product?.images; let i = index" class="carousel-item" [class.active]="i === 0">
+          <img [src]="image.imageUrl" style="width: 800px; height: 500px; object-fit: contain;" class="d-block w-100" alt="{{ getLocalizedProductName() }}" />
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    <!-- Product Info Column -->
+    <div class="col-12 col-md-6 product-info">
+      <h1 class="product-title">{{ getLocalizedProductName() }}</h1>
+      <p>
+        <strong>{{ "PRODUCT_DETAILS.DESCRIPTION" | translate }} :</strong>
+        {{ getLocalizedProductDescription() }}
+      </p>
+      <hr />
+      <p class="price">
+        <span class="special-price">{{ product?.price | currency }}</span>
+        <strong>{{ PriceAfterSale | currency }}</strong>
+        &nbsp;
+        <span class="stock-status">
+          {{
+            product && product.unitInStock > 0
+              ? ("PRODUCT_DETAILS.STOCK_STATUS.IN_STOCK" | translate)
+              : ("PRODUCT_DETAILS.STOCK_STATUS.OUT_OF_STOCK" | translate)
+          }}
+        </span>
+      </p>
+
+      <div class="cart-buttons">
+        <button (click)="addToCart()" class="add-cart-btn">
+          <i class="fas fa-shopping-cart"></i> {{ "ADD_TO_CART" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+
 
 <div class="more-info-reviews">
   <a id="more-info" [class.active]="IsMoreInfo" (click)="activateTab(true)">{{
@@ -220,29 +274,45 @@
 <div *ngIf="!IsMoreInfo">
   <form style="margin: 25px" (ngSubmit)="addreview()" #reviewForm="ngForm">
     <!-- stars parts -->
-    <div class="star-rating">
-      <h2 style="margin: 0">{{ "PRODUCT_DETAILS.PRICE" | translate }}</h2>
+    <div class="star-rating text-center">
+      <h2  style="margin: 0; font-size: 1.2rem;">
+        {{ "PRODUCT_DETAILS.PRICE" | translate }}
+      </h2>
       <span *ngFor="let star of starsPrice; let i = index" (click)="ratePrice(i + 1)">
-        <i [class]="ratingPrice > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
+        <i
+          [class]="ratingPrice > i ? 'fas fa-star text-warning' : 'far fa-star text-secondary'"
+          style="font-size: 18px; margin-right: 5px;"
+        ></i>
       </span>
     </div>
-
-    <div class="star-rating">
-      <h2 style="margin: 0">{{ "PRODUCT_DETAILS.QUALITY" | translate }}</h2>
+    
+    <div class="star-rating text-center mt-3">
+      <h2  style="margin: 0; font-size: 1.2rem;">
+        {{ "PRODUCT_DETAILS.QUALITY" | translate }}
+      </h2>
       <span *ngFor="let star of starsQuilty; let i = index" (click)="rateQuilty(i + 1)">
-        <i [class]="ratingQuilty > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
+        <i
+          [class]="ratingQuilty > i ? 'fas fa-star text-warning' : 'far fa-star text-secondary'"
+          style="font-size: 18px; margin-right: 5px;"
+        ></i>
       </span>
     </div>
-
-    <div class="star-rating">
-      <h2 style="margin: 0">{{ "PRODUCT_DETAILS.VALUE" | translate }}</h2>
+    
+    <div class="star-rating text-center mt-3">
+      <h2  style="margin: 0; font-size: 1.2rem;">
+        {{ "PRODUCT_DETAILS.VALUE" | translate }}
+      </h2>
       <span *ngFor="let star of starsValue; let i = index" (click)="rateValue(i + 1)">
-        <i [class]="ratingValue > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
+        <i
+          [class]="ratingValue > i ? 'fas fa-star text-warning' : 'far fa-star text-secondary'"
+          style="font-size: 18px; margin-right: 5px;"
+        ></i>
       </span>
     </div>
+    
 
     <!-- stars parts -->
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="NickName">{{ "REVIEW_FORM.NICKNAME" | translate }}</label>
       <input type="text" class="form-control" [(ngModel)]="Review.nickName" id="NickName" name="nickName" required
         maxlength="50" #nickName="ngModel" />
@@ -283,12 +353,64 @@
           {{ "REVIEW_FORM.REVIEW_MAXLENGTH" | translate }}
         </div>
       </div>
+    </div> -->
+    <div class="container">
+      <form>
+        <div class="row">
+          <!-- Nickname Field -->
+          <div class="col-12 col-md-6 form-group">
+            <label for="NickName">{{ "REVIEW_FORM.NICKNAME" | translate }}</label>
+            <input type="text" class="form-control" [(ngModel)]="Review.nickName" id="NickName" name="nickName" required
+              maxlength="50" #nickName="ngModel" />
+            <div *ngIf="nickName.invalid && nickName.touched" class="text-danger">
+              <div *ngIf="nickName.errors?.['required']">
+                {{ "REVIEW_FORM.NICKNAME_REQUIRED" | translate }}
+              </div>
+              <div *ngIf="nickName.errors?.['maxlength']">
+                {{ "REVIEW_FORM.NICKNAME_MAXLENGTH" | translate }}
+              </div>
+            </div>
+          </div>
+    
+          <!-- Summary Field -->
+          <div class="col-12 col-md-6 form-group " style="">
+            <label for="Summary">{{ "REVIEW_FORM.SUMMARY" | translate }}</label>
+            <input type="text" class="form-control" [(ngModel)]="Review.summary" name="summary" id="Summary" required
+              maxlength="100" #summary="ngModel" />
+            <div *ngIf="summary.invalid && summary.touched" class="text-danger">
+              <div *ngIf="summary.errors?.['required']">
+                {{ "REVIEW_FORM.SUMMARY_REQUIRED" | translate }}
+              </div>
+              <div *ngIf="summary.errors?.['maxlength']">
+                {{ "REVIEW_FORM.SUMMARY_MAXLENGTH" | translate }}
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="row">
+          <!-- Review Text Field (Full Width) -->
+          <div class="col-12 form-group">
+            <label for="reviewText">{{ "REVIEW_FORM.REVIEW" | translate }}</label>
+            <textarea class="form-control" [(ngModel)]="Review.reviewText" name="reviewText" id="reviewText" required
+              maxlength="1000" #reviewText="ngModel"></textarea>
+            <div *ngIf="reviewText.invalid && reviewText.touched" class="text-danger">
+              <div *ngIf="reviewText.errors?.['required']">
+                {{ "REVIEW_FORM.REVIEW_REQUIRED" | translate }}
+              </div>
+              <div *ngIf="reviewText.errors?.['maxlength']">
+                {{ "REVIEW_FORM.REVIEW_MAXLENGTH" | translate }}
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-warning" style="margin: 20px 0px" [disabled]="reviewForm.invalid">
+            {{ "REVIEW_FORM.SUBMIT" | translate }}
+          </button>
+        </div>
+      </form>
     </div>
+    
+   
+ 
 
-    <button type="submit" class="btn btn-warning" style="margin: 20px 0px" [disabled]="reviewForm.invalid">
-      {{ "REVIEW_FORM.SUBMIT" | translate }}
-    </button>
-  </form>
-</div>
 
-</html>

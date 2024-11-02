@@ -15,11 +15,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
 import { LanguageServiceService } from '../../../services/language-service.service';
-
+import { ProductSliderComponent } from "../product-slider/product-slider.component";
+ 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, SidebarComponent, NavBarComponent, TranslateModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, SidebarComponent, NavBarComponent, TranslateModule, ProductSliderComponent,ProductSliderComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
@@ -99,12 +100,16 @@ addToCart(product: IProduct)
         price: product.price - (product.price * product.discount) / 100 ,
         quantity: product?.quantity || 1,
         totalPrice: product.price,
+        discount:product.discount,
         // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
         image: "",
         stock: product.unitInStock 
   
       };
       this._cartService.addToCart(cartItem);
+      this.snackBar.open(this.translate.instant('ADD_TO_CART'), 'Close', {
+        duration: 2000,
+      });
 }
 
   removeFromCart(productId: number) {

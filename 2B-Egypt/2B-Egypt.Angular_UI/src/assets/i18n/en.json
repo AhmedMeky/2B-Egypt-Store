@@ -1,4 +1,22 @@
 {
+    "shipping": "Shipping",
+    "reviewPayments": "Review & Payments",
+    "country": "Country",
+    "city": "City",
+    "streetAddressLine1": "Street Address: Line 1",
+    "streetAddressLine2": "Street Address: Line 2",
+    "phoneNumber": "Phone Number",
+    "back": "Back",
+    "next": "Next",
+    "paymentMethod": "Payment Method",
+    "cashOnDelivery": "Cash On Delivery",
+    "creditCard": "Credit Card",
+    "paypalCard": "Paypal Card",
+    "electronicWallets": "Electronic wallets",
+    "createOrder": "Create Order",
+
+  
+  "GO TO CHECKOUT":"GO TO CHECKOUT",
   "Home": "Home",
   "footer": {
     "beFirstToKnow": "Be the First to Know",
@@ -308,5 +326,24 @@
   "MAX_PRICE": "Max Price",
   "DISCOUNT": "Filter by Discount",
   "ENTER_DISCOUNT": "Enter minimum discount",
-  "APPLY_FILTER": "Apply Filter"
+  "APPLY_FILTER": "Apply Filter",
+  "cities": {
+    "Mohandessin": "Mohandessin",
+    "Dokki": "Dokki",
+    "Agouza": "Agouza",
+    "Bulaq": "Bulaq",
+    "Imbaba": "Imbaba",
+    "Pyramids": "Pyramids",
+    "Giza": "Giza",
+    "Ossim": "Ossim",
+    "Kerdasa": "Kerdasa",
+    "Faisal": "Faisal",
+    "El Haram": "El Haram",
+    "6th of October": "6th of October",
+    "Al Ahram": "Al Ahram",
+    "Al Khatatba": "Al Khatatba",
+    "Al Awqaf": "Al Awqaf",
+    "Al Manial": "Al Manial",
+    "Other": "Other"
+  }
 }

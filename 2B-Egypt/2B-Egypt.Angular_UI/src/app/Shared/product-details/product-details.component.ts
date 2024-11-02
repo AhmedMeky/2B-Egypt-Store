@@ -133,7 +133,9 @@ export class ProductDetailsComponent implements OnInit {
       // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
       image: this.product.images[0].imageUrl,
       stock: this.product.unitInStock,
+      discount: this.product.discount
     };
+    
     this._cartService.addToCart(cartItem);
     this.snackBar.open(this.translate.instant('ADD_TO_CART'), 'Close', {
       duration: 2000,
