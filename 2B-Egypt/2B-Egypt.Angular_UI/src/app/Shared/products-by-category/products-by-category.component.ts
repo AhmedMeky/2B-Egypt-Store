@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
@@ -9,6 +9,8 @@ import { IProduct } from '../../../models/IProduct';
 import Cookies from 'js-cookie';
 import { SidebarComponent } from '../Components/sidebar/sidebar.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CartItem } from '../../ShoppingCart/Models/CartItem';
+import { CartService } from '../../ShoppingCart/Services/CartService';
 
 @Component({
   selector: 'app-products-by-category',
@@ -19,6 +21,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class ProductsByCategoryComponent implements OnInit {
   imgmvcurl = 'http://localhost:5269/img/';
+  @Output() AddToCartCounter: EventEmitter<number> = new EventEmitter<number>();
+  Counter: number = 0;
 
   products: IProduct[] = [] as IProduct[];
   filteredProducts: IProduct[] = [] as IProduct[];
@@ -32,8 +36,8 @@ export class ProductsByCategoryComponent implements OnInit {
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
     private router: Router,
-    translateService: TranslateService
-    
+    translateService: TranslateService,
+    private _cartService:CartService
   ) {this.translate = translateService;}
 
   
@@ -91,33 +95,24 @@ onPageChange(page: number): void {
       product.quantity = item ? item.quantity : 1;
     });
   }
-  addToCart(product: IProduct) {
-    if (!product.unitInStock || product.unitInStock <= 0) {
-      this.snackBar.open(
-        'Cannot add product to cart. Quantity must be greater than zero.',
-        'Close',
-        {
-          duration: 3000,
-        }
-      );
-      return;
-    }
-    let cartData = Cookies.get('cartItems');
-    let cartItems: IProduct[] = cartData ? JSON.parse(cartData) : [];
-    const existingProduct = cartItems.find(
-      (item: IProduct) => item.id === product.id
-    );
-    const quantityToAdd = product.quantity || 1;
-
-    if (existingProduct) {
-      existingProduct.quantity =
-        (existingProduct.quantity || 0) + quantityToAdd;
-    } else {
-      cartItems.push({ ...product, quantity: quantityToAdd });
-    }
-
-    Cookies.set('cartItems', JSON.stringify(cartItems), { expires: 7 });
-    product.inCart = true;
+  addToCart(product: IProduct)
+  {
+    console.log(product)
+    this.AddToCartCounter.emit(this.Counter)
+        const cartItem: CartItem = {
+          productId: (product.id),
+          productName: product.nameEn,
+          productNamear: product.nameAr,
+          price: product.price - (product.price * product.discount) / 100 ,
+          quantity: product?.quantity || 1,
+          totalPrice: product.price,
+          discount:product.discount,
+          // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
+          image: "",
+          stock: product.unitInStock 
+    
+        };
+        this._cartService.addToCart(cartItem);
   }
 
   removeFromCart(productId: number) {

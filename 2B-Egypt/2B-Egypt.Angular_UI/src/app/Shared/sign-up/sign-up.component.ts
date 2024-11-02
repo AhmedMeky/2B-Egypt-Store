@@ -3,18 +3,23 @@ import { IUser } from '../../../models/iuser';
 import { FormsModule, NgModel } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Observer } from 'rxjs';
-import { RouterLink } from '@angular/router';
+import { RouterLink , Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [FormsModule,RouterLink,TranslateModule],
+  imports: [FormsModule,RouterLink,TranslateModule,CommonModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent {
   loginservice: LoginService | undefined;
+  passwordNotMatch = false
+  submitted = false
+  emailNotVaild=false
+  passwordShort=false
   @Input() user: IUser | any = {
     firstName: '',
     lastName: '',
@@ -23,10 +28,11 @@ export class SignUpComponent {
     password: '',
     confirmPassword: '',
   };
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService , private router : Router) {
     this.loginservice = loginService;
   }
   onSubmit() { 
+    this.submitted = true
     // Example of ensuring phoneNumber is a string
    this.user.phoneNumber = String(this.user.phoneNumber); 
    console.log(typeof(this.user.phoneNumber))
@@ -38,21 +44,35 @@ export class SignUpComponent {
 
     if (this.user.password !== this.user.confirmPassword) {
       console.error('Passwords do not match');
+      this.passwordNotMatch = true
       return;
+    }else{
+      this.passwordNotMatch = false
+    }
+
+    if (this.user.password.length < 8) {
+      this.passwordShort = true
+      return;
+    }else{
+      this.passwordShort = false
     }
 
     console.log('User  Data:', this.user);
     this.loginService.UserRegister(this.user).subscribe(
       (response) => { 
+        this.emailNotVaild = false
+
         console.log(response);
-        sessionStorage.setItem('token', response.tokens);
-        sessionStorage.setItem('user', JSON.stringify(response.user));
+        // sessionStorage.setItem('token', response.tokens);
+        // sessionStorage.setItem('user', JSON.stringify(response.user));
         console.log('Sign up successful', response);
-        
+        this.router.navigateByUrl('products')
+
       },
       (error) => {
         console.error('Sign up failed', error);
         if (error.error) {
+          this.emailNotVaild = true
           console.error('Error details:', error.error);
         }
       }
