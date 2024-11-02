@@ -1,4 +1,5 @@
 ﻿using _2B_Egypt.AdminDashboard.Models;
+using Azure;
 
 namespace _2B_Egypt.AdminDashboard.Controllers
 {
@@ -40,12 +41,11 @@ namespace _2B_Egypt.AdminDashboard.Controllers
                 {
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    return View("Error", response.Message);
-                }
-            } 
-	        return View("Create", CategoryDTO);
+                ModelState.AddModelError(string.Empty, response.Message);
+            }
+            var categories = (await _categoryService.GetAllAsync()).Entity;
+            ViewBag.Categories = new SelectList(categories, "Id", "NameEn");
+            return View(CategoryDTO);
         }
 
 
@@ -55,7 +55,7 @@ namespace _2B_Egypt.AdminDashboard.Controllers
             var response = await _categoryService.GetByIdAsync(id);
             if(!response.IsSuccessfull)
             {
-                return View("Error", response.Message);
+                return View("Error404");
             }
             var categories = (await _categoryService.GetAllAsync()).Entity;
             ViewBag.Categories = new SelectList(categories, "Id", "NameEn");
@@ -73,9 +73,11 @@ namespace _2B_Egypt.AdminDashboard.Controllers
             var result = await _categoryService.UpdateAsync(category);
             if (result.IsSuccessfull)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             ModelState.AddModelError(string.Empty, result.Message);
+            var categories = (await _categoryService.GetAllAsync()).Entity;
+            ViewBag.Categories = new SelectList(categories, "Id", "NameEn");
             return View(category);
         }
 

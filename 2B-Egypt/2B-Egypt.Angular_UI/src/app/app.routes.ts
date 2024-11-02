@@ -27,7 +27,7 @@ export const routes: Routes = [
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'Categories', component: NavBarComponent },
   { path: 'products-by-category/:id', component: ProductsByCategoryComponent },
-  { path: 'order-list', component: OrderListComponent }, 
+  { path: 'order-list', component: OrderListComponent },
   { path: 'order/:orderId', component: OrderDetailsComponent },
   { path: 'shipping', component: ShippingReviewPaymentComponent ,canActivate:[AuthorizationGuard] },
   { path: 'order', component: OrderComponent },

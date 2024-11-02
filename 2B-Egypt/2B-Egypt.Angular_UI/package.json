@@ -28,6 +28,7 @@
     "bootstrap": "^5.3.2",
     "js-cookie": "^3.0.5",
     "js-cookies": "^1.0.4",
+    "ngx-paypal": "^11.0.0",
     "ngx-toaster": "^1.0.1",
     "primeicons": "^7.0.0",
     "primeng": "^17.18.11",

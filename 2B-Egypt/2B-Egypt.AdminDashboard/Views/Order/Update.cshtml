@@ -1,0 +1,60 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <a class="btn btn-success btn-lg" asp-controller="Order" asp-action="index">Back to Orders</a>
+</div>
+<h1>Update</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Update">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group" hidden>
+                <label asp-for="UserId" class="control-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group" >
+                <label asp-for="OrderNumber" class="control-label"></label>
+                <input asp-for="OrderNumber" class="form-control" readonly />
+                <span asp-validation-for="OrderNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TotalAmount" class="control-label"></label>
+                <input asp-for="TotalAmount" class="form-control" readonly />
+                <span asp-validation-for="TotalAmount" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" hidden>
+                <label asp-for="PaymentId" class="control-label"></label>
+                <input asp-for="PaymentId" class="form-control" />
+                <span asp-validation-for="PaymentId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status_Er" class="control-label"> Order Status </label>
+                @Html.DropDownList("Status_En", ViewBag.statuses as SelectList, null, new { @class = "form-control" })
+                <span asp-validation-for="Status_Er" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

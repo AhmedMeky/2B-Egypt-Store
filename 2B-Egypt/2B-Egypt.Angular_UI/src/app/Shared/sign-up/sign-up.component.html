@@ -59,6 +59,8 @@
           />
           <label *ngIf="user.email==''  && submitted" style="color: red">Email is Required</label>
           <label *ngIf="emailNotVaild" style="color: red">Email Not Vaild</label>
+          /> 
+          <span style="color: red;" *ngIf="alreadyExists">email already exists</span>
         </div>
 
         <div class="col-sm-6 mb-3">

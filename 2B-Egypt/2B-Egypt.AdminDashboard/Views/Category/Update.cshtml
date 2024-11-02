@@ -4,7 +4,13 @@
     ViewData["Title"] = "Update";
 }
 
-<h1>Update</h1>
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Update Category</h1>
+    <a asp-action="Index" class="d-none d-sm-inline-block btn btn-sm bg-success shadow text-white">
+        Back to Categories
+    </a>
+</div>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -22,8 +28,8 @@
                 <span asp-validation-for="NameEn" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ParentCategoryId" class="control-label"></label>
-                @Html.DropDownList("ParentCategoryId", ViewBag.Categories as SelectList, "Select Parent Category", new { @class = "form-control" })
+                <label asp-for="ParentCategoryId" class="control-label"> Parent Category </label>
+                @Html.DropDownList("ParentCategoryId", ViewBag.Categories as SelectList, "None", new { @class = "form-control" })
                 <span asp-validation-for="ParentCategoryId" class="text-danger"></span>
             </div>
 

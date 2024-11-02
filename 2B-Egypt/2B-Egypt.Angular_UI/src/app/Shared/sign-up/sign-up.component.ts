@@ -3,7 +3,7 @@ import { IUser } from '../../../models/iuser';
 import { FormsModule, NgModel } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Observer } from 'rxjs';
-import { RouterLink , Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 
@@ -14,7 +14,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
-export class SignUpComponent {
+export class SignUpComponent { 
+  alreadyExists:boolean =false;
   loginservice: LoginService | undefined;
   passwordNotMatch = false
   submitted = false
@@ -28,7 +29,7 @@ export class SignUpComponent {
     password: '',
     confirmPassword: '',
   };
-  constructor(private loginService: LoginService , private router : Router) {
+  constructor(private loginService: LoginService , private router:Router) {
     this.loginservice = loginService;
   }
   onSubmit() { 
@@ -69,7 +70,9 @@ export class SignUpComponent {
         this.router.navigateByUrl('products')
 
       },
-      (error) => {
+      (error) => { 
+        this.alreadyExists =true;
+
         console.error('Sign up failed', error);
         if (error.error) {
           this.emailNotVaild = true
@@ -89,5 +92,8 @@ export class SignUpComponent {
   //       console.error('Sign up failed', error);
   //     }
   //   );
-  // }
+  // } 
+  GotoLogin(){
+    this.router.navigateByUrl(`/Login`);
+  }
 }
