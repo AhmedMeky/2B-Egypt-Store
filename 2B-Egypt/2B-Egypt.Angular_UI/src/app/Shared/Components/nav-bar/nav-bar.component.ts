@@ -81,7 +81,12 @@ export class NavBarComponent implements OnInit {
   ) {
     this.translate.setDefaultLang('en');
     this.translate.use('en');
-    this.isLoggedIn = false;
+    let check = sessionStorage.getItem('token')
+    if(check){
+      this.isLoggedIn  = true
+    }else{
+      this.isLoggedIn = false;
+    }
   }
   switchLanguage(event: Event): void {
     const selectElement = event.target as HTMLSelectElement | null;
@@ -247,13 +252,16 @@ export class NavBarComponent implements OnInit {
     this.router.navigateByUrl(`/products-by-category/${id}`);
   }
 
+  login(){
+    this.router.navigateByUrl(`login`);
+  }
+
   logout() {
     this.loginService.logout();
-    this.isLoggedIn = true;
+    this.isLoggedIn = false;
+    this.router.navigateByUrl(`login`);
   }
-  changeStat() {
-    this.isLoggedIn = !this.isLoggedIn;
-  }
+  
   get counter(): number {
     return this._cartService.getCounter();
   } 

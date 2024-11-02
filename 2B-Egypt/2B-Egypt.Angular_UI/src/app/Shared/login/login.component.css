@@ -1,46 +1,11 @@
 #loginDiv {
-  display: flex;
-  flex-direction: column;
-  height: 500px;
-  width: 30%;
-  /* border: solid 3px; */
-  /* border-color: orangered;  */
-  padding: 15px; 
-  margin-left: 35%;
-} 
-#Head{
-    color: orangered;
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-    text-align: center;
-
-}
-#inputlogin {
-    border: unset;
-    background: #F5F5F5 0% 0% no-repeat padding-box !important;
-    opacity: 1;
-    border: unset;
-    border-radius: 6px;
-    height: 45px; 
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 13px; 
-    padding: 5px;
-}  
-#inputlogin:focus{
-    border-color: aqua;
-    outline: none !important;
-    border-color: #719ECE;
-    /* box-shadow: 0 0 10px #719ECE; */
-} 
-#btnlogin{
-    width: 80px; 
-    height: 40px;
-    background-color: #FF662B; 
-    border: none; 
-    border-radius: 4px;  
-    margin-right: 10px;
-
-}
-a{
-    text-decoration: none; 
-    color: #FF662B;
-}
+    background-color: #f8f9fa; 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  #btnlogin {
+    width: 100%; 
+  }
+  

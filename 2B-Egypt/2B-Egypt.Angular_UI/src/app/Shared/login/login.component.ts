@@ -4,11 +4,12 @@ import { LoginService } from '../../services/login.service';
 import { FormsModule } from '@angular/forms';
 import { Loginuser } from '../../../models/loginuser';
 import { firstValueFrom } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,TranslateModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'], // Corrected from styleUrl to styleUrls
 })
@@ -54,7 +55,11 @@ async onSubmit(event: Event) {
     sessionStorage.setItem('token', response.tokens);
     sessionStorage.setItem('user', JSON.stringify(response.user)); // Save user details
     this.isLoggedIn = true; // Set login status to true
-    this.router.navigate(['/products']); // Navigate to the home page or another page on successful login
+    this.router.navigateByUrl('products').then(() => {
+      window.location.reload();
+    });
+
+    // this.router.navigate(['/products']); // Navigate to the home page or another page on successful login
   } catch (err) {
     console.error('Login failed', err);
     // Optionally, display an error message to the user

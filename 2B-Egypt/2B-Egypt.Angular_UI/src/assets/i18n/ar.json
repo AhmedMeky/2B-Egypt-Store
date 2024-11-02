@@ -54,6 +54,70 @@
     "ENTER_DISCOUNT": "أدخل الحد الأدنى للخصم",
     "APPLY_FILTER": "تطبيق الفلتر"
   },
+  
+    "TITLEE": "طلبياتي",
+    "ORDER_NUMBER": "رقم الطلب",
+    "DATE": "التاريخ",
+    "RECIPIENT": "المستلم",
+    "ORDER_TOTAL": "إجمالي الطلب",
+    "STATUS": {
+      "PENDING": "قيد الانتظار",
+      "CONFIRMED": "مؤكد",
+      "SHIPPED": "شحن",
+      "ATTEMPTED_DELIVERY": "تمت محاولة التسليم",
+      "RECEIVED": "تم الاستلام",
+      "CANCELED": "ملغي"
+    },
+    
+      "LOGIN": {
+        "TITLE": "تسجيل الدخول",
+        "SOCIAL_LOGIN": "تسجيل الدخول باستخدام حسابات التواصل الاجتماعي",
+        "EMAIL": "البريد الإلكتروني",
+        "PASSWORD": "كلمة المرور",
+        "SIGN_IN": "تسجيل الدخول",
+        "FORGOT_PASSWORD": "هل نسيت كلمة المرور؟"
+  
+    },
+    
+    
+      "SIGN_UP": "إنشاء حساب",
+      "LOGIN_WITH_SOCIAL": "تسجيل الدخول باستخدام حساب اجتماعي",
+      "FIRST_NAME": "الاسم الأول",
+      "LAST_NAME": "اسم العائلة",
+      "EMAIL": "البريد الإلكتروني",
+      "PHONE_NUMBER": "رقم الهاتف",
+      "PASSWORD": "كلمة المرور",
+      "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+      "ALREADY_HAVE_ACCOUNT": "لديك حساب بالفعل",
+    
+    "ACTION": "الإجراء",
+    "VIEW_DETAILS": "عرض التفاصيل",
+    "UNKNOWN_STATUS": "غير معروف",
+    "ORDER_DETAILS": {
+      "TITLEO": "تفاصيل الطلب",
+      "ORDER_NUMBER": "رقم الطلب",
+      "CREATED_AT": "تاريخ الإنشاء",
+      "STATUS": "الحالة",
+      "DISCOUNT": "الخصم",
+      "TOTAL_AMOUNT": "المبلغ الإجمالي",
+      "PRODUCT_NAME": "اسم المنتج",
+      "QUANTITY": "الكمية",
+      "PRICE": "السعر",
+      "TOTAL_PRICE": "السعر الإجمالي",
+      "BACK_TO_ORDERS": "العودة إلى طلباتي",
+      "UNKNOWN": "غير معروف"
+    },
+  
+  
+  "TITLE": "طلبياتي",
+  "ORDER_NUMBER": "رقم الطلب",
+  "DATE": "التاريخ",
+  "RECIPIENT": "المستلم",
+  "ORDER_TOTAL": "إجمالي الطلب",
+  "STATUS": "الحالة",
+  "ACTION": "الإجراء",
+  "VIEW_DETAILS": "عرض التفاصيل",
+  "UNKNOWN_STATUS": "غير معروف",
 
   "COMPARE": "قارن()",
   "SIGN_IN": "تسجيل الدخول",

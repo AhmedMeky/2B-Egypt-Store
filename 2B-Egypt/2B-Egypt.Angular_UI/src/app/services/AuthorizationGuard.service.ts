@@ -16,7 +16,7 @@ export class AuthorizationGuard implements CanActivate {
   canActivate(): boolean {
     const userToken = sessionStorage.getItem('token');
     if (!userToken) {
-      this.router.navigate(['/Login']);
+      this.router.navigate(['/login']);
       return false;
     }
     return true;

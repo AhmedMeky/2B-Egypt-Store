@@ -20,7 +20,9 @@ export class OrderService {
   }
  
   getOrderDetails(orderId: string): Observable<any> {
-    return this.httpclient.get<any>(`${this.baseUrl}/Details/${orderId}`);
+    return  this.httpclient.get<any>(`${this.baseUrl}/Details/${orderId}`);
+    
+    
   }
 
   creatOrder(order: IOrder): Observable<IOrder> {

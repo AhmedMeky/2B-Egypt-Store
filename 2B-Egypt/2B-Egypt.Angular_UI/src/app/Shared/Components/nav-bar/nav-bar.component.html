@@ -1,4 +1,3 @@
-<!-- Example split danger button -->
 <div class="responsivediv" style="width: 100%"></div>
 <div style="height: 3px; background-color: orangered"></div>
 <div id="smallnav">
@@ -6,21 +5,19 @@
     <div>
       <a href="#">{{ "COMPARE" | translate }}</a>
     </div>
-    <!-- <div><a *ngIf="!isLoggedIn" routerLink="/Login">Sign In</a></div>  -->
-    <a
-      *ngIf="!isLoggedIn"
-      routerLink="/Login"
-      (click)="changeStat()"
-      style="color: grey"
-      >{{ "SIGN_IN" | translate }}</a
-    >
-    <a
-      *ngIf="isLoggedIn"
-      routerLink="/Login"
-      (click)="logout()"
-      style="color: grey"
-      >{{ "Logout" | translate }}</a
-    >
+    <div *ngIf="!isLoggedIn">
+      <a class="cursor" (click)="login()" style="color: grey">{{
+        "SIGN_IN" | translate
+      }}</a>
+    </div>
+    <div *ngIf="isLoggedIn">
+      <a  class="cursor"   (click)="logout()" style="color: grey">{{
+        "Logout" | translate
+      }}</a>
+    </div>
+    <!-- <a *ngIf="!isLoggedIn" (click)="login()"  style="color: grey">{{ "SIGN_IN" | translate
+      }}</a>
+    <a *ngIf="isLoggedIn"  (click)="logout()" style="color: grey">{{ "Logout" | translate }}</a> -->
     <div>
       <a routerLink="/Signup">{{ "CREATE_ACCOUNT" | translate }}</a>
     </div>
@@ -39,7 +36,13 @@
 </div>
 <div>
   <div id="bigDivForNavbar">
-    <img routerLink="/Home" src="/img/2b.png" width="15%" id="img2b" style="cursor: pointer;" />
+    <img
+      routerLink="/Home"
+      src="/img/2b.png"
+      width="15%"
+      id="img2b"
+      style="cursor: pointer"
+    />
 
     <div>
       <div id="divforEndjustfy">
@@ -154,58 +157,39 @@
       {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
     >
   </div>
-  <!-- <div id="sidelist" *ngIf="BarsAppears">
-    <select *ngFor="let cat of ParentCategories" style="display: block">
-      <div style="background-color: black;">
-        <option style="width: 100%">
-          <a href="#">{{ cat.nameEn }}</a>
-        </option>
-      </div>
-    </select>
-  </div> -->
-  <!-- <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
-    <div
-      (click)="toggleDropdown()"
-      style="
-        background-color: black;
-        color: white;
-        padding: 10px;
-        cursor: pointer;
-      "
-    >
-      {{ selectedCategory || "Select a category" }}
-    </div>
-    <div
-      *ngIf="isDropdownOpen"
-      style="
-        position: absolute;
-        background-color: white;
-        border: 1px solid black;
-        width: 100%;
-        z-index: 1;
-      "
-    >
-      <div
-        *ngFor="let cat of ParentCategories"
-        (click)="selectCategory(cat.nameEn)"
-        style="padding: 10px; cursor: pointer; text-align: left; color: black"
-      >
-        <ul>
-          <li>
-            <select style="display: block">
-              <option style="display: block" value="">{{ cat.nameEn }}</option>
-            </select>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div> -->
 
-  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative"> 
-    <div style="height: 50px;display: flex; flex-direction: row;flex-grow: 1;"> 
-      <div style="background-color: #FF662B;margin:2px; width: 100px;color: white;" >Menu</div>
-      <div style="background-color: #FF662B;margin:2px; width: 100px;color: white;">Account</div>
-      <div style="background-color: #FF662B;margin:2px; width: 100px;color: white;">Settings</div>
+  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
+    <div style="height: 50px; display: flex; flex-direction: row; flex-grow: 1">
+      <div
+        style="
+          background-color: #ff662b;
+          margin: 2px;
+          width: 100px;
+          color: white;
+        "
+      >
+        Menu
+      </div>
+      <div
+        style="
+          background-color: #ff662b;
+          margin: 2px;
+          width: 100px;
+          color: white;
+        "
+      >
+        Account
+      </div>
+      <div
+        style="
+          background-color: #ff662b;
+          margin: 2px;
+          width: 100px;
+          color: white;
+        "
+      >
+        Settings
+      </div>
     </div>
     <div
       (click)="toggleDropdown()"
@@ -267,4 +251,4 @@
   />
 </div>
 <app-advertisment></app-advertisment>
-<router-outlet ></router-outlet>
+<!-- <router-outlet ></router-outlet> -->

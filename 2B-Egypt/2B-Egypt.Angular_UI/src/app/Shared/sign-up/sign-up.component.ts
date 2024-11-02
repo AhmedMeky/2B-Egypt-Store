@@ -3,11 +3,13 @@ import { IUser } from '../../../models/iuser';
 import { FormsModule, NgModel } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import { Observer } from 'rxjs';
+import { RouterLink } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink,TranslateModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
 })
@@ -46,6 +48,7 @@ export class SignUpComponent {
         sessionStorage.setItem('token', response.tokens);
         sessionStorage.setItem('user', JSON.stringify(response.user));
         console.log('Sign up successful', response);
+        
       },
       (error) => {
         console.error('Sign up failed', error);

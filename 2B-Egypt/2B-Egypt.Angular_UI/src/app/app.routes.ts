@@ -17,12 +17,12 @@ import { OrderDetailsComponent } from './Shared/Components/order-details/order-d
 export const routes: Routes = [ 
   // { path: '', component: LoginComponent },
   // { path: '', component: ProductListComponent },
-  { path: '', component: ProductListComponent },
+  // { path: '', component: ProductListComponent },
   { path: 'cart', component: CartComponent},
   { path: 'Signup', component: SignUpComponent },
-  { path: 'Login', component: LoginComponent },
-  { path: 'Home', component: AppComponent },
-  { path: 'products', component: ProductListComponent ,canActivate:[AuthorizationGuard]},
+  { path: 'login', component: LoginComponent },
+  { path: 'Home', component: ProductListComponent },
+  { path: 'products', component: ProductListComponent},
   { path: 'category/:id', component: ProductsByCategoryComponent },
   { path: 'product-details/:id', component: ProductDetailsComponent },
   { path: 'Categories', component: NavBarComponent },
@@ -31,5 +31,7 @@ export const routes: Routes = [
   { path: 'order/:orderId', component: OrderDetailsComponent },
   { path: 'shipping', component: ShippingReviewPaymentComponent ,canActivate:[AuthorizationGuard] },
   { path: 'order', component: OrderComponent },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  // { path: '**', redirectTo: '/products', pathMatch: 'full' },
 
 ];
