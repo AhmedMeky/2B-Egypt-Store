@@ -49,8 +49,8 @@ export class SignUpComponent {
         console.log(response);
         sessionStorage.setItem('token', response.tokens);
         sessionStorage.setItem('user', JSON.stringify(response.user));
-        console.log('Sign up successful', response); 
-        this.alreadyExists=false;
+        console.log('Sign up successful', response);
+        
       },
       (error) => { 
         this.alreadyExists =true;

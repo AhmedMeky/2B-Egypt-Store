@@ -31,6 +31,8 @@ export class ProductListComponent implements OnInit {
   pageSize = 8;
   totalProducts = 0;
   lang: string = 'en';
+  productGroups: IProduct[][] = [];
+
 
   @Output() AddToCartCounter: EventEmitter<number> = new EventEmitter<number>();
   Counter: number = 0;
@@ -57,6 +59,7 @@ export class ProductListComponent implements OnInit {
     });
     this.translate.setDefaultLang('en');
     this.loadProducts();
+    this.splitProductsIntoGroups();
   }
 
   loadProducts(): void {
@@ -163,4 +166,11 @@ addToCart(product: IProduct)
   getLocalizedProductDescription(product: IProduct): string {
     return this.translate.currentLang === 'ar' ? product.descriptionAr : product.descriptionEn;
   }
+  splitProductsIntoGroups(): void {
+    const groupSize = 4;
+    for (let i = 0; i < this.products.length; i += groupSize) {
+      this.productGroups.push(this.products.slice(i, i + groupSize));
+    }
+  }
+  
 }

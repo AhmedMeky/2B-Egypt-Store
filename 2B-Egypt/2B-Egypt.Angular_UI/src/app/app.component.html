@@ -5,13 +5,9 @@
 <!-- <router-outlet></router-outlet> -->
 <div [dir]="lang === 'en' ? 'ltr' : 'rtl'">
   <app-nav-bar (filterChange)="applyFilters($event)"></app-nav-bar>
+
  
-  <!-- <button (click)="showToast()">Show Toast</button>
-  <ng-template #toastTemplate>
-    <div>This is a toast message!</div>
-  </ng-template>
-  <app-toastglobal></app-toastglobal> -->
-  <!-- <router-outlet></router-outlet> -->
+    <router-outlet></router-outlet> 
  
   <!-- <app-footer></app-footer> -->
   <!-- <app-sidebar></app-sidebar> -->

@@ -5,19 +5,19 @@
     <div>
       <a href="#">{{ "COMPARE" | translate }}</a>
     </div>
-    <!-- <div><a *ngIf="!isLoggedIn" routerLink="/Login">Sign In</a></div>  -->
-    <a *ngIf="isLoggedIn == false" routerLink="/Login" style="color: grey">{{
-      "SIGN_IN" | translate
-    }}</a>
-
-    <a
-      *ngIf="2 > 1"
-      routerLink="/Login"
-      (click)="logout()"
-      style="color: grey"
-      >{{ "Logout" | translate }}</a
-    >
-    
+    <div *ngIf="!isLoggedIn">
+      <a class="cursor" (click)="login()" style="color: grey">{{
+        "SIGN_IN" | translate
+      }}</a>
+    </div>
+    <div *ngIf="isLoggedIn">
+      <a  class="cursor"   (click)="logout()" style="color: grey">{{
+        "Logout" | translate
+      }}</a>
+    </div>
+    <!-- <a *ngIf="!isLoggedIn" (click)="login()"  style="color: grey">{{ "SIGN_IN" | translate
+      }}</a>
+    <a *ngIf="isLoggedIn"  (click)="logout()" style="color: grey">{{ "Logout" | translate }}</a> -->
     <div>
       <a routerLink="/Signup">{{ "CREATE_ACCOUNT" | translate }}</a>
     </div>
@@ -40,8 +40,13 @@
 </div>
 <div>
   <div id="bigDivForNavbar">
-
-    <img routerLink="/Home" src="/img/2b.png" width="15%" id="img2b" style="cursor: pointer;" />
+    <img
+      routerLink="/Home"
+      src="/img/2b.png"
+      width="15%"
+      id="img2b"
+      style="cursor: pointer"
+    />
 
     <div>
       <div id="divforEndjustfy">
@@ -256,6 +261,4 @@
   />
 </div>
 <app-advertisment></app-advertisment>
-<router-outlet ></router-outlet>
-
-
+<!-- <router-outlet ></router-outlet> -->

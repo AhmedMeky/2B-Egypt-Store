@@ -1,27 +1,84 @@
-<div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div *ngFor="let product of products; let i = index" class="carousel-item" [ngClass]="{ 'active': i === 0 }">
-        <div class="d-flex justify-content-center">
-          <div class="product-slide">
-            <img [src]="product.images.length > 0 ? product.images[0].imageUrl : 'img/placeholder.png'" style="width: 300px; height: auto; object-fit: contain; margin-bottom: 70px;"/>
+<!-- <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div *ngFor="let product of filteredProducts" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="card product-card" style="cursor: pointer">
+        <div *ngIf="filteredProducts.length > 0; else noProducts">
+          <div class="product-img-wrapper" (click)="SelectedProductId(product.id)">
+            <img [src]="product.images.length > 0 ? product.images[0].imageUrl : 'img/2b.png'" 
+                 alt="{{ getLocalizedProductName(product) }}" class="card-img-top product-img" />
+            <span *ngIf="product.discount > 0" class="discount-badge">-{{ product.discount }}%</span>
+          </div>
 
-            <div class="carousel-caption d-none d-md-block">
-              <h5>{{ product.nameEn }}</h5>
-              <p>{{ product.descriptionEn }}</p>
-              <span>Price: {{ product.price | currency }}</span>
+          <div class="card-body text-center">
+            <h5 class="card-title product-name">{{ getLocalizedProductName(product) }}</h5>
+            <p class="card-text product-description">{{ getLocalizedProductDescription(product) }}</p>
+            <span *ngIf="product.discount > 0" class="old-price">{{ product.price | currency }}</span>
+            <div class="price-section">
+              <span class="current-price">{{ product.price - (product.price * product.discount) / 100 | currency }}</span>
+            </div>
+
+            <div class="quantity-section my-3">
+              <button class="btn quantity-btn" (click)="handleQuantity('plus', product)">
+                {{ 'QUANTITY_INCREASE' | translate }}
+              </button>
+              <input type="text" [(ngModel)]="product.quantity" readonly class="quantity-input mx-2" />
+              <button class="btn quantity-btn" (click)="handleQuantity('min', product)">
+                {{ 'QUANTITY_DECREASE' | translate }}
+              </button>
+            </div>
+
+            <div class="cart-buttons">
+              <button (click)="addToCart(product)" class="btn add-cart-btn">
+                <i class="fas fa-shopping-cart"></i> {{ 'ADD_TO_CART' | translate }}
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  
-    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev " >
-      <span class="carousel-control-prev-icon" aria-hidden="true" st></span>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div> -->
+
+<div class="container-fluid py-3">
+  <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
+    
+    <div class="carousel-inner">
+      <div *ngFor="let productGroup of productGroups; let i = index" class="carousel-item" [ngClass]="{ 'active': i === 0 }">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+          <div *ngFor="let product of productGroup" class="col">
+            <div class="card h-100 text-center border-0">
+              <img [src]="product.images.length > 0 ? product.images[0].imageUrl : 'img/placeholder.png'" 
+                   class="card-img-top" alt="Product Image" style="height: 200px; object-fit: contain;">
+              <div class="card-body">
+                <span class="badge bg-danger"> {{ product.discount }}% off </span>
+                <h5 class="card-title">{{ product.nameEn }}</h5>
+                <p class="card-text">
+                  <span class="text-muted text-decoration-line-through">{{ product.price| currency }}</span>
+                  <br>
+                  <strong >{{ product.price - (product.price * product.discount) / 100 | currency }}</strong>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  
+</div>

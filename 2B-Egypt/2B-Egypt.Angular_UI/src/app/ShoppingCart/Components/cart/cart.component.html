@@ -17,8 +17,8 @@
           <tbody>
             <tr *ngFor="let item of cartItems;">
               <td style="max-width: 300px;">
-                <div style="display: flex; align-items: center;">
-                  <!-- Product Name -->
+                <div style="display: flex;justify-content:center">
+                  <!-- <img class="imageItem" [src]="item.image" width="100px" height="100px"> -->
                   <span class="productName">
                     {{getLocalizedProductName(item)}}
                   </span>
@@ -36,11 +36,10 @@
                   {{ "Exceeded available stock quantity. Maximum available is " + item.stock | translate }}
                 </span>
               </td>
-              <td>{{ (item.price * item.quantity) | currency }}</td>
+              <td> {{ item.price * item.quantity |currency}}</td>
               <td>
-                <button (click)="removeItem(item.productId)" class="clear-cart-btn">
-                  {{ 'remove' | translate }}
-                </button>
+                <button (click)="removeItem(item.productId)" class="clear-cart-btn">{{ 'remove' | translate
+                }}</button>
               </td>
             </tr>
           </tbody>
@@ -100,10 +99,13 @@
 <style>
   .table {
     vertical-align: middle;
+    text-align: center;
+
   }
 
   .table tbody tr td {
     vertical-align: middle;
+    text-align: center;
   }
 
   .imageItem {

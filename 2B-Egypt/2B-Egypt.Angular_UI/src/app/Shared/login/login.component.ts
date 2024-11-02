@@ -56,7 +56,11 @@ async onSubmit(event: Event) {
     sessionStorage.setItem('token', response.tokens);
     sessionStorage.setItem('user', JSON.stringify(response.user)); // Save user details
     this.isLoggedIn = true; // Set login status to true
-    this.router.navigate(['/products']); // Navigate to the home page or another page on successful login
+    this.router.navigateByUrl('products').then(() => {
+      window.location.reload();
+    });
+
+    // this.router.navigate(['/products']); // Navigate to the home page or another page on successful login
   } catch (err) {
     console.error('Login failed', err);
     // Optionally, display an error message to the user

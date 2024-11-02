@@ -85,7 +85,12 @@ export class NavBarComponent implements OnInit {
   ) {
     this.translate.setDefaultLang('en');
     this.translate.use('en');
-    this.isLoggedIn = false;
+    let check = sessionStorage.getItem('token')
+    if(check){
+      this.isLoggedIn  = true
+    }else{
+      this.isLoggedIn = false;
+    }
   }
   switchLanguage(event: Event): void {
     const selectElement = event.target as HTMLSelectElement | null;
@@ -212,18 +217,16 @@ export class NavBarComponent implements OnInit {
     this.router.navigateByUrl(`/products-by-category/${id}`);
   }
 
-  logout() {
-    this.loginService.logout(); // Call your logout service
-    sessionStorage.removeItem('token'); // Clear the token
-    sessionStorage.removeItem('user'); // Clear user data
-    this.isLoggedIn = false; // Set login status to false
-    this.router.navigate(['/Login']); // Optionally navigate to the login page
+  login(){
+    this.router.navigateByUrl(`login`);
   }
 
-  checkLoginStatus() {
-    const token = sessionStorage.getItem('token');
-    this.isLoggedIn = !!token; // Set isLoggedIn based on the presence of the token
+  logout() {
+    this.loginService.logout();
+    this.isLoggedIn = false;
+    this.router.navigateByUrl(`login`);
   }
+  
   get counter(): number {
     return this._cartService.getCounter();
   }

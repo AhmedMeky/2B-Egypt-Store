@@ -112,4 +112,19 @@ public class OrderService : IOrderService
             return new() { Entity = null, IsSuccessfull = false, Message = "There is no order with this Id" };
         return new() { Entity = order, IsSuccessfull = true };
     }
+
+    public async Task<ResponseDTO<Order>> GetOrderForUpdateByIdAsync(Guid orderId)
+    {
+        var order = (await _OrderRepository.GetByIdAsync(orderId));
+        if (order is null)
+            return new() { Entity = null!, IsSuccessfull = false, Message = "There is no order with this Id" };
+        return new() { Entity = order, IsSuccessfull = true };
+    }
+
+    public async Task<bool> UpdateAsync(Order order)
+    {
+        var response = await _OrderRepository.UpdateAsync(order);
+        await _OrderRepository.SaveChangesAsync();
+        return response is not null;
+    }
 }
