@@ -7,4 +7,6 @@ public interface IOrderService
     Task<ResponseDTO<List<GetAllOrderDTO>>> GetAllOrderAsync(Guid userId);
     Task<ResponseDTO<OrderDetailsDTO>> GetOrderByIdAsync(Guid orderId);
     Task<ResponseDTO<Order>> GetOrderDetailsByIdAsync(Guid orderId);
+    Task<ResponseDTO<Order>> GetOrderForUpdateByIdAsync(Guid orderId);
+    Task<bool> UpdateAsync(Order order);
 }
