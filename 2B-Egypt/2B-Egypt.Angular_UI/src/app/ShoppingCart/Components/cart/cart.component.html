@@ -2,11 +2,12 @@
   <h2>{{ " shopping cart" | translate }}</h2>
   <div *ngIf="cartItems.length > 0">
     <div class="row">
-      <div class="col-md-9">
+      <!-- Cart Items Table -->
+      <div class="col-12 col-lg-9 mb-4">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">{{ "item" | translate }}</th>
+              <th scope="col">{{ "item" | translate }}</th>  
               <th scope="col">{{ "price" | translate }}</th>
               <th scope="col">{{ "qty" | translate }}</th>
               <th scope="col">{{ "subtotal" | translate }}</th>
@@ -14,7 +15,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of cartItems ; ">
+            <tr *ngFor="let item of cartItems;">
               <td style="max-width: 300px;">
                 <div style="display: flex;justify-content:center">
                   <!-- <img class="imageItem" [src]="item.image" width="100px" height="100px"> -->
@@ -23,19 +24,17 @@
                   </span>
                 </div>
               </td>
-              <td> {{ item.price| currency }}</td>
+              <td>{{ item.price | currency }}</td>
               <td>
                 <div class="quantity">
-                  <i class="fa fa-angle-up" (click)="item.quantity < item.stock?increaseQuantity(item):''"></i>
+                  <i class="fa fa-angle-up" (click)="item.quantity < item.stock ? increaseQuantity(item) : ''"></i>
                   {{item.quantity}}
                   <i class="fa fa-angle-down" [style.cursor]="item.quantity === 1 ? 'auto' : 'pointer'"
                     (click)="decreaseQuantity(item)"></i>
                 </div>
-                <span *ngIf="item.quantity>=item.stock" style="color: red;"> Exceeded available stock quantity. Maximum
-                  available is {{ item.stock }}.
-
+                <span *ngIf="item.quantity >= item.stock" style="color: red; font-size: 0.9rem;">
+                  {{ "Exceeded available stock quantity. Maximum available is " + item.stock | translate }}
                 </span>
-
               </td>
               <td> {{ item.price * item.quantity |currency}}</td>
               <td>
@@ -45,45 +44,48 @@
             </tr>
           </tbody>
         </table>
-
-
-
-
       </div>
-      <div class="col-md-3">
-        <div class="card" style="width: 100%;border: 1px solid gray; padding: 10px;">
+  
+      <!-- Order Summary Card -->
+      <div class="col-12 col-lg-3">
+        <div class="card p-3 border-secondary">
           <div class="card-body">
-            <h3 style="margin: 0;" class="card-title">Summary</h3>
-            <hr style="margin: 5px;">
-            <div style="display: flex;justify-content: space-between;">
-              <span>subtotal</span>
-              <span style="color: black;">EGP {{subTotal}}</span>
+            <h3 class="card-title mb-3">{{ "Summary" | translate }}</h3>
+            <div class="d-flex justify-content-between mb-2">
+              <span>{{ "subtotal" | translate }}</span>
+              <span>{{ subTotal | currency }}</span>
             </div>
-            <hr style="margin: 5px;">
-            <div style="display: flex;justify-content: space-between;">
-              <h5>Order Total</h5>
-              <h5 style="color: black;">EGP {{subTotal}}</h5>
+            <hr>
+            <div class="d-flex justify-content-between">
+              <h5>{{ "Order Total" | translate }}</h5>
+              <h5>{{ subTotal | currency }}</h5>
             </div>
-            <button  routerLink="/shipping"  class="btn btn-warning btn-block">GO TO CHECKOUT</button>
+            <button routerLink="/shipping" class="btn btn-warning btn-block mt-3">
+              {{ "GO TO CHECKOUT" | translate }}
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="cart-footer">
-      <button (click)="clearCart()" class="clear-cart-btn">Clear Cart</button>
-      <!-- <h3>Total Price: ${{ cartItems.reduce((total, item) => total + item.totalPrice, 0) }}</h3> -->
-    </div>
-
-    <div *ngIf="cartItems.length == 0">
-      <p>You have no items in your shopping cart</p>
-      <p>Click <a class="clickHere" routerLink="/products">here</a>
-        {{ 'continue_shopping' | translate }}</p>
-    </div>
-
-
-
   
+    <!-- Cart Footer -->
+    <div class="cart-footer mt-4 text-right">
+      <button (click)="clearCart()" class="btn btn-danger">
+        {{ "Clear Cart" | translate }}
+      </button>
+    </div>
   </div>
+  
+  <!-- Empty Cart Message -->
+  <div *ngIf="cartItems.length == 0" class="text-center mt-5">
+    <p>{{ "You have no items in your shopping cart" | translate }}</p>
+    <p>
+      {{ "Click" | translate }}
+      <a class="clickHere" routerLink="/products">{{ "here" | translate }}</a>
+      {{ "to continue shopping" | translate }}
+    </p>
+  </div>
+  
 </div>
   <div  *ngIf="cartItems.length == 0">
     <p  ><span routerLink="/products" class="clickHere" >{{ 'continue_shopping' | translate }}</span> </p>

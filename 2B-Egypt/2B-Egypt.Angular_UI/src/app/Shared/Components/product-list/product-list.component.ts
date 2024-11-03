@@ -15,11 +15,12 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
 import { LanguageServiceService } from '../../../services/language-service.service';
+import { ProductSliderComponent } from "../product-slider/product-slider.component";
  
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, SidebarComponent, NavBarComponent, TranslateModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, SidebarComponent, NavBarComponent, TranslateModule, ProductSliderComponent,ProductSliderComponent],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
 })
@@ -30,6 +31,8 @@ export class ProductListComponent implements OnInit {
   pageSize = 8;
   totalProducts = 0;
   lang: string = 'en';
+  productGroups: IProduct[][] = [];
+
 
   @Output() AddToCartCounter: EventEmitter<number> = new EventEmitter<number>();
   Counter: number = 0;
@@ -56,6 +59,7 @@ export class ProductListComponent implements OnInit {
     });
     this.translate.setDefaultLang('en');
     this.loadProducts();
+    this.splitProductsIntoGroups();
   }
 
   loadProducts(): void {
@@ -106,6 +110,9 @@ addToCart(product: IProduct)
   
       };
       this._cartService.addToCart(cartItem);
+      this.snackBar.open(this.translate.instant('ADD_TO_CART'), 'Close', {
+        duration: 2000,
+      });
 }
 
   removeFromCart(productId: number) {
@@ -159,4 +166,11 @@ addToCart(product: IProduct)
   getLocalizedProductDescription(product: IProduct): string {
     return this.translate.currentLang === 'ar' ? product.descriptionAr : product.descriptionEn;
   }
+  splitProductsIntoGroups(): void {
+    const groupSize = 4;
+    for (let i = 0; i < this.products.length; i += groupSize) {
+      this.productGroups.push(this.products.slice(i, i + groupSize));
+    }
+  }
+  
 }

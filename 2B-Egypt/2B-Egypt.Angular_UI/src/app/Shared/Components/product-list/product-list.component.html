@@ -1,3 +1,5 @@
+<!-- <app-nav-bar (filterChange)="applyFilters($event)"></app-nav-bar> -->
+
 <div class="container-fluid main-container mt-4">
 
   <div class="row ">
@@ -54,12 +56,10 @@
     <button class="btn" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
       Prev
     </button>
-    <span class="mx-2">Page {{ currentPage }}</span>
+    <span class="mx-2"> {{ currentPage }}</span>
     <button class="btn" (click)="onPageChange(currentPage + 1)" [disabled]="products.length < pageSize">
       Next
     </button>
   </div>
 </div>
-
-
-
+<app-product-slider></app-product-slider>

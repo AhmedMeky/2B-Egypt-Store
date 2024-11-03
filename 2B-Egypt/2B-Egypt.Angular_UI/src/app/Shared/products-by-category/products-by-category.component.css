@@ -168,7 +168,6 @@ button:hover {
 } 
 
 
-/* عرض مناسب لجهاز iPhone 14 */
 @media (max-width: 430px) {
   .main-container {
     padding: 10px;
@@ -256,3 +255,21 @@ button:hover {
   .main-container {
     padding: 15px;
   }}
+
+  .product-card {
+    height: 500px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .product-img-wrapper {
+    height: 200px; 
+    overflow: hidden; 
+  }
+  
+  .product-img {
+    width: 100%;
+    height: 100%;
+    object-fit:contain;
+  }

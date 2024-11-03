@@ -36,7 +36,7 @@
 .filters input[type="text"],
 .filters select,
 .filters input[type="range"] {
-  width: 100%;
+  width: 80%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -48,6 +48,9 @@
   display: flex;
   gap: 10px;
   justify-content: center;
+}
+.discount{
+  width: 30%;
 }
 
 .filter-button {
@@ -73,7 +76,9 @@
   margin-bottom: 1rem;
 }
 
-/* Responsive Styles */
+
+
+
 @media (max-width: 992px) {
   .main-container {
     flex-direction: column;
@@ -88,13 +93,30 @@
     border-right: none;
     border-bottom: 1px solid #ddd;
   }
-
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 8px 12px;
+    padding-right: 30px; 
+  }
+  
+  .search-container .fa-search {
+    position: absolute;
+    right: 10px;
+    color: #888;
+    cursor: pointer;
+  }
+  
   .filters {
     padding: 10px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
   .sidebar {
     width: 100%;
     margin: 0;
@@ -137,3 +159,39 @@
     gap: 0.5rem;
   }
 }
+
+
+
+
+/* @media (max-width: 820px) {
+  .main-container {
+    flex-direction: column;
+    padding: 0 20px;
+  }
+
+  .sidebar {
+    width: 90%;
+    max-width: 300px;
+    margin: 20px auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .filters {
+    padding: 15px;
+  }
+
+  .filters h3 {
+    font-size: 1.3em;
+  }
+  
+  .filter-button {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .filter-input {
+    width: 100%;
+  }
+} */
+

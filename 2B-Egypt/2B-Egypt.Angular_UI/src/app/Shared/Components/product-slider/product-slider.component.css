@@ -1,0 +1,52 @@
+.product-slide {
+    text-align: center;
+  }
+  
+  .carousel-caption h5 {
+    color: black;
+    font-size: 1.5rem;
+  }
+  
+  .carousel-caption p {
+    color: gray;
+  }
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: black; 
+  border-radius: 50%; 
+}
+
+.carousel-control-prev-icon:after,
+.carousel-control-next-icon:after {
+  display: none; 
+}
+
+.carousel-control-prev-icon {
+  width: 30px; 
+  height: 30px;
+}
+
+.carousel-control-next-icon {
+  width: 30px; 
+  height: 30px; 
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 0.8; 
+}
+
+
+
+#productCarousel .carousel-control-prev,
+#productCarousel .carousel-control-next {
+  width: 5%; /* يمكنك تعديل العرض حسب المسافة التي ترغب بها */
+}
+
+#productCarousel .carousel-control-prev {
+  left: -10px; /* تعديل المسافة للأزرار في اليسار */
+}
+
+#productCarousel .carousel-control-next {
+  right: -10px; /* تعديل المسافة للأزرار في اليمين */
+}
