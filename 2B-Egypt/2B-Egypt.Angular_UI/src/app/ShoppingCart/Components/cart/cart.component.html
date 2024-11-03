@@ -16,7 +16,7 @@
           <tbody>
             <tr *ngFor="let item of cartItems ; ">
               <td style="max-width: 300px;">
-                <div style="display: flex;">
+                <div style="display: flex;justify-content:center">
                   <!-- <img class="imageItem" [src]="item.image" width="100px" height="100px"> -->
                   <span class="productName">
                     {{getLocalizedProductName(item)}}
@@ -38,8 +38,10 @@
 
               </td>
               <td> {{ item.price * item.quantity |currency}}</td>
-              <button (click)="removeItem(item.productId)" class="clear-cart-btn">{{ 'remove' | translate
+              <td>
+                <button (click)="removeItem(item.productId)" class="clear-cart-btn">{{ 'remove' | translate
                 }}</button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -95,10 +97,13 @@
 <style>
   .table {
     vertical-align: middle;
+    text-align: center;
+
   }
 
   .table tbody tr td {
     vertical-align: middle;
+    text-align: center;
   }
 
   .imageItem {
