@@ -313,3 +313,13 @@ a {
 }
 
 
+#nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: block; /* أو يمكنك استخدام display: flex */
+}
+
+
+
+

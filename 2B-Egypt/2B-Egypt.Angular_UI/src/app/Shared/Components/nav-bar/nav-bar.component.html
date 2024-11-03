@@ -127,14 +127,14 @@
       </div>
     </div>
   </div>
-
+<div>
   <nav
     id="nav"
     style="
-      overflow: hidden;
       white-space: nowrap;
       margin-left: 10%;
       margin-right: 10%;
+     
     "
   >
     <ul
@@ -148,7 +148,7 @@
     >
       <li
         *ngFor="let cat of ParentCategories"
-        style="margin-right: 7px; position: relative"
+        style="margin-right: 7px; "
       >
         <a (mouseover)="ShowSubCategories(cat.id)">
           {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
@@ -156,19 +156,20 @@
       </li>
     </ul>
   </nav>
+</div>
   <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
     <a
       routerLink="/products-by-category"
       routerLinkActive="active"
       (click)="SelectedProductId(cat.id)"
       *ngFor="let cat of filteredSubcategories"
-      style="margin-right: 7px; position: relative"
+      style="margin-right: 7px;" 
     >
       {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
     >
   </div>
 
-  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
+  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; ">
     <div style="height: 50px; display: flex; flex-direction: row; flex-grow: 1">
       <div
         style="

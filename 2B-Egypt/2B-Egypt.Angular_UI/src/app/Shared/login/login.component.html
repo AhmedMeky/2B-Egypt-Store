@@ -29,12 +29,16 @@
           required
         />
       </div>
+      <div class="form-group" *ngIf="loginNotVaild">
+        <label style="color: red">Email or Password Not Vaild</label>
+        
+      </div>
       <div class="text-center" style="margin-top: 15px;">
         <button id="btnlogin" type="submit" class="btn" style="background-color: #ff662b; color: white; width: 90px;" >
           {{ 'LOGIN.SIGN_IN' | translate }}
         </button>
         <br>
-        <a href="#" style="color: #ff662b;" translate="LOGIN.FORGOT_PASSWORD"></a>
+        <!-- <a href="#" style="color: #ff662b;" translate="LOGIN.FORGOT_PASSWORD"></a> -->
       </div>
     </div>
   </div>

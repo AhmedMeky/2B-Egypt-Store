@@ -1,5 +1,5 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { IPayPalConfig } from 'ngx-paypal';
+// import { IPayPalConfig } from 'ngx-paypal';
 import { RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './Shared/Components/product-list/product-list.component';
 import { LanguageServiceService } from './services/language-service.service';
@@ -16,23 +16,17 @@ import { AdvertismentComponent } from "./Shared/Components/advertisment/advertis
 import { IProduct } from '../models/IProduct';
 import { ProductService } from './services/product.service';
 import { TranslateService } from '@ngx-translate/core';
-import { NgxPayPalModule } from 'ngx-paypal';
+// import { NgxPayPalModule } from 'ngx-paypal';
 // import { ToastglobalComponent } from './Shared/Components/toastglobal/toastglobal.component';
 import { Toast, ToastService } from './services/toast.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ 
-    
-    NgxPayPalModule,
-    RouterOutlet, NavBarComponent,
-    ProductListComponent, HttpClientModule, ProductDetailsComponent,
-    ProductsByCategoryComponent, LoginComponent,
-    FooterComponent, SignUpComponent, AdvertismentComponent],
+  imports: [ RouterOutlet, NavBarComponent,ProductListComponent, HttpClientModule, ProductDetailsComponent,ProductsByCategoryComponent, LoginComponent,FooterComponent, SignUpComponent, AdvertismentComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'], 
   providers: [ToastService], // Provide the ToastService if needed
-
+  
 })
 export class AppComponent { 
 

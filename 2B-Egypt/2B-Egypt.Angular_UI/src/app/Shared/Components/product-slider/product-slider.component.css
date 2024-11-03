@@ -35,3 +35,18 @@
 .carousel-control-next:hover {
   opacity: 0.8; 
 }
+
+
+
+#productCarousel .carousel-control-prev,
+#productCarousel .carousel-control-next {
+  width: 5%; /* يمكنك تعديل العرض حسب المسافة التي ترغب بها */
+}
+
+#productCarousel .carousel-control-prev {
+  left: -10px; /* تعديل المسافة للأزرار في اليسار */
+}
+
+#productCarousel .carousel-control-next {
+  right: -10px; /* تعديل المسافة للأزرار في اليمين */
+}
