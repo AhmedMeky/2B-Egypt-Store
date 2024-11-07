@@ -12,13 +12,13 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./pay-pal.component.css']
 })
 export class PaypalComponent implements OnInit {
-  order: any = {};  // تعريف متغير لحفظ تفاصيل الطلب
-  public payPalConfig?: IPayPalConfig;  // تكوين باي بال
+  order: any = {};  
+  public payPalConfig?: IPayPalConfig;  
 
   constructor(private router: Router , private _orderservice:OrderService) {}
 
   ngOnInit() {
-    this.order = history.state.orderDetails;  // استرجاع التفاصيل من history.state
+    this.order = history.state.orderDetails;  
     console.log('Order details:', this.order);
 
     if (this.order && this.order.orderItems && this.order.totalAmount) {
@@ -38,20 +38,20 @@ export class PaypalComponent implements OnInit {
           purchase_units: [{
             amount: {
               currency_code: 'USD',
-              value: (this.order.totalAmount / 1).toFixed(2),  // إذا كان totalAmount بالدولار
+              value: (this.order.totalAmount / 1).toFixed(2),  
               breakdown: {
                 item_total: {
                   currency_code: 'USD',
-                  value: (this.order.totalAmount / 1).toFixed(2)  // تحويل المجموع الكلي للعناصر إلى دولار
+                  value: (this.order.totalAmount / 1).toFixed(2)  
                 }
               }
             },
             items: this.order.orderItems.map((item: any) => ({
-              name: item.name || "Unnamed Product",  // التأكد من وجود اسم المنتج
-              quantity: item.quantity.toString(),  // الكمية
+              name: item.name || "Unnamed Product",  
+              quantity: item.quantity.toString(),  
               unit_amount: {
                 currency_code: 'USD',
-                value: (item.price && !isNaN(item.price) ? (item.price / 1).toFixed(2) : "0.00")  // تحويل السعر إلى دولار
+                value: (item.price && !isNaN(item.price) ? (item.price / 1).toFixed(2) : "0.00")  
               }
             }))
           }]
@@ -81,8 +81,7 @@ export class PaypalComponent implements OnInit {
               }
             });
             console.log(this.order)
-            // توجيه المستخدم إلى صفحة النجاح بعد المعاملة
-            // this.router.navigateByUrl('/paypal-success');
+      
           });
         },
         onClientAuthorization: (data) => {

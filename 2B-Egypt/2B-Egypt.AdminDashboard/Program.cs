@@ -50,6 +50,7 @@ builder.Services.AddTransient<AccountController>();
 builder.Services.AddDbContext<AppDbContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly("2B-Egypt.AdminDashboard"));
+
 });
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));

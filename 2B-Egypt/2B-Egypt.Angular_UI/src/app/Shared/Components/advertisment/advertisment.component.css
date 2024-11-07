@@ -13,20 +13,14 @@
     transition: background-color 0.3s ease;
   } 
   .rectangle:hover {
-    background-color: #f37021; /* Change background color on hover */ 
+    background-color: #f37021; 
    
   } 
-  /* @media (max-width: 650px) { 
+  @media (max-width: 1370px) {
     .rectangle {
-     flex-direction: column; 
-     
-    } 
-  } */
-  @media (max-width:1336){
-
-    .rectangle{
-      display: flex;
-      flex-direction: column;
+        flex-direction: column; 
+        width: 100%; 
+        margin: 10px auto; 
     }
-
-  }
+}
+  

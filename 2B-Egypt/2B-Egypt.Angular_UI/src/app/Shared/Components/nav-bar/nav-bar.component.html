@@ -23,6 +23,9 @@
     </div>
     <!-- <div><button (click)="logout()">Log Out</button></div> -->
   </div>
+  <button [routerLink]="['/products']"  class="btn" style="color: #f37021;">
+    <i class="fas fa-home" style="color: #f37021;"></i> {{"Home"| translate}}
+  </button>
 
   <select
     (change)="changelang($event)"
@@ -30,6 +33,7 @@
     aria-label="Select language"
     style="background-color: grey"
   >
+
     <option value="en">English</option>
     <option value="ar">العربية</option>
   </select>
@@ -46,22 +50,7 @@
 
     <div>
       <div id="divforEndjustfy">
-        <div id="searchandButton">
-          <input
-            type="search"
-            id="search"
-            class="form-control"
-            style="margin-right: 5px"
-          />
-          <button id="btnsearch" style="margin-right: 5px; width: 10%px">
-            <img
-              src="/img/search.png"
-              width="25px"
-              style="margin-left: 10px; margin-right: 10px"
-            />
-          </button>
-          <!-- <label class="form-label" for="form1">Search</label> -->
-        </div>
+        
         <div id="responsiveSearchBarsCart">
           <div style="display: flex; flex-direction: row">
             <div class="hiddenDiv">
@@ -88,15 +77,36 @@
           >
 
           <div class="cart-container">
+            
             <div style="padding-top: 15px" id="listbars">
-              <a (click)="changeSearchAppearance()"
-                ><i class="fa fa-search fa-large" style="color: #f37021"></i
-              ></a>
+              <a (click)="toggleCategories()">
+                <i class="fa fa-bars fa-large" style="color: #f37021"></i>
+              </a>
             </div>
-            <div style="padding-top: 15px" id="listbars">
-              <a (click)="changeBarsAppearance()"
-                ><i class="fa fa-bars fa-large" style="color: #f37021"></i
-              ></a>
+
+            <!-- Container for displaying the categories -->
+            <div *ngIf="showCategories" id="categoryList"
+              style="background-color: white; border: 1px solid black; padding: 10px; position: absolute; z-index: 20;">
+              <!-- Close button -->
+              <span (click)="toggleCategories()"
+                style="cursor: pointer; color: #f37021; float: right; font-size: 1.5em;">&times;</span>
+              <ul style="list-style: none; margin: 0; padding: 0;">
+                <li *ngFor="let cat of ParentCategories" style="padding: 5px;">
+                  <a (mouseover)="ShowSubCategories(cat.id)" style="color: black;">
+                    {{ lang === 'ar' ? cat.nameAr : cat.nameEn }}
+                  </a>
+                  <!-- Subcategories list -->
+                  <ul *ngIf="cat.id === selectedParentId"
+                    style="list-style-type: none; padding-left: 15px; margin-top: 5px;">
+                    <li *ngFor="let subCat of filteredSubcategories" style="padding: 5px;">
+                      <a routerLink="/products-by-category" (click)="SelectedProductId(subCat.id)"
+                        style="color: black;">
+                        {{ lang === 'ar' ? subCat.nameAr : subCat.nameEn }}
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
             </div>
             <div
               style="
@@ -117,14 +127,14 @@
       </div>
     </div>
   </div>
-
+<div>
   <nav
     id="nav"
     style="
-      overflow: hidden;
       white-space: nowrap;
       margin-left: 10%;
       margin-right: 10%;
+     
     "
   >
     <ul
@@ -138,7 +148,7 @@
     >
       <li
         *ngFor="let cat of ParentCategories"
-        style="margin-right: 7px; position: relative"
+        style="margin-right: 7px; "
       >
         <a (mouseover)="ShowSubCategories(cat.id)">
           {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
@@ -146,19 +156,20 @@
       </li>
     </ul>
   </nav>
+</div>
   <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
     <a
       routerLink="/products-by-category"
       routerLinkActive="active"
       (click)="SelectedProductId(cat.id)"
       *ngFor="let cat of filteredSubcategories"
-      style="margin-right: 7px; position: relative"
+      style="margin-right: 7px;" 
     >
       {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
     >
   </div>
 
-  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; position: relative">
+  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; ">
     <div style="height: 50px; display: flex; flex-direction: row; flex-grow: 1">
       <div
         style="

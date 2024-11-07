@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { IProduct } from '../../models/IProduct';
 
 @Injectable({
@@ -12,8 +12,8 @@ export class ProductService {
   }
   productColors: string[] = [];
   private apiUrl = 'http://localhost:5204/api/products';
-  // private imgmvcurl = 'http://localhost:5269/';
-  private imgmvcurl = 'http://localhost:29510/';
+  private imgmvcurl = 'http://localhost:5269/';
+  // private imgmvcurl = 'http://localhost:29510/';
   constructor(private httpclient: HttpClient) {}
 
   getAllProducts(): Observable<IProduct[]> {
@@ -148,6 +148,11 @@ export class ProductService {
         })
     );
 }
+private productsSource = new BehaviorSubject<IProduct[]>([]);
+  products$ = this.productsSource.asObservable();
+
+  updateProducts(products: IProduct[]) {
+    this.productsSource.next(products);}
 
   
 

@@ -206,11 +206,22 @@ public class ProductService : IProductService
                     .ToList();
         return mapper.Map<List<GetProductDTO>>(products);
     }
+    // افترض أن لديك دالة لتحويل CreateImageWithPraductDTO إلى ProductImage
+    private ProductImage MapToProductImage(CreateImageWithPraductDTO imageDTO)
+    {
+        return new ProductImage
+        {
+            // عيّن الخصائص المناسبة بناءً على الخصائص المتاحة في كلا الكائنين
+            ImageUrl = imageDTO.ImageUrl
+            // أضف أي خصائص إضافية إذا كانت موجودة
+        };
+    }
+
 
     public async Task<ResponseDTO<CreateProductDTO>> UpdateAsync(CreateProductDTO productDTO)
     {
         var product = await productRepository.GetByIdAsync(productDTO.Id);
-        if(product is null)
+        if (product is null)
         {
             return new()
             {
