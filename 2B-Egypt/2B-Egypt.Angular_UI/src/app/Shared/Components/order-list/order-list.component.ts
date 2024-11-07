@@ -117,6 +117,4 @@ export class OrderListComponent {
   viewOrderDetails(order: any) {
     console.log('Order details:', order);
   }
-
-
 }

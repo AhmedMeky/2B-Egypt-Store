@@ -8,6 +8,7 @@ import { OrderService } from '../../../services/order.service';
 import { IOrder } from '../../../../models/iorder';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
+import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-shipping-review-payment', 
@@ -50,7 +51,6 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     const userString = sessionStorage.getItem("user");
     let array  = this._cartService.getCartItems()
     console.log(array);
-    // this.product.discount * 0.01 * this.product.price;
     
     let Items = array.map(item => ({
       productId: item.productId,
@@ -63,12 +63,11 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     let subTotal = 0
     for(let total of array)
       {
-        subTotal+=total.price
+        subTotal+=(total.price)*(total.quantity)
       }
       this.order.totalAmount = subTotal;
       console.log(subTotal)
       console.log(array)
-      // this.order.orderItems  = array.map(({ productId, totalPrice , quantity }) => ({ productId, totalPrice , quantity }));
       var getToken =sessionStorage.getItem("token");
       if (getToken)
         {
@@ -98,42 +97,48 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
       }
       
       
-      createOrder()
-      {
+      createOrder() {
+        console.log(this.order)
         this.order.paymentType = this.selectedPaymentMethod;
-        this._order.creatOrder(this.order).subscribe({
-          next: (res) => {
-            localStorage.clear()
-            this.router.navigateByUrl('order-list').then(() => {
-              window.location.reload();
-            });
-    },
-    error: (err) => {
-    },
-})
-
-}
-
-goToShipping(checkshipping: boolean): void {
-  this.IsShipping = checkshipping;
-  setTimeout(() => {
-    if (this.shippingStep && this.paymentStep) {
-      this.shippingStep.nativeElement.classList.add('active');
-      this.paymentStep.nativeElement.classList.remove('active');
-    }
-  });
-}
-
-goToPayment(checkshipping: boolean): void {
-  this.IsShipping = checkshipping;
-  setTimeout(() => {
-    if (this.shippingStep && this.paymentStep) {
-      this.paymentStep.nativeElement.classList.add('active');
-      this.shippingStep.nativeElement.classList.remove('active');
-    }
-  });
-}
-}
+        if (this.order.paymentType == "Paypal Card")
+           {
+         
+            this.router.navigate(['/paypal'], { state: { orderDetails: this.order } });
+          } 
+        else {
+          this._order.creatOrder(this.order).subscribe({
+            next: (res) => {
+              localStorage.clear();
+              this.router.navigateByUrl('order-list').then(() => {
+                window.location.reload();
+              });
+            },
+            error: (err) => {
+            }
+          });
+        }
+      }
+      
+      goToShipping(checkshipping: boolean): void {
+        this.IsShipping = checkshipping;
+        setTimeout(() => {
+          if (this.shippingStep && this.paymentStep) {
+            this.shippingStep.nativeElement.classList.add('active');
+            this.paymentStep.nativeElement.classList.remove('active');
+          }
+        });
+      }
+      
+      goToPayment(checkshipping: boolean): void {
+        this.IsShipping = checkshipping;
+        setTimeout(() => {
+          if (this.shippingStep && this.paymentStep) {
+            this.paymentStep.nativeElement.classList.add('active');
+            this.shippingStep.nativeElement.classList.remove('active');
+          }
+        });
+      }
+      
 
 
 
@@ -306,3 +311,4 @@ goToPayment(checkshipping: boolean): void {
 //     };
 //   }
 // }
+    }
