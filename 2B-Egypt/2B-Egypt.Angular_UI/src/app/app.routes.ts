@@ -12,6 +12,7 @@ import { OrderListComponent } from './Shared/Components/order-list/order-list.co
 import { ShippingReviewPaymentComponent } from './Shared/Components/shipping-review-payment/shipping-review-payment.component';
 import { OrderComponent } from './Shared/Components/order/order.component';
 import { OrderDetailsComponent } from './Shared/Components/order-details/order-details.component';
+import { PaypalComponent } from './Shared/Components/pay-pal/pay-pal.component';
 
 
 export const routes: Routes = [ 
@@ -31,6 +32,7 @@ export const routes: Routes = [
   { path: 'order/:orderId', component: OrderDetailsComponent },
   { path: 'shipping', component: ShippingReviewPaymentComponent ,canActivate:[AuthorizationGuard] },
   { path: 'order', component: OrderComponent },
+  { path: 'paypal', component: PaypalComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   // { path: '**', redirectTo: '/products', pathMatch: 'full' },
 
