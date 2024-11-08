@@ -37,38 +37,38 @@ Make sure you have the following installed:
 ```bash
 git clone https://github.com/AhmedMeky/2B-Egypt-Store.git
 cd 2B-Egypt
-
+```
 #### 2.  Backend Setup (ASP.NET 8 API)
 Navigate to the API project folder:
 ```bash
 cd 2B-Egypt.API
-
+```
 ##### Restore dependencies:
 ```bash
 dotnet restore
-
+```
 ##### Build the project::
 ```bash
 dotnet build
-
+```
 ##### run the API::
 ```bash
 dotnet run
-
+```
 
 #### 3. Frontend Setup (Angular)
 Navigate to the Angular project folder:
 ```bash
 cd ../2B-Egypt.Angular
-
+```
 ##### Install dependencies
 ```bash
 npm install
-
+```
 ##### Serve the Angular App
 ```bash
 ng serve
-
+```
 ###### The application should now be running on http://localhost:4200
 
 
@@ -76,19 +76,19 @@ ng serve
 Navigate to the Admin Dashboard project folder:
 ```bash
 cd ../2B-Egypt.Admin
-
+```
 ##### Restore dependencies:
 ```bash
 dotnet restore
-
+```
 ##### Build the project::
 ```bash
 dotnet build
-
+```
 ##### run the API::
 ```bash
 dotnet run
-
+```
 ##### The Admin Dashboard should now be running on http://localhost:5269.
 
 ### Configuration
@@ -99,15 +99,8 @@ dotnet run
 "ConnectionStrings": {
   "DefaultConnection": "Server=localhost;Database=2BEgyptDB;Trusted_Connection=True;"
 }
+```
 
-
-more technologies please
-ChatGPT said:
-ChatGPT
-Certainly! Here is an even more expanded version of the Technologies Used section with additional technologies and tools that can be relevant for a full-fledged e-commerce application:
-
-markdown
-Copy code
 ## Technologies Used
 
 - **ASP.NET 8 MVC**: For building the Admin Dashboard using the Model-View-Controller architecture.
