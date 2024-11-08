@@ -163,7 +163,7 @@
     "ORDER_DETAILS": {
     "TITLEO": "Order Details",
     "ORDER_NUMBER": "Order Number",
-    "CREATED_AT": "DATE",
+    "CREATED_AT": "Date",
     "STATUS": "Status",
     "DISCOUNT": "Discount",
     "TOTAL_AMOUNT": "Total Amount",

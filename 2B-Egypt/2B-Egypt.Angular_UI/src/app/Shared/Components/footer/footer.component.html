@@ -1,4 +1,4 @@
-<footer class="container-fluid text-center text-white " style="background-color: #272723; ">
+<footer class="container-fluid  text-white " style="background-color: #272723; ">
   <section class="mb-4 p-4">
     <h5>{{ 'footer.beFirstToKnow' | translate }}</h5>
     <p>{{ 'footer.subscribeMessage' | translate }}</p>
@@ -8,11 +8,11 @@
     <form action="">
       <div class="row d-flex justify-content-center">
         <div class="col-md-5 col-12">
-          <div class="form-outline form-white input-group mb-4">
-            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-              aria-describedby="search-addon" />
+          <div class="form-outline form-white input-group mb-4" [dir]="currentLang === 'ar' ? 'rtl' : 'ltr'">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
             <button type="button" class="btn text-white">{{ 'footer.subscribe' | translate }}</button>
           </div>
+          
         </div>
       </div>
     </form>
