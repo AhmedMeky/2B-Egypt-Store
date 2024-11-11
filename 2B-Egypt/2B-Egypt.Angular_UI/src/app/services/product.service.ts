@@ -13,6 +13,8 @@ export class ProductService {
   productColors: string[] = [];
   private apiUrl = 'http://localhost:5204/api/products';
   private imgmvcurl = 'http://localhost:5269/';
+  // private apiUrl = 'http://2b-sohag.runasp.net/api/products';
+  // private imgmvcurl = 'http://2begypt.runasp.net/';
   // private imgmvcurl = 'http://localhost:29510/';
   constructor(private httpclient: HttpClient) {}
 
@@ -95,7 +97,7 @@ export class ProductService {
       .get<IProduct[]>(`${this.apiUrl}/category/${categoryId}`)
       .pipe(
         map((products) => {
-          console.log('Fetched Products:', products); // Log the response
+          console.log('Fetched Products:', products); 
           return products.map((product) => {
             const processedProduct = this.processProductImages(product);
             console.log('Processed Product:', processedProduct);

@@ -54,12 +54,13 @@
 
   <div class="pagination-controls text-center my-4">
     <button class="btn" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
-      Prev
+      {{ 'PREV' | translate }}
     </button>
     <span class="mx-2"> {{ currentPage }}</span>
     <button class="btn" (click)="onPageChange(currentPage + 1)" [disabled]="products.length < pageSize">
-      Next
+      {{ 'NEXT' | translate }}
     </button>
   </div>
+  
 </div>
 <app-product-slider></app-product-slider>

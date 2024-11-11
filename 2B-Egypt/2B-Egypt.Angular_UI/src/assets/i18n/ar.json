@@ -1,5 +1,16 @@
 {
   
+    "CORPORATE": "الشركات",
+    "DELIVERY": "التوصيل",
+    "TECHNOLOGIES": "التقنيات",
+    "ASSOCIATIONS": "الجمعيات",
+    
+      "PREV": "السابق",
+      "NEXT": "التالي",
+      "PAGE": "الصفحة",
+    
+    
+  
     "shipping": "الشحن",
     "reviewPayments": "المراجعة والدفع",
     "country": "البلد",

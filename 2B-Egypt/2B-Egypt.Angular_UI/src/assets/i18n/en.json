@@ -1,4 +1,15 @@
 {
+  
+    "CORPORATE": "Corporate",
+    "DELIVERY": "Delivery",
+    "TECHNOLOGIES": "Technologies",
+    "ASSOCIATIONS": "Associations",
+  
+      "PREV": "Prev",
+      "NEXT": "Next",
+      "PAGE": "Page",
+    
+  
     "shipping": "Shipping",
     "reviewPayments": "Review & Payments",
     "country": "Country",

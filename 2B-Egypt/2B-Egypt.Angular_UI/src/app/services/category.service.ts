@@ -8,6 +8,7 @@ import { ICategory } from '../../models/icategory';
   providedIn: 'root',
 })
 export class CategoryService { 
+  //private apiUrl = 'http://2b-sohag.runasp.net/api/Category';
   private apiUrl = 'http://localhost:5204/api/Category';
 
   constructor(private httpclient: HttpClient) {}
