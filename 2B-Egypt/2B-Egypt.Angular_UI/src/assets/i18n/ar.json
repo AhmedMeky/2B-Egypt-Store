@@ -81,6 +81,7 @@
     "RECIPIENT": "المستلم",
     "ORDER_TOTAL": "إجمالي الطلب",
     "STATUS": {
+      "STATUS":"الحالة",
       "PENDING": "قيد الانتظار",
       "CONFIRMED": "مؤكد",
       "SHIPPED": "شحن",

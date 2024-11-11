@@ -1,15 +1,15 @@
-<div *ngIf="orderDetails" class="container mt-5">
+<div *ngIf="orderDetails" class="container mt-5"style="margin-bottom: 5%;">
   <div class="card shadow-lg">
     <div class="card-header text-center text-white" style="background-color: #ff7f00;">
-      <h2>{{ 'ORDER_DETAILS.TITLEO' | translate }}</h2>
+      <h4>{{ 'ORDER_DETAILS.TITLEO' | translate }}</h4>
     </div>
-    <div class="card-body">
+    <div class="card-body " >
       <div class="row mb-3">
         <div class="col-md-6">
           <p><strong>{{ 'ORDER_DETAILS.ORDER_NUMBER' | translate }}:</strong> {{ orderDetails.orderNumber }}</p>
         </div>
         <div class="col-md-6">
-          <p><strong>{{ 'ORDER_DETAILS.CREATED_AT' | translate }}:</strong> {{ orderDetails.createdAt | date: 'yyyy/MM/dd HH:mm:ss' }}</p>
+          <p><strong>{{ 'ORDER_DETAILS.CREATED_AT' | translate }}:</strong> {{ orderDetails.createdAt | date:'yyyy/MM/dd' }}</p>
         </div>
       </div>
       <div class="row mb-3">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
+      <a [routerLink]="['/order-list']" style="color: #ff7f00;">{{ 'ORDER_DETAILS.BACK_TO_ORDERS' | translate }}</a>
     </div>
-    <a [routerLink]="['/order-list']" style="color: #ff7f00;">{{ 'ORDER_DETAILS.BACK_TO_ORDERS' | translate }}</a>
   </div>
 </div>

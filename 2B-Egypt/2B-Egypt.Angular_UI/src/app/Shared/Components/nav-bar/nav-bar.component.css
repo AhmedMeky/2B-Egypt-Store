@@ -351,5 +351,5 @@ a {
 #nav {
   position: sticky;
   top: 0;
-  overflow: hidden; /* أو يمكنك استخدام display: flex */
+  overflow: hidden;
 }

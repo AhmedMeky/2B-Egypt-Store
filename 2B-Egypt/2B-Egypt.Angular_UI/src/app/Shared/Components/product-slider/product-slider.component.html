@@ -18,7 +18,7 @@
                    class="card-img-top" alt="Product Image" style="height: 200px; object-fit: contain;">
               <div class="card-body">
                 <span class="badge bg-danger"> {{ product.discount }}% off </span>
-                <div style="text-align: center;" class="card-title">{{ product.nameEn }}</div>
+                <div style="text-align: center;" class="card-title">{{ getLocalizedProductName(product) }}</div>
                 <p class="card-text">
                   <span class="text-muted text-decoration-line-through">{{ product.price| currency }}</span>
                   <br>

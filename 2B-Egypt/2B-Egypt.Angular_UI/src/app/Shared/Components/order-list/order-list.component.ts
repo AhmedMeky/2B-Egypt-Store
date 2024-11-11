@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../services/order.service';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
@@ -6,103 +6,36 @@ import { RouterLink } from '@angular/router';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'app-order-list',
   standalone: true,
-  imports: [CommonModule,MatTableModule,RouterLink,TranslateModule ],
+  imports: [CommonModule, MatTableModule, RouterLink, TranslateModule],
   templateUrl: './order-list.component.html',
-  styleUrl: './order-list.component.css'
+  styleUrls: ['./order-list.component.css']
 })
-
-
-export class OrderListComponent {
+export class OrderListComponent implements OnInit {
   orders: any[] = [];
-  
-  // getStatusText(statusCode: number): string {
-  //   switch (statusCode) {
-  //     case 1:
-  //       return this.translate.instant('STATUS.PENDING');          
-  //     case 2:
-  //       return this.translate.instant('STATUS.CONFIRMED');       
-  //     case 3:
-  //       return this.translate.instant('STATUS.SHIPPED');          
-  //     case 4:
-  //       return this.translate.instant('STATUS.ATTEMPTED_DELIVERY'); 
-  //     case 5:
-  //       return this.translate.instant('STATUS.RECEIVED');        
-  //     case 6:
-  //       return this.translate.instant('STATUS.CANCELED');        
-  //     default:
-  //       return this.translate.instant('UNKNOWN_STATUS');          
-  //   }
-  // }
-  getStatusText(statusCode: number): Observable<string> {
-    let statusKey: string;
-  
-    switch (statusCode) {
-      case 1:
-        statusKey = 'STATUS.PENDING';
-        break;
-      case 2:
-        statusKey = 'STATUS.CONFIRMED';
-        break;
-      case 3:
-        statusKey = 'STATUS.SHIPPED';
-        break;
-      case 4:
-        statusKey = 'STATUS.ATTEMPTED_DELIVERY';
-        break;
-      case 5:
-        statusKey = 'STATUS.RECEIVED';
-        break;
-      case 6:
-        statusKey = 'STATUS.CANCELED';
-        break;
-      default:
-        statusKey = 'UNKNOWN_STATUS';
-    }
-  
-    return this.translate.get(statusKey);
-  }
-  
-  
-  constructor(private orderService: OrderService,private translate: TranslateService) {}
+  currentLang: string = 'en';  
 
-  // ngOnInit(): void {
-  //   this.translate.setDefaultLang('en');
-  //   const userSessionData = sessionStorage.getItem('user');
+  constructor(private orderService: OrderService, private translate: TranslateService) {}
 
-  //   if (userSessionData) {
-  //     const userData = JSON.parse(userSessionData);
-  //     const userId = userData.id;
-
-  //     this.orderService.getAllOrders(userId).subscribe(
-  //       (response) => {
-  //         this.orders = response;
-  //         console.log('Orders:', this.orders); 
-  //       },
-  //       (error) => {
-  //         console.error('Error fetching orders:', error);
-  //       }
-  //     );
-  //   } else {
-  //     console.error('User data not found in session storage');
-  //   }
-  // }
   ngOnInit(): void {
     this.translate.setDefaultLang('en');
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe(lang => {
+      this.currentLang = lang.lang;
+    });
+
     const userSessionData = sessionStorage.getItem('user');
-  
     if (userSessionData) {
       const userData = JSON.parse(userSessionData);
       const userId = userData.id;
-  
+
       this.orderService.getAllOrders(userId).subscribe(
         (response) => {
           this.orders = response.sort((a: any, b: any) => b.orderNumber - a.orderNumber);
-
-          console.log('Orders:', this.orders); 
+          console.log('Orders:', this.orders);
         },
         (error) => {
           console.error('Error fetching orders:', error);
@@ -112,9 +45,18 @@ export class OrderListComponent {
       console.error('User data not found in session storage');
     }
   }
-  
-  
-  viewOrderDetails(order: any) {
-    console.log('Order details:', order);
-  }
+
+getStatusText(statusCode: number): Observable<string> {
+  const statusMap: { [key: string]: string } = {
+    '1': 'STATUS.PENDING',
+    '2': 'STATUS.CONFIRMED',
+    '3': 'STATUS.SHIPPED',
+    '4': 'STATUS.ATTEMPTED_DELIVERY',
+    '5': 'STATUS.RECEIVED',
+    '6': 'STATUS.CANCELED',
+  };
+
+  return this.translate.get(statusMap[statusCode.toString()] || 'UNKNOWN_STATUS');
+}
+
 }

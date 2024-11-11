@@ -2,18 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { IProduct } from '../../../../models/IProduct';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-slider',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './product-slider.component.html',
   styleUrls: ['./product-slider.component.css'],
 })
 export class ProductSliderComponent implements OnInit {
   products: IProduct[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService,  public translate: TranslateService
+  ) {}
   productGroups: IProduct[][] = [];
 
   ngOnInit(): void {
@@ -28,5 +30,8 @@ export class ProductSliderComponent implements OnInit {
     for (let i = 0; i < this.products.length; i += groupSize) {
       this.productGroups.push(this.products.slice(i, i + groupSize));
     }
+  }
+  getLocalizedProductName(product: IProduct): string {
+    return this.translate.currentLang === 'ar' ? product.nameAr : product.nameEn;
   }
 }

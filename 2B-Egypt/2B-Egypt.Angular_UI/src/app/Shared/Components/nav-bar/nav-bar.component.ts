@@ -102,17 +102,30 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('parentOfNav') as HTMLElement;
-      if (!navbar) return; // Check if navbar exists
-      const sticky = navbar.offsetTop;
-      // console.log('sticky number ' + sticky);
-      // console.log(' window.pageYOffset ' + window.pageYOffset);
-
-      // if (window.pageYOffset == sticky) {
-      //   navbar.classList.add('sticky');
-      // } else {
-      //   navbar.classList.remove('sticky');
-      // }
+      if (!navbar) return;
+    
+      const stickyThreshold = navbar.offsetTop - 5; 
+    
+      if (window.pageYOffset >= stickyThreshold) {
+        navbar.classList.add('sticky');
+      } else {
+        navbar.classList.remove('sticky');
+      }
     });
+    
+    // window.addEventListener('scroll', () => {
+    //   const navbar = document.getElementById('parentOfNav') as HTMLElement;
+    //   if (!navbar) return; // Check if navbar exists
+    //   const sticky = navbar.offsetTop;
+    //   console.log('sticky number ' + sticky);
+    //   console.log(' window.pageYOffset ' + window.pageYOffset);
+
+    //   if (window.pageYOffset == sticky) {
+    //     navbar.classList.add('sticky');
+    //   } else {
+    //     navbar.classList.remove('sticky');
+    //   }
+    // });
     this._LanguageService.getlanguage().subscribe({
       next: (lang) => {
         this.lang = lang;

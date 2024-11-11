@@ -121,9 +121,22 @@ button{
       }
       
 
-      @media (max-width: 576px) { /* الشاشات الصغيرة */
+      @media (max-width: 576px) { 
         .no-margin-sm {
             margin-right: 0 !important;
         }
     }
-    
+    .form-outline {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+      }
+      
+      [dir="rtl"] .form-outline {
+        flex-direction: row-reverse; 
+      }
+      
+      [dir="ltr"] .form-outline {
+        flex-direction: row; 
+      }
+      

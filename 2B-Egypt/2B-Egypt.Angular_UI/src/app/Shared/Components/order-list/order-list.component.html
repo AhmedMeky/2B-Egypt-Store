@@ -3,26 +3,52 @@
 
   <div class="table-responsive">
     <table class="table table-striped order-table">
-      <thead class="thead-dark d-none d-md-table-header-group">
+      <thead class="thead-dark d-md-table-header-group">
         <tr>
-          <th scope="col">{{ 'ORDER_NUMBER' | translate }}</th>
-          <th scope="col">{{ 'DATE' | translate }}</th>
-          <th scope="col">{{ 'RECIPIENT' | translate }}</th>
-          <th scope="col">{{ 'ORDER_TOTAL' | translate }}</th>
-          <th scope="col">{{ 'STATUS' | translate }}</th>
-          <th scope="col">{{ 'ACTION' | translate }}</th>
+          <!-- Order columns conditionally based on language -->
+          <ng-container *ngIf="currentLang === 'en'; else arabicOrder">
+            <th scope="col">{{ 'ACTION' | translate }}</th>
+            <th scope="col">{{ 'Status' }}</th>
+            <th scope="col">{{ 'ORDER_TOTAL' | translate }}</th>
+            <th scope="col">{{ 'RECIPIENT' | translate }}</th>
+            <th scope="col">{{ 'DATE' | translate }}</th>
+            <th scope="col">{{ 'ORDER_NUMBER' | translate }}</th>
+          </ng-container>
+          <!-- Arabic Order -->
+          <ng-template #arabicOrder>
+            <th scope="col">{{ 'ORDER_NUMBER' | translate }}</th>
+            <th scope="col">{{ 'DATE' | translate }}</th>
+            <th scope="col">{{ 'RECIPIENT' | translate }}</th>
+            <th scope="col">{{ 'ORDER_TOTAL' | translate }}</th>
+            <th scope="col">{{ 'STATUS'| translate}}</th>
+            <th scope="col">{{ 'ACTION' | translate }}</th>
+          </ng-template>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let order of orders" class="order-row">
-          <td data-label="Order Number">{{ order.orderNumber }}</td>
-          <td data-label="Date">{{ order.date | date:'yyyy/MM/dd' }}</td>
-          <td data-label="Recipient">{{ order.userName }}</td>
-          <td data-label="Order Total">{{ order.totalAmount | currency:'USD':'symbol-narrow':'1.2-2' }}</td>
-          <td data-label="Status">{{ getStatusText(order.stateEn) | async }}</td>
-          <td data-label="Action">
-            <a class="details-link btn btn-sm" [routerLink]="['/order', order.id]">{{ 'VIEW_DETAILS' | translate }}</a>
-          </td>
+          <!-- Rows adjusted conditionally based on language -->
+          <ng-container *ngIf="currentLang === 'en'; else arabicRow">
+            <td data-label="Action">
+              <a class="details-link btn btn-sm" [routerLink]="['/order', order.id]">{{ 'VIEW_DETAILS' | translate }}</a>
+            </td>
+            <td data-label="Status">{{ getStatusText(order.stateEn) | async }}</td>
+            <td data-label="Order Total">{{ order.totalAmount | currency:'USD':'symbol-narrow':'1.2-2' }}</td>
+            <td data-label="Recipient">{{ order.userName }}</td>
+            <td data-label="Date">{{ order.date | date:'yyyy/MM/dd' }}</td>
+            <td data-label="Order Number">{{ order.orderNumber }}</td>
+          </ng-container>
+          <!-- Arabic Row Order -->
+          <ng-template #arabicRow>
+            <td data-label="Order Number">{{ order.orderNumber }}</td>
+            <td data-label="Date">{{ order.date | date:'yyyy/MM/dd' }}</td>
+            <td data-label="Recipient">{{ order.userName }}</td>
+            <td data-label="Order Total">{{ order.totalAmount | currency:'USD':'symbol-narrow':'1.2-2' }}</td>
+            <td data-label="Status">{{ getStatusText(order.stateEn) | async }}</td>
+            <td data-label="Action">
+              <a class="details-link btn btn-sm" [routerLink]="['/order', order.id]">{{ 'VIEW_DETAILS' | translate }}</a>
+            </td>
+          </ng-template>
         </tr>
       </tbody>
     </table>
