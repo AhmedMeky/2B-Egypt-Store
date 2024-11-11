@@ -1,33 +1,34 @@
-<div class="cart-container">
-  <h2>{{ " shopping cart" | translate }}</h2>
+<div style="background-color: white;" class="cart-container">
+  <h5 style="color: #FF662B;margin-left: 35px;">{{ "shopping cart" | translate }}</h5>
   <div *ngIf="cartItems.length > 0">
     <div class="row">
-      <!-- Cart Items Table -->
       <div class="col-12 col-lg-9 mb-4">
         <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">{{ "item" | translate }}</th>  
-              <th scope="col">{{ "price" | translate }}</th>
-              <th scope="col">{{ "qty" | translate }}</th>
-              <th scope="col">{{ "subtotal" | translate }}</th>
-              <th scope="col">{{ "action" | translate }}</th>
+          <thead >
+            <tr class="fonts">
+              <th style="color: #777777d5;text-align: start;" scope="col">{{ "item" | translate }}</th>
+              <th style="color: #777777d5;" scope="col">{{ "price" | translate }}</th>
+              <th style="color: #777777d5;" scope="col">{{ "qty" | translate }}</th>
+              <th style="color: #777777d5;" scope="col">{{ "subtotal" | translate }}</th>
+              <!-- <th scope="col">{{ "action" | translate }}</th> -->
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let item of cartItems;">
-              <td style="max-width: 300px;">
-                <div style="display: flex;justify-content:center">
-                  <!-- <img class="imageItem" [src]="item.image" width="100px" height="100px"> -->
-                  <span class="productName">
+              <td style="width: 50%;">
+                <div style="display: flex;">
+                  <img src="{{ item.image }}" alt="Image description" (click)="SelectedProductId(item.productId)"
+                    style="width: 150px; height: 150px; object-fit: cover; border: solid .1px silver; border-radius: 7px;" />
+                  <span style="font-weight: bold;" class="productName">
                     {{getLocalizedProductName(item)}}
+        
                   </span>
                 </div>
               </td>
-              <td>{{ item.price | currency }}</td>
+              <td style="font-weight: bold;" >{{ item.price | currency }}</td>
               <td>
                 <div class="quantity">
-                  <i class="fa fa-angle-up" (click)="item.quantity < item.stock ? increaseQuantity(item) : ''"></i>
+                  <i  class="fa fa-angle-up" (click)="item.quantity < item.stock ? increaseQuantity(item) : ''"></i>
                   {{item.quantity}}
                   <i class="fa fa-angle-down" [style.cursor]="item.quantity === 1 ? 'auto' : 'pointer'"
                     (click)="decreaseQuantity(item)"></i>
@@ -36,31 +37,31 @@
                   {{ "Exceeded available stock quantity. Maximum available is " + item.stock | translate }}
                 </span>
               </td>
-              <td> {{ item.price * item.quantity |currency}}</td>
-              <td>
-                <button (click)="removeItem(item.productId)" class="clear-cart-btn">{{ 'remove' | translate
-                }}</button>
+              <td style="position: relative; ">
+                <div style="font-weight: bold;">
+
+                  {{ item.price * item.quantity |currency}}
+                </div>
+                <a title="Remove" (click)="removeItem(item.productId)"
+                  style="color: #FF662B; cursor: pointer; text-decoration: none;position: absolute; top: 0;right : 0 ; margin-right: 30px;margin-top: 10px;"
+                  class="action action-delete">X</a>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
   
-      <!-- Order Summary Card -->
       <div class="col-12 col-lg-3">
         <div class="card p-3 border-secondary">
           <div class="card-body">
             <h3 class="card-title mb-3">{{ "Summary" | translate }}</h3>
-            <div class="d-flex justify-content-between mb-2">
-              <span>{{ "subtotal" | translate }}</span>
-              <span>{{ subTotal | currency }}</span>
-            </div>
+          
             <hr>
             <div class="d-flex justify-content-between">
               <h5>{{ "Order Total" | translate }}</h5>
               <h5>{{ subTotal | currency }}</h5>
             </div>
-            <button routerLink="/shipping" class="btn btn-warning btn-block mt-3">
+            <button class="Go-To-Checkout" routerLink="/shipping" style="background-color: #FF662B; color: #f9f9f9;border-radius: 5px; height:40px;">
               {{ "GO TO CHECKOUT" | translate }}
             </button>
           </div>
@@ -68,28 +69,26 @@
       </div>
     </div>
   
-    <!-- Cart Footer -->
     <div class="cart-footer mt-4 text-right">
-      <button (click)="clearCart()" class="btn btn-danger">
+      <button style="background-color: #FF662B" (click)="clearCart()" class="btn btn-danger">
         {{ "Clear Cart" | translate }}
       </button>
     </div>
   </div>
   
-  <!-- Empty Cart Message -->
   <div *ngIf="cartItems.length == 0" class="text-center mt-5">
     <p>{{ "You have no items in your shopping cart" | translate }}</p>
     <p>
       {{ "Click" | translate }}
-      <a class="clickHere" routerLink="/products">{{ "here" | translate }}</a>
+      <a  class="clickHere" routerLink="/products">{{ "here" | translate }}</a>
       {{ "to continue shopping" | translate }}
     </p>
   </div>
   
 </div>
-  <div  *ngIf="cartItems.length == 0">
+  <!-- <div  *ngIf="cartItems.length == 0">
     <p  ><span routerLink="/products" class="clickHere" >{{ 'continue_shopping' | translate }}</span> </p>
-  </div>
+  </div> -->
 
 
 
@@ -156,7 +155,7 @@
     cursor: pointer;
   }
 
-  .clear-cart-btn {
+  .clear-cart-btn,.Go-To-Checkout {
     background-color: orangered;
     color: white;
     border-radius: 5px;

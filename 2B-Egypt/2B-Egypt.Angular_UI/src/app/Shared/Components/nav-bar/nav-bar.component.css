@@ -124,6 +124,25 @@ nav a:hover {
   align-items: center;
   line-height: 10px;
 }
+
+
+.item-count2 {
+  position: absolute;
+  top: 0;
+  left: 30px;
+  background-color: #f37021;
+  color: black;
+  border-radius: 50%;
+  padding: 5px 5px;
+  margin-right: 29px;
+  margin-bottom: 5px;
+  /* margin-top: 10px; */
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  line-height: 10px;
+}
 #img2b {
   margin-left: 30px;
   max-height: 100%;
@@ -352,4 +371,9 @@ a {
   position: sticky;
   top: 0;
   overflow: hidden;
+}
+
+#cartIcon{
+ display: none;
+ margin-top: 7px;
 }

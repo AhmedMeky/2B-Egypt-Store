@@ -105,7 +105,8 @@ addToCart(product: IProduct)
         totalPrice: product.price,
         discount:product.discount,
         // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
-        image: "",
+        // image: "",
+        image:product.images[0].imageUrl,
         stock: product.unitInStock 
   
       };

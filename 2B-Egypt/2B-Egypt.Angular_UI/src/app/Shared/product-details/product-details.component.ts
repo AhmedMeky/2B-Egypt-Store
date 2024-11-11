@@ -131,7 +131,6 @@ export class ProductDetailsComponent implements OnInit {
       totalPrice: this.product.price,
       productNamear: this.product.nameAr,
       discount:this.product.discount,
-      // image: product.images.find(i => i.imageUrl === product.image)?.imageUrl || ''
       image: this.product.images[0].imageUrl,
       stock: this.product.unitInStock,
     };
@@ -197,10 +196,18 @@ export class ProductDetailsComponent implements OnInit {
   addreview() {
     this._ReviewService.addReview(this.Review).subscribe({
       next: (res) => {
-        this.Review = {} as IReview;
-        this.ratingPrice = 0;
-        this.ratingQuilty = 0;
-        this.ratingValue = 0;
+        var check = sessionStorage.getItem('token')
+        if(check)
+        {
+          this.Review = {} as IReview;
+          this.ratingPrice = 0;
+          this.ratingQuilty = 0;
+          this.ratingValue = 0;
+        }
+        else
+        {
+          this.router.navigate(['/login'])
+        }
       },
       error: (err) => {
         console.log(err);

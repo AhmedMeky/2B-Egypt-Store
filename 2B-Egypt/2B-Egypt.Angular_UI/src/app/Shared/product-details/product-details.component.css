@@ -117,3 +117,13 @@
 .form-group {
   margin-top: 15px;
 }
+
+  .submit-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+

@@ -18,7 +18,6 @@ export class CartService {
     console.log(item)
     const existingItem = this.cart.find(i => i.productId === item.productId);
     if (existingItem) {
-      // existingItem.quantity += item.quantity;
       existingItem.totalPrice = existingItem.quantity * existingItem.price;
     } else {
       this.cart.push(item);

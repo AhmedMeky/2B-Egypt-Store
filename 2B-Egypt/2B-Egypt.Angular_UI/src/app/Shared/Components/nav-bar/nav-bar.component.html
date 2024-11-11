@@ -3,6 +3,9 @@
 <div id="smallnav">
   <div style="display: flex; flex-direction: row; align-items: center">
     <div>
+      <a routerLink="/products" >{{ "Home" | translate }}</a>
+    </div>
+    <div>
       <a href="#">{{ "COMPARE" | translate }}</a>
     </div>
     <div *ngIf="!isLoggedIn">
@@ -23,9 +26,9 @@
     </div>
     <!-- <div><button (click)="logout()">Log Out</button></div> -->
   </div>
-  <button [routerLink]="['/products']" class="btn" style="color: #f37021">
+  <!-- <button [routerLink]="['/products']" class="btn" style="color: #f37021">
     <i class="fas fa-home" style="color: #f37021"></i> {{ "Home" | translate }}
-  </button>
+  </button> -->
 
   <select
     (change)="changelang($event)"
@@ -144,7 +147,7 @@
               width: 1px;
             "
           ></div>
-          <a [routerLink]="['/cart']">
+          <a  [routerLink]="['/cart']">
             <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
             <span class="item-count">
               {{ counter.toString() | translate }}
@@ -165,6 +168,7 @@
       <ul
         style="
           display: flex;
+          justify-content: space-between;
           flex-wrap: wrap;
           padding: 0;
           margin: 0;
@@ -176,9 +180,28 @@
             {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
           </a>
         </li>
+        <li>
+          <a style="position: relative;" id="cartIcon" [routerLink]="['/cart']">
+            <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
+            <span class="item-count2">
+              {{ counter.toString() | translate }}
+            </span>
+          </a>
+        </li>
       </ul>
     </nav>
 
+    <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
+      <a
+        routerLink="/products-by-category"
+        routerLinkActive="active"
+        (click)="SelectedProductId(cat.id)"
+        *ngFor="let cat of filteredSubcategories"
+        style="margin-right: 7px"
+      >
+        {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
+      >
+    </div>
  
 
   <div id="sidelist" *ngIf="BarsAppears" style="width: 80%">
@@ -274,7 +297,7 @@
     "
   />
 </div> 
-<div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
+<!-- <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
   <a
     routerLink="/products-by-category"
     routerLinkActive="active"
@@ -284,6 +307,6 @@
   >
     {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
   >
-</div>
+</div> -->
 <app-advertisment></app-advertisment>
 <!-- <router-outlet ></router-outlet> -->

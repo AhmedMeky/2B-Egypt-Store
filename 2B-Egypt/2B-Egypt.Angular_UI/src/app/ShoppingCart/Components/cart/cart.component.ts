@@ -23,7 +23,6 @@ export class CartComponent implements OnInit {
   cart: CartItem = {} as CartItem;
 
   constructor(private cartService: CartService,private route:ActivatedRoute, public translateService: TranslateService,private router:Router) {
-    // this.translate = translateService;
 
   }
  
@@ -32,7 +31,6 @@ export class CartComponent implements OnInit {
 console.log(this.cartItems)
 for(let s of this.cartItems)
 this.subTotal+=(s.price*s.quantity)
-// this.subTotal=this.ca
 }
 
 
@@ -65,7 +63,6 @@ increaseQuantity(item: CartItem) {
   item.quantity = newQuantity; 
   this.subTotal = 0
   this.cartItems.forEach(item=>{
-
     this.subTotal+= item.price*item.quantity
   })
 }
@@ -83,55 +80,17 @@ decreaseQuantity(item: CartItem) {
   })
 }
 
-
-
-
   clearCart() {
     this.cartService.clearCart();
     this.cartItems = [];
   }
  
-  
-
-
-
   getLocalizedProductName(item: CartItem): string {
     return this.translateService.currentLang === 'ar'
       ? item.productNamear
       : item.productName;
   }
-
-// gotoShipping()
-// {
-//   let check = sessionStorage.getItem('user')
-//   if(check)
-//   {
-//     this.router.navigateByUrl(`shipping`);
-//   }
-//   else{
-//     this.router.navigateByUrl(`Login`);
-    
-//   }
-// }
-
-//   orderTotal = 0
-
-// ngOnInit() {
-//     // this.cartItems = this.cartService.getCartItems();
-//     this.cartItems.forEach(item=>{
-//       this.orderTotal+=item.price*item.quantity
-//     })
-//   }
-
-
-// updateQuantity(productId: number, quantity: number) {
-//     console.log('productId',productId)
-//     console.log('quantity',quantity)
-//     this.orderTotal=0
-//     this.cartItems.forEach(item=>{
-//       this.orderTotal+=item.price*item.quantity
-//     })
-//     // this.cartService.updateQuantity(productId, quantity);
-//     // this.cartItems = this.cartService.getCartItems();
-//   }
+  SelectedProductId(id: string) {
+    this.router.navigateByUrl(`/product-details/${id}`);
+  }
 }
