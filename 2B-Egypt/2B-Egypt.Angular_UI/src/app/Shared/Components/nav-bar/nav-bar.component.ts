@@ -102,14 +102,18 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     window.addEventListener('scroll', () => {
       const navbar = document.getElementById('parentOfNav') as HTMLElement;
+      const cartIcon = document.getElementById('cartIcon') as HTMLElement;
       if (!navbar) return;
     
       const stickyThreshold = navbar.offsetTop - 5; 
     
       if (window.pageYOffset >= stickyThreshold) {
         navbar.classList.add('sticky');
+        cartIcon.style.display = "block"
       } else {
         navbar.classList.remove('sticky');
+        cartIcon.style.display = "none"
+
       }
     });
     

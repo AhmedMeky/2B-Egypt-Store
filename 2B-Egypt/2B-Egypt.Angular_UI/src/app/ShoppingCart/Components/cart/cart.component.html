@@ -6,7 +6,7 @@
         <table class="table">
           <thead >
             <tr class="fonts">
-              <th style="color: #777777d5;" scope="col">{{ "item" | translate }}</th>
+              <th style="color: #777777d5;text-align: start;" scope="col">{{ "item" | translate }}</th>
               <th style="color: #777777d5;" scope="col">{{ "price" | translate }}</th>
               <th style="color: #777777d5;" scope="col">{{ "qty" | translate }}</th>
               <th style="color: #777777d5;" scope="col">{{ "subtotal" | translate }}</th>
@@ -15,8 +15,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of cartItems;">
-              <td style="max-width: 300px;">
-                <div style="display: flex;justify-content:center">
+              <td style="width: 50%;">
+                <div style="display: flex;">
                   <img src="{{ item.image }}" alt="Image description"
                     style="width: 150px; height: 150px; object-fit: cover; border: solid .1px silver; border-radius: 7px;" />
                   <span style="font-weight: bold;" class="productName">
