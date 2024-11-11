@@ -9,9 +9,10 @@ body {
 }
 .responsivediv {
   background-image: url("/img/bank.jpg");
-  height: 70px; 
-  width: 100%; 
-  
+  height: 70px;
+  width: 100%;
+
+  /* background-color: #333; */
 }
 
 #smallnav {
@@ -22,27 +23,53 @@ body {
   justify-content: space-between;
   padding-right: 10%;
   padding-left: 8%;
+  /* position: sticky;
+  top: 0;
+  overflow: hidden; */
 }
 #smallnav > div > div a {
   font-size: 14px !important;
   font-family: "Cairo" !important;
   color: #6d6d6c !important;
 }
-#responsiveSearchBarsCart{
+#responsiveSearchBarsCart {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   /* background-color: blue; */
   justify-content: end;
   width: 45%;
 }
+#parentOfNav {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  z-index: 999;
+}
+.sticky {
+  background-color: black;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  z-index: 999;
+  /* justify-content: space-around; */
+}
 nav {
   background-color: black;
-  margin-left: 50px;
-  margin-right: 50px;
+
   /* width: 100%; */
 
   /* flex-wrap: wrap; */
   justify-content: space-around;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+nav::after {
+  content: "";
+  margin: 0; /* Margin when sticky */
 }
 
 nav ul {
@@ -71,15 +98,13 @@ nav a:hover {
 }
 .cart-container {
   position: relative;
-  display: flex; 
+  display: flex;
   flex-direction: row;
-
 }
 
 .cart-icon {
   display: block;
   width: 35px;
-  
 }
 
 .item-count {
@@ -120,7 +145,7 @@ nav a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   margin-right: 5px;
   margin-left: 5px;
 }
@@ -133,6 +158,9 @@ nav a:hover {
   padding-right: 7%;
   width: 100%;
   height: 150px;
+  /* position: sticky;
+  top: 0;
+  overflow: hidden; */
 }
 #bigDivForNavbar > div {
   flex: 1; /* Allow child divs to grow */
@@ -152,7 +180,7 @@ nav a:hover {
   flex-direction: row;
   margin-block: 10%;
 }
-#divforEndjustfy{
+#divforEndjustfy {
   display: flex;
   flex-direction: row;
   align-items: end;
@@ -169,6 +197,13 @@ nav a:hover {
   flex-direction: row;
   flex-wrap: wrap;
   transition: 0.5s;
+  position: sticky;
+    top: 0;
+    background-color: white; /* Default background */
+    transition: background-color 0.3s; /* Smooth transition */
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  
 }
 #showsubcategories > a {
   color: black;
@@ -195,14 +230,14 @@ a {
   flex-direction: row;
   width: 45%;
 }
-@media (max-width: 820px) { 
-  #responsiveSearchBarsCart{ 
+@media (max-width: 820px) {
+  #responsiveSearchBarsCart {
     justify-content: end;
   }
   #listbars {
     display: block;
-  } 
-  .hiddenDiv{
+  }
+  .hiddenDiv {
     display: flex;
   }
   #nav {
@@ -226,8 +261,7 @@ a {
   .cart-container {
     justify-content: end;
   }
-
-} 
+}
 #sidelist {
   width: 100%;
 }
@@ -245,7 +279,6 @@ a {
   justify-content: space-around;
   width: 30%;
 }
-
 
 #categoryList {
   background-color: #ffffff;
@@ -297,29 +330,26 @@ a {
   background-color: #fafafa;
 }
 
-
-.cursor{
+.cursor {
   cursor: pointer;
 }
 @media (max-width: 768px) {
   #sidelist {
-    display: none; 
+    display: none;
   }
 }
 @media (max-width: 768px) {
   #showsubcategories {
-    display: none; 
+    display: none;
   }
 }
-
-
+@media (max-width: 768px) {
+  .hiddenDiv {
+    display: none;
+  }
+}
 #nav {
   position: sticky;
   top: 0;
-  z-index: 1000;
-  display: block; /* أو يمكنك استخدام display: flex */
+  overflow: hidden; /* أو يمكنك استخدام display: flex */
 }
-
-
-
-

@@ -286,45 +286,45 @@
 </div>
 
 <div *ngIf="IsMoreInfo">
-  <div class="product-details">
-    <h2>{{ "PRODUCT_DETAILS.PRODUCT_SPECIFICATIONS" | translate }}</h2>
+  <div style="margin-left: 10px;" class="product-details">
     <ul>
       <li>
-        <strong>{{ "PRODUCT_DETAILS.CATEGORY" | translate }}</strong>
+        <strong style="font-size: 18px;">{{ "PRODUCT_DETAILS.CATEGORY" | translate }}</strong>
         {{ getLocalizedcatogary() }}
       </li>
       <li>
-        <strong>{{ "PRODUCT_DETAILS.BRAND" | translate }}</strong>
+        <strong style="font-size: 18px;">{{ "PRODUCT_DETAILS.BRAND" | translate }}</strong>
         {{ getLocalizedbrand() }}
       </li>
       <li>
-        <strong>{{ "PRODUCT_DETAILS.DESCRIPTION" | translate }}</strong>
+        <strong style="font-size: 18px;">{{ "PRODUCT_DETAILS.DESCRIPTION" | translate }}</strong>
         {{ getLocalizedProductDescription() }}
       </li>
     </ul>
   </div>
 </div>
 <div *ngIf="!IsMoreInfo">
+         <p style="margin-left: 24px; margin-top: 17px; color: #FF662B;" >You're reviewing: {{ getLocalizedProductName() }}</p> 
   <form style="margin: 25px" (ngSubmit)="addreview()" #reviewForm="ngForm">
     <!-- stars parts -->
     <div class="star-rating">
-      <h4 style="margin: 0">{{ "PRODUCT_DETAILS.PRICE" | translate }}</h4>
+      <h6 style="margin: 0 ;font-size: 18px ">{{ "PRODUCT_DETAILS.PRICE" | translate }}</h6>
       <span *ngFor="let star of starsPrice; let i = index" (click)="ratePrice(i + 1)">
         <i [class]="ratingPrice > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
       </span>
     </div>
 
     <div class="star-rating">
-      <h4 style="margin: 0">{{ "PRODUCT_DETAILS.QUALITY" | translate }}</h4>
+      <h6 style="margin: 0 ;font-size: 18px ">{{ "PRODUCT_DETAILS.QUALITY" | translate }}</h6>
       <span *ngFor="let star of starsQuilty; let i = index" (click)="rateQuilty(i + 1)">
-        <i [class]="ratingQuilty > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 20px; margin-right: 10px"></i>
+        <i [class]="ratingQuilty > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
       </span>
     </div>
 
     <div class="star-rating">
-      <h4 style="margin: 0">{{ "PRODUCT_DETAILS.VALUE" | translate }}</h4>
+      <h6 style="margin: 0 ;font-size: 18px ">{{ "PRODUCT_DETAILS.VALUE" | translate }}</h6>
       <span *ngFor="let star of starsValue; let i = index" (click)="rateValue(i + 1)">
-        <i [class]="ratingValue > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 20px; margin-right: 10px"></i>
+        <i [class]="ratingValue > i ? 'fas fa-star' : 'far fa-star'" style="font-size: 24px; margin-right: 10px"></i>
       </span>
     </div>
 
@@ -372,7 +372,7 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-warning" style="margin: 20px 0px" [disabled]="reviewForm.invalid">
+    <button type="submit" class="submit-btn"  style="margin: 20px 0px ; background-color: #FF662B; color: #e0e0e0;" [disabled]="reviewForm.invalid">
       {{ "REVIEW_FORM.SUBMIT" | translate }}
     </button>
   </form>

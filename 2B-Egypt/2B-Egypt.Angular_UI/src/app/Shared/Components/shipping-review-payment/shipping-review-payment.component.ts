@@ -8,11 +8,10 @@ import { OrderService } from '../../../services/order.service';
 import { IOrder } from '../../../../models/iorder';
 import { CartService } from '../../../ShoppingCart/Services/CartService';
 import { CartItem } from '../../../ShoppingCart/Models/CartItem';
-import { state } from '@angular/animations';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { state } from '@angular/animations';
 @Component({
-  selector: 'app-shipping-review-payment', 
+  selector: 'app-shipping-review-payment',
   standalone: true,
   imports: [CommonModule, FormsModule , RouterModule,TranslateModule],
   templateUrl: './shipping-review-payment.component.html',
@@ -25,26 +24,26 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
   email:string="";
   @ViewChild('shippingStep', { static: false }) shippingStep!: ElementRef;
   @ViewChild('paymentStep', { static: false }) paymentStep!: ElementRef;
-  
+
   country = 'Egypt';
   cities = [
     'Mohandessin', 'Dokki', 'Agouza', 'Bulaq', 'Imbaba',
     'Pyramids', 'Giza', 'Ossim', 'Kerdasa', 'Faisal', 'El Haram',
     '6th of October', 'Al Ahram', 'Al Khatatba', 'Al Awqaf', 'Al Manial', 'Other'
-  ]; 
-  
-  
-  shippingData: IShippingData = { 
+  ];
+
+
+  shippingData: IShippingData = {
     country: this.country,
     city: '',
     addressLine1: '',
     addressLine2: '',
     phoneNumber: ''
   };
-  
+
   constructor(private _shippingService: ShippingService ,private _order:OrderService , private _cartService:CartService ,private router:Router) {}
   ngOnChanges(): void {
-   
+
   }
   ngOnInit() {
     this.IsShipping=true;
@@ -53,13 +52,13 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
     const userString = sessionStorage.getItem("user");
     let array  = this._cartService.getCartItems()
     console.log(array);
-    
+
     let Items = array.map(item => ({
       productId: item.productId,
       quantity: item.quantity,
       itemTotalPrice: item.price
     }));
-    
+
     console.log(Items)
     this.order.orderItems = Items
     let subTotal = 0
@@ -73,20 +72,20 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
       var getToken =sessionStorage.getItem("token");
       if (getToken)
         {
-          
+
           console.log(this.order.userId)
         }
         if (userString) {
           const user = JSON.parse(userString);
-          this.email = user.email; 
+          this.email = user.email;
           this.order.userId=user.id;
           console.log(this.email)
         }
       }
-      
+
       addAddress() {
-        
-        
+
+
         this._shippingService.addAddress(this.email,this.shippingData).subscribe({
           next: (res) => {
             this.shippingData=res;
@@ -95,18 +94,18 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
             console.log(err);
           },
         })
-         
+
       }
-      
-      
+
+
       createOrder() {
         console.log(this.order)
         this.order.paymentType = this.selectedPaymentMethod;
         if (this.order.paymentType == "Paypal Card")
            {
-         
+
             this.router.navigate(['/paypal'], { state: { orderDetails: this.order } });
-          } 
+          }
         else {
           this._order.creatOrder(this.order).subscribe({
             next: (res) => {
@@ -120,7 +119,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
           });
         }
       }
-      
+
       goToShipping(checkshipping: boolean): void {
         this.IsShipping = checkshipping;
         setTimeout(() => {
@@ -130,7 +129,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
           }
         });
       }
-      
+
       goToPayment(checkshipping: boolean): void {
         this.IsShipping = checkshipping;
         setTimeout(() => {
@@ -140,7 +139,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
           }
         });
       }
-      
+
 
 
 
@@ -155,14 +154,14 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
 //   templateUrl: './paypal2.component.html',
 //   styleUrl: './paypal2.component.css'
 // })
-// export class Paypal2Component {  
+// export class Paypal2Component {
 
 //   public payPalConfig?: IPayPalConfig;
 //   ngOnInit(): void {
 //     this.initConfig();
 //   }
 
-//   private initConfig(): void { 
+//   private initConfig(): void {
 
 
 //     this.payPalConfig = {
@@ -181,7 +180,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
 //                 value: '9.99'
 //               }
 //             }
-//           }, 
+//           },
 //           items: [
 //             {
 //               name: 'Enterprise Subscription',
@@ -236,7 +235,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
 //   templateUrl: './paypal2.component.html',
 //   styleUrls: ['./paypal2.component.css'] // Corrected to styleUrls
 // })
-// export class Paypal2Component {  
+// export class Paypal2Component {
 
 //   public payPalConfig?: IPayPalConfig;
 
@@ -244,7 +243,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
 //     this.initConfig();
 //   }
 
-//   private initConfig(): void { 
+//   private initConfig(): void {
 //     this.payPalConfig = {
 //       currency: 'EUR',
 //       clientId: 'Ab9lglzdiPC5mJxHHMPic0jFslZGTrvFsPNg9-4RP9IU3oI_RXIHGWE7DHCGTlVMUt-DCDghXm6F9ELf', // Replace with your actual sandbox client ID
@@ -285,8 +284,8 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
 //       },
 //       onApprove: (data, actions) => {
 //         console.log('onApprove - transaction was  approved, but not authorized', data, actions);
-//         // Capture the funds from the transaction 
-       
+//         // Capture the funds from the transaction
+
 //         return actions.order.capture().then((details: any) => {
 //           console.log('Transaction completed by ' + details.payer.name.given_name);
 //           console.log('Transaction Id' + details.Id);
@@ -304,7 +303,7 @@ export class ShippingReviewPaymentComponent implements OnInit,OnChanges {
 //       onCancel: (data, actions) => {
 //         console.log('OnCancel', data, actions);
 //       },
-//       onError: err => { 
+//       onError: err => {
 //         console.log('OnError', err);
 //       },
 //       onClick: (data, actions) => {

@@ -4,8 +4,9 @@ export interface CartItem {
   productNamear: string;
   quantity: number;
   price: number;
-  discount: number; // إضافة الخصم
-  totalPrice: number; // price * quantity
+  discount: number; 
+  totalPrice: number; 
   image:String;
+  // images: { imageUrl: string }[];
   stock:number;
 }

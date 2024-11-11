@@ -85,10 +85,10 @@ export class NavBarComponent implements OnInit {
   ) {
     this.translate.setDefaultLang('en');
     this.translate.use('en');
-    let check = sessionStorage.getItem('token')
-    if(check){
-      this.isLoggedIn  = true
-    }else{
+    let check = sessionStorage.getItem('token');
+    if (check) {
+      this.isLoggedIn = true;
+    } else {
       this.isLoggedIn = false;
     }
   }
@@ -100,6 +100,19 @@ export class NavBarComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('parentOfNav') as HTMLElement;
+      if (!navbar) return; // Check if navbar exists
+      const sticky = navbar.offsetTop;
+      // console.log('sticky number ' + sticky);
+      // console.log(' window.pageYOffset ' + window.pageYOffset);
+
+      // if (window.pageYOffset == sticky) {
+      //   navbar.classList.add('sticky');
+      // } else {
+      //   navbar.classList.remove('sticky');
+      // }
+    });
     this._LanguageService.getlanguage().subscribe({
       next: (lang) => {
         this.lang = lang;
@@ -131,12 +144,11 @@ export class NavBarComponent implements OnInit {
         console.error('Error fetching Parent Categories:', error);
       },
     });
-    
   }
   toggleCategories() {
     this.showCategories = !this.showCategories;
   }
- 
+
   selectDiv(divName: string) {
     this.selectedDiv = divName; // Update the selected div
   }
@@ -178,7 +190,7 @@ export class NavBarComponent implements OnInit {
       (sub) => sub.parentCategoryId === id
     );
   }
-  
+
   transformCategories(categories: ICategory[]): CategorywithSubcategories[] {
     const groupedMap: { [key: string]: ICategory[] } = {};
 
@@ -196,7 +208,9 @@ export class NavBarComponent implements OnInit {
       }
     }
 
-    const groupedCategories: CategorywithSubcategories[] = Object.keys(groupedMap).map((parentId) => {
+    const groupedCategories: CategorywithSubcategories[] = Object.keys(
+      groupedMap
+    ).map((parentId) => {
       const subcategories = groupedMap[parentId];
       const representativeCategory = subcategories[0];
 
@@ -217,17 +231,17 @@ export class NavBarComponent implements OnInit {
     this.router.navigateByUrl(`/products-by-category/${id}`);
   }
 
-  login(){
+  login() {
     this.router.navigateByUrl(`login`);
   }
 
   logout() {
     this.loginService.logout();
     this.isLoggedIn = false;
-    localStorage.clear()
+    localStorage.clear();
     this.router.navigateByUrl(`login`);
   }
-  
+
   get counter(): number {
     return this._cartService.getCounter();
   }
@@ -243,7 +257,7 @@ export class NavBarComponent implements OnInit {
 
   toggleSubDropdown(category: any) {
     // Close other sub dropdowns and toggle the clicked one
-    this.ParentCategories.forEach(cat => {
+    this.ParentCategories.forEach((cat) => {
       if (cat !== category) {
         cat.isSubDropdownOpen = false; // Close other dropdowns
       }
@@ -265,21 +279,16 @@ export class NavBarComponent implements OnInit {
     }
   }
 
-
   @HostListener('document:click', ['$event'])
   handleClick(event: MouseEvent) {
     const dropdownElement = document.getElementById('sidelist');
     const targetElement = event.target as HTMLElement;
 
     if (dropdownElement && !dropdownElement.contains(targetElement)) {
-      this.isDropdownOpen = false; 
-      this.ParentCategories.forEach(cat => {
-        cat.isSubDropdownOpen = false; 
+      this.isDropdownOpen = false;
+      this.ParentCategories.forEach((cat) => {
+        cat.isSubDropdownOpen = false;
       });
     }
   }
-
 }
-  
-
-

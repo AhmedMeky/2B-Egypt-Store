@@ -11,7 +11,7 @@
       }}</a>
     </div>
     <div *ngIf="isLoggedIn">
-      <a  class="cursor"   (click)="logout()" style="color: grey">{{
+      <a class="cursor" (click)="logout()" style="color: grey">{{
         "Logout" | translate
       }}</a>
     </div>
@@ -23,9 +23,9 @@
     </div>
     <!-- <div><button (click)="logout()">Log Out</button></div> -->
   </div>
-  <button [routerLink]="['/products']"  class="btn" style="color: #f37021;">
-    <i class="fas fa-home" style="color: #f37021;"></i> {{"Home"| translate}}
-  </button>
+  <!-- <button [routerLink]="['/products']" class="btn" style="color: #f37021">
+    <i class="fas fa-home" style="color: #f37021"></i> {{ "Home" | translate }}
+  </button> -->
 
   <select
     (change)="changelang($event)"
@@ -33,143 +33,155 @@
     aria-label="Select language"
     style="background-color: grey"
   >
-
     <option value="en">English</option>
     <option value="ar">العربية</option>
   </select>
 </div>
-<div>
-  <div id="bigDivForNavbar">
-    <img
-      routerLink="/Home"
-      src="/img/2b.png"
-      width="15%"
-      id="img2b"
-      style="cursor: pointer"
-    />
+<div id="bigDivForNavbar">
+  <img
+    routerLink="/Home"
+    src="/img/2b.png"
+    width="15%"
+    id="img2b"
+    style="cursor: pointer"
+  />
 
-    <div>
-      <div id="divforEndjustfy">
-        
-        <div id="responsiveSearchBarsCart">
-          <div style="display: flex; flex-direction: row">
-            <div class="hiddenDiv">
-              <div class="headsetandlocation">
-                <i
-                  class="fa-solid fa-headset fa-2x"
-                  style="margin-right: 5px; color: black"
-                ></i>
-                <div style="margin: 0; color: orangered; font-size: 20px">
-                  {{ "SUPPORT_NUMBER" | translate }}
-                </div>
+  <div>
+    <div id="divforEndjustfy">
+      <div id="responsiveSearchBarsCart">
+        <div style="display: flex; flex-direction: row">
+          <div class="hiddenDiv">
+            <div class="headsetandlocation">
+              <i
+                class="fa-solid fa-headset fa-2x"
+                style="margin-right: 5px; color: black"
+              ></i>
+              <div style="margin: 0; color: orangered; font-size: 20px">
+                {{ "SUPPORT_NUMBER" | translate }}
               </div>
-              <div class="headsetandlocation">
-                <i
-                  class="fa-solid fa-location-dot fa-2x"
-                  style="color: black"
-                ></i>
-                <div style="margin: 0; color: orangered; font-size: 20px">
-                  {{ "STORES" | translate }}
-                </div>
+            </div>
+            <div class="headsetandlocation">
+              <i
+                class="fa-solid fa-location-dot fa-2x"
+                style="color: black"
+              ></i>
+              <div style="margin: 0; color: orangered; font-size: 20px">
+                {{ "STORES" | translate }}
               </div>
             </div>
           </div>
-          >
+        </div>
+        >
 
-          <div class="cart-container">
-            
-            <div style="padding-top: 15px" id="listbars">
-              <a (click)="toggleCategories()">
-                <i class="fa fa-bars fa-large" style="color: #f37021"></i>
-              </a>
-            </div>
-
-            <!-- Container for displaying the categories -->
-            <div *ngIf="showCategories" id="categoryList"
-              style="background-color: white; border: 1px solid black; padding: 10px; position: absolute; z-index: 20;">
-              <!-- Close button -->
-              <span (click)="toggleCategories()"
-                style="cursor: pointer; color: #f37021; float: right; font-size: 1.5em;">&times;</span>
-              <ul style="list-style: none; margin: 0; padding: 0;">
-                <li *ngFor="let cat of ParentCategories" style="padding: 5px;">
-                  <a (mouseover)="ShowSubCategories(cat.id)" style="color: black;">
-                    {{ lang === 'ar' ? cat.nameAr : cat.nameEn }}
-                  </a>
-                  <!-- Subcategories list -->
-                  <ul *ngIf="cat.id === selectedParentId"
-                    style="list-style-type: none; padding-left: 15px; margin-top: 5px;">
-                    <li *ngFor="let subCat of filteredSubcategories" style="padding: 5px;">
-                      <a routerLink="/products-by-category" (click)="SelectedProductId(subCat.id)"
-                        style="color: black;">
-                        {{ lang === 'ar' ? subCat.nameAr : subCat.nameEn }}
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            <div
-              style="
-                background-color: grey;
-                display: inline-block;
-                height: 50px;
-                width: 1px;
-              "
-            ></div>
-            <a [routerLink]="['/cart']">
-              <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
-              <span class="item-count">
-                {{ counter.toString() | translate }}
-              </span>
+        <div class="cart-container">
+          <div style="padding-top: 15px" id="listbars">
+            <a (click)="toggleCategories()">
+              <i class="fa fa-bars fa-large" style="color: #f37021"></i>
             </a>
           </div>
+
+          <!-- Container for displaying the categories -->
+          <div
+            *ngIf="showCategories"
+            id="categoryList"
+            style="
+              background-color: white;
+              border: 1px solid black;
+              padding: 10px;
+              
+              z-index: 20;
+              position: sticky;
+              top: 0;
+              overflow: hidden;
+            "
+          >
+            <!-- Close button -->
+            <span
+              (click)="toggleCategories()"
+              style="
+                cursor: pointer;
+                color: #f37021;
+                float: right;
+                font-size: 1.5em;
+              "
+              >&times;</span
+            >
+            <ul style="list-style: none; margin: 0; padding: 0">
+              <li *ngFor="let cat of ParentCategories" style="padding: 5px">
+                <a (mouseover)="ShowSubCategories(cat.id)" style="color: black">
+                  {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
+                </a>
+                <!-- Subcategories list -->
+                <ul
+                  *ngIf="cat.id === selectedParentId"
+                  style="
+                    list-style-type: none;
+                    padding-left: 15px;
+                    margin-top: 5px;
+                  "
+                >
+                  <li
+                    *ngFor="let subCat of filteredSubcategories"
+                    style="padding: 5px"
+                  >
+                    <a
+                      routerLink="/products-by-category"
+                      (click)="SelectedProductId(subCat.id)"
+                      style="color: black"
+                    >
+                      {{ lang === "ar" ? subCat.nameAr : subCat.nameEn }}
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div
+            style="
+              background-color: grey;
+              display: inline-block;
+              height: 50px;
+              width: 1px;
+            "
+          ></div>
+          <a [routerLink]="['/cart']">
+            <img src="/img/cart.png" alt="Shopping Cart" class="cart-icon" />
+            <span class="item-count">
+              {{ counter.toString() | translate }}
+            </span>
+          </a>
         </div>
       </div>
     </div>
   </div>
-<div>
-  <nav
-    id="nav"
-    style="
-      white-space: nowrap;
-      margin-left: 10%;
-      margin-right: 10%;
-     
-    "
-  >
-    <ul
-      style="
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
-      "
+</div> 
+<!-- playing for sticky here here  -->
+<div  id="parentOfNav">
+  
+    <nav
+      id="nav"
+      style="background-color: black;"
     >
-      <li
-        *ngFor="let cat of ParentCategories"
-        style="margin-right: 7px; "
+      <ul
+        style="
+          display: flex;
+          flex-wrap: wrap;
+          padding: 0;
+          margin: 0;
+          list-style-type: none;
+        "
       >
-        <a (mouseover)="ShowSubCategories(cat.id)">
-          {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
-        </a>
-      </li>
-    </ul>
-  </nav>
-</div>
-  <div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
-    <a
-      routerLink="/products-by-category"
-      routerLinkActive="active"
-      (click)="SelectedProductId(cat.id)"
-      *ngFor="let cat of filteredSubcategories"
-      style="margin-right: 7px;" 
-    >
-      {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
-    >
-  </div>
+        <li *ngFor="let cat of ParentCategories" style="margin-right: 7px">
+          <a (mouseover)="ShowSubCategories(cat.id)">
+            {{ lang === "ar" ? cat.nameAr : cat.nameEn }}
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%; ">
+ 
+
+  <div id="sidelist" *ngIf="BarsAppears" style="width: 80%">
     <div style="height: 50px; display: flex; flex-direction: row; flex-grow: 1">
       <div
         style="
@@ -245,7 +257,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> 
+
 <div style="margin-inline: 10%">
   <input
     type="search"
@@ -260,6 +273,17 @@
       width: 100%;
     "
   />
+</div> 
+<div *ngIf="filteredSubcategories.length >= 1" id="showsubcategories">
+  <a
+    routerLink="/products-by-category"
+    routerLinkActive="active"
+    (click)="SelectedProductId(cat.id)"
+    *ngFor="let cat of filteredSubcategories"
+    style="margin-right: 7px"
+  >
+    {{ lang === "ar" ? cat.nameAr : cat.nameEn }}</a
+  >
 </div>
 <app-advertisment></app-advertisment>
 <!-- <router-outlet ></router-outlet> -->
